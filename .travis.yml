@@ -1,0 +1,10 @@
+language: csharp
+solution: NetCoreWebDriverFactory.sln
+mono: none
+dotnet: 2.1
+addons:
+  sonarcloud:
+    organization: "alexanderontesting-github"
+script:
+ - dotnet build
+ - sonar-scanner

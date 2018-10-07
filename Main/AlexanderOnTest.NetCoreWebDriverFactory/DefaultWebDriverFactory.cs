@@ -79,7 +79,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         }
 
         public virtual IWebDriver GetRemoteWebDriver(DriverOptions options,
-            Uri gridUrl,
+            Uri gridUrl = null,
             WindowSize windowSize = WindowSize.Hd)
         {
             return StaticWebDriverFactory.GetRemoteWebDriver(options, gridUrl, windowSize);

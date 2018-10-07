@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
@@ -13,7 +10,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     /// <summary>
     /// An overridable implementation of the DriverOptionsFactory Interface.
     /// </summary>
-    class DefaultDriverOptionsFactory : IDriverOptionsFactory
+    public class DefaultDriverOptionsFactory : IDriverOptionsFactory
     {
         public virtual ChromeOptions GetChromeOptions(PlatformType platformType = PlatformType.Any)
         {

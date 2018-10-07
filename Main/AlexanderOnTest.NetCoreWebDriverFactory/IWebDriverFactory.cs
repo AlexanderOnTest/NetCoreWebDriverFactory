@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
@@ -82,9 +78,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="gridUrl"></param>
         /// <param name="windowSize"></param>
         /// <returns></returns>
-        IWebDriver GetRemoteWebDriver(DriverOptions options,
-            Uri gridUrl = null,
-            WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetRemoteWebDriver(DriverOptions options, Uri gridUrl = null, WindowSize windowSize = WindowSize.Hd);
 
         /// <summary>
         /// Return a configured RemoteWebDriver of the given browser type with default settings.
@@ -93,9 +87,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="gridUrl"></param>
         /// <param name="platformType"></param>
         /// <returns></returns>
-        IWebDriver GetRemoteWebDriver(Browser browser,
-            Uri gridUrl = null,
-            PlatformType platformType = PlatformType.Any);
+        IWebDriver GetRemoteWebDriver(Browser browser, Uri gridUrl = null, PlatformType platformType = PlatformType.Any);
 
         /// <summary>
         /// Convenience method for setting the Window Size of a WebDriver to common values. (768P, 1080P and fullscreen)

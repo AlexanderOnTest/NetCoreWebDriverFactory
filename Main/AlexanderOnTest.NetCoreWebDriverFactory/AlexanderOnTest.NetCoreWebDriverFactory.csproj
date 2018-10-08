@@ -2,6 +2,51 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.9.0</Version>
+    <Company>AlexanderOnTest.tech</Company>
+    <Authors>Alexander Dunn</Authors>
+    <Product>NetCoreWebDriverFactory</Product>
+    <Description>A library to ease the creation of Selenium WebDriver instances in .net Core projects.</Description>
+    <PackageReleaseNotes>First release: 5 October 2018
+Local and Remote WebDriver creation made easy
+Usage:
+Add Nuget Packages for the Browser drivers. 
+(tested with the Selenium.WebDriver.xxxx packages by jsakamoto)
+
+Usage
+
+IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Firefox);
+
+or 
+
+IWebDriver remoteWebDriver = StaticWebDriverFactory.GetRemoteWebDriver(Browser.Chrome, gridUri, Platform.Linux);
+
+Supported Browsers:
+Chrome
+Firefox
+Edge (Windows 10 version 1803 Only)
+Internet Explorer 11 (Windows Platforms)
+Safari (MacOS)
+
+Platforms:
+Windows
+Linux
+MacOS
+
+Tested and working on Windows 10 and Linux.
+It SHOULD work on MacOS (at least for Firefox and Chrome) but is currently untested.
+
+The repository at
+https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
+
+
+contains test projects for Windows Linux and MacOS. These can be used to test your setup and demonstrate the options available.</PackageReleaseNotes>
+    <Copyright>Copyright 2018 Alexander Dunn</Copyright>
+    <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
+    <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

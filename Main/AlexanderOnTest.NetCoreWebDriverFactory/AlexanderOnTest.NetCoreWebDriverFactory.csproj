@@ -13,8 +13,13 @@ Local and Remote WebDriver creation made easy
 Usage:
 Add Nuget Packages for the Browser drivers. 
 (tested with the Selenium.WebDriver.xxxx packages by jsakamoto)
+
+Usage
+
 IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Firefox);
+
 or 
+
 IWebDriver remoteWebDriver = StaticWebDriverFactory.GetRemoteWebDriver(Browser.Chrome, gridUri, Platform.Linux);
 
 Supported Browsers:
@@ -34,8 +39,9 @@ It SHOULD work on MacOS (at least for Firefox and Chrome) but is currently untes
 
 The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
-contains test projects for Windows Linux and MacOS
-These can be used to test your setup and demonstrate the options available.</PackageReleaseNotes>
+
+
+contains test projects for Windows Linux and MacOS. These can be used to test your setup and demonstrate the options available.</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>

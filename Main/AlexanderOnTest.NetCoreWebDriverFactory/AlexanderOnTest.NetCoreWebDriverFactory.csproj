@@ -22,7 +22,7 @@ Chrome
 Firefox
 Edge (Windows 10 version 1803 Only)
 Internet Explorer 11 (Windows Platforms)
-Safari
+Safari (MacOS)
 
 Platforms:
 Windows
@@ -38,7 +38,7 @@ contains test projects for Windows Linux and MacOS
 These can be used to test your setup and demonstrate the options available.</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
   </PropertyGroup>

@@ -16,6 +16,8 @@
 
 using System;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -27,6 +29,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     {
         private IWebDriver Driver { get; set; }
         private readonly PlatformType thisPlatformType = PlatformType.Windows;
+        private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private IWebDriverFactory WebDriverFactory { get; set; }
         private IDriverOptionsFactory DriverOptionsFactory { get; set; }
 
@@ -45,7 +48,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.Chrome)]
         public void LocalWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(browser);
+            Driver = WebDriverFactory.GetLocalWebDriver(browser, browser == Browser.Edge? null : DriverPath);
             Driver.Url = "https://example.com/";
             Driver.Title.Should().Be("Example Domain");
         }
@@ -65,7 +68,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.Chrome)]
         public void HeadlessBrowsersCanBeLaunched(Browser browser)
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(browser, true);
+            Driver = WebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
             Driver.Url = "https://example.com/";
             Driver.Title.Should().Be("Example Domain");
         }
@@ -76,7 +79,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.Safari)]
         public void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
         {
-            Action act = () => WebDriverFactory.GetLocalWebDriver(browser, true);
+            Action act = () => WebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
             act.Should()
                 .ThrowExactly<ArgumentException>($"because headless mode is not supported on {browser}.")
                 .WithMessage($"Headless mode is not currently supported for {browser}.");
@@ -85,7 +88,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [Test]
         public void HdBrowserIsOfRequestedSize()
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(DriverOptionsFactory.GetFirefoxOptions(true), WindowSize.Hd);
+            Driver = WebDriverFactory.GetLocalWebDriver(DriverOptionsFactory.GetFirefoxOptions(true), DriverPath, WindowSize.Hd);
 
             Assert.Multiple(() =>
             {
@@ -98,7 +101,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [Test]
         public void FhdBrowserIsOfRequestedSize()
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(DriverOptionsFactory.GetFirefoxOptions(true), WindowSize.Fhd);
+            Driver = WebDriverFactory.GetLocalWebDriver(DriverOptionsFactory.GetFirefoxOptions(true), DriverPath, WindowSize.Fhd);
 
             Assert.Multiple(() =>
             {

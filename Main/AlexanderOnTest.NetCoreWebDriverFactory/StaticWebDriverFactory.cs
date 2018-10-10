@@ -30,15 +30,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     public static class StaticWebDriverFactory
     {
-        private static string DriverPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
         /// <summary>
         /// Return a local webdriver of the given browser type with default settings.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Chrome, Firefox, Internet Explorer and Edge on Windows 10 version 1803 and earlier 
+        /// Try using driverPath = null (default) for Safari and Edge on Windows 10 version 1809 and later
         /// </summary>
         /// <param name="browser"></param>
+        /// <param name="driverPath"></param>
         /// <param name="headless"></param>
         /// <returns></returns>
-        public static IWebDriver GetLocalWebDriver(Browser browser, bool headless = false)
+        public static IWebDriver GetLocalWebDriver(Browser browser, string driverPath = null, bool headless = false)
         {
             if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
             {
@@ -47,16 +48,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(headless));
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(headless), driverPath);
 
                 case Browser.Chrome:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetChromeOptions(headless));
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetChromeOptions(headless), driverPath);
 
                 case Browser.InternetExplorer:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetInternetExplorerOptions());
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetInternetExplorerOptions(), driverPath);
 
                 case Browser.Edge:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetEdgeOptions());
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetEdgeOptions(), driverPath);
 
                 case Browser.Safari:
                     return GetLocalWebDriver(StaticDriverOptionsFactory.GetSafariOptions());
@@ -69,69 +70,95 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
 
         /// <summary>
         /// Return a Local Chrome WebDriver instance.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" 
         /// </summary>
         /// <param name="options"></param>
+        /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
         /// <returns></returns>
-        public static IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public static IWebDriver GetLocalWebDriver(
+            ChromeOptions options,
+            string driverPath,
+            WindowSize windowSize = WindowSize.Hd)
         {
-            IWebDriver driver = new ChromeDriver(DriverPath, options);
+            IWebDriver driver = new ChromeDriver(driverPath, options);
             return SetWindowSize(driver, windowSize);
         }
 
         /// <summary>
         /// Return a local Firefox WebDriver instance.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" 
         /// </summary>
         /// <param name="options"></param>
+        /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
         /// <returns></returns>
-        public static IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd)
+        public static IWebDriver GetLocalWebDriver(
+            FirefoxOptions options, 
+            string driverPath,
+            WindowSize windowSize = WindowSize.Hd)
         {
-            IWebDriver driver = new FirefoxDriver(DriverPath, options);
+            IWebDriver driver = new FirefoxDriver(driverPath, options);
             return SetWindowSize(driver, windowSize);
         }
 
         /// <summary>
         /// Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
+        /// Try using driverPath = null (default) for Windows 10 version 1809 and later.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Windows 10 version 1803 and earlier.
         /// </summary>
         /// <param name="options"></param>
+        /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
         /// <returns></returns>
-        public static IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public static IWebDriver GetLocalWebDriver(
+            EdgeOptions options, 
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd)
         {
             if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.WinNT))
             {
-                throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows.");
+                throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows 10.");
             }
 
-            IWebDriver driver = new EdgeDriver(DriverPath, options);
+            IWebDriver driver = driverPath==null? new EdgeDriver(options): new EdgeDriver(driverPath, options);
             return SetWindowSize(driver, windowSize);
         }
 
         /// <summary>
         /// Return a local Internet Explorer WebDriver instance. (Only supported on Microsoft Windows)
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
         /// </summary>
         /// <param name="options"></param>
+        /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
         /// <returns></returns>
-        public static IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd)
+        public static IWebDriver GetLocalWebDriver(
+            InternetExplorerOptions options, 
+            string driverPath,
+            WindowSize windowSize = WindowSize.Hd)
         {
             if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.WinNT))
             {
                 throw new PlatformNotSupportedException("Microsoft Internet Explorer is only available on Microsoft Windows.");
             }
 
-            IWebDriver driver = new InternetExplorerDriver(DriverPath, options);
+            IWebDriver driver = new InternetExplorerDriver(driverPath, options);
             return SetWindowSize(driver, windowSize);
         }
 
         /// <summary>
         /// Return a local Safari WebDriver instance. (Only supported on Mac Os)
+        /// Try using driverPath = null (default)
         /// </summary>
         /// <param name="options"></param>
+        /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
         /// <returns></returns>
-        public static IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd)
+        public static IWebDriver GetLocalWebDriver(
+            SafariOptions options, 
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd)
         {
             if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.Mac))
             {
@@ -140,7 +167,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             
             // I suspect that the SafariDriver is already on the path as it is within the Safari executable.
             // I currently have no means to test this
-            IWebDriver driver = new SafariDriver(options);
+            IWebDriver driver = driverPath == null? new SafariDriver(options) : new SafariDriver(driverPath, options);
             return SetWindowSize(driver, windowSize);
         }
 

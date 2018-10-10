@@ -32,16 +32,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         {
             GridUri = gridUri?? new Uri("http://localhost:4444/wd/hub");
             DriverOptionsFactory = driverOptionsFactory ?? new DefaultDriverOptionsFactory();
-            DriverPath = driverPath?? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
-
-        public string DriverPath { get; set; }
 
         public Uri GridUri { get; set; }
 
         public IDriverOptionsFactory DriverOptionsFactory { get; set; }
 
-        public virtual IWebDriver GetLocalWebDriver(Browser browser, bool headless = false)
+        public virtual IWebDriver GetLocalWebDriver(Browser browser, string driverPath = null, bool headless = false)
         {
             if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
             {
@@ -50,48 +47,63 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(headless));
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(headless), driverPath);
 
                 case Browser.Chrome:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetChromeOptions(headless));
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetChromeOptions(headless), driverPath);
 
                 case Browser.InternetExplorer:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetInternetExplorerOptions());
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetInternetExplorerOptions(), driverPath);
 
                 case Browser.Edge:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetEdgeOptions());
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetEdgeOptions(), driverPath);
 
                 case Browser.Safari:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetSafariOptions());
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetSafariOptions(), driverPath);
 
                 default:
                     throw new PlatformNotSupportedException($"{browser} is not currently supported.");
             }
         }
 
-        public virtual IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(
+            ChromeOptions options,
+            string driverPath = null, 
+            WindowSize windowSize = WindowSize.Hd)
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, driverPath, windowSize);
         }
 
-        public virtual IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(
+            FirefoxOptions options, 
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd)
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, driverPath, windowSize);
         }
 
-        public virtual IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(
+            EdgeOptions options,
+            string driverPath = null, 
+            WindowSize windowSize = WindowSize.Hd)
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, driverPath, windowSize);
         }
 
-        public virtual IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(
+            InternetExplorerOptions options,
+            string driverPath = null, 
+            WindowSize windowSize = WindowSize.Hd)
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, driverPath, windowSize);
         }
 
-        public virtual IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(
+            SafariOptions options,
+            string driverPath = null, 
+            WindowSize windowSize = WindowSize.Hd)
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, driverPath, windowSize);
         }
 
         public virtual IWebDriver GetRemoteWebDriver(DriverOptions options,

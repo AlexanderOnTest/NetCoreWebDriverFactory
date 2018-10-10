@@ -96,7 +96,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         [Test]
         public void HdBrowserIsOfRequestedSize()
         {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(true), null, WindowSize.Hd);
+            Driver = StaticWebDriverFactory.GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(true), DriverPath, WindowSize.Hd);
 
             Assert.Multiple(() =>
             {
@@ -109,7 +109,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         [Test]
         public void FhdBrowserIsOfRequestedSize()
         {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(true), null, WindowSize.Fhd);
+            Driver = StaticWebDriverFactory.GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(true), DriverPath, WindowSize.Fhd);
 
             Assert.Multiple(() =>
             {

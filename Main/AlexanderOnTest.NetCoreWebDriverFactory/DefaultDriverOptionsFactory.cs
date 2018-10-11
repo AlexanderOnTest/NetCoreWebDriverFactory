@@ -28,41 +28,87 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     /// </summary>
     public class DefaultDriverOptionsFactory : IDriverOptionsFactory
     {
+
+        /// <summary>
+        /// Return a configured ChromeOptions instance.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual ChromeOptions GetChromeOptions(PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetChromeOptions(platformType);
         }
 
+        /// <summary>
+        /// Return a configured ChromeOptions instance.
+        /// </summary>
+        /// <param name="headless"></param>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual ChromeOptions GetChromeOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetChromeOptions(headless, platformType);
         }
 
+
+        /// <summary>
+        /// Return a configured FirefoxOptions instance.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual FirefoxOptions GetFirefoxOptions(PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetFirefoxOptions(platformType);
         }
 
+        /// <summary>
+        /// Return a configured FirefoxOptions instance.
+        /// </summary>
+        /// <param name="headless"></param>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual FirefoxOptions GetFirefoxOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetFirefoxOptions(headless, platformType);
         }
-
+        
+        /// <summary>
+        /// Return a configured EdgeOptions instance.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual EdgeOptions GetEdgeOptions(PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetEdgeOptions(platformType);
         }
 
+        /// <summary>
+        /// Return a configured InternetExplorerOptions instance.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual InternetExplorerOptions GetInternetExplorerOptions(PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetInternetExplorerOptions(platformType);
         }
 
+        /// <summary>
+        /// Return a configured SafariOptions instance.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual SafariOptions GetSafariOptions(PlatformType platformType = PlatformType.Any)
         {
             return StaticDriverOptionsFactory.GetSafariOptions(platformType);
         }
 
+        /// <summary>
+        /// Add the platform configuration to a DriverOptions instance.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="options"></param>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
         public virtual T SetPlatform<T>(T options, PlatformType platformType) where T : DriverOptions
         {
             return StaticDriverOptionsFactory.SetPlatform(options, platformType);

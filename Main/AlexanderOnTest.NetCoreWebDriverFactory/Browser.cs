@@ -16,12 +16,30 @@
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Enum of supported desktop WebDriver supported Browsers
+    /// </summary>
     public enum Browser
     {
+        /// <summary>
+        /// Mozilla Firefox
+        /// </summary>
         Firefox,
+        /// <summary>
+        /// Google Chrome
+        /// </summary>
         Chrome,
+        /// <summary>
+        /// Microsoft Internet Explorer version 11
+        /// </summary>
         InternetExplorer,
+        /// <summary>
+        /// Microsoft Edge
+        /// </summary>
         Edge,
+        /// <summary>
+        ///  Apple Safari
+        /// </summary>
         Safari
     }
 }

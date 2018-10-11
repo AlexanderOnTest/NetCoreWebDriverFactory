@@ -23,6 +23,9 @@ using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Interface for DriverOptionsFactory instances.
+    /// </summary>
     public interface IDriverOptionsFactory
     {
         /// <summary>

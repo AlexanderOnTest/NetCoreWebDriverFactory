@@ -24,8 +24,14 @@ using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Interface for WebDriverFactory Instances.
+    /// </summary>
     public interface IWebDriverFactory
     {
+        /// <summary>
+        /// The Uri of your selenium grid for remote Webdriver instances.
+        /// </summary>
         Uri GridUri
         {
             get;
@@ -42,8 +48,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="headless"></param>
         /// <returns></returns>
         IWebDriver GetLocalWebDriver(Browser browser, string driverPath = null, bool headless = false);
-
-
+        
         /// <summary>
         /// Return a Local Chrome WebDriver instance.
         /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"

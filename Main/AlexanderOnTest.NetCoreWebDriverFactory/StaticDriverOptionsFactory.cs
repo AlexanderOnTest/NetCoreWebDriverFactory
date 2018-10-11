@@ -23,6 +23,9 @@ using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Static Factory for DriverOptions
+    /// </summary>
     public static class StaticDriverOptionsFactory
     {
         /// <summary>

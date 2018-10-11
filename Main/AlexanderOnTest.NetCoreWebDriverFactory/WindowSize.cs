@@ -16,11 +16,26 @@
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Enum of Browser window size configurations.
+    /// </summary>
     public enum WindowSize
     {
+        /// <summary>
+        /// HD - 1366 x 768 (cheap laptop) screen size. Most common 'PC' screen size.
+        /// </summary>
         Hd,
+        /// <summary>
+        /// Full HD - 1920 x 1080 screen size. 2nd most common 'PC' screen size.
+        /// </summary>
         Fhd,
+        /// <summary>
+        /// Maximise the browser to the full screen.
+        /// </summary>
         Maximise,
+        /// <summary>
+        /// Continue without setting screen size, this may not be consistent.
+        /// </summary>
         Unchanged
     }
 }

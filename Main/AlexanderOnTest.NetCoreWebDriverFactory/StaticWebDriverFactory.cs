@@ -28,6 +28,9 @@ using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Static Factory for WebDriverInstances with configuration.
+    /// </summary>
     public static class StaticWebDriverFactory
     {
         /// <summary>
@@ -78,10 +81,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             ChromeOptions options,
-            string driverPath,
+            string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
         {
-            IWebDriver driver = new ChromeDriver(driverPath, options);
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new ChromeDriver(options)
+                    : new ChromeDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestedPath(ex);
+            }
+
             return SetWindowSize(driver, windowSize);
         }
 
@@ -95,10 +109,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             FirefoxOptions options, 
-            string driverPath,
+            string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
         {
-            IWebDriver driver = new FirefoxDriver(driverPath, options);
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new FirefoxDriver(options)
+                    : new FirefoxDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestedPath(ex);
+            }
+
             return SetWindowSize(driver, windowSize);
         }
 
@@ -121,7 +146,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows 10.");
             }
 
-            IWebDriver driver = driverPath==null? new EdgeDriver(options): new EdgeDriver(driverPath, options);
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new EdgeDriver(options)
+                    : new EdgeDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestionOfNoPath(ex);
+            }
+
             return SetWindowSize(driver, windowSize);
         }
 
@@ -135,7 +171,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             InternetExplorerOptions options, 
-            string driverPath,
+            string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
         {
             if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.WinNT))
@@ -143,7 +179,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 throw new PlatformNotSupportedException("Microsoft Internet Explorer is only available on Microsoft Windows.");
             }
 
-            IWebDriver driver = new InternetExplorerDriver(driverPath, options);
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new InternetExplorerDriver(options)
+                    : new InternetExplorerDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestedPath(ex);
+            }
+
             return SetWindowSize(driver, windowSize);
         }
 
@@ -164,10 +211,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             {
                 throw new PlatformNotSupportedException("Safari is only available on Mac Os.");
             }
-            
-            // I suspect that the SafariDriver is already on the path as it is within the Safari executable.
-            // I currently have no means to test this
-            IWebDriver driver = driverPath == null? new SafariDriver(options) : new SafariDriver(driverPath, options);
+
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new SafariDriver(options)
+                    : new SafariDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestionOfNoPath(ex);
+            }
             return SetWindowSize(driver, windowSize);
         }
 
@@ -251,6 +306,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 default:
                     return driver;
             }
+        }
+
+        private static void RethrowWithSuggestedPath(DriverServiceNotFoundException driverServiceNotFoundException)
+        {
+            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)' or add the driverPath to the Path", driverServiceNotFoundException);
+        }
+
+        private static void RethrowWithSuggestionOfNoPath(DriverServiceNotFoundException driverServiceNotFoundException)
+        {
+            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'null' and ensure that the driverPath is added to the environment Path", driverServiceNotFoundException);
         }
     }
 }

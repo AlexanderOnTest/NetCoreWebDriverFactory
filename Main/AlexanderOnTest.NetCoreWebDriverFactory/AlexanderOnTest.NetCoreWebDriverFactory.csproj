@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.6</Version>
+    <Version>1.0.0</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -37,34 +37,21 @@ https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 
 
 contains test projects for Windows Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
-    <PackageReleaseNotes>v0.9.6 Release Candidate
+    <PackageReleaseNotes>v1.0.0
 10 October 2018
-Apologies to those of you who pulled the earlier failing versions.
-*** Breaking changes***
-It appears that reflection cannot be used from a .net Standard library to find the Calling Assembly so my efforts to find the DriverPath fail.
-To ensure that a path can be set or not as required (Safari and the latest version of Edge should NOT require a path set) I have now added the driverPath as a parameter for GetLocalWebDriver calls.
-The suggested path to use from your .net core project is given in the xml documentation.
+Full release tested on Windows 10 (versions 1803 and 1809) and Ubuntu 18.4
 
-v0.9.4
-9 October 2018
-Allow passing of path and debugging.
-
-v0.9.3
-8 October 2018
-Fixed Path calculation to account for use in a package. Third time lucky.
-
-v0.9.2
-8 October 2018
-Fixed Path calculation to account for use in a package.
-
-0.9.0
-First release: 5 October 2018
-Local and Remote WebDriver creation made easy</PackageReleaseNotes>
+Should be considered experiemental on MacOS as currently untested, but should work.</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants />
+    <DocumentationFile>C:\src\NetCoreWebDriverFactory\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

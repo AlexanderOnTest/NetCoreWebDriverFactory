@@ -1,10 +1,10 @@
 # NetCoreWebDriverFactory
 A Utility library to ease the launching of Selenium WebDriver instances in .net Core projects
 
-This 
+This is not really intended for production use, but does ease the creation of WebDriver instances, particularly by providing helpful Exception messages to find the required driver path. The simplest approach is to use the static factory as described below, however I also include IWebDriverFactory and IDriverOptionsFactory interfaces and default implementations if you prefer to have overrideable instances.
 
 10/10/2018
-Version 1 release
+Version 1.0.0 release
 
 For usage ideas I recommend you to [look through the test source](https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/tree/master/Test)
 
@@ -101,7 +101,7 @@ e.g. StaticDriverOptionsFactory.GetFirefoxOptions();
 The Firefox and Chrome versions accept an optional bool to request headless options. (default = false)
 
 ### Setting Browser size:
-This is far from exhaustive, but the WindowSize enum has 4 values
+This is far from exhaustive, but the WindowSize enum has 4 values.
 + Hd            (1366 x 768)
 + Fhd           (1920 x 1080)
 + Maximise

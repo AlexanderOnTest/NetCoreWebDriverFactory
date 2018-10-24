@@ -28,6 +28,7 @@ Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location
 ```
 
 
+
 ## The simplest local driver calls 
 for a 1366 x 768 WebDriver instance:
 ```
@@ -81,6 +82,7 @@ examples:
                 true);
 ```
 
+
 ### Passing in a DriverOptions instance instead of the Browser enum:
 If you have unusual options requirements, or just prefer to create the options yourself:
 ```
@@ -89,6 +91,7 @@ If you have unusual options requirements, or just prefer to create the options y
             string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
 ```
+
 The above signature is available for all supported browsers.  
 
 Notes:  

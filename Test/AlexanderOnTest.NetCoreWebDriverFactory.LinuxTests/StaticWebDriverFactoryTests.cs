@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -28,13 +29,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
     public class StaticWebDriverFactoryTests
     {
         private IWebDriver Driver { get; set; }
-        private readonly PlatformType thisPlatformType = PlatformType.Linux;
+        private readonly OSPlatform thisPlatform = OSPlatform.Linux;
         private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
 
         [OneTimeSetUp]
         public void CheckForValidPlatform()
         {
-            Assume.That(() => Platform.CurrentPlatform.IsPlatformType(thisPlatformType));
+            Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
         }
 
         [Test]
@@ -55,7 +56,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         {
             Action act = () => StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath);
             act.Should()
-                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatformType}.")
+                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatform}.")
                 .WithMessage("*is only available on*");
         }
 

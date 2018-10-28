@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -28,7 +29,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
     public class WebDriverFactoryInstanceTests
     {
         private IWebDriver Driver { get; set; }
-        private readonly PlatformType thisPlatformType = PlatformType.Mac;
+        private readonly OSPlatform thisPlatform = OSPlatform.OSX;
         private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private IWebDriverFactory WebDriverFactory { get; set; }
         private IDriverOptionsFactory DriverOptionsFactory { get; set; }
@@ -36,7 +37,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [OneTimeSetUp]
         public void SetUp()
         {
-            Assume.That(() => Platform.CurrentPlatform.IsPlatformType(thisPlatformType));
+            Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
             WebDriverFactory = new DefaultWebDriverFactory();
             DriverOptionsFactory = new DefaultDriverOptionsFactory();
         }
@@ -59,7 +60,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         {
             Action act = () => WebDriverFactory.GetLocalWebDriver(browser, DriverPath);
             act.Should()
-                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatformType}.")
+                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatform}.")
                 .WithMessage("*is only available on*");
         }
 

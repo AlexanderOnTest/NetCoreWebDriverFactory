@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -28,7 +29,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     public class WebDriverFactoryInstanceTests
     {
         private IWebDriver Driver { get; set; }
-        private readonly PlatformType thisPlatformType = PlatformType.Windows;
+        private readonly OSPlatform thisPlatform = OSPlatform.Windows;
         private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private IWebDriverFactory WebDriverFactory { get; set; }
         private IDriverOptionsFactory DriverOptionsFactory { get; set; }
@@ -36,7 +37,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [OneTimeSetUp]
         public void SetUp()
         {
-            Assume.That(() => Platform.CurrentPlatform.IsPlatformType(thisPlatformType));
+            Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
             WebDriverFactory = new DefaultWebDriverFactory();
             DriverOptionsFactory = new DefaultDriverOptionsFactory();
         }
@@ -59,7 +60,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         {
             Action act = () => WebDriverFactory.GetLocalWebDriver(browser);
             act.Should()
-                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatformType}.")
+                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatform}.")
                 .WithMessage("*is only available on*");
         }
 

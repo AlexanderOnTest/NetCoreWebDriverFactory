@@ -3,15 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
     <Description>A library to ease the creation of Selenium WebDriver instances in .net Core projects.
 
 Usage
+For Safari, Microsoft Edge in Windows 10 October 2018 Update (version 1809) onwards or any case where the required WebDriver is on the System Path:
 
-IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Firefox, Path.GetDirectoryName(Assembly.GetCallingAssembly().Location));
+IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Edge);
+
+For Chrome, Internet Explorer, Firefox or Microsoft Edge in Windows 10 version 1803 or earlier when the WebDriver is provided by a Nuget Package in your test project:
+
+IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Edge, Path.GetDirectoryName(Assembly.GetCallingAssembly().Location));
 
 or 
 
@@ -20,7 +25,7 @@ IWebDriver remoteWebDriver = StaticWebDriverFactory.GetRemoteWebDriver(Browser.C
 Supported Browsers:
 Chrome
 Firefox
-Edge (Windows 10 version 1803 Only)
+Edge (Windows 10)
 Internet Explorer 11 (Windows Platforms)
 Safari (MacOS)
 
@@ -29,19 +34,15 @@ Windows
 Linux
 MacOS
 
-Tested and working on Windows 10 and Linux.
-It SHOULD work on MacOS (at least for Firefox and Chrome) but is currently untested.
+Tested and working on Windows 10, Linux (Ubuntu 18.04) and MacOS Mojave
 
 The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
-
-
-contains test projects for Windows Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
-    <PackageReleaseNotes>v1.0.0
-10 October 2018
-Full release tested on Windows 10 (versions 1803 and 1809) and Ubuntu 18.4
-
-Should be considered experiemental on MacOS as currently untested, but should work.</PackageReleaseNotes>
+contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
+    <PackageReleaseNotes>v1.0.1
+28 October 2018
+Now tested and fixed for use on MacOS Mojave.
+Full release tested on Windows 10 (versions 1803 and 1809), Ubuntu 18.04 and MacOS Mojave</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>

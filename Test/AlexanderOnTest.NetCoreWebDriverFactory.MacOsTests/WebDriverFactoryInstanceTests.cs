@@ -118,9 +118,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.Chrome)]
+        [TestCase(Browser.Safari)]
         public void RemoteWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
         {
-            Driver = WebDriverFactory.GetRemoteWebDriver(browser, null, PlatformType.Windows);
+            Driver = WebDriverFactory.GetRemoteWebDriver(browser, new Uri("http://192.168.0.200:4444/wd/hub"), PlatformType.Windows);
             Driver.Url = "https://example.com/";
             Driver.Title.Should().Be("Example Domain");
         }

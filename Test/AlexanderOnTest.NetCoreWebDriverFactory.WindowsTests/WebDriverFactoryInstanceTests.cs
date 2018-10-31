@@ -33,6 +33,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private IWebDriverFactory WebDriverFactory { get; set; }
         private IDriverOptionsFactory DriverOptionsFactory { get; set; }
+        private readonly Uri gridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
         [OneTimeSetUp]
         public void SetUp()
@@ -47,7 +48,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.Chrome)]
-        public void LocalWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
+        public void LocalWebDriverWorks(Browser browser)
         {
             Driver = WebDriverFactory.GetLocalWebDriver(browser, browser == Browser.Edge? null : DriverPath);
             Driver.Url = "https://example.com/";
@@ -117,13 +118,33 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.Chrome)]
-        public void RemoteWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
+        public void RemoteWebDriverOnWindowsWorks(Browser browser)
         {
-            Driver = WebDriverFactory.GetRemoteWebDriver(browser);
+            Driver = WebDriverFactory.GetRemoteWebDriver(browser, gridUrl, PlatformType.Windows);
             Driver.Url = "https://example.com/";
             Driver.Title.Should().Be("Example Domain");
         }
 
+        [Test]
+        [TestCase(Browser.Firefox)]
+        [TestCase(Browser.Chrome)]
+        [TestCase(Browser.Safari)]
+        public void RemoteWebDriverOnMacOsWorks(Browser browser)
+        {
+            Driver = WebDriverFactory.GetRemoteWebDriver(browser, gridUrl, PlatformType.Mac);
+            Driver.Url = "https://example.com/";
+            Driver.Title.Should().Be("Example Domain");
+        }
+
+        [Test]
+        [TestCase(Browser.Firefox)]
+        [TestCase(Browser.Chrome)]
+        public void RemoteWebDriverOnLinuxWorks(Browser browser)
+        {
+            Driver = WebDriverFactory.GetRemoteWebDriver(browser, gridUrl, PlatformType.Linux);
+            Driver.Url = "https://example.com/";
+            Driver.Title.Should().Be("Example Domain");
+        }
 
         [TearDown]
         public void Teardown()

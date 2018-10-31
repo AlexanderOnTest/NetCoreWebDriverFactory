@@ -31,12 +31,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         private IWebDriver Driver { get; set; }
         private readonly OSPlatform thisPlatform = OSPlatform.Windows;
         private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+        private readonly Uri gridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
         [OneTimeSetUp]
         public void CheckForValidPlatform()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform)) ;
-            var platform = RuntimeInformation.OSDescription;
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.Chrome)]
-        public void LocalWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
+        public void LocalWebDriverWorks(Browser browser)
         {
             Driver = StaticWebDriverFactory.GetLocalWebDriver(browser, browser == Browser.Edge? null : DriverPath);
             Driver.Url = "https://example.com/";
@@ -64,7 +64,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [Test]
         [TestCase(Browser.Firefox)]
         [TestCase(Browser.Chrome)]
-        public void HeadlessBrowsersCanBeLaunched(Browser browser)
+        public void HeadlessBrowsersWork(Browser browser)
         {
             Driver = StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
             Driver.Url = "https://example.com/";
@@ -114,9 +114,31 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.Chrome)]
-        public void RemoteWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
+        public void RemoteWebDriverOnWindowsWorks(Browser browser)
         {
-            Driver = StaticWebDriverFactory.GetRemoteWebDriver(browser, new Uri("http://localhost:4444/wd/hub"), PlatformType.Any);
+            Driver = StaticWebDriverFactory.GetRemoteWebDriver(browser, gridUrl, PlatformType.Windows);
+            Driver.Url = "https://example.com/";
+            Driver.Title.Should().Be("Example Domain");
+        }
+
+        [Test]
+        [TestCase(Browser.Firefox)]
+        [TestCase(Browser.Chrome)]
+        [TestCase(Browser.Safari)]
+        public void RemoteWebDriverOnMacOsWorks(Browser browser)
+        {
+            Driver = StaticWebDriverFactory.GetRemoteWebDriver(browser, gridUrl, PlatformType.Mac);
+            Driver.Url = "https://example.com/";
+            Driver.Title.Should().Be("Example Domain");
+        }
+
+        [Test]
+        [TestCase(Browser.Firefox)]
+        [TestCase(Browser.Chrome)]
+        public void RemoteWebDriverOnLinuxWorks(Browser browser)
+        {
+            Driver = StaticWebDriverFactory.GetRemoteWebDriver(browser, gridUrl, PlatformType.Linux);
+            StaticWebDriverFactory.SetWindowSize(Driver, WindowSize.Maximise);
             Driver.Url = "https://example.com/";
             Driver.Title.Should().Be("Example Domain");
         }

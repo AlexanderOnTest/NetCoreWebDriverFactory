@@ -293,12 +293,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                     return driver;
 
                 case WindowSize.Hd:
+                    if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
+                    {
                     driver.Manage().Window.Position = Point.Empty;
+                    }
                     driver.Manage().Window.Size = new Size(1366, 768);
                     return driver;
 
                 case WindowSize.Fhd:
-                    driver.Manage().Window.Position = Point.Empty;
+                    if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
+                    {
+                        driver.Manage().Window.Position = Point.Empty;
+                    }
                     driver.Manage().Window.Size = new Size(1920, 1080);
                     return driver;
 

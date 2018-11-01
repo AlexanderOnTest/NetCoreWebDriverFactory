@@ -18,10 +18,10 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.42.0.1" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.23.0" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj" />
     <ProjectReference Include="..\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj" />
   </ItemGroup>
 

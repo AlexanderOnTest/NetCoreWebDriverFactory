@@ -42,7 +42,7 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
     <PackageReleaseNotes>v1.0.1
 28 October 2018
 Now tested and fixed for use on MacOS Mojave.
-Full release tested on Windows 10 (versions 1803 and 1809), Ubuntu 18.04 and MacOS Mojave</PackageReleaseNotes>
+Release tested on Windows 10 (versions 1803 and 1809), Ubuntu 18.04 and MacOS Mojave</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>

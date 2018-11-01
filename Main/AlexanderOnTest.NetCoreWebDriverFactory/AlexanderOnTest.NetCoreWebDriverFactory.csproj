@@ -40,9 +40,10 @@ The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
     <PackageReleaseNotes>v1.0.1
-28 October 2018
+1 November 2018
 Now tested and fixed for use on MacOS Mojave.
-Release tested on Windows 10 (versions 1803 and 1809), Ubuntu 18.04 and MacOS Mojave</PackageReleaseNotes>
+Release tested on Windows 10 (versions 1803 and 1809), Ubuntu 18.04 and MacOS Mojave
+All Supported browsers tested both local and Remote through Selenium Grid v3.14</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>

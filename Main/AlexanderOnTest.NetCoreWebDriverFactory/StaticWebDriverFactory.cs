@@ -16,8 +16,7 @@
 
 using System;
 using System.Drawing;
-using System.IO;
-using System.Reflection;
+using System.Runtime.InteropServices;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -141,7 +140,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
         {
-            if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.WinNT))
+            if (!RuntimeInformation.OSDescription.StartsWith("Microsoft Windows 10"))
             {
                 throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows 10.");
             }
@@ -174,7 +173,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
         {
-            if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.WinNT))
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 throw new PlatformNotSupportedException("Microsoft Internet Explorer is only available on Microsoft Windows.");
             }
@@ -207,7 +206,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             string driverPath = null,
             WindowSize windowSize = WindowSize.Hd)
         {
-            if (!Platform.CurrentPlatform.IsPlatformType(PlatformType.Mac))
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 throw new PlatformNotSupportedException("Safari is only available on Mac Os.");
             }
@@ -294,12 +293,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                     return driver;
 
                 case WindowSize.Hd:
+                    if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
+                    {
                     driver.Manage().Window.Position = Point.Empty;
+                    }
                     driver.Manage().Window.Size = new Size(1366, 768);
                     return driver;
 
                 case WindowSize.Fhd:
-                    driver.Manage().Window.Position = Point.Empty;
+                    if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
+                    {
+                        driver.Manage().Window.Position = Point.Empty;
+                    }
                     driver.Manage().Window.Size = new Size(1920, 1080);
                     return driver;
 

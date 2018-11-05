@@ -47,7 +47,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         public static ChromeOptions GetChromeOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
         {
             ChromeOptions options = new ChromeOptions();
-            options.AddArguments("disable-infobars", "test-type", "start-maximized");
+            options.AddArguments("disable-infobars", "test-type");
             if (headless)
             {
                 options.AddArgument("headless");

@@ -15,10 +15,10 @@
 // </copyright>
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
-using FluentAssertions;
+using System.Runtime.InteropServices;
+using AlexanderonTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -27,24 +27,58 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
     [TestFixture]
     public class StaticWebDriverFactoryTests
     {
+        private static readonly OSPlatform ThisPlatform = OSPlatform.Linux;
+        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
+
         private IWebDriver Driver { get; set; }
-        private readonly PlatformType thisPlatformType = PlatformType.Linux;
-        private string DriverPath => Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
 
         [OneTimeSetUp]
         public void CheckForValidPlatform()
         {
-            Assume.That(() => Platform.CurrentPlatform.IsPlatformType(thisPlatformType));
+            Assume.That(() => RuntimeInformation.IsOSPlatform(ThisPlatform));
         }
 
         [Test]
-        [TestCase(Browser.Chrome)]
-        [TestCase(Browser.Firefox)]
-        public void LocalWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
+        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
         {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath);
-            Driver.Url = "https://example.com/";
-            Driver.Title.Should().Be("Example Domain");
+            Driver = StaticWebDriverFactory.GetLocalWebDriver(
+                browser,
+                browser == Browser.Edge ? null : DriverPath,
+                headless == BrowserVisibility.Headless);
+            Assertions.AssertThatPageCanBeLoaded(Driver);
+        }
+
+        [Test]
+        [TestCase(PlatformType.Linux, Browser.Chrome)]
+        [TestCase(PlatformType.Linux, Browser.Firefox)]
+        [TestCase(PlatformType.Mac, Browser.Chrome)]
+        [TestCase(PlatformType.Mac, Browser.Firefox)]
+        [TestCase(PlatformType.Mac, Browser.Safari)]
+        [TestCase(PlatformType.Windows, Browser.Chrome)]
+        [TestCase(PlatformType.Windows, Browser.Edge)]
+        [TestCase(PlatformType.Windows, Browser.Firefox)]
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
+        public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
+        {
+            Driver = StaticWebDriverFactory.GetRemoteWebDriver(browser, GridUrl, platformType);
+            Assertions.AssertThatPageCanBeLoaded(Driver);
+        }
+
+        [Test]
+        [TestCase(WindowSize.Hd, 1366, 768)]
+        [TestCase(WindowSize.Fhd, 1920, 1080)]
+        public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
+        {
+            Driver = StaticWebDriverFactory.GetLocalWebDriver(
+                StaticDriverOptionsFactory.GetFirefoxOptions(true),
+                DriverPath,
+                windowSize);
+            Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
 
         [Test]
@@ -53,20 +87,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         [TestCase(Browser.Safari)]
         public void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
         {
-            Action act = () => StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath);
-            act.Should()
-                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {thisPlatformType}.")
-                .WithMessage("*is only available on*");
-        }
+            Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, ThisPlatform);
 
-        [Test]
-        [TestCase(Browser.Firefox)]
-        [TestCase(Browser.Chrome)]
-        public void HeadlessBrowserCanBeLaunched(Browser browser)
-        {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
-            Driver.Url = "https://example.com/";
-            Driver.Title.Should().Be("Example Domain");
+            void Act() => StaticWebDriverFactory.GetLocalWebDriver(browser);
         }
 
         [Test]
@@ -75,48 +98,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         [TestCase(Browser.Safari)]
         public void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
         {
-            Action act = () => StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
-            act.Should()
-                .ThrowExactly<ArgumentException>($"because headless mode is not supported on {browser}.")
-                .WithMessage($"Headless mode is not currently supported for {browser}.");
-        }
+            Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
 
-        [Test]
-        [TestCase(Browser.Firefox)]
-        [TestCase(Browser.InternetExplorer)]
-        [TestCase(Browser.Edge)]
-        [TestCase(Browser.Chrome)]
-        public void RemoteWebDriverCanBeLaunchedAndLoadExampleDotCom(Browser browser)
-        {
-            Driver = StaticWebDriverFactory.GetRemoteWebDriver(browser, new Uri("http://localhost:4444/wd/hub"), PlatformType.Any);
-            Driver.Url = "https://example.com/";
-            Driver.Title.Should().Be("Example Domain");
-        }
-
-        [Test]
-        public void HdBrowserIsOfRequestedSize()
-        {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(true), DriverPath, WindowSize.Hd);
-
-            Assert.Multiple(() =>
-            {
-                Size size = Driver.Manage().Window.Size;
-                size.Width.Should().Be(1366);
-                size.Height.Should().Be(768);
-            });
-        }
-
-        [Test]
-        public void FhdBrowserIsOfRequestedSize()
-        {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(true), DriverPath, WindowSize.Fhd);
-
-            Assert.Multiple(() =>
-            {
-                Size size = Driver.Manage().Window.Size;
-                size.Height.Should().Be(1080);
-                size.Width.Should().Be(1920);
-            });
+            void Act() => StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
         }
 
         [TearDown]

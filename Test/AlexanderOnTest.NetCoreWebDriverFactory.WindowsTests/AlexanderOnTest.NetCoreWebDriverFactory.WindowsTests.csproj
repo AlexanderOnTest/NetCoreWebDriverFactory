@@ -20,7 +20,11 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.23.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.14.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="1.0.0" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj" />
   </ItemGroup>
 
 </Project>

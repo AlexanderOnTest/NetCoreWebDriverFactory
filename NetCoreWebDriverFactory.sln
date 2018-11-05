@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests", "Test\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests.csproj", "{EFC77B86-A9DF-4A8E-BDEB-793B7E115717}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexanderonTest.NetCoreWebDriverFactory.Lib.Test", "Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{EFC77B86-A9DF-4A8E-BDEB-793B7E115717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFC77B86-A9DF-4A8E-BDEB-793B7E115717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFC77B86-A9DF-4A8E-BDEB-793B7E115717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{77F6D485-77A8-43F6-B9BD-229CC926E8A7} = {8A7C80EE-4A21-466B-8519-EBCED9CF00D7}
 		{9C605B71-7B13-4B5E-8B2F-72D69DA87D5D} = {8A7C80EE-4A21-466B-8519-EBCED9CF00D7}
 		{EFC77B86-A9DF-4A8E-BDEB-793B7E115717} = {8A7C80EE-4A21-466B-8519-EBCED9CF00D7}
+		{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D} = {8A7C80EE-4A21-466B-8519-EBCED9CF00D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F82661E-6641-4817-BCA2-1644BBDB32DD}

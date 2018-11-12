@@ -36,57 +36,37 @@
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory">
             <summary>
-            An overridable implementation of the DriverOptionsFactory Interface.
+            An overridable implementation of the IDriverOptionsFactory Interface.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetChromeOptions(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.#ctor">
             <summary>
-            Return a configured ChromeOptions instance.
+            Construct a default DriverOptionsFactory.
             </summary>
-            <param name="platformType"></param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.#ctor(System.Collections.Generic.Dictionary{System.Type,OpenQA.Selenium.DriverOptions})">
+            <summary>
+            Constructor to override the default DriverOptions.
+            </summary>
+            <param name="driverOptionsDictionary"></param>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.DriverOptionsDictionary">
+            <summary>
+            Dictionary of basically configured DriverOptions instances.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
+            <summary>
+            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            </summary>
+            <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetChromeOptions(System.Boolean,OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType)">
             <summary>
-            Return a configured ChromeOptions instance.
+            Return a DriverOptions instance of the correct type configured for a RemoteWebDriver.
             </summary>
-            <param name="headless"></param>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetFirefoxOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured FirefoxOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetFirefoxOptions(System.Boolean,OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured FirefoxOptions instance.
-            </summary>
-            <param name="headless"></param>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured EdgeOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetInternetExplorerOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured InternetExplorerOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.GetSafariOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured SafariOptions instance.
-            </summary>
+            <typeparam name="T"></typeparam>
             <param name="platformType"></param>
             <returns></returns>
         </member>
@@ -97,6 +77,14 @@
             <typeparam name="T"></typeparam>
             <param name="options"></param>
             <param name="platformType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultDriverOptionsFactory.AddHeadlessOption``1(``0)">
+            <summary>
+            Add the headless flag if available.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="driverOptions"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory">
@@ -215,63 +203,18 @@
             Interface for DriverOptionsFactory instances.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetChromeOptions(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
             <summary>
-            Return a configured ChromeOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetChromeOptions(System.Boolean,OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured ChromeOptions instance.
-            </summary>
-            <param name="headless"></param>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetFirefoxOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured FirefoxOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetFirefoxOptions(System.Boolean,OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured FirefoxOptions instance.
-            </summary>
-            <param name="headless"></param>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured EdgeOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetInternetExplorerOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured InternetExplorerOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetSafariOptions(OpenQA.Selenium.PlatformType)">
-            <summary>
-            Return a configured SafariOptions instance.
-            </summary>
-            <param name="platformType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.SetPlatform``1(``0,OpenQA.Selenium.PlatformType)">
-            <summary>
-            Add the platform configuration to a DriverOptions instance.
+            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType)">
+            <summary>
+            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            </summary>
+            <typeparam name="T"></typeparam>
             <param name="platformType"></param>
             <returns></returns>
         </member>
@@ -378,34 +321,34 @@
             Static Factory for DriverOptions
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetChromeOptions(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetChromeOptions(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a configured ChromeOptions instance.
+            Return a configured ChromeOptions instance for a RemoteWebDriver.
             </summary>
             <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetChromeOptions(System.Boolean,OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetChromeOptions(System.Boolean)">
             <summary>
-            Return a configured ChromeOptions instance.
+            Return a configured ChromeOptions instance  for a local WebDriver.
             </summary>
             <param name="headless"></param>
-            <param name="platformType"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetFirefoxOptions(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetFirefoxOptions(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a configured FirefoxOptions instance.
+            Return a configured FirefoxOptions instance for a RemoteWebDriver.
             </summary>
             <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetFirefoxOptions(System.Boolean,OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetFirefoxOptions(System.Boolean)">
             <summary>
-            Return a configured FirefoxOptions instance.
+            Return a configured FirefoxOptions instance for a local WebDriver.
             </summary>
             <param name="headless"></param>
-            <param name="platformType"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType)">
@@ -436,6 +379,14 @@
             <typeparam name="T"></typeparam>
             <param name="options"></param>
             <param name="platformType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticDriverOptionsFactory.AddHeadlessOption``1(``0)">
+            <summary>
+            Add the headless flag if available.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="driverOptions"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory">

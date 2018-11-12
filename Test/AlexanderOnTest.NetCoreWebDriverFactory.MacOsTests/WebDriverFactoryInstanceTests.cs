@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 using AlexanderonTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
 {
@@ -80,7 +81,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
             Driver = WebDriverFactory.GetLocalWebDriver(
-                DriverOptionsFactory.GetFirefoxOptions(true),
+                DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(true),
                 DriverPath,
                 windowSize);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);

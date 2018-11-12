@@ -14,6 +14,8 @@
 // limitations under the License.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -24,82 +26,64 @@ using OpenQA.Selenium.Safari;
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
-    /// An overridable implementation of the DriverOptionsFactory Interface.
+    /// An overridable implementation of the IDriverOptionsFactory Interface.
     /// </summary>
     public class DefaultDriverOptionsFactory : IDriverOptionsFactory
     {
-
         /// <summary>
-        /// Return a configured ChromeOptions instance.
+        /// Construct a default DriverOptionsFactory.
         /// </summary>
-        /// <param name="platformType"></param>
-        /// <returns></returns>
-        public virtual ChromeOptions GetChromeOptions(PlatformType platformType = PlatformType.Any)
+        public DefaultDriverOptionsFactory()
         {
-            return StaticDriverOptionsFactory.GetChromeOptions(platformType);
+            this.DriverOptionsDictionary = new Dictionary<Type, DriverOptions>
+            {
+                {typeof(ChromeOptions), StaticDriverOptionsFactory.GetChromeOptions()},
+                {typeof(EdgeOptions), StaticDriverOptionsFactory.GetEdgeOptions()},
+                {typeof(FirefoxOptions), StaticDriverOptionsFactory.GetFirefoxOptions()},
+                {typeof(InternetExplorerOptions), StaticDriverOptionsFactory.GetInternetExplorerOptions()},
+                {typeof(SafariOptions), StaticDriverOptionsFactory.GetSafariOptions()}
+            };
         }
 
         /// <summary>
-        /// Return a configured ChromeOptions instance.
+        /// Constructor to override the default DriverOptions.
         /// </summary>
-        /// <param name="headless"></param>
-        /// <param name="platformType"></param>
-        /// <returns></returns>
-        public virtual ChromeOptions GetChromeOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
+        /// <param name="driverOptionsDictionary"></param>
+        public DefaultDriverOptionsFactory(Dictionary<Type, DriverOptions> driverOptionsDictionary)
         {
-            return StaticDriverOptionsFactory.GetChromeOptions(headless, platformType);
-        }
-
-
-        /// <summary>
-        /// Return a configured FirefoxOptions instance.
-        /// </summary>
-        /// <param name="platformType"></param>
-        /// <returns></returns>
-        public virtual FirefoxOptions GetFirefoxOptions(PlatformType platformType = PlatformType.Any)
-        {
-            return StaticDriverOptionsFactory.GetFirefoxOptions(platformType);
+            DriverOptionsDictionary = driverOptionsDictionary;
         }
 
         /// <summary>
-        /// Return a configured FirefoxOptions instance.
+        /// Dictionary of basically configured DriverOptions instances.
         /// </summary>
-        /// <param name="headless"></param>
-        /// <param name="platformType"></param>
-        /// <returns></returns>
-        public virtual FirefoxOptions GetFirefoxOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
-        {
-            return StaticDriverOptionsFactory.GetFirefoxOptions(headless, platformType);
-        }
-        
+        protected Dictionary<Type, DriverOptions> DriverOptionsDictionary { get; }
+
         /// <summary>
-        /// Return a configured EdgeOptions instance.
+        /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.
         /// </summary>
-        /// <param name="platformType"></param>
+        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public virtual EdgeOptions GetEdgeOptions(PlatformType platformType = PlatformType.Any)
+        public T GetLocalDriverOptions<T>(bool headless = false) where T : DriverOptions
         {
-            return StaticDriverOptionsFactory.GetEdgeOptions(platformType);
+            Type type = typeof(T);
+            DriverOptionsDictionary.TryGetValue(type, out DriverOptions driverOptions);
+            T options = driverOptions as T;
+            return headless ? AddHeadlessOption(options) : options;
         }
 
         /// <summary>
-        /// Return a configured InternetExplorerOptions instance.
+        /// Return a DriverOptions instance of the correct type configured for a RemoteWebDriver.
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="platformType"></param>
         /// <returns></returns>
-        public virtual InternetExplorerOptions GetInternetExplorerOptions(PlatformType platformType = PlatformType.Any)
+        public T GetRemoteDriverOptions<T>(PlatformType platformType) where T : DriverOptions
         {
-            return StaticDriverOptionsFactory.GetInternetExplorerOptions(platformType);
-        }
-
-        /// <summary>
-        /// Return a configured SafariOptions instance.
-        /// </summary>
-        /// <param name="platformType"></param>
-        /// <returns></returns>
-        public virtual SafariOptions GetSafariOptions(PlatformType platformType = PlatformType.Any)
-        {
-            return StaticDriverOptionsFactory.GetSafariOptions(platformType);
+            Type type = typeof(T);
+            DriverOptionsDictionary.TryGetValue(type, out DriverOptions driverOptions);
+            SetPlatform(driverOptions, platformType);
+            return (T)driverOptions;
         }
 
         /// <summary>
@@ -109,9 +93,20 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="platformType"></param>
         /// <returns></returns>
-        public virtual T SetPlatform<T>(T options, PlatformType platformType) where T : DriverOptions
+        protected virtual T SetPlatform<T>(T options, PlatformType platformType) where T : DriverOptions
         {
             return StaticDriverOptionsFactory.SetPlatform(options, platformType);
+        }
+
+        /// <summary>
+        /// Add the headless flag if available.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="driverOptions"></param>
+        /// <returns></returns>
+        protected virtual T AddHeadlessOption<T>(T driverOptions) where T : DriverOptions
+        {
+            return StaticDriverOptionsFactory.AddHeadlessOption(driverOptions);
         }
     }
 }

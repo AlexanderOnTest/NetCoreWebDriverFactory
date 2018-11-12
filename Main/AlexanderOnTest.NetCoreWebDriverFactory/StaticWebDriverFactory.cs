@@ -50,7 +50,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(headless), driverPath);
+                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(PlatformType.Any, headless), driverPath);
 
                 case Browser.Chrome:
                     return GetLocalWebDriver(StaticDriverOptionsFactory.GetChromeOptions(headless), driverPath);

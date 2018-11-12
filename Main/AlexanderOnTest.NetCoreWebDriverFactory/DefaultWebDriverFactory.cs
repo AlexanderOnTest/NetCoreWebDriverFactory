@@ -69,19 +69,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetFirefoxOptions(headless), driverPath);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless), driverPath);
 
                 case Browser.Chrome:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetChromeOptions(headless), driverPath);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless), driverPath);
 
                 case Browser.InternetExplorer:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetInternetExplorerOptions(), driverPath);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(), driverPath);
 
                 case Browser.Edge:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetEdgeOptions(), driverPath);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), driverPath);
 
                 case Browser.Safari:
-                    return GetLocalWebDriver(StaticDriverOptionsFactory.GetSafariOptions(), driverPath);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(), driverPath);
 
                 default:
                     throw new PlatformNotSupportedException($"{browser} is not currently supported.");
@@ -199,19 +199,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetFirefoxOptions(platformType), actualGridUrl);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType), actualGridUrl);
 
                 case Browser.Chrome:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetChromeOptions(platformType), actualGridUrl);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType), actualGridUrl);
 
                 case Browser.InternetExplorer:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetInternetExplorerOptions(platformType), actualGridUrl);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType), actualGridUrl);
 
                 case Browser.Edge:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetEdgeOptions(platformType), actualGridUrl);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType), actualGridUrl);
 
                 case Browser.Safari:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetSafariOptions(platformType), actualGridUrl);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType), actualGridUrl);
 
                 default:
                     throw new PlatformNotSupportedException($"{browser} is not currently supported.");

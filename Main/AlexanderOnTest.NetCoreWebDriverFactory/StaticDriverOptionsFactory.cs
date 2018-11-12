@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -29,64 +30,57 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     public static class StaticDriverOptionsFactory
     {
         /// <summary>
-        /// Return a configured ChromeOptions instance.
+        /// Return a configured ChromeOptions instance for a RemoteWebDriver.
         /// </summary>
         /// <param name="platformType"></param>
-        /// <returns></returns>
-        public static ChromeOptions GetChromeOptions(PlatformType platformType = PlatformType.Any)
-        {
-            return GetChromeOptions(false, platformType);
-        }
-
-        /// <summary>
-        /// Return a configured ChromeOptions instance.
-        /// </summary>
         /// <param name="headless"></param>
-        /// <param name="platformType"></param>
         /// <returns></returns>
-        public static ChromeOptions GetChromeOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
+        public static ChromeOptions GetChromeOptions(PlatformType platformType, bool headless = false)
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArguments("disable-infobars", "test-type");
-            if (headless)
-            {
-                options.AddArgument("headless");
-            }
-
+            ChromeOptions options = GetChromeOptions(headless);
             SetPlatform(options, platformType);
             return options;
         }
 
         /// <summary>
-        /// Return a configured FirefoxOptions instance.
+        /// Return a configured ChromeOptions instance  for a local WebDriver.
         /// </summary>
-        /// <param name="platformType"></param>
+        /// <param name="headless"></param>
         /// <returns></returns>
-        public static FirefoxOptions GetFirefoxOptions(PlatformType platformType = PlatformType.Any)
+        public static ChromeOptions GetChromeOptions(bool headless = false)
         {
-            return GetFirefoxOptions(false, platformType);
+            ChromeOptions options = new ChromeOptions();
+            options.AddArguments("disable-infobars", "test-type");
+
+            return headless ? AddHeadlessOption(options) : options;
         }
 
         /// <summary>
-        /// Return a configured FirefoxOptions instance.
+        /// Return a configured FirefoxOptions instance for a RemoteWebDriver.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <param name="headless"></param>
+        /// <returns></returns>
+        public static FirefoxOptions GetFirefoxOptions(PlatformType platformType, bool headless = false)
+        {
+            FirefoxOptions options = GetFirefoxOptions(headless);
+            SetPlatform(options, platformType);
+            return options;
+        }
+
+        /// <summary>
+        /// Return a configured FirefoxOptions instance for a local WebDriver.
         /// </summary>
         /// <param name="headless"></param>
-        /// <param name="platformType"></param>
         /// <returns></returns>
-        public static FirefoxOptions GetFirefoxOptions(bool headless = false, PlatformType platformType = PlatformType.Any)
+        public static FirefoxOptions GetFirefoxOptions(bool headless = false)
         {
             FirefoxOptions options = new FirefoxOptions
             {
                 AcceptInsecureCertificates = true
             };
-
-            if (headless)
-            {
-                options.AddArgument("--headless");
-            }
-
-            SetPlatform(options, platformType);
-            return options;
+            
+            return headless ? AddHeadlessOption(options) : options;
         }
 
         /// <summary>
@@ -160,6 +154,27 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 default:
                     return options;
             }
+        }
+
+        /// <summary>
+        /// Add the headless flag if available.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="driverOptions"></param>
+        /// <returns></returns>
+        public static T AddHeadlessOption<T>(T driverOptions) where T : DriverOptions
+        {
+            switch (driverOptions)
+            {
+                case ChromeOptions chromeOptions:
+                    chromeOptions.AddArgument("headless");
+                    return driverOptions;
+                case FirefoxOptions firefoxOptions:
+                    firefoxOptions.AddArgument("--headless");
+                    return driverOptions;
+            }
+
+            throw new ArgumentException("Only Chrome and Firefox support headless operation");
         }
     }
 }

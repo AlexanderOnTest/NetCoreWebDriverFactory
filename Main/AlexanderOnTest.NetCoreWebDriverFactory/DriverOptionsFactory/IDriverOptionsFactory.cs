@@ -16,7 +16,7 @@
 
 using OpenQA.Selenium;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
 {
     /// <summary>
     /// Interface for DriverOptionsFactory instances.
@@ -27,6 +27,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="headless"></param>
         /// <returns></returns>
         T GetLocalDriverOptions<T>(bool headless = false) where T : DriverOptions;
 

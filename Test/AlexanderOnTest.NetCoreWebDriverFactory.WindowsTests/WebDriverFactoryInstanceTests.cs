@@ -19,9 +19,9 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderonTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
 {
@@ -40,8 +40,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(ThisPlatform));
-            WebDriverFactory = new DefaultWebDriverFactory();
             DriverOptionsFactory = new DefaultDriverOptionsFactory();
+            WebDriverFactory = new DefaultWebDriverFactory(DriverPath, GridUrl, DriverOptionsFactory);
         }
         
         [Test]
@@ -51,12 +51,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(
-                browser,
-                browser == Browser.Edge ? null : DriverPath,
-                headless == BrowserVisibility.Headless);
+            Driver = WebDriverFactory.GetLocalWebDriver(browser, WindowSize.Hd, browserVisibility == BrowserVisibility.Headless);
             Assertions.AssertThatPageCanBeLoaded(Driver);
         }
 
@@ -72,7 +69,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
         public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
         {
-            Driver = WebDriverFactory.GetRemoteWebDriver(browser, GridUrl, platformType);
+            Driver = WebDriverFactory.GetRemoteWebDriver(browser, platformType);
             Assertions.AssertThatPageCanBeLoaded(Driver);
         }
 
@@ -81,10 +78,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(WindowSize.Fhd, 1920, 1080)]
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(
-                DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(true), 
-                DriverPath, 
-                windowSize);
+            Driver = WebDriverFactory.GetLocalWebDriver(Browser.Firefox, windowSize, true);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
 
@@ -105,7 +99,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         {
             Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
 
-            void Act() => WebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
+            void Act() => WebDriverFactory.GetLocalWebDriver(browser, WindowSize.Hd, true);
         }
 
         [TearDown]

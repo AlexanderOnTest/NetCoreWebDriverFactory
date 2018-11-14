@@ -19,6 +19,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderonTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 

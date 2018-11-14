@@ -22,7 +22,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Safari;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
 {
     /// <summary>
     /// Static Factory for DriverOptions

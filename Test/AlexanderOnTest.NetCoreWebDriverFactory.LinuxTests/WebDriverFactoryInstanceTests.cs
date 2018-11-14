@@ -19,6 +19,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderonTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -40,8 +41,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(ThisPlatform));
-            WebDriverFactory = new DefaultWebDriverFactory();
             DriverOptionsFactory = new DefaultDriverOptionsFactory();
+            WebDriverFactory = new DefaultWebDriverFactory(DriverPath, GridUrl, DriverOptionsFactory);
         }
 
         [Test]
@@ -53,7 +54,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         {
             Driver = WebDriverFactory.GetLocalWebDriver(
                 browser,
-                browser == Browser.Safari ? null : DriverPath,
+                WindowSize.Hd,
                 headless == BrowserVisibility.Headless);
             Assertions.AssertThatPageCanBeLoaded(Driver);
         }
@@ -70,7 +71,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
         public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
         {
-            Driver = WebDriverFactory.GetRemoteWebDriver(browser, GridUrl, platformType);
+            Driver = WebDriverFactory.GetRemoteWebDriver(browser, platformType);
             Assertions.AssertThatPageCanBeLoaded(Driver);
         }
 
@@ -81,7 +82,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         {
             Driver = WebDriverFactory.GetLocalWebDriver(
                 DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(true),
-                DriverPath,
                 windowSize);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
@@ -105,7 +105,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         {
             Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
 
-            void Act() => WebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
+            void Act() => WebDriverFactory.GetLocalWebDriver(browser, WindowSize.Hd, true);
         }
 
         [TearDown]

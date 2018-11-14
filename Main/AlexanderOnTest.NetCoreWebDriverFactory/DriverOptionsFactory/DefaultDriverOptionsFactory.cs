@@ -23,7 +23,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Safari;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
 {
     /// <summary>
     /// An overridable implementation of the IDriverOptionsFactory Interface.
@@ -63,6 +63,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="headless"></param>
         /// <returns></returns>
         public T GetLocalDriverOptions<T>(bool headless = false) where T : DriverOptions
         {

@@ -10,17 +10,15 @@
     <Description>A library to ease the creation of Selenium WebDriver instances in .net Core projects.
 
 Usage
-For Safari, Microsoft Edge in Windows 10 October 2018 Update (version 1809) onwards or any case where the required WebDriver is on the System Path:
+Instantiate a WebDriverFactory from a .NET Core project:
+IWebDriverFactory webDriverFactory =  new DefaultWebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), yourGridUri);
 
-IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Edge);
+(Use my alternative Windows1803WebDriverFactory implementation for Windows 10 version 1803 and earlier)
 
-For Chrome, Internet Explorer, Firefox or Microsoft Edge in Windows 10 version 1803 or earlier when the WebDriver is provided by a Nuget Package in your test project:
-
-IWebDriver localWebDriver = StaticWebDriverFactory.GetLocalWebDriver(Browser.Edge, Path.GetDirectoryName(Assembly.GetCallingAssembly().Location));
-
+Then to use it
+IWebDriver localWebDriver = webDriverFactory.GetLocalWebDriver(Browser.xxxx);
 or 
-
-IWebDriver remoteWebDriver = StaticWebDriverFactory.GetRemoteWebDriver(Browser.Chrome, gridUri, Platform.Linux);
+IWebDriver remoteWebDriver = webDriverFactory.GetRemoteWebDriver(Browser.xxxx, Platform.xxxx);
 
 Supported Browsers:
 Chrome
@@ -40,15 +38,28 @@ The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
     <PackageReleaseNotes>v2.0.0-alpha
-Simplified generic Interfaces.
-1) IDriverOptionsFactory:
+Simplified generic Interfaces. Closer to my original intentions for this project:
+1) IWebDriverFactory:
+        IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false);
+        IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd);
+
+        IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false);
+        IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd);
+
+DefaultWebDriverFactory no longer has a default constructor and must be instantiated using
+        public DefaultWebDriverFactory(string installedDriverPath, Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null)
+
+2) IDriverOptionsFactory:
         T GetLocalDriverOptions&lt;T&gt;(bool headless = false) where T : DriverOptions;
         T GetRemoteDriverOptions&lt;T&gt;(PlatformType platformType) where T : DriverOptions;
-2) In addition, DefaultDriverOptionsFactory exposes a new constructor:
+
+In addition, DefaultDriverOptionsFactory exposes a new constructor:
        public DefaultDriverOptionsFactory(Dictionary&lt;Type, DriverOptions&gt; driverOptionsDictionary)
-to enable the use of your own standard options choices.
-       protected virtual T SetPlatform&lt;T&gt;(T options, PlatformType platformType) where T : DriverOptions
-       protected virtual T AddHeadlessOption&lt;T&gt;(T driverOptions) where T : DriverOptions</PackageReleaseNotes>
+to enable the use of your own standard DriverOptions choices.</PackageReleaseNotes>
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>

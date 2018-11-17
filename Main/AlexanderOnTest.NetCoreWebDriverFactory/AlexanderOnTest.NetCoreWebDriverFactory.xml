@@ -53,6 +53,11 @@
             The Uri of your selenium grid for remote Webdriver instances.
             </summary>
         </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.InstalledDriverPath">
+            <summary>
+            The path of installed drivers.
+            </summary>
+        </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.DriverOptionsFactory">
             <summary>
             The DriverOptionsFactory to use.
@@ -442,6 +447,36 @@
             Convenience method for setting the Window Size of a WebDriver to common values. (768P, 1080P and fullscreen)
             </summary>
             <param name="driver"></param>
+            <param name="windowSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory">
+            <summary>
+            Example Override implementation, This will allow Edge to work on Windows 10 version 1803 and Earlier.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.#ctor(System.String,System.Uri,AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory)">
+            <summary>
+            Return a WebDriverFactory for Windows 10 version 1803 and earlier
+            </summary>
+            <param name="installedDriverPath"></param>
+            <param name="gridUri"></param>
+            <param name="driverOptionsFactory"></param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean)">
+            <summary>
+            Return a local webdriver of the given browser type with default settings.
+            </summary>
+            <param name="browser"></param>
+            <param name="windowSize"></param>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10 version 1803 or earlier)
+            </summary>
+            <param name="options"></param>
             <param name="windowSize"></param>
             <returns></returns>
         </member>

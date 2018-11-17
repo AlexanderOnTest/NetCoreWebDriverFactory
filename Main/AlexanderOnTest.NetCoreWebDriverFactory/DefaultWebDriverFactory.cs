@@ -49,7 +49,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         public Uri GridUri { get; set; }
 
-        private string InstalledDriverPath { get; }
+        /// <summary>
+        /// The path of installed drivers.
+        /// </summary>
+        protected string InstalledDriverPath { get; }
 
         /// <summary>
         /// The DriverOptionsFactory to use.

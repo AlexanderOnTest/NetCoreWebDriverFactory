@@ -70,7 +70,7 @@ to enable the use of your own standard DriverOptions choices.</PackageReleaseNot
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants />
-    <DocumentationFile>C:\src\NetCoreWebDriverFactory\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.xml</DocumentationFile>
+    <DocumentationFile>.\AlexanderOnTest.NetCoreWebDriverFactory.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

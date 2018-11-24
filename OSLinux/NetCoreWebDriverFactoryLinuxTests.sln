@@ -3,19 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory", "Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj", "{3F97382B-6E44-422D-8EC0-A54968A60531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory", "..\src\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj", "{3F97382B-6E44-422D-8EC0-A54968A60531}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{11555F43-5282-451E-99CC-3D16D391C790}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "..\src\Main", "{11555F43-5282-451E-99CC-3D16D391C790}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8A7C80EE-4A21-466B-8519-EBCED9CF00D7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "..src\Test", "{8A7C80EE-4A21-466B-8519-EBCED9CF00D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests", "Test\AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests\AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests.csproj", "{77F6D485-77A8-43F6-B9BD-229CC926E8A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests", "..\src\Test\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests.csproj", "{EFC77B86-A9DF-4A8E-BDEB-793B7E115717}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests", "Test\AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests\AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests.csproj", "{9C605B71-7B13-4B5E-8B2F-72D69DA87D5D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests", "Test\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests.csproj", "{EFC77B86-A9DF-4A8E-BDEB-793B7E115717}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexanderonTest.NetCoreWebDriverFactory.Lib.Test", "Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexanderonTest.NetCoreWebDriverFactory.Lib.Test", "..\src\Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{A17A5A3D-B640-4329-81FC-F4FBD4E44A5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

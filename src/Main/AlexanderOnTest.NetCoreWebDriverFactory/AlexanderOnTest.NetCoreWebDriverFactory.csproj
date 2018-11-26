@@ -66,6 +66,8 @@ to enable the use of your own standard DriverOptions choices.</PackageReleaseNot
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
     <LangVersion>7.1</LangVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -74,7 +76,7 @@ to enable the use of your own standard DriverOptions choices.</PackageReleaseNot
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
   </ItemGroup>
 
 </Project>

@@ -6,5 +6,6 @@ addons:
   sonarcloud:
     organization: "alexanderontesting-github"
 script:
+ - dotnet restore .\LinuxTests.sln
  - dotnet test .\LinuxTests.sln --filter=TestCategory=CI
  - sonar-scanner

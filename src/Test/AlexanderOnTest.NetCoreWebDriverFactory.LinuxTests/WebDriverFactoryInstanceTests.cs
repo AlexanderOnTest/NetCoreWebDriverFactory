@@ -46,6 +46,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
@@ -76,6 +77,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(WindowSize.Hd, 1366, 768)]
         [TestCase(WindowSize.Fhd, 1920, 1080)]
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
@@ -87,6 +89,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
@@ -98,6 +101,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]

@@ -3,6 +3,7 @@ solution: NetCoreWebDriverFactory.sln
 mono: none
 dotnet: 2.1
 addons:
+  firefox: latest
   sonarcloud:
     organization: "alexanderontesting-github"
 script:

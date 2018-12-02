@@ -45,18 +45,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
             WebDriverFactory = new DefaultWebDriverFactory(DriverPath, GridUrl, DriverOptionsFactory);
         }
 
-        [Test]
-        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
-        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        [TearDown]
+        public void Teardown()
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(
-                browser,
-                WindowSize.Hd,
-                headless == BrowserVisibility.Headless);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            Driver?.Quit();
         }
 
         [Test]
@@ -111,10 +103,30 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
             void Act() => WebDriverFactory.GetLocalWebDriver(browser, WindowSize.Hd, true);
         }
 
-        [TearDown]
-        public void Teardown()
+        [Test]
+        [TestCase(BrowserVisibility.OnScreen)]
+        [TestCase(BrowserVisibility.Headless)]
+        public void LocalChromeDriverCallWorks(BrowserVisibility headless = BrowserVisibility.OnScreen)
         {
-            Driver?.Quit();
+            LocalWebDriverFactoryWorks(Browser.Chrome, headless);
+        }
+        
+        [Test]
+        [Category("CI")]
+        [TestCase(BrowserVisibility.OnScreen)]
+        [TestCase(BrowserVisibility.Headless)]
+        public void LocalFirefoxDriverCallWorks(BrowserVisibility headless = BrowserVisibility.OnScreen)
+        {
+            LocalWebDriverFactoryWorks(Browser.Firefox, headless);
+        }
+        
+        private void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        {
+            Driver = WebDriverFactory.GetLocalWebDriver(
+                browser,
+                WindowSize.Hd,
+                headless == BrowserVisibility.Headless);
+            Assertions.AssertThatPageCanBeLoaded(Driver);
         }
     }
 }

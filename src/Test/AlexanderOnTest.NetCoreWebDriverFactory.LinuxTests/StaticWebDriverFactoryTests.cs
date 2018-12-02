@@ -40,18 +40,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
             Assume.That(() => RuntimeInformation.IsOSPlatform(ThisPlatform));
         }
 
-        [Test]
-        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
-        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        [TearDown]
+        public void Teardown()
         {
-            Driver = StaticWebDriverFactory.GetLocalWebDriver(
-                browser,
-                browser == Browser.Edge ? null : DriverPath,
-                headless == BrowserVisibility.Headless);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            Driver?.Quit();
         }
 
         [Test]
@@ -71,6 +63,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(WindowSize.Hd, 1366, 768)]
         [TestCase(WindowSize.Fhd, 1920, 1080)]
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
@@ -83,6 +76,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
@@ -94,6 +88,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
@@ -104,10 +99,30 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
             void Act() => StaticWebDriverFactory.GetLocalWebDriver(browser, DriverPath, true);
         }
 
-        [TearDown]
-        public void Teardown()
+        [Test]
+        [TestCase(BrowserVisibility.OnScreen)]
+        [TestCase(BrowserVisibility.Headless)]
+        public void LocalChromeDriverCallWorks(BrowserVisibility headless = BrowserVisibility.OnScreen)
         {
-            Driver?.Quit();
+            LocalWebDriverFactoryWorks(Browser.Chrome, headless);
+        }
+
+        [Test]
+        [Category("CI")]
+        [TestCase(BrowserVisibility.OnScreen)]
+        [TestCase(BrowserVisibility.Headless)]
+        public void LocalFirefoxDriverCallWorks(BrowserVisibility headless = BrowserVisibility.OnScreen)
+        {
+            LocalWebDriverFactoryWorks(Browser.Firefox, headless);
+        }
+        
+        private void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        {
+            Driver = StaticWebDriverFactory.GetLocalWebDriver(
+                browser,
+                browser == Browser.Edge ? null : DriverPath,
+                headless == BrowserVisibility.Headless);
+            Assertions.AssertThatPageCanBeLoaded(Driver);
         }
     }
 }

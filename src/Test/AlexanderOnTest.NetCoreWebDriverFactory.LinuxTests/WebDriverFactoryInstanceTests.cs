@@ -46,7 +46,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
         }
 
         [Test]
-        [Category("CI")]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]

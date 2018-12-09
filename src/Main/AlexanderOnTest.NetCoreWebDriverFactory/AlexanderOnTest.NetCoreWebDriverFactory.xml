@@ -280,6 +280,18 @@
             <param name="driverOptions"></param>
             <returns></returns>
         </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.FrameworkWebDriverFactory">
+            <summary>
+            Overridable implementation of the IWebDriverFactory interface for use with .Net Framework test projects.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.FrameworkWebDriverFactory.#ctor(System.Uri,AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory)">
+            <summary>
+            Return a FrameworkWebDriverFactory instance for use with .NET framework projects
+            </summary>
+            <param name="gridUri"></param>
+            <param name="driverOptionsFactory"></param>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory">
             <summary>
             Interface for WebDriverFactory Instances.

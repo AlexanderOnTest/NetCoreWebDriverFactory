@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0-beta1</Version>
+    <Version>2.0.0-RC</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -11,19 +11,18 @@
 
 Usage
 Instantiate a WebDriverFactory from a .NET Core project:
-IWebDriverFactory webDriverFactory =  new DefaultWebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), yourGridUri);
+IWebDriverFactory webDriverFactory =  new DefaultWebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), {{yourGridUri}});
 
-Use my alternative Windows1803WebDriverFactory implementation for Windows 10 version 1803 and earlier.
-IWebDriverFactory webDriverFactory =  new Windows1803WebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), yourGridUri);
+Use the alternative Windows1803WebDriverFactory implementation for Windows 10 version 1803 and earlier.
+IWebDriverFactory webDriverFactory =  new Windows1803WebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), {{yourGridUri}});
 
 This is not intended for .NET Framework (as it is really not required) but if you would like to use it in a Framework project use:
-
-IWebDriverFactory webDriverFactory =  new FrameworkWebDriverFactory(yourGridUri);
+IWebDriverFactory webDriverFactory =  new FrameworkWebDriverFactory({{yourGridUri}});
 
 Then to use it
 IWebDriver localWebDriver = webDriverFactory.GetLocalWebDriver(Browser.xxxx);
 or 
-IWebDriver remoteWebDriver = webDriverFactory.GetRemoteWebDriver(Browser.xxxx, Platform.xxxx);
+IWebDriver remoteWebDriver = webDriverFactory.GetRemoteWebDriver(Browser.xxxx, PlatformType.xxxx);
 
 Supported Browsers:
 Chrome
@@ -33,16 +32,19 @@ Internet Explorer 11 (Windows Platforms)
 Safari (MacOS)
 
 Platforms:
-Windows
-Linux
-MacOS
+Windows (PlatformType.Windows)
+Linux        (PlatformType.Linux)
+MacOS     (PlatformType.Mac)
 
 Tested and working on Windows 10, Linux (Ubuntu 18.04) and MacOS Mojave
 
 The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
-    <PackageReleaseNotes>v2.0.0-beta1
+    <PackageReleaseNotes>v2.0.0-RC
+Functionally identical to beta1 for public testing.
+
+v2.0.0-beta1
 Added WebDriverFactory implementation for .NET Framework
 
 v2.0.0-alpha

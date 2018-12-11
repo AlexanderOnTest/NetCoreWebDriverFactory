@@ -45,19 +45,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
             WebDriverFactory = new DefaultWebDriverFactory(DriverPath, GridUrl, DriverOptionsFactory);
         }
 
-        [Test]
-        [Category("CI")]
-        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
-        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        [TearDown]
+        public void Teardown()
         {
-            Driver = WebDriverFactory.GetLocalWebDriver(
-                browser,
-                WindowSize.Hd,
-                headless == BrowserVisibility.Headless);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            Driver?.Quit();
         }
 
         [Test]
@@ -112,10 +103,30 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
             void Act() => WebDriverFactory.GetLocalWebDriver(browser, WindowSize.Hd, true);
         }
 
-        [TearDown]
-        public void Teardown()
+        [Test]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
+        public void LocalWebDriverCallWorks(Browser browser, BrowserVisibility visibility = BrowserVisibility.OnScreen)
         {
-            Driver?.Quit();
+            LocalWebDriverFactoryWorks(browser, visibility);
+        }
+        
+        [Test]
+        [Category("CI")]
+        [TestCase(BrowserVisibility.Headless)]
+        public void LocalHeadlessFirefoxDriverCallWorks(BrowserVisibility visibility = BrowserVisibility.OnScreen)
+        {
+            LocalWebDriverFactoryWorks(Browser.Firefox, visibility);
+        }
+        
+        private void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility visibility = BrowserVisibility.OnScreen)
+        {
+            Driver = WebDriverFactory.GetLocalWebDriver(
+                browser,
+                WindowSize.Hd,
+                visibility == BrowserVisibility.Headless);
+            Assertions.AssertThatPageCanBeLoaded(Driver);
         }
     }
 }

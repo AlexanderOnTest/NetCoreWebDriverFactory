@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0-RC</Version>
+    <Version>2.0.0</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -41,14 +41,8 @@ Tested and working on Windows 10, Linux (Ubuntu 18.04) and MacOS Mojave
 The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
-    <PackageReleaseNotes>v2.0.0-RC
-Functionally identical to beta1 for public testing.
-
-v2.0.0-beta1
-Added WebDriverFactory implementation for .NET Framework
-
-v2.0.0-alpha
-Simplified generic Interfaces. Closer to my original intentions for this project:
+    <PackageReleaseNotes>v2.0.0 final
+Significant refactoring from v1.0.1 for simplified usage:
 1) IWebDriverFactory:
         IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false);
         IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd);

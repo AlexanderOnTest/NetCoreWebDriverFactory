@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderonTest.NetCoreWebDriverFactory.Lib.Test", "src\Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{8F3864BD-1618-4ADC-9E1A-A951F4E5851C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests", "src\Test\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests\AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests.csproj", "{D5514D1B-4F3E-4945-8192-0F0F4B2F6F1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F3864BD-1618-4ADC-9E1A-A951F4E5851C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3864BD-1618-4ADC-9E1A-A951F4E5851C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3864BD-1618-4ADC-9E1A-A951F4E5851C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3864BD-1618-4ADC-9E1A-A951F4E5851C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5514D1B-4F3E-4945-8192-0F0F4B2F6F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5514D1B-4F3E-4945-8192-0F0F4B2F6F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5514D1B-4F3E-4945-8192-0F0F4B2F6F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5514D1B-4F3E-4945-8192-0F0F4B2F6F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECE8EB4B-8740-4D23-9A75-99C1CACC5C4F}
+	EndGlobalSection
+EndGlobal

@@ -3,8 +3,11 @@ solution: NetCoreWebDriverFactory.sln
 mono: none
 dotnet: 2.1
 addons:
+  firefox: latest
   sonarcloud:
     organization: "alexanderontesting-github"
 script:
- - dotnet build
+ - dotnet build WindowsTests.sln
+ - dotnet build MacOSTests.sln
+ - dotnet test LinuxTests.sln --filter=TestCategory=CI
  - sonar-scanner

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderonTest.NetCoreWebDriverFactory.Lib.Test", "src\Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests", "src\Test\AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests\AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests.csproj", "{180BB709-1B90-44F6-A903-FBF378721945}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{180BB709-1B90-44F6-A903-FBF378721945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180BB709-1B90-44F6-A903-FBF378721945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180BB709-1B90-44F6-A903-FBF378721945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180BB709-1B90-44F6-A903-FBF378721945}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02BA514A-0BBA-4415-BA34-6C3BBE8DE4C6}
+	EndGlobalSection
+EndGlobal

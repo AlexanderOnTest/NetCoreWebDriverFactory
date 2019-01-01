@@ -132,6 +132,77 @@
             <param name="windowSize"></param>
             <returns></returns>
         </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
+            <summary>
+            Return a WebDriver instance of the given configuration.
+            </summary>
+            <param name="browser"></param>
+            <param name="windowSize"></param>
+            <param name="isLocal"></param>
+            <param name="platformType"></param>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager">
+            <summary>
+            Interface for a WebDriver Manager class that provides a singleton
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager.Get">
+            <summary>
+            Return a singleton WebDriver instance;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager.Quit">
+            <summary>
+            Quit and clear the current singleton WebDriver instance;
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager.GetAdditionalWebDriver">
+            <summary>
+            Return a new WebDriver instance independent of the singleton instance;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager">
+            <summary>
+            A simple implementation of a WebDriverManager
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
+            <summary>
+            Required constructor for a working WebDriverManager.
+            </summary>
+            <param name="factory"></param>
+            <param name="browser"></param>
+            <param name="windowSize"></param>
+            <param name="isLocal"></param>
+            <param name="platformType"></param>
+            <param name="headless"></param>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Driver">
+            <summary>
+            The singleton WebDriver instance.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Get">
+            <summary>
+            Return a singleton WebDriver instance
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Quit">
+            <summary>
+            Quit and clear the current singleton WebDriver instance;
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.GetAdditionalWebDriver">
+            <summary>
+            Return a new WebDriver instance independent of the singleton instance;
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory">
             <summary>
             An overridable implementation of the IDriverOptionsFactory Interface.
@@ -367,6 +438,17 @@
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
+            <summary>
+            Return a WebDriver instance of the given configuration.
+            </summary>
+            <param name="browser"></param>
+            <param name="windowSize"></param>
+            <param name="isLocal"></param>
+            <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory">

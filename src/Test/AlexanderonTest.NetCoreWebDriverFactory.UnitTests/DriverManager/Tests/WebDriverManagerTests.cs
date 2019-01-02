@@ -15,8 +15,6 @@
 // </copyright>
 
 using System;
-using System.IO;
-using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using FluentAssertions;
@@ -25,6 +23,7 @@ using OpenQA.Selenium;
 
 namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
 {
+    [Category("CI")]
     public class WebDriverManagerTests
     {
         private IWebDriver DriverOne { get; set; }
@@ -37,14 +36,8 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         public void Prepare()
         {
             DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            WebDriverFactory = new DefaultWebDriverFactory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));   // new FakeWebDriverFactory();
             WebDriverFactory = new FakeWebDriverFactory();
             WebDriverManager = new WebDriverManager(WebDriverFactory, Browser.Firefox);
-        }
-
-        [SetUp]
-        public void Setup()
-        {
         }
 
         /// <summary>

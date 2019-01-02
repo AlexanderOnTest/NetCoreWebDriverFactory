@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.1.0-RC</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -41,7 +41,14 @@ Tested and working on Windows 10, Linux (Ubuntu 18.04) and MacOS Mojave
 The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
-    <PackageReleaseNotes>v2.0.0 final
+    <PackageReleaseNotes>v2.1.0
+Addition of a generalised GetWebDriver method for both local and remote webdrivers.
+IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
+            PlatformType platformType = PlatformType.Any, bool headless = false)
+
+And a WebDriverManager interface and implementation that uses it.
+
+v2.0.0 final
 Significant refactoring from v1.0.1 for simplified usage:
 1) IWebDriverFactory:
         IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false);
@@ -67,11 +74,12 @@ to enable the use of your own standard DriverOptions choices.</PackageReleaseNot
     <Copyright>Copyright 2018 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageLicense>Apache-2.0</PackageLicense>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
     <LangVersion>7.1</LangVersion>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <FileVersion>2.1.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

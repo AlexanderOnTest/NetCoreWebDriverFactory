@@ -22,7 +22,9 @@ using OpenQA.Selenium;
 
 namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
 {
+#pragma warning disable S3881 // "IDisposable" should be implemented correctly
     internal class FakeWebDriver : IWebDriver
+#pragma warning restore S3881 // "IDisposable" should be implemented correctly
     {
         private bool isQuit = false;
 
@@ -61,8 +63,7 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
 
         public IOptions Manage()
         {
-            // to simulate the bahviour of a quit WebDriver: a WebDriverException is thrown when a call is made to
-            //     driver.Manage().Window.FullScreen();
+            // to simulate the behaviour of a quit WebDriver: a WebDriverException is thrown when a call is made to "driver.Manage().Window.FullScreen()"
             if (isQuit)
             {
                 throw new WebDriverException();

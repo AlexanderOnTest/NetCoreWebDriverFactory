@@ -6,7 +6,7 @@ addons:
   firefox: latest
   sonarcloud:
     organization: "alexanderontesting-github"
-script
+script:
  - dotnet test NetCoreWebDriverFactoryDevelopment.sln
  - dotnet build WindowsTests.sln
  - dotnet build MacOSTests.sln

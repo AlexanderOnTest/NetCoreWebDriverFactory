@@ -199,5 +199,22 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         {
             return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize);
         }
+
+        /// <summary>
+        /// Return a WebDriver instance of the given configuration.
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="isLocal"></param>
+        /// <param name="platformType"></param>
+        /// <param name="headless"></param>
+        /// <returns></returns>
+        public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
+            PlatformType platformType = PlatformType.Any, bool headless = false)
+        {
+            return isLocal ? 
+                GetLocalWebDriver(browser, windowSize, headless) :
+                GetRemoteWebDriver(browser, platformType, windowSize, headless);
+        }
     }
 }

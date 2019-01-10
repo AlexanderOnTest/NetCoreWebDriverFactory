@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
@@ -21,7 +22,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     /// <summary>
     /// Interface for a WebDriver Manager class that provides a singleton
     /// </summary>
-    public interface IWebDriverManager
+    public interface IWebDriverManager : IDisposable
     {
         /// <summary>
         /// Return a singleton WebDriver instance;

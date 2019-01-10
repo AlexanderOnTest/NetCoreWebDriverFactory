@@ -18,6 +18,7 @@ using System;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -28,16 +29,18 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
     {
         private IWebDriver DriverOne { get; set; }
         private IWebDriver DriverTwo { get; set; }
-        private IWebDriverFactory WebDriverFactory { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
         private IWebDriverManager WebDriverManager { get; set; }
 
         [OneTimeSetUp]
         public void Prepare()
         {
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            WebDriverFactory = new FakeWebDriverFactory();
-            WebDriverManager = new WebDriverManager(WebDriverFactory, Browser.Firefox);
+            ServiceCollection services = new ServiceCollection();
+            services.AddTransient(typeof(IDriverOptionsFactory), typeof(DefaultDriverOptionsFactory));
+            services.AddTransient(typeof(IWebDriverFactory), typeof(DefaultWebDriverFactory));
+            services.AddTransient(typeof(IWebDriverManager), typeof(WebDriverManager));
+            IServiceProvider provider = services.BuildServiceProvider();
+
+            WebDriverManager = new WebDriverManager(provider.GetService<IWebDriverFactory>(), Browser.Firefox);
         }
 
         /// <summary>

@@ -38,17 +38,25 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
             throw new NotImplementedException();
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
         {
-            // Dispose of unmanaged resources.
-            Dispose(true);
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
+            if (disposing)
+            {
+                // nothing to dispose of
+            }
         }
 
-        private void Dispose(bool disposing)
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
         {
-            // nothing to dispose of.
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public void Close()

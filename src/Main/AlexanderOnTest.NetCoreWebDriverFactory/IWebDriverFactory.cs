@@ -49,6 +49,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false);
 
         /// <summary>
+        /// Return a RemoteWebDriver instance of the given configuration.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        IWebDriver GetRemoteWebDriver(IWebDriverConfiguration configuration);
+
+        /// <summary>
         /// Return a RemoteWebDriver of the given windows size.
         /// </summary>
         /// <param name="options"></param>
@@ -64,6 +71,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="headless"></param>
         /// <returns></returns>
         IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false);
+
+        /// <summary>
+        /// Return a Local IWebDriver instance of the given configuration.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        IWebDriver GetLocalWebDriver(IWebDriverConfiguration configuration);
 
         /// <summary>
         /// Return a Local Chrome WebDriver instance.
@@ -116,6 +130,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <returns></returns>
         IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false);
+
+        /// <summary>
+        /// Return a WebDriver instance of the given configuration.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        IWebDriver GetWebDriver(IWebDriverConfiguration configuration);
     }
 }
 

@@ -35,6 +35,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="gridUri"></param>
         /// <param name="driverOptionsFactory"></param>
-        public FrameworkWebDriverFactory(Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null) : base(null, gridUri, driverOptionsFactory) { }
+        public FrameworkWebDriverFactory(Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null) : base((string) null, gridUri, driverOptionsFactory) { }
     }
 }

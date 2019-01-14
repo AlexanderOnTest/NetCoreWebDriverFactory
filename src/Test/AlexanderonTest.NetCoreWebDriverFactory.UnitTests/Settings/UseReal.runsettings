@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<RunSettings>
+  <RunConfiguration>
+    <MaxCpuCount>1</MaxCpuCount>
+    <!-- TestSessionTimeout is only available with Visual Studio 2017 version 15.5 and higher -->
+    <!-- Using real WebDrivers is slooooow, 5 minutes timeout should be plenty-->
+    <TestSessionTimeout>300000</TestSessionTimeout>
+  </RunConfiguration>
+
+  <TestRunParameters>
+    <Parameter name="useRealWebDriver" value="true" />
+  </TestRunParameters>
+</RunSettings>

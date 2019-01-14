@@ -35,12 +35,22 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
             throw new NotImplementedException();
         }
 
+        public IWebDriver GetRemoteWebDriver(IWebDriverConfiguration configuration)
+        {
+            throw new NotImplementedException();
+        }
+
         public IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd)
         {
             throw new NotImplementedException();
         }
 
         public IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWebDriver GetLocalWebDriver(IWebDriverConfiguration configuration)
         {
             throw new NotImplementedException();
         }
@@ -72,6 +82,11 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
 
         public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false)
+        {
+            return new FakeWebDriver();
+        }
+
+        public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
         {
             return new FakeWebDriver();
         }

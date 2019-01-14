@@ -15,8 +15,8 @@
 // </copyright>
 
 using System;
+using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using AlexanderOnTest.NetCoreWebDriverFactory;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -28,19 +28,17 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
     public class WebDriverManagerTests
     {
         private IWebDriver DriverOne { get; set; }
+
         private IWebDriver DriverTwo { get; set; }
+
         private IWebDriverManager WebDriverManager { get; set; }
 
         [OneTimeSetUp]
         public void Prepare()
         {
-            ServiceCollection services = new ServiceCollection();
-            services.AddTransient(typeof(IDriverOptionsFactory), typeof(DefaultDriverOptionsFactory));
-            services.AddTransient(typeof(IWebDriverFactory), typeof(DefaultWebDriverFactory));
-            services.AddTransient(typeof(IWebDriverManager), typeof(WebDriverManager));
-            IServiceProvider provider = services.BuildServiceProvider();
+            IServiceProvider provider = DependencyInjector.GetServiceProvider();
 
-            WebDriverManager = new WebDriverManager(provider.GetService<IWebDriverFactory>(), Browser.Firefox);
+            WebDriverManager = provider.GetService<IWebDriverManager>();
         }
 
         /// <summary>
@@ -115,7 +113,7 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         /// Calling Quit() quits only the singleton driver.
         /// </summary>
         [Test]
-        public void QuitOnlyQuitsTheSingletionWebDriver()
+        public void QuitOnlyQuitsTheSingletonWebDriver()
         {
             DriverOne = WebDriverManager.Get();
             DriverTwo = WebDriverManager.GetAdditionalWebDriver();

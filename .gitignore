@@ -329,3 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 /license header script.ps1
+/src/Test/AlexanderonTest.NetCoreWebDriverFactory.UnitTests/Settings/UseReal.Designer.cs

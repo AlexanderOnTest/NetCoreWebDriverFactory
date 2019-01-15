@@ -19,7 +19,6 @@ using System.Reflection;
 using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using Microsoft.Extensions.DependencyInjection;
-using OpenQA.Selenium;
 
 namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies
 {
@@ -27,21 +26,11 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
     {
         public static IServiceProvider GetServiceProvider()
         {
-            IWebDriverConfiguration configuration = new WebDriverConfiguration()
-                {
-                    Browser = Browser.Firefox,
-                    GridUri = new Uri("http://192.168.0.200:4444/wd/hub"),
-                    IsLocal = true,
-                    PlatformType = PlatformType.Windows,
-                    WindowSize = WindowSize.Hd,
-                    Headless = false
-                };
-
-            DriverPath driverPath = new DriverPath(Assembly.GetExecutingAssembly());
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton(configuration);
-            services.AddSingleton(driverPath);
+            services.AddSingleton(TestSettings.WebDriverConfiguration);
+            services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
 
+            // Allow a setting to override the default FakeWebDriveFactory
             Type webDriverType = TestSettings.UseRealWebDriver
                 ? typeof(DefaultWebDriverFactory)
                 : typeof(FakeWebDriverFactory);

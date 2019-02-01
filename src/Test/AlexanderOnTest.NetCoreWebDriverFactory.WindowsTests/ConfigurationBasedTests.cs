@@ -44,7 +44,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
             DriverOptionsFactory = new DefaultDriverOptionsFactory();
             WebDriverFactory = new DefaultWebDriverFactory(DriverPath, GridUrl, DriverOptionsFactory);
         }
-        
+
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]
@@ -134,7 +134,5 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
                 WindowSize = windowSize
             };
         }
-
-        private static IServiceCollection 
     }
 }

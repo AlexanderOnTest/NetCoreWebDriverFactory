@@ -14,7 +14,6 @@
     
     <!-- Sample WebDriver Configuration settings -->
     <Parameter name="browserType" value="Chrome" />
-    <Parameter name="gridUri" value="http://192.168.0.200:4444/wd/hub" />
     <Parameter name="isLocal" value="true" />
     <Parameter name="platform" value="Windows" />
     <Parameter name="headless" value="false" />

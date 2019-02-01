@@ -26,32 +26,25 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         [DefaultValue(Browser.Firefox)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public Browser Browser { get; set; }
-
-
+        
         [DefaultValue(PlatformType.Any)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public PlatformType PlatformType { get; set; }
-
-
+        
         [DefaultValue(WindowSize.Hd)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public WindowSize WindowSize { get; set; }
-
-
+        
         [DefaultValue("https://localhost:4400/wd/grid")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public Uri GridUri { get; set; }
-
-
+        
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool IsLocal { get; set; }
-
 
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; set; }
     }
-
-
 }

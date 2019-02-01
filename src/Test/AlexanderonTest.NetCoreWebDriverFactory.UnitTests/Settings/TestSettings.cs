@@ -15,7 +15,9 @@
 // </copyright>
 
 using System;
+using System.IO;
 using AlexanderOnTest.NetCoreWebDriverFactory;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -31,8 +33,15 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings
 
         internal static Browser Browser { get; } = GetEnumSettingOrDefault("browserType", Browser.Firefox);
 
+        /// <summary>
+        /// Uri of the grid. Configurtion Priority:
+        /// 1. A value provided in "My Documents/Config_GridUri.json" (Windows) or "/Config_GridUri.json" (Mac / Linux)
+        /// 2. The value in an applied .runsettings file
+        /// 3. Default Localhost grid.
+        /// </summary>
         internal static Uri GridUri { get; } 
-            = new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
+            = GetLocalGridUri() ?? 
+              new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
 
         internal static bool IsLocal { get; } 
             = GetSettingAsBoolOrDefault("isLocal", true);
@@ -54,12 +63,26 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings
                 Headless = Headless
             };
 
-        /// <summary>
-        /// Returns the TestContext.Parameters value if it exists, else the defaultValue.
-        /// </summary>
-        /// <param name="settingName"></param>
-        /// <param name="defaultValue"></param>
-        /// <returns></returns>
+        private static Uri GetLocalGridUri()
+        {
+            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string configFile = $@"{folderPath}\Config_GridUri.json";
+
+            string localGridUriString = null;
+            if (!string.IsNullOrEmpty(folderPath) && File.Exists(configFile))
+            {
+                using (StreamReader file = File.OpenText(configFile))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    localGridUriString = (string)serializer.Deserialize(file, typeof(string));
+                }
+            }
+
+            return string.IsNullOrEmpty(localGridUriString) ?
+                null :
+                new Uri(localGridUriString);
+        }
+
         private static string GetSettingOrDefault(string settingName, string defaultValue)
         {
             return TestContext.Parameters.Exists(settingName) ?
@@ -67,12 +90,6 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings
                 defaultValue;
         }
 
-        /// <summary>
-        /// Returns the defaultValue unless the TestContext.Parameters exists and correctly negates it.
-        /// </summary>
-        /// <param name="settingName"></param>
-        /// <param name="defaultValue"></param>
-        /// <returns></returns>
         private static bool GetSettingAsBoolOrDefault(string settingName, bool defaultValue)
         {
             return !TestContext.Parameters.Exists(settingName)
@@ -81,14 +98,6 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings
                 !defaultValue;
         }
 
-        /// <summary>
-        /// Returns the TestContext.Parameters value if it exists and parses to a valid Enum value,
-        /// otherwise returning the defaultValue.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="settingName"></param>
-        /// <param name="defaultValue"></param>
-        /// <returns></returns>
         private static T GetEnumSettingOrDefault<T>(string settingName, T defaultValue)
         {
             T returnValue;

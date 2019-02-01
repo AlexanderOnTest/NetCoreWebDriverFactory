@@ -15,10 +15,13 @@
 // </copyright>
 
 using System;
+using System.IO;
 using System.Reflection;
 using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using static System.Environment;
 
 namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies
 {
@@ -27,7 +30,9 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
         public static IServiceProvider GetServiceProvider()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton(TestSettings.WebDriverConfiguration);
+
+            services.AddSingleton(GetLocalConfig() ?? TestSettings.WebDriverConfiguration);
+
             services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
 
             // Allow a setting to override the default FakeWebDriveFactory
@@ -40,6 +45,30 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
             services.AddTransient(typeof(IWebDriverManager), typeof(WebDriverManager));
             
             return services.BuildServiceProvider();
+        }
+
+        /// <summary>
+        /// Return a WebDriverConfiguration object deserialised from:
+        /// "My Documents/Config_WebDriver.json" (Windows) or "/Config_WebDriver.json" (Mac / Linux) if present
+        /// </summary>
+        /// <returns></returns>
+        private static IWebDriverConfiguration GetLocalConfig()
+        {
+            IWebDriverConfiguration configFromHome = null;
+
+            var folderPath = GetFolderPath(SpecialFolder.MyDocuments);
+            string configFile = $@"{folderPath}\Config_WebDriver.json";
+
+            if (!string.IsNullOrEmpty(folderPath) && File.Exists(configFile))
+            {
+                using (StreamReader file = File.OpenText(configFile))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    configFromHome = (IWebDriverConfiguration)serializer.Deserialize(file, typeof(WebDriverConfiguration));
+                }
+            }
+
+            return configFromHome;
         }
     }
 }

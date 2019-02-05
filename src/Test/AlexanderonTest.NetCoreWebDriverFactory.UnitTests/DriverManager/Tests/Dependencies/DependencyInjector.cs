@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ using System.IO;
 using System.Reflection;
 using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings;
 using AlexanderOnTest.NetCoreWebDriverFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using static System.Environment;
@@ -31,7 +33,7 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
         {
             ServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton(GetLocalConfig() ?? TestSettings.WebDriverConfiguration);
+            services.AddSingleton(GetLocalConfig() ?? WebDriverSettings.WebDriverConfiguration);
 
             services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
 

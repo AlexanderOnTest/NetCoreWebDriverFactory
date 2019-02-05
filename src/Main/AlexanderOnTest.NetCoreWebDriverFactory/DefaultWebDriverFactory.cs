@@ -26,12 +26,12 @@ using OpenQA.Selenium.Safari;
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
-    /// Overridable implementation of the IWebDriverFactory interface.
+    /// Overridable implementation of the IWebDriverFactory interface for .NET Core test projects.
     /// </summary>
     public class DefaultWebDriverFactory : IWebDriverFactory
     {
         /// <summary>
-        /// Return a DefaultWebDriverFactory instance.
+        /// Return a DriverFactory instance for use in .NET Core projects.
         /// Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
         /// </summary>
         /// <param name="installedDriverPath"></param>
@@ -45,7 +45,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         }
 
         /// <summary>
-        /// Preferred constructor to return a DefaultWebDriverFactory instance.
+        /// Return a DriverFactory instance for use in .NET Core projects.
         /// Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
         /// </summary>
         /// <param name="driverPath"></param>
@@ -175,6 +175,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             }
         }
 
+        /// <summary>
+        /// Return a local WebDriver instance of the given configuration.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public IWebDriver GetLocalWebDriver(IWebDriverConfiguration configuration)
         {
             if (!configuration.IsLocal)

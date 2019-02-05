@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,28 +21,49 @@ using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// A WebDriver Configuration implementation.
+    /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
+        /// <summary>
+        /// Browser type to request.
+        /// </summary>
         [DefaultValue(Browser.Firefox)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public Browser Browser { get; set; }
-        
+
+        /// <summary>
+        /// Platform to request for a RemoteWebDriver
+        /// </summary>
         [DefaultValue(PlatformType.Any)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public PlatformType PlatformType { get; set; }
-        
+
+        /// <summary>
+        /// WindowSize to request
+        /// </summary>
         [DefaultValue(WindowSize.Hd)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public WindowSize WindowSize { get; set; }
-        
+
+        /// <summary>
+        /// The Uri of the Selenium grd to use for remote calls.
+        /// </summary>
         [DefaultValue("https://localhost:4400/wd/grid")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public Uri GridUri { get; set; }
-        
+
+        /// <summary>
+        /// Use a local WebDriver.
+        /// </summary>
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool IsLocal { get; set; }
 
+        /// <summary>
+        /// Run headless if available.
+        /// </summary>
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; set; }

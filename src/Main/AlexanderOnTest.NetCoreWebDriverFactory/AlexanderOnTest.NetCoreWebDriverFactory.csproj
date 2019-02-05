@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.2.0-alpha1</Version>
+    <Version>2.2.0-alpha2</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -42,8 +42,7 @@ The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
     <PackageReleaseNotes>v2.2.0
-Addition of iDisposable to interfaces.
-Introduction of IWebDriverConfiguration
+Introduction of IWebDriverConfiguration and addition of iDisposable on instances.
 
 v2.1.0
 Addition of a generalised GetWebDriver method for both local and remote webdrivers.

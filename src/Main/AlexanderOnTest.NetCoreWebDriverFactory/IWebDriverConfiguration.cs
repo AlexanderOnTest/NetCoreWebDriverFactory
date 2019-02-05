@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,12 +15,13 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
+    /// <summary>
+    /// Interface for a WebDriver Configuration object.
+    /// </summary>
     public interface IWebDriverConfiguration
     {
         /// <summary>
@@ -33,7 +34,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         }
 
         /// <summary>
-        /// Platform to request for a RemoteWebDriver
+        /// Platform to request for a RemoteWebDriver.
         /// </summary>
         PlatformType PlatformType
         {
@@ -42,7 +43,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         }
 
         /// <summary>
-        /// WindowSize to request
+        /// WindowSize to request.
         /// </summary>
         WindowSize WindowSize
         {
@@ -50,18 +51,27 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             set;
         }
 
+        /// <summary>
+        /// The Uri of the Selenium grd to use for remote calls.
+        /// </summary>
         Uri GridUri
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Use a local WebDriver.
+        /// </summary>
         bool IsLocal
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Run headless if available.
+        /// </summary>
         bool Headless
         {
             get;

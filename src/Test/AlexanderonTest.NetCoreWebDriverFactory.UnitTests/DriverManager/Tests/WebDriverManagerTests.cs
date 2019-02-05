@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 using System;
 using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using AlexanderOnTest.NetCoreWebDriverFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

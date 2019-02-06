@@ -17,7 +17,6 @@
 using System;
 using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using AlexanderOnTest.NetCoreWebDriverFactory;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

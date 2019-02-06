@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.9.2</Version>
+    <Version>2.2.0-beta1</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -40,14 +40,15 @@ e.g.
   "WindowSize": "HD",
   "GridUri": "http://192.168.0.200:4444/wd/hub"
 }</Description>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>v2.2.0-Beta1
+Initial release: version number matched to concurrent release NetCoreWebDriverFactory</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="2.2.0-alpha2" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="2.2.0-beta1" />
   </ItemGroup>
 
 </Project>

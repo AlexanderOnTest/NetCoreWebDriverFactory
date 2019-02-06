@@ -15,7 +15,7 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.45.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.23.0.3" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="0.9.2" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="2.2.0-beta1" />
   </ItemGroup>
 
   <ItemGroup>

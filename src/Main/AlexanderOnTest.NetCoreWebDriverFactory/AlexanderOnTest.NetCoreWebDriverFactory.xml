@@ -184,34 +184,34 @@
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>
         </member>
-        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.IWebDriverManager">
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager">
             <summary>
             Interface for a WebDriver Manager class that provides a singleton
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.IWebDriverManager.Get">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager.Get">
             <summary>
             Return a singleton WebDriver instance;
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.IWebDriverManager.Quit">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager.Quit">
             <summary>
             Quit and clear the current singleton WebDriver instance;
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.IWebDriverManager.GetAdditionalWebDriver">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverManager.GetAdditionalWebDriver">
             <summary>
             Return a new WebDriver instance independent of the singleton instance;
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager">
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager">
             <summary>
             A simple implementation of a WebDriverManager
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
             Parameter based constructor for a WebDriverManager
             </summary>
@@ -222,42 +222,42 @@
             <param name="platformType"></param>
             <param name="headless"></param>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
             <summary>
             Configuration based constructor for a WebDriverManager
             </summary>
             <param name="factory"></param>
             <param name="configuration"></param>
         </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.Driver">
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Driver">
             <summary>
             The singleton WebDriver instance.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.Get">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Get">
             <summary>
             Return a singleton WebDriver instance
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.Quit">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Quit">
             <summary>
             Quit and clear the current singleton WebDriver instance;
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.GetAdditionalWebDriver">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.GetAdditionalWebDriver">
             <summary>
             Return a new WebDriver instance independent of the singleton instance;
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.Dispose(System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Dispose(System.Boolean)">
             <summary>
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>
             <param name="disposing"></param>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.Dispose">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverManager.Dispose">
             <summary>
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>

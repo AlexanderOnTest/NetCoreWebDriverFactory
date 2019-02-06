@@ -19,7 +19,6 @@ using System.IO;
 using System.Reflection;
 using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings;
 using AlexanderOnTest.NetCoreWebDriverFactory;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

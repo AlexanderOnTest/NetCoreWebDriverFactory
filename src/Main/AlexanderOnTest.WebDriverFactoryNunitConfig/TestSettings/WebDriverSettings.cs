@@ -15,9 +15,7 @@
 // </copyright>
 
 using System;
-using System.IO;
 using AlexanderOnTest.NetCoreWebDriverFactory;
-using Newtonsoft.Json;
 using OpenQA.Selenium;
 using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
 
@@ -34,7 +32,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 3. Default (Localhost) grid.
         /// </summary>
         public static Uri GridUri { get; }
-            = GetLocalGridUri() ??
+            = Utils.GetFromFileSystemIfPresent<Uri>("Config_GridUri.json") ??
               new Uri(GetStringSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
 
         public static bool IsLocal { get; }
@@ -53,7 +51,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 3. Default values.
         /// </summary>
         public static IWebDriverConfiguration WebDriverConfiguration { get; }
-            = GetLocalConfig() ??
+            = Utils.GetFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") ??
               new WebDriverConfiguration
             {
                 Browser = Browser,
@@ -63,49 +61,5 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 PlatformType = PlatformType,
                 Headless = Headless
             };
-
-        private static Uri GetLocalGridUri()
-        {
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string configFile = Path.Combine(folderPath, "Config_GridUri.json");
-
-            string localGridUriString = null;
-            if (!string.IsNullOrEmpty(folderPath) && File.Exists(configFile))
-            {
-                using (StreamReader file = File.OpenText(configFile))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    localGridUriString = (string)serializer.Deserialize(file, typeof(string));
-                }
-            }
-
-            return string.IsNullOrEmpty(localGridUriString) ?
-                null :
-                new Uri(localGridUriString);
-        }
-
-        /// <summary>
-        /// Return a WebDriverConfiguration object deserialised from:
-        /// "My Documents/Config_WebDriver.json" (Windows) or "/Config_WebDriver.json" (Mac / Linux) if present
-        /// </summary>
-        /// <returns></returns>
-        private static IWebDriverConfiguration GetLocalConfig()
-        {
-            IWebDriverConfiguration configFromHome = null;
-
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string configFile = Path.Combine(folderPath, "Config_WebDriver.json");
-
-            if (!string.IsNullOrEmpty(folderPath) && File.Exists(configFile))
-            {
-                using (StreamReader file = File.OpenText(configFile))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    configFromHome = (IWebDriverConfiguration)serializer.Deserialize(file, typeof(WebDriverConfiguration));
-                }
-            }
-
-            return configFromHome;
-        }
     }
 }

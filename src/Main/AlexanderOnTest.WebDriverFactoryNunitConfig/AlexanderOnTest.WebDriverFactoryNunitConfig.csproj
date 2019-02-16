@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.0-beta2</Version>
+    <Version>2.2.0-beta3</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -10,37 +10,9 @@
     <Product>WebDriverFactoryNunitConfig</Product>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core., NetCoreWebDriverFactory</PackageTags>
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
-    <Description>Pick up NetCoreWebDriverFactory configuration for Nunit 3 test projects from runsettings files and with local file overrides.
-
-Sample Runsettings file.
-
-&lt;?xml version='1.0' encoding='utf-8'?&gt;
-&lt;RunSettings&gt;
-  &lt;TestRunParameters&gt;
-    &lt;Parameter name="browserType" value="Chrome" /&gt;
-    &lt;Parameter name="isLocal" value="true" /&gt;
-    &lt;Parameter name="platform" value="Windows" /&gt;
-    &lt;Parameter name="headless" value="false" /&gt;
-    &lt;Parameter name="windowSize" value="FHd" /&gt;
-  &lt;/TestRunParameters&gt;
-&lt;/RunSettings&gt;
-
-Overide files should be placed in 'My Documents' on Windows or '/' on Linux / MacOS
-
-To overide the Grid URI a file called 'Config_GridUri.json' containing just the URI is required
-e.g.
-"http://192.168.0.200:4444/wd/hub"
-
-To overide the complete WebDriverConfiguration a file called 'Config_WebDriver.json' is required
-e.g.
-{
-  "Browser": "CHROME",
-  "IsLocal": false,
-  "PlatformType": "LINUX",
-  "WindowSize": "HD",
-  "GridUri": "http://192.168.0.200:4444/wd/hub"
-}</Description>
-    <PackageReleaseNotes>v2.2.0-Beta2
+    <Description>Pick up NetCoreWebDriverFactory configuration for Nunit 3 test projects from runsettings files and with local file overrides.</Description>
+    <PackageReleaseNotes>v2.2.0-Beta3
+v2.2.0-Beta2
 Initial release: version number matched to concurrent release NetCoreWebDriverFactory</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageId>
@@ -48,7 +20,7 @@ Initial release: version number matched to concurrent release NetCoreWebDriverFa
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="2.2.0-beta1" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="2.2.0-beta3" />
   </ItemGroup>
 
 </Project>

@@ -15,6 +15,8 @@
 // </copyright>
 
 using System;
+using System.IO;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
@@ -56,6 +58,25 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 }
             }
             return returnValue;
+        }
+
+        public static T GetFromFileSystemIfPresent<T>(
+            string filename,
+            System.Environment.SpecialFolder fileLocation = Environment.SpecialFolder.MyDocuments)
+        {
+            string fileLocationPath = Environment.GetFolderPath(fileLocation);
+            string configFilePath = Path.Combine(fileLocationPath, filename);
+
+            if (string.IsNullOrEmpty(configFilePath) || !File.Exists(configFilePath)) return default(T);
+
+            T configFromHome;
+            using (StreamReader file = File.OpenText(configFilePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                configFromHome = (T)serializer.Deserialize(file, typeof(T));
+            }
+
+            return configFromHome;
         }
     }
 }

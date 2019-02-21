@@ -23,23 +23,27 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 {
     public static class Utils
     {
-
-        public static string GetStringSettingOrDefault(string settingName, string defaultValue)
+        /// <summary>
+        /// Return the string value of the setting in the applied .runsettings file or the passed in default.
+        /// </summary>
+        /// <param name="settingName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static string GetSettingOrDefault(string settingName, string defaultValue)
         {
             return TestContext.Parameters.Exists(settingName) ?
                 TestContext.Parameters.Get(settingName) :
                 defaultValue;
         }
 
-        public static bool GetBoolSettingOrDefault(string settingName, bool defaultValue)
-        {
-            return !TestContext.Parameters.Exists(settingName)
-                   || TestContext.Parameters.Get(settingName).ToLower().Equals(defaultValue.ToString().ToLower()) ?
-                defaultValue :
-                !defaultValue;
-        }
-
-        public static T GetEnumSettingOrDefault<T>(string settingName, T defaultValue)
+        /// <summary>
+        /// Return the Enum value parsed from the setting in the applied .runsettings file, or the passed in default.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="settingName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static T GetEnumSettingOrDefault<T>(string settingName, T defaultValue) where T : Enum
         {
             T returnValue;
             if (!TestContext.Parameters.Exists(settingName))
@@ -60,23 +64,44 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
             return returnValue;
         }
 
-        public static T GetFromFileSystemIfPresent<T>(
+        /// <summary>
+        /// Return the passed in default unless the setting in the applied .runsettings file is !default.
+        /// </summary>
+        /// <param name="settingName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static bool GetBoolSettingOrDefault(string settingName, bool defaultValue)
+        {
+            return !TestContext.Parameters.Exists(settingName)
+                   || TestContext.Parameters.Get(settingName).ToLower().Equals(defaultValue.ToString().ToLower()) ?
+                defaultValue :
+                !defaultValue;
+        }
+
+        /// <summary>
+        /// Return the object deserialised from the given json file if present in the given folder
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filename"></param>
+        /// <param name="fileLocation"></param>
+        /// <returns></returns>
+        public static T GetConfigFromFileSystemIfPresent<T>(
             string filename,
-            System.Environment.SpecialFolder fileLocation = Environment.SpecialFolder.MyDocuments)
+            Environment.SpecialFolder fileLocation = Environment.SpecialFolder.MyDocuments)
         {
             string fileLocationPath = Environment.GetFolderPath(fileLocation);
             string configFilePath = Path.Combine(fileLocationPath, filename);
 
-            if (string.IsNullOrEmpty(configFilePath) || !File.Exists(configFilePath)) return default(T);
+            if (string.IsNullOrEmpty(configFilePath) || !File.Exists(configFilePath)) return default;
 
-            T configFromHome;
+            T localConfig;
             using (StreamReader file = File.OpenText(configFilePath))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                configFromHome = (T)serializer.Deserialize(file, typeof(T));
+                localConfig = (T)serializer.Deserialize(file, typeof(T));
             }
 
-            return configFromHome;
+            return localConfig;
         }
     }
 }

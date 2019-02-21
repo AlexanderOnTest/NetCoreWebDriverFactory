@@ -14,7 +14,7 @@
     
     <!-- Sample WebDriver Configuration settings -->
     <Parameter name="browserType" value="Chrome" />
-    <Parameter name="isLocal" value="true" />
+    <Parameter name="isLocal" value="false" />
     <Parameter name="platform" value="Windows" />
     <Parameter name="headless" value="false" />
     <Parameter name="windowSize" value="FHd" />

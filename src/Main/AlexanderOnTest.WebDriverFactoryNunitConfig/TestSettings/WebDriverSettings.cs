@@ -32,16 +32,28 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 3. Default (Localhost) grid.
         /// </summary>
         public static Uri GridUri { get; }
-            = Utils.GetFromFileSystemIfPresent<Uri>("Config_GridUri.json") ??
-              new Uri(GetStringSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
+            = Utils.GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json") ??
+              new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
 
+        /// <summary>
+        /// Run the webdriver locally (rather than remote)
+        /// </summary>
         public static bool IsLocal { get; }
             = GetBoolSettingOrDefault("isLocal", true);
 
+        /// <summary>
+        /// PlatformType for the RemoteWebDriver request
+        /// </summary>
         public static PlatformType PlatformType { get; } = GetEnumSettingOrDefault("platform", PlatformType.Windows);
 
+        /// <summary>
+        /// Requested Browser Window Size
+        /// </summary>
         public static WindowSize WindowSize { get; } = GetEnumSettingOrDefault("windowSize", WindowSize.Hd);
 
+        /// <summary>
+        /// Run the WebDriver instance Headless (Supported only on Firefox and Chrome)
+        /// </summary>
         public static bool Headless { get; } = GetBoolSettingOrDefault("headless", false);
 
         /// <summary>
@@ -51,7 +63,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 3. Default values.
         /// </summary>
         public static IWebDriverConfiguration WebDriverConfiguration { get; }
-            = Utils.GetFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") ??
+            = Utils.GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") ??
               new WebDriverConfiguration
             {
                 Browser = Browser,

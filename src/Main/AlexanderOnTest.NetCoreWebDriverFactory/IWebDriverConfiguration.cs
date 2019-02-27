@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
@@ -43,7 +44,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         }
 
         /// <summary>
-        /// WindowSize to request.
+        /// Defined WindowSize to request.
         /// </summary>
         WindowSize WindowSize
         {
@@ -51,8 +52,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             set;
         }
 
+
         /// <summary>
-        /// The Uri of the Selenium grd to use for remote calls.
+        /// Custom window size to request if using WindowSize.Custom
+        /// </summary>
+        Size WindowCustomSize
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The Uri of the Selenium grid to use for remote calls.
         /// </summary>
         Uri GridUri
         {

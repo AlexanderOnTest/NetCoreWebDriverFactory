@@ -484,7 +484,17 @@
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowSize">
             <summary>
-            WindowSize to request.
+            Defined WindowSize to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowWidth">
+            <summary>
+            Custom window width to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowHeight">
+            <summary>
+            Custom window height to request.
             </summary>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.GridUri">
@@ -724,6 +734,16 @@
             WindowSize to request
             </summary>
         </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowWidth">
+            <summary>
+            Custom window width to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowHeight">
+            <summary>
+            Custom window height to request.
+            </summary>
+        </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.GridUri">
             <summary>
             The Uri of the Selenium grd to use for remote calls.
@@ -792,6 +812,16 @@
             Full HD - 1920 x 1080 screen size. 2nd most common 'PC' screen size.
             </summary>
         </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Qhd">
+            <summary>
+            Quad HD (aka 1440p) - 2560 x 1440
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Uhd">
+            <summary>
+            Ultra HD-1 (aka 4k) - 3840 x 2160
+            </summary>
+        </member>
         <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Maximise">
             <summary>
             Maximise the browser to the full screen.
@@ -801,6 +831,25 @@
             <summary>
             Continue without setting screen size, this may not be consistent.
             </summary>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension">
+            <summary>
+            Extension methods for the WindowSize Enum.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension.Size(AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Return the requested browser window size for the Enum value, or (0,0) if size is not specified
+            </summary>
+            <param name="windowSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension.HasDefinedSize(AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Does this WindowSize value request a given size for the generated WebDriver?
+            </summary>
+            <param name="windowSize"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -14,6 +14,9 @@
 // limitations under the License.
 // </copyright>
 
+using System.Collections.Generic;
+using System.Drawing;
+
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
@@ -30,12 +33,58 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         Fhd,
         /// <summary>
+        /// Quad HD (aka 1440p) - 2560 x 1440
+        /// </summary>
+        Qhd,
+        /// <summary>
+        /// Ultra HD-1 (aka 4k) - 3840 x 2160
+        /// </summary>
+        Uhd,
+        /// <summary>
         /// Maximise the browser to the full screen.
         /// </summary>
         Maximise,
         /// <summary>
         /// Continue without setting screen size, this may not be consistent.
         /// </summary>
-        Unchanged
+        Unchanged,
+        Custom
+    }
+
+    /// <summary>
+    /// Extension methods for the WindowSize Enum.
+    /// </summary>
+    public static class WindowSizeExtension
+    {
+        private static readonly Dictionary<WindowSize, Size> Sizes = new Dictionary<WindowSize, Size>();
+
+
+        static WindowSizeExtension()
+        {
+            Sizes.Add(WindowSize.Hd, new Size(1366, 768));
+            Sizes.Add(WindowSize.Fhd, new Size(1920, 1080));
+            Sizes.Add(WindowSize.Qhd, new Size(2560, 1440));
+            Sizes.Add(WindowSize.Uhd, new Size(3840, 2160));
+        }
+
+        /// <summary>
+        /// Return the requested browser window size for the Enum value, or (0,0) if size is not specified
+        /// </summary>
+        /// <param name="windowSize"></param>
+        /// <returns></returns>
+        public static Size Size(this WindowSize windowSize)
+        {
+            return windowSize.HasDefinedSize() ? Sizes[windowSize] : default;
+        }
+
+        /// <summary>
+        /// Does this WindowSize value request a given size for the generated WebDriver?
+        /// </summary>
+        /// <param name="windowSize"></param>
+        /// <returns></returns>
+        public static bool HasDefinedSize(this WindowSize windowSize)
+        {
+            return Sizes.ContainsKey(windowSize);
+        }
     }
 }

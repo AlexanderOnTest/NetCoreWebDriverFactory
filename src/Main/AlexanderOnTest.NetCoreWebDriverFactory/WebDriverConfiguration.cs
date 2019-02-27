@@ -16,6 +16,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 
@@ -26,6 +27,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
+        private Size windowCustomSize;
+        
         /// <summary>
         /// Browser type to request.
         /// </summary>
@@ -48,7 +51,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         public WindowSize WindowSize { get; set; }
 
         /// <summary>
-        /// The Uri of the Selenium grd to use for remote calls.
+        /// Custom window size to request.
+        /// </summary>
+        public Size WindowCustomSize {
+            get => WindowSize == WindowSize.Custom ? windowCustomSize : WindowSize.Size();
+            set => windowCustomSize = value;
+        }
+
+        /// <summary>
+        /// The Uri of the Selenium grid to use for remote calls.
         /// </summary>
         [DefaultValue("https://localhost:4400/wd/grid")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]

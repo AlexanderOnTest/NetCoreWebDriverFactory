@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.0-RC</Version>
+    <Version>2.2.0</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -20,7 +20,10 @@ Initial release: version number matched to concurrent release NetCoreWebDriverFa
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="2.2.0-RC" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj" />
   </ItemGroup>
 
 </Project>

@@ -30,7 +30,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     public interface IWebDriverFactory : IDisposable
     {
         /// <summary>
-        /// The Uri of your selenium grid for remote Webdriver instances.
+        /// The Uri of your selenium grid for remote WebDriver instances.
         /// </summary>
         Uri GridUri
         {

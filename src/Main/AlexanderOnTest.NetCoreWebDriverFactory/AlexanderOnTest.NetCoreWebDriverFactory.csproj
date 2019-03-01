@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.2.0-RC</Version>
+    <Version>2.2.0</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -45,6 +45,11 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
     <PackageReleaseNotes>v2.2.0
 Introduction of IWebDriverConfiguration and addition of iDisposable on instances.
+
+Warning: v2.2.x will be the final feature release of v2. 
+v3.x.x will require an additonal (optional) parameter on many interface methods to support custom browser sizes. 
+This should only be a breaking change if you are implementing the interfaces, or extending my classes:
+If you are only consuming the interfaces, the version change will be safe.
 
 v2.1.0
 Addition of a generalised GetWebDriver method for both local and remote webdrivers.

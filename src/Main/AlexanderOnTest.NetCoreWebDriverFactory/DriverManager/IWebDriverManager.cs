@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,14 +14,18 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using OpenQA.Selenium;
 
+// The WebDriverManager was first released in v2.1.0 with this incorrect namepace.
+// I prefer this file structure, but do not wish to change the API.
+// DO NOT CORRECT THIS WITHOUT A MAJOR VERSION BUMP.
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
     /// Interface for a WebDriver Manager class that provides a singleton
     /// </summary>
-    public interface IWebDriverManager
+    public interface IWebDriverManager : IDisposable
     {
         /// <summary>
         /// Return a singleton WebDriver instance;

@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,6 +17,9 @@
 using System;
 using OpenQA.Selenium;
 
+// The WebDriverManager was first released in v2.1.0 with this incorrect namepace.
+// I prefer this file structure, but do not wish to change the API.
+// DO NOT CORRECT THIS WITHOUT A MAJOR VERSION BUMP.
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
@@ -30,7 +33,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         private WebDriverManager() { }
 
         /// <summary>
-        /// Required constructor for a working WebDriverManager.
+        /// Parameter based constructor for a WebDriverManager
         /// </summary>
         /// <param name="factory"></param>
         /// <param name="browser"></param>
@@ -42,6 +45,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             PlatformType platformType = PlatformType.Any, bool headless = false)
         {
             this.webDriverConstructor = () => factory.GetWebDriver(browser, windowSize, isLocal, platformType, headless);
+        }
+
+        /// <summary>
+        /// Configuration based constructor for a WebDriverManager
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="configuration"></param>
+        public WebDriverManager(IWebDriverFactory factory, IWebDriverConfiguration configuration)
+        {
+            this.webDriverConstructor = () => factory.GetWebDriver(configuration);
         }
 
         /// <summary>
@@ -79,6 +92,27 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         public virtual IWebDriver GetAdditionalWebDriver()
         {
             return webDriverConstructor();
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                driver?.Dispose();
+            }
+        }
+        
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,12 +35,22 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
             throw new NotImplementedException();
         }
 
+        public IWebDriver GetRemoteWebDriver(IWebDriverConfiguration configuration)
+        {
+            throw new NotImplementedException();
+        }
+
         public IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd)
         {
             throw new NotImplementedException();
         }
 
         public IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWebDriver GetLocalWebDriver(IWebDriverConfiguration configuration)
         {
             throw new NotImplementedException();
         }
@@ -74,6 +84,32 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
             PlatformType platformType = PlatformType.Any, bool headless = false)
         {
             return new FakeWebDriver();
+        }
+
+        public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
+        {
+            return new FakeWebDriver();
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // nothing to dispose of
+            }
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 

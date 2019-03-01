@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,9 +15,10 @@
 // </copyright>
 
 using System;
+using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using AlexanderOnTest.NetCoreWebDriverFactory;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -27,17 +28,17 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
     public class WebDriverManagerTests
     {
         private IWebDriver DriverOne { get; set; }
+
         private IWebDriver DriverTwo { get; set; }
-        private IWebDriverFactory WebDriverFactory { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
+
         private IWebDriverManager WebDriverManager { get; set; }
 
         [OneTimeSetUp]
         public void Prepare()
         {
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            WebDriverFactory = new FakeWebDriverFactory();
-            WebDriverManager = new WebDriverManager(WebDriverFactory, Browser.Firefox);
+            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+
+            WebDriverManager = provider.GetService<IWebDriverManager>();
         }
 
         /// <summary>
@@ -112,7 +113,7 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         /// Calling Quit() quits only the singleton driver.
         /// </summary>
         [Test]
-        public void QuitOnlyQuitsTheSingletionWebDriver()
+        public void QuitOnlyQuitsTheSingletonWebDriver()
         {
             DriverOne = WebDriverManager.Get();
             DriverTwo = WebDriverManager.GetAdditionalWebDriver();

@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
@@ -21,7 +22,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
     /// <summary>
     /// Interface for DriverOptionsFactory instances.
     /// </summary>
-    public interface IDriverOptionsFactory
+    public interface IDriverOptionsFactory : IDisposable
     {
         /// <summary>
         /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.

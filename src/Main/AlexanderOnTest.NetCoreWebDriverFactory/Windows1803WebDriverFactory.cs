@@ -15,20 +15,14 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
-    /// Example Override implementation, This will allow Edge to work on Windows 10 version 1803 and Earlier.
+    /// Implementation of the IWebDriverFactory interface for .NET Core test projects to allow Edge to work on Windows 10 version 1803 and Earlier.
     /// </summary>
     public class Windows1803WebDriverFactory : DefaultWebDriverFactory
     {
@@ -41,7 +35,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         public Windows1803WebDriverFactory(string installedDriverPath, Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null) : base(installedDriverPath, gridUri, driverOptionsFactory)
         {
         }
-        
+
+        /// <summary>
+        /// Return a WebDriverFactory for Windows 10 version 1803 and earlier
+        /// </summary>
+        /// <param name="driverPath"></param>
+        /// <param name="configuration"></param>
+        /// <param name="driverOptionsFactory"></param>
+        public Windows1803WebDriverFactory(DriverPath driverPath, IWebDriverConfiguration configuration, IDriverOptionsFactory driverOptionsFactory = null)
+            : this(driverPath.PathString, configuration.GridUri, driverOptionsFactory)
+        {
+        }
+
         /// <summary>
         /// Return a local webdriver of the given browser type with default settings.
         /// </summary>

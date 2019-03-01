@@ -16,12 +16,6 @@
 
 using System;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
@@ -31,10 +25,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     public class FrameworkWebDriverFactory : DefaultWebDriverFactory
     {
         /// <summary>
-        /// Return a FrameworkWebDriverFactory instance for use with .NET framework projects
+        /// Return a WebDriverFactory instance for use with .NET framework projects
         /// </summary>
         /// <param name="gridUri"></param>
         /// <param name="driverOptionsFactory"></param>
-        public FrameworkWebDriverFactory(Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null) : base(null, gridUri, driverOptionsFactory) { }
+        public FrameworkWebDriverFactory(Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null) : base((string) null, gridUri, driverOptionsFactory) { }
+
+        /// <summary>
+        /// Return a WebDriverFactory instance for use with .NET framework projects
+        /// </summary>
+        /// <param name="driverPath"></param>
+        /// <param name="configuration"></param>
+        /// <param name="driverOptionsFactory"></param>
+        public FrameworkWebDriverFactory(DriverPath driverPath, IWebDriverConfiguration configuration, IDriverOptionsFactory driverOptionsFactory = null)
+            : this(configuration.GridUri, driverOptionsFactory)
+        {
+        }
     }
 }

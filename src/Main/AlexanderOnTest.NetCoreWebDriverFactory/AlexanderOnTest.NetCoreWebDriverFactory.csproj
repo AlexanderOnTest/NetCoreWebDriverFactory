@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
+    <Version>2.2.0</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -40,8 +40,18 @@ Tested and working on Windows 10, Linux (Ubuntu 18.04) and MacOS Mojave
 
 The repository at
 https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
-contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.</Description>
-    <PackageReleaseNotes>v2.1.0
+contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.
+
+The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
+    <PackageReleaseNotes>v2.2.0
+Introduction of IWebDriverConfiguration and addition of iDisposable on instances.
+
+Warning: v2.2.x will be the final feature release of v2. 
+v3.x.x will require an additonal (optional) parameter on many interface methods to support custom browser sizes. 
+This should only be a breaking change if you are implementing the interfaces, or extending my classes:
+If you are only consuming the interfaces, the version change will be safe.
+
+v2.1.0
 Addition of a generalised GetWebDriver method for both local and remote webdrivers.
 IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false)
@@ -71,15 +81,14 @@ DefaultWebDriverFactory no longer has a default constructor and must be instanti
 In addition, DefaultDriverOptionsFactory exposes a new constructor:
        public DefaultDriverOptionsFactory(Dictionary&lt;Type, DriverOptions&gt; driverOptionsDictionary)
 to enable the use of your own standard DriverOptions choices.</PackageReleaseNotes>
-    <Copyright>Copyright 2018 Alexander Dunn</Copyright>
+    <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-    <PackageLicense>Apache-2.0</PackageLicense>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
-    <LangVersion>7.1</LangVersion>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -88,12 +97,7 @@ to enable the use of your own standard DriverOptions choices.</PackageReleaseNot
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.10.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.9.1.7622">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Framework;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
 {
     public class WindowSizeDataTests
     {
@@ -19,9 +19,8 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         {
             using (new AssertionScope())
             {
-
-            windowSize.Size().Width.Should().Be(expectedWidth);
-            windowSize.Size().Height.Should().Be(expectedHeight);
+                windowSize.Size().Width.Should().Be(expectedWidth);
+                windowSize.Size().Height.Should().Be(expectedHeight);
             }
         }
 

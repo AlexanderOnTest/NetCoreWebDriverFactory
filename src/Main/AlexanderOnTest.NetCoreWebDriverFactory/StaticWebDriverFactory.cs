@@ -78,11 +78,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             ChromeOptions options,
             string driverPath = null,
-            WindowSize windowSize = WindowSize.Hd)
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
         {
             IWebDriver driver = null;
             try
@@ -96,7 +98,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 RethrowWithSuggestedPath(ex);
             }
 
-            return SetWindowSize(driver, windowSize);
+            return SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -106,11 +108,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             FirefoxOptions options, 
             string driverPath = null,
-            WindowSize windowSize = WindowSize.Hd)
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
         {
             IWebDriver driver = null;
             try
@@ -124,7 +128,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 RethrowWithSuggestedPath(ex);
             }
 
-            return SetWindowSize(driver, windowSize);
+            return SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -135,11 +139,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             EdgeOptions options, 
             string driverPath = null,
-            WindowSize windowSize = WindowSize.Hd)
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
         {
             if (!RuntimeInformation.OSDescription.StartsWith("Microsoft Windows 10"))
             {
@@ -158,7 +164,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 RethrowWithSuggestionOfNoPath(ex);
             }
 
-            return SetWindowSize(driver, windowSize);
+            return SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -168,11 +174,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             InternetExplorerOptions options, 
             string driverPath = null,
-            WindowSize windowSize = WindowSize.Hd)
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -191,7 +199,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 RethrowWithSuggestedPath(ex);
             }
 
-            return SetWindowSize(driver, windowSize);
+            return SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -201,11 +209,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="driverPath"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public static IWebDriver GetLocalWebDriver(
             SafariOptions options, 
             string driverPath = null,
-            WindowSize windowSize = WindowSize.Hd)
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
@@ -223,7 +233,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             {
                 RethrowWithSuggestionOfNoPath(ex);
             }
-            return SetWindowSize(driver, windowSize);
+            return SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -232,14 +242,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="options"></param>
         /// <param name="gridUrl"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public static IWebDriver GetRemoteWebDriver(
             DriverOptions options,
             Uri gridUrl,
-            WindowSize windowSize = WindowSize.Hd)
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
         {
             IWebDriver driver = new RemoteWebDriver(gridUrl, options);
-            return SetWindowSize(driver, windowSize);
+            return SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -281,8 +293,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public static IWebDriver SetWindowSize(IWebDriver driver, WindowSize windowSize)
+        public static IWebDriver SetWindowSize(IWebDriver driver, WindowSize windowSize, Size windowCustomSize = new Size())
         {
             switch (windowSize)
             {
@@ -293,23 +306,20 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                     driver.Manage().Window.Maximize();
                     return driver;
 
-                case WindowSize.Hd:
+                case WindowSize.Custom:
                     if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
                     {
                     driver.Manage().Window.Position = Point.Empty;
                     }
-                    driver.Manage().Window.Size = new Size(1366, 768);
+                    driver.Manage().Window.Size = windowCustomSize;
                     return driver;
 
-                case WindowSize.Fhd:
+                default:
                     if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
                     {
                         driver.Manage().Window.Position = Point.Empty;
                     }
-                    driver.Manage().Window.Size = new Size(1920, 1080);
-                    return driver;
-
-                default:
+                    driver.Manage().Window.Size = windowSize.Size();
                     return driver;
             }
         }

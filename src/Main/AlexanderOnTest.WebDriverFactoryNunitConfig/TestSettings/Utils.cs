@@ -65,6 +65,33 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         }
 
         /// <summary>
+        /// Return
+        /// </summary>
+        /// <param name="settingName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static int GetIntSettingOrDefault(string settingName, int defaultValue)
+        {
+            int returnValue;
+            if (!TestContext.Parameters.Exists(settingName))
+            {
+                returnValue = defaultValue;
+            }
+            else
+            {
+                try
+                {
+                    returnValue = TestContext.Parameters.Get<int>(settingName, defaultValue);
+                }
+                catch (Exception ex) when (ex is ArgumentException || ex is OverflowException)
+                {
+                    returnValue = defaultValue;
+                }
+            }
+            return returnValue;
+        }
+
+        /// <summary>
         /// Return the passed in default unless the setting in the applied .runsettings file is !default.
         /// </summary>
         /// <param name="settingName"></param>

@@ -15,7 +15,9 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
 
@@ -57,6 +59,13 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         public static bool Headless { get; } = GetBoolSettingOrDefault("headless", false);
 
         /// <summary>
+        /// Requested Custom browser size for WindowSize.Custom
+        /// </summary>
+        public static Size WindowCustomSize { get; } = new Size(
+            TestContext.Parameters.Get<int>("customWidth", 0 ), 
+            TestContext.Parameters.Get<int>("customHeight", 0));
+
+        /// <summary>
         /// Return the Configuration to use - Priority:
         /// 1. A value provided in "My Documents/Config_WebDriver.json" (Windows) or "/Config_WebDriver.json" (Mac / Linux)
         /// 2. The value in an applied .runsettings file
@@ -69,6 +78,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 Browser = Browser,
                 IsLocal = IsLocal,
                 WindowSize = WindowSize,
+                WindowCustomSize = WindowCustomSize,
                 GridUri = GridUri,
                 PlatformType = PlatformType,
                 Headless = Headless

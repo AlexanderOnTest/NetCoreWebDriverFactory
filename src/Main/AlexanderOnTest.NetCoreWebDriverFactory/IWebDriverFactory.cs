@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -45,8 +46,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="platformType"></param>
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false);
+        IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a RemoteWebDriver instance of the given configuration.
@@ -60,8 +62,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a local webdriver of the given browser type with default settings.
@@ -69,8 +72,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="browser"></param>
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false);
+        IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a Local IWebDriver instance of the given configuration.
@@ -84,40 +88,45 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a local Firefox WebDriver instance.
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a local Internet Explorer WebDriver instance. (Only supported on Microsoft Windows)
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a local Safari WebDriver instance. (Only supported on Mac Os)
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd);
+        IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a WebDriver instance of the given configuration.
@@ -127,9 +136,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="isLocal"></param>
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false);
+            PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size());
 
         /// <summary>
         /// Return a WebDriver instance of the given configuration.

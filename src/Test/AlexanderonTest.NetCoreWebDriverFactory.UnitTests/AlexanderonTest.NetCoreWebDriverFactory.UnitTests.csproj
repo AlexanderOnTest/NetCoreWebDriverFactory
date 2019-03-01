@@ -34,12 +34,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UseReal.runsettings</DependentUpon>
     </Compile>
+    <Compile Update="Settings\UseRealWithCustomSizeConfig.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UseRealWithCustomSizeConfig.runsettings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Settings\UseReal.runsettings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>UseReal.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Settings\UseRealWithCustomSizeConfig.runsettings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UseRealWithCustomSizeConfig.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

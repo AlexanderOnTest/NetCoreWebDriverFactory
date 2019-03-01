@@ -48,6 +48,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// Continue without setting screen size, this may not be consistent.
         /// </summary>
         Unchanged,
+        /// <summary>
+        /// Customise browser size according to the windowCustomSize configuration.
+        /// </summary>
         Custom
     }
 

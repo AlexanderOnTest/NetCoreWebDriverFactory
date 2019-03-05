@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.Drawing;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
@@ -27,8 +28,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
+        private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
+
+        [JsonConverter(typeof(SizeJsonConverter))]
         private Size windowCustomSize;
-        
+
+        /// <summary>
+        /// Convenience method to Deserialize from Json.
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <returns></returns>
+        public static WebDriverConfiguration DeserializeFromJson(string jsonString)
+        {
+            return JsonConvert.DeserializeObject<WebDriverConfiguration>(jsonString, SizeJsonConverter);
+        }
+
         /// <summary>
         /// Browser type to request.
         /// </summary>
@@ -78,5 +92,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string SerializeToJson()
+        {
+            return JsonConvert.SerializeObject(this, SizeJsonConverter);
+        }
     }
 }

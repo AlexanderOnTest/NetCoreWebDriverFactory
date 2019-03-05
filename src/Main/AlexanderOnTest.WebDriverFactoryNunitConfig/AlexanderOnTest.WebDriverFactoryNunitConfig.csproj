@@ -24,7 +24,7 @@ Initial release: version number matched to concurrent release NetCoreWebDriverFa
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="2.3.0-alpha1" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha1" />
   </ItemGroup>
 
 </Project>

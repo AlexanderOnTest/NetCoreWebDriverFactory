@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
 {
+    [Category("CI")]
     public class WindowSizeDataTests
     {
         [Test]

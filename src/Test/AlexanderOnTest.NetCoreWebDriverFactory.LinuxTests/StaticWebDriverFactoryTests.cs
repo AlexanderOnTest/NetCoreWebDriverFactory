@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -72,6 +73,20 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
                 StaticDriverOptionsFactory.GetFirefoxOptions(true),
                 DriverPath,
                 windowSize);
+            Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
+        }
+
+        [Test]
+        [Category("CI")]
+        [TestCase(WindowSize.Custom, 1366, 760)]
+        [TestCase(WindowSize.Custom, 1280, 1024)]
+        public void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
+        {
+            Driver = StaticWebDriverFactory.GetLocalWebDriver(
+                StaticDriverOptionsFactory.GetFirefoxOptions(true),
+                DriverPath,
+                windowSize,
+                new Size(expectedWidth, expectedHeight));
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
 

@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -124,8 +125,9 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
             T localConfig;
             using (StreamReader file = File.OpenText(configFilePath))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                localConfig = (T)serializer.Deserialize(file, typeof(T));
+                string json = file.ReadToEnd();
+
+                localConfig = JsonConvert.DeserializeObject<T>(json, new SizeJsonConverter());
             }
 
             return localConfig;

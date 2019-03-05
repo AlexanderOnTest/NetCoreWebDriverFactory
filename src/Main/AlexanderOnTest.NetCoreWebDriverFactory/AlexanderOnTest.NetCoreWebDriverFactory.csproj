@@ -45,41 +45,7 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
     <PackageReleaseNotes>v3.0.0
 Support for Custom Browser sizes
-Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter
-
-v2.2.0
-Introduction of IWebDriverConfiguration and addition of iDisposable on instances.
-
-v2.1.0
-Addition of a generalised GetWebDriver method for both local and remote webdrivers.
-IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false)
-
-And a WebDriverManager interface and implementation that uses it.
-
-v2.0.0 final
-Significant refactoring from v1.0.1 for simplified usage:
-1) IWebDriverFactory:
-        IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false);
-        IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd);
-
-        IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false);
-        IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd);
-        IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd);
-        IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd);
-        IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd);
-        IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd);
-
-DefaultWebDriverFactory no longer has a default constructor and must be instantiated using
-        public DefaultWebDriverFactory(string installedDriverPath, Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null)
-
-2) IDriverOptionsFactory:
-        T GetLocalDriverOptions&lt;T&gt;(bool headless = false) where T : DriverOptions;
-        T GetRemoteDriverOptions&lt;T&gt;(PlatformType platformType) where T : DriverOptions;
-
-In addition, DefaultDriverOptionsFactory exposes a new constructor:
-       public DefaultDriverOptionsFactory(Dictionary&lt;Type, DriverOptions&gt; driverOptionsDictionary)
-to enable the use of your own standard DriverOptions choices.</PackageReleaseNotes>
+Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter</PackageReleaseNotes>
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

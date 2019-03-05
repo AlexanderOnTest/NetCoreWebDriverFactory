@@ -43,9 +43,11 @@ https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.
 
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
+
     <PackageReleaseNotes>v3.0.0
 Support for Custom Browser sizes
 Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter</PackageReleaseNotes>
+
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

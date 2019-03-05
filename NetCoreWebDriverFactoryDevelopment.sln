@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{11555F43-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8A7C80EE-4A21-466B-8519-EBCED9CF00D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.UnitTests", "src\Test\AlexanderonTest.NetCoreWebDriverFactory.UnitTests\AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.csproj", "{6112DF9A-69C8-47C0-B362-B3F5DAAC11D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.UnitTests", "src\Test\AlexanderOnTest.NetCoreWebDriverFactory.UnitTests\AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.csproj", "{6112DF9A-69C8-47C0-B362-B3F5DAAC11D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.WebDriverFactoryNunitConfig", "src\Main\AlexanderOnTest.WebDriverFactoryNunitConfig\AlexanderOnTest.WebDriverFactoryNunitConfig.csproj", "{844BA98B-6BD2-4A93-8C09-29D876228809}"
 EndProject

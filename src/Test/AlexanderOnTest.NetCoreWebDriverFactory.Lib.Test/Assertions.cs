@@ -17,12 +17,11 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using OpenQA.Selenium;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.Lib.Test
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
     public static class Assertions
     {

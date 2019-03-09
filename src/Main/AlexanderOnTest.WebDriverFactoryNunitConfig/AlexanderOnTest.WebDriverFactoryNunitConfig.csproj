@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0-alpha1</Version>
+    <Version>3.0.0-alpha2</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -12,11 +12,13 @@
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <Description>Pick up NetCoreWebDriverFactory configuration for Nunit 3 test projects from runsettings files and with local file override options. See project URL for details.</Description>
 
-    <PackageReleaseNotes>v3.0.0
-Update to NetCoreWebDriverFactory v3.0.0 and handling of configuration for custom browser size requests
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-v2.2.0
-Initial release: version number matched to concurrent release NetCoreWebDriverFactory</PackageReleaseNotes>
+    <PackageReleaseNotes>v3.0.0
+Update to NetCoreWebDriverFactory v3.0.0 and handling of configuration for custom browser size requests.
+
+Working code calling the interfaces and implementations from v2.x.x should continue to work unchanged.</PackageReleaseNotes>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageId>
@@ -26,7 +28,7 @@ Initial release: version number matched to concurrent release NetCoreWebDriverFa
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha1" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha2" />
   </ItemGroup>
 
 </Project>

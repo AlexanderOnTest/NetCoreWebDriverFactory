@@ -1,4 +1,20 @@
-﻿using System.Drawing;
+﻿// <copyright>
+// Copyright 2019 Alexander Dunn
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// </copyright>
+
+using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -39,7 +55,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             using (new AssertionScope())
             {
                 actualJson.Should().Contain("\"PlatformType\":1");
-                actualJson.Should().Contain("\"WindowSize\":6");
+                actualJson.Should().Contain("\"WindowSize\":5");
                 actualJson.Should().Contain($"\"WindowCustomSize\":{{\"width\":{width},\"height\":{height}}}");
                 actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444/wd/hub\"");
             }
@@ -61,19 +77,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
 
             // Assert
             returnedConfig.Should().BeEquivalentTo(expectedConfig);
-        }
-
-        public void BuilderGetJsonConfigStringProducesCorrectJson()
-        {
-            WebDriverConfigurationBuilder wdc= WebDriverConfigurationBuilder.Start()
-                .WithBrowser(Browser.Firefox)
-                .WithIsLocal(true);
-
-            string generatedJson = wdc.GetJsonConfigString();
-            WebDriverConfiguration expectedConfiguration = wdc.Build();
-            WebDriverConfiguration configurationFromGeneratedJson = WebDriverConfiguration.DeserializeFromJson(generatedJson);
-
-            configurationFromGeneratedJson.Should().BeEquivalentTo(expectedConfiguration);
         }
     }
 }

@@ -3,26 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0-alpha1</Version>
+    <Version>3.0.0-alpha2</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
     <Description>A library to ease the creation of Selenium WebDriver instances in .net Core projects.
-
-Usage
-Instantiate a WebDriverFactory from a .NET Core project:
-IWebDriverFactory webDriverFactory =  new DefaultWebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), {{yourGridUri}});
-
-Use the alternative Windows1803WebDriverFactory implementation for Windows 10 version 1803 and earlier.
-IWebDriverFactory webDriverFactory =  new Windows1803WebDriverFactory(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), {{yourGridUri}});
-
-This is not intended for .NET Framework (as it is really not required) but if you would like to use it in a Framework project use:
-IWebDriverFactory webDriverFactory =  new FrameworkWebDriverFactory({{yourGridUri}});
-
-Then to use it
-IWebDriver localWebDriver = webDriverFactory.GetLocalWebDriver(Browser.xxxx);
-or 
-IWebDriver remoteWebDriver = webDriverFactory.GetRemoteWebDriver(Browser.xxxx, PlatformType.xxxx);
+Supports browser instances run locally or on a Selenium grid.
 
 Supported Browsers:
 Chrome
@@ -45,8 +31,12 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
 
     <PackageReleaseNotes>v3.0.0
-Support for Custom Browser sizes
-Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter</PackageReleaseNotes>
+Support for Custom Browser sizes.
+Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter.
+
+Working code calling the interfaces and implementations from v2.x.x should continue to work unchanged. 
+
+Classes implementing the public interfaces however will require work to meet the new signatures and support custom sizes.</PackageReleaseNotes>
 
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
@@ -56,6 +46,11 @@ Extending all size setting methods and IWebDriverConfiguration with an optional 
     <LangVersion>7.3</LangVersion>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <FileVersion>3.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

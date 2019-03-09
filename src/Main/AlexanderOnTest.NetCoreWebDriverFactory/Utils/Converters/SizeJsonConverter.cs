@@ -45,8 +45,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             Size size = (Size)value;
-            JObject jo = new JObject { { "width", size.Width }, { "height", size.Height } };
-            jo.WriteTo(writer);
+            JObject jsonObject = new JObject { { "width", size.Width }, { "height", size.Height } };
+            jsonObject.WriteTo(writer);
         }
 
         /// <summary>Reads the JSON representation of the object.</summary>
@@ -57,8 +57,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JObject jo = JObject.Load(reader);
-            return new Size((int)jo["width"], (int)jo["height"]);
+            JObject jsonObject = JObject.Load(reader);
+            return new Size((int)jsonObject["width"], (int)jsonObject["height"]);
         }
     }
 }

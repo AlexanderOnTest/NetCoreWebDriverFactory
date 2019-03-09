@@ -962,16 +962,6 @@
             Full HD - 1920 x 1080 screen size. 2nd most common 'PC' screen size.
             </summary>
         </member>
-        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Qhd">
-            <summary>
-            Quad HD (aka 1440p) - 2560 x 1440
-            </summary>
-        </member>
-        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Uhd">
-            <summary>
-            Ultra HD-1 (aka 4k) - 3840 x 2160
-            </summary>
-        </member>
         <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Maximise">
             <summary>
             Maximise the browser to the full screen.
@@ -982,9 +972,24 @@
             Continue without setting screen size, this may not be consistent.
             </summary>
         </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Maximize">
+            <summary>
+            Maximize the browser to the full screen.
+            </summary>
+        </member>
         <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Custom">
             <summary>
             Customise browser size according to the windowCustomSize configuration.
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Qhd">
+            <summary>
+            Quad HD (aka 1440p) - 2560 x 1440
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Uhd">
+            <summary>
+            Ultra HD-1 (aka 4k) - 3840 x 2160
             </summary>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension">

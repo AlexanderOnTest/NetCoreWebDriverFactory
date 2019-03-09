@@ -33,14 +33,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         Fhd,
         /// <summary>
-        /// Quad HD (aka 1440p) - 2560 x 1440
-        /// </summary>
-        Qhd,
-        /// <summary>
-        /// Ultra HD-1 (aka 4k) - 3840 x 2160
-        /// </summary>
-        Uhd,
-        /// <summary>
         /// Maximise the browser to the full screen.
         /// </summary>
         Maximise,
@@ -49,9 +41,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         Unchanged,
         /// <summary>
+        /// Maximize the browser to the full screen.
+        /// </summary>
+        Maximize,
+        /// <summary>
         /// Customise browser size according to the windowCustomSize configuration.
         /// </summary>
-        Custom
+        Custom,
+        /// <summary>
+        /// Quad HD (aka 1440p) - 2560 x 1440
+        /// </summary>
+        Qhd,
+        /// <summary>
+        /// Ultra HD-1 (aka 4k) - 3840 x 2160
+        /// </summary>
+        Uhd
     }
 
     /// <summary>

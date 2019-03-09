@@ -17,7 +17,7 @@
 using System;
 using OpenQA.Selenium;
 
-// The WebDriverManager was first released in v2.1.0 with this incorrect namepace.
+// The WebDriverManager was first released in v2.1.0 with this incorrect namespace.
 // I prefer this file structure, but do not wish to change the API.
 // DO NOT CORRECT THIS WITHOUT A MAJOR VERSION BUMP.
 namespace AlexanderOnTest.NetCoreWebDriverFactory

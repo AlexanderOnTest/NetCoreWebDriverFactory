@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderonTest.NetCoreWebDriverFactory.Lib.Test", "src\Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test\AlexanderonTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test", "src\Test\AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test\AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{A2D9CC12-36E9-44C4-BD4B-3A4EEFF6E2B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests", "src\Test\AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests\AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests.csproj", "{180BB709-1B90-44F6-A903-FBF378721945}"
 EndProject

@@ -16,8 +16,10 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
@@ -26,6 +28,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
+        private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
+
+        [JsonConverter(typeof(SizeJsonConverter))]
+        private Size windowCustomSize;
+
+        /// <summary>
+        /// Convenience method to Deserialize from Json.
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <returns></returns>
+        public static WebDriverConfiguration DeserializeFromJson(string jsonString)
+        {
+            return JsonConvert.DeserializeObject<WebDriverConfiguration>(jsonString, SizeJsonConverter);
+        }
+
         /// <summary>
         /// Browser type to request.
         /// </summary>
@@ -48,7 +65,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         public WindowSize WindowSize { get; set; }
 
         /// <summary>
-        /// The Uri of the Selenium grd to use for remote calls.
+        /// Custom window size to request.
+        /// </summary>
+        public Size WindowCustomSize {
+            get => WindowSize == WindowSize.Custom ? windowCustomSize : WindowSize.Size();
+            set => windowCustomSize = value;
+        }
+
+        /// <summary>
+        /// The Uri of the Selenium grid to use for remote calls.
         /// </summary>
         [DefaultValue("https://localhost:4400/wd/grid")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -67,5 +92,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string SerializeToJson()
+        {
+            return JsonConvert.SerializeObject(this, SizeJsonConverter);
+        }
     }
 }

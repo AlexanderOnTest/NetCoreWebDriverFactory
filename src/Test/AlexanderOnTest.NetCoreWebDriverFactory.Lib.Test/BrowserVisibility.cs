@@ -14,7 +14,7 @@
 // limitations under the License.
 // </copyright>
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.Lib.Test
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
     public enum BrowserVisibility
     {

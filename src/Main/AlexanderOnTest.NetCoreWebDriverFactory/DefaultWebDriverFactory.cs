@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -87,7 +88,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
                 configuration.Browser,
                 configuration.PlatformType,
                 configuration.WindowSize,
-                configuration.Headless
+                configuration.Headless, 
+                configuration.WindowCustomSize
             );
         }
 
@@ -96,10 +98,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetRemoteWebDriver(options, GridUri, windowSize);
+            return StaticWebDriverFactory.GetRemoteWebDriver(options, GridUri, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -109,8 +112,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="platformType"></param>
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false)
+        public virtual IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
             if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
             {
@@ -120,19 +124,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType), windowSize);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType), windowSize, windowCustomSize);
 
                 case Browser.Chrome:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType), windowSize);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType), windowSize, windowCustomSize);
 
                 case Browser.InternetExplorer:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType), windowSize);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType), windowSize, windowCustomSize);
 
                 case Browser.Edge:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType), windowSize);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType), windowSize, windowCustomSize);
 
                 case Browser.Safari:
-                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType), windowSize);
+                    return GetRemoteWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType), windowSize, windowCustomSize);
 
                 default:
                     throw new PlatformNotSupportedException($"{browser} is not currently supported.");
@@ -145,8 +149,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="browser"></param>
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false)
+        public virtual IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
             if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
             {
@@ -156,19 +161,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless), windowSize);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless), windowSize, windowCustomSize);
 
                 case Browser.Chrome:
-                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless), windowSize);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless), windowSize, windowCustomSize);
 
                 case Browser.InternetExplorer:
-                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(), windowSize);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(), windowSize, windowCustomSize);
 
                 case Browser.Edge:
-                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize, windowCustomSize);
 
                 case Browser.Safari:
-                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(), windowSize);
+                    return GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(), windowSize, windowCustomSize);
 
                 default:
                     throw new PlatformNotSupportedException($"{browser} is not currently supported.");
@@ -190,7 +195,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             return GetLocalWebDriver(
                 configuration.Browser,
                 configuration.WindowSize,
-                configuration.Headless
+                configuration.Headless, 
+                configuration.WindowCustomSize
             );
         }
 
@@ -200,10 +206,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -212,10 +219,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -223,10 +231,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -234,10 +243,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -245,10 +255,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd)
+        public virtual IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -259,13 +270,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="isLocal"></param>
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false)
+            PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
         {
             return isLocal ? 
-                GetLocalWebDriver(browser, windowSize, headless) :
-                GetRemoteWebDriver(browser, platformType, windowSize, headless);
+                GetLocalWebDriver(browser, windowSize, headless, windowCustomSize) :
+                GetRemoteWebDriver(browser, platformType, windowSize, headless, windowCustomSize);
         }
 
         /// <summary>
@@ -275,13 +287,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <returns></returns>
         public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
         {
-            return GetWebDriver(
-                configuration.Browser,
-                configuration.WindowSize,
-                configuration.IsLocal,
-                configuration.PlatformType,
-                configuration.Headless
-            );
+            return configuration.IsLocal ?
+                GetLocalWebDriver(configuration) :
+                GetRemoteWebDriver(configuration);
         }
 
         /// <summary>

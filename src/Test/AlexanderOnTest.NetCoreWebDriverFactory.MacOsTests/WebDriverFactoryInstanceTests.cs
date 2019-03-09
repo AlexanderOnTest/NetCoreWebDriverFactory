@@ -15,11 +15,12 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using AlexanderonTest.NetCoreWebDriverFactory.Lib.Test;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -79,6 +80,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
             Driver = WebDriverFactory.GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(true), windowSize);
+            Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
+        }
+
+        [Test]
+        [TestCase(WindowSize.Custom, 1366, 760)]
+        [TestCase(WindowSize.Custom, 1280, 1024)]
+        public void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
+        {
+            Driver = WebDriverFactory.GetLocalWebDriver(
+                Browser.Firefox,
+                windowSize,
+                true,
+                new Size(expectedWidth, expectedHeight));
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
 

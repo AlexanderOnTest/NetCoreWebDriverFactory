@@ -11,13 +11,15 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.6.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="nunit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.46.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="72.0.3626.69" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.24.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.5" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="2.2.0-rc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Main\AlexanderOnTest.WebDriverFactoryNunitConfig\AlexanderOnTest.WebDriverFactoryNunitConfig.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,12 +34,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UseReal.runsettings</DependentUpon>
     </Compile>
+    <Compile Update="Settings\UseRealWithCustomSizeConfig.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UseRealWithCustomSizeConfig.runsettings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Settings\UseReal.runsettings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>UseReal.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Settings\UseRealWithCustomSizeConfig.runsettings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UseRealWithCustomSizeConfig.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

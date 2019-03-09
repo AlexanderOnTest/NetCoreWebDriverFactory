@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
@@ -53,13 +54,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="browser"></param>
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public override IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false)
+        public override IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
             // The only case needing to be overidden is Edge not headless
             return (browser == Browser.Edge && !headless) ?
-                GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize) :
-                base.GetLocalWebDriver(browser, windowSize, headless);
+                GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize, windowCustomSize) :
+                base.GetLocalWebDriver(browser, windowSize, headless, windowCustomSize);
         }
 
         /// <summary>
@@ -67,10 +69,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public override IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd)
+        public override IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize);
+            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
     }
 }

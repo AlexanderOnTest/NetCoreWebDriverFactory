@@ -79,15 +79,16 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetRemoteWebDriver(OpenQA.Selenium.DriverOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetRemoteWebDriver(OpenQA.Selenium.DriverOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a RemoteWebDriver of the given windows size.
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetRemoteWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetRemoteWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a configured RemoteWebDriver of the given browser type with default settings.
             </summary>
@@ -95,15 +96,17 @@
             <param name="platformType"></param>
             <param name="windowSize"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a local webdriver of the given browser type with default settings.
             </summary>
             <param name="browser"></param>
             <param name="windowSize"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
@@ -113,49 +116,54 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Chrome.ChromeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Chrome.ChromeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a Local Chrome WebDriver instance.
             Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Firefox.FirefoxOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Firefox.FirefoxOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Firefox WebDriver instance.
             Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10 version 1809 or later)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.IE.InternetExplorerOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.IE.InternetExplorerOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Internet Explorer WebDriver instance. (Only supported on Microsoft Windows)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Safari.SafariOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Safari.SafariOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Safari WebDriver instance. (Only supported on Mac Os)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a WebDriver instance of the given configuration.
             </summary>
@@ -164,6 +172,7 @@
             <param name="isLocal"></param>
             <param name="platformType"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DefaultWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
@@ -484,12 +493,17 @@
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowSize">
             <summary>
-            WindowSize to request.
+            Defined WindowSize to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowCustomSize">
+            <summary>
+            Custom window size to request if using WindowSize.Custom
             </summary>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.GridUri">
             <summary>
-            The Uri of the Selenium grd to use for remote calls.
+            The Uri of the Selenium grid to use for remote calls.
             </summary>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.IsLocal">
@@ -509,10 +523,10 @@
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GridUri">
             <summary>
-            The Uri of your selenium grid for remote Webdriver instances.
+            The Uri of your selenium grid for remote WebDriver instances.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetRemoteWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetRemoteWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a configured RemoteWebDriver of the given browser type with default settings.
             </summary>
@@ -520,6 +534,7 @@
             <param name="platformType"></param>
             <param name="windowSize"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetRemoteWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
@@ -529,21 +544,23 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetRemoteWebDriver(OpenQA.Selenium.DriverOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetRemoteWebDriver(OpenQA.Selenium.DriverOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a RemoteWebDriver of the given windows size.
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a local webdriver of the given browser type with default settings.
             </summary>
             <param name="browser"></param>
             <param name="windowSize"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
@@ -553,47 +570,52 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Chrome.ChromeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Chrome.ChromeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a Local Chrome WebDriver instance.
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Firefox.FirefoxOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Firefox.FirefoxOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Firefox WebDriver instance.
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.IE.InternetExplorerOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.IE.InternetExplorerOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Internet Explorer WebDriver instance. (Only supported on Microsoft Windows)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Safari.SafariOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Safari.SafariOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Safari WebDriver instance. (Only supported on Mac Os)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,OpenQA.Selenium.PlatformType,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a WebDriver instance of the given configuration.
             </summary>
@@ -602,6 +624,7 @@
             <param name="isLocal"></param>
             <param name="platformType"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
@@ -627,7 +650,7 @@
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Chrome.ChromeOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Chrome.ChromeOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a Local Chrome WebDriver instance.
             Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" 
@@ -635,9 +658,10 @@
             <param name="options"></param>
             <param name="driverPath"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Firefox.FirefoxOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Firefox.FirefoxOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Firefox WebDriver instance.
             Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" 
@@ -645,9 +669,10 @@
             <param name="options"></param>
             <param name="driverPath"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
             Try using driverPath = null (default) for Windows 10 version 1809 and later.
@@ -656,9 +681,10 @@
             <param name="options"></param>
             <param name="driverPath"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.IE.InternetExplorerOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.IE.InternetExplorerOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Internet Explorer WebDriver instance. (Only supported on Microsoft Windows)
             Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
@@ -666,9 +692,10 @@
             <param name="options"></param>
             <param name="driverPath"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Safari.SafariOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Safari.SafariOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Safari WebDriver instance. (Only supported on Mac Os)
             Try using driverPath = null (default)
@@ -676,15 +703,17 @@
             <param name="options"></param>
             <param name="driverPath"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetRemoteWebDriver(OpenQA.Selenium.DriverOptions,System.Uri,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetRemoteWebDriver(OpenQA.Selenium.DriverOptions,System.Uri,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a RemoteWebDriver of the given browser type with default settings.
             </summary>
             <param name="options"></param>
             <param name="gridUrl"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.GetRemoteWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,System.Uri,OpenQA.Selenium.PlatformType)">
@@ -696,18 +725,146 @@
             <param name="platformType"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.SetWindowSize(OpenQA.Selenium.IWebDriver,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.StaticWebDriverFactory.SetWindowSize(OpenQA.Selenium.IWebDriver,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Convenience method for setting the Window Size of a WebDriver to common values. (768P, 1080P and fullscreen)
             </summary>
             <param name="driver"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder">
+            <summary>
+            Builder class for easy configuration
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.Start">
+            <summary>
+            return a new instance of this class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.Build">
+            <summary>
+            Generate the WebDriverConfiguration from the current state of the builder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithBrowser(AlexanderOnTest.NetCoreWebDriverFactory.Browser)">
+            <summary>
+            Set the required Browser
+            </summary>
+            <param name="browser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithGridUri(System.Uri)">
+            <summary>
+            Set the required Uri for the Selenium Grid
+            </summary>
+            <param name="gridUri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithHeadless(System.Boolean)">
+            <summary>
+            Set the Headless switch as required
+            </summary>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithIsLocal(System.Boolean)">
+            <summary>
+            Set the IsLocal switch as required
+            </summary>
+            <param name="isLocal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithPlatformType(OpenQA.Selenium.PlatformType)">
+            <summary>
+            Set the required PlatformType
+            </summary>
+            <param name="platformType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithWindowSize(AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Set the required value for the WindowSize Enum
+            </summary>
+            <param name="windowSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithWindowCustomSize(System.Drawing.Size)">
+            <summary>
+            Set the required WindowCustomSize (Caution: only used for WindowSize.Custom)
+            </summary>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithCustomSize(System.Drawing.Size)">
+            <summary>
+            Shortcut method to request the given Custom Size
+            </summary>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.RunRemotelyOn(System.Uri)">
+            <summary>
+            Shortcut method to request running remotely on the given Uri
+            </summary>
+            <param name="gridUri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.RunHeadless">
+            <summary>
+            Set the Browser to run in headless mode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.GetJsonConfigString">
+            <summary>
+            Return a formatted, human readable Json string suitable for saving locally in a Config_WebDriver.json file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters.SizeJsonConverter">
+            <summary>
+            Based on code at https://stackoverflow.com/questions/21471404/how-to-de-serialize-system-drawing-size-to-object-using-json-net
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters.SizeJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>
+            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters.SizeJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>Writes the JSON representation of the object.</summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter" /> to write to.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters.SizeJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>Reads the JSON representation of the object.</summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader" /> to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration">
             <summary>
             A WebDriver Configuration implementation.
             </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.DeserializeFromJson(System.String)">
+            <summary>
+            Convenience method to Deserialize from Json.
+            </summary>
+            <param name="jsonString"></param>
+            <returns></returns>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.Browser">
             <summary>
@@ -724,9 +881,14 @@
             WindowSize to request
             </summary>
         </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowCustomSize">
+            <summary>
+            Custom window size to request.
+            </summary>
+        </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.GridUri">
             <summary>
-            The Uri of the Selenium grd to use for remote calls.
+            The Uri of the Selenium grid to use for remote calls.
             </summary>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.IsLocal">
@@ -738,6 +900,12 @@
             <summary>
             Run headless if available.
             </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.SerializeToJson">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory">
             <summary>
@@ -760,21 +928,23 @@
             <param name="configuration"></param>
             <param name="driverOptionsFactory"></param>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
             <summary>
             Return a local webdriver of the given browser type with default settings.
             </summary>
             <param name="browser"></param>
             <param name="windowSize"></param>
             <param name="headless"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Windows1803WebDriverFactory.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
             Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10 version 1803 or earlier)
             </summary>
             <param name="options"></param>
             <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize">
@@ -801,6 +971,45 @@
             <summary>
             Continue without setting screen size, this may not be consistent.
             </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Maximize">
+            <summary>
+            Maximize the browser to the full screen.
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Custom">
+            <summary>
+            Customise browser size according to the windowCustomSize configuration.
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Qhd">
+            <summary>
+            Quad HD (aka 1440p) - 2560 x 1440
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Uhd">
+            <summary>
+            Ultra HD-1 (aka 4k) - 3840 x 2160
+            </summary>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension">
+            <summary>
+            Extension methods for the WindowSize Enum.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension.Size(AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Return the requested browser window size for the Enum value, or (0,0) if size is not specified
+            </summary>
+            <param name="windowSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension.HasDefinedSize(AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Does this WindowSize value request a given size for the generated WebDriver?
+            </summary>
+            <param name="windowSize"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

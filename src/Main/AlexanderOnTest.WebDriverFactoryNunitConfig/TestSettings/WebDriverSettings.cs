@@ -73,15 +73,13 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// </summary>
         public static IWebDriverConfiguration WebDriverConfiguration { get; }
             = Utils.GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") ??
-              new WebDriverConfiguration
-            {
-                Browser = Browser,
-                IsLocal = IsLocal,
-                WindowSize = WindowSize,
-                WindowCustomSize = WindowCustomSize,
-                GridUri = GridUri,
-                PlatformType = PlatformType,
-                Headless = Headless
-            };
+              new WebDriverConfiguration(
+                  Browser,
+                  GridUri,
+                  Headless,
+                  IsLocal,
+                  PlatformType,
+                  WindowSize,
+                  WindowCustomSize);
     }
 }

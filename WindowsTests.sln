@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test", "src\Test\AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test\AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.csproj", "{7A71CDF5-C9D8-45D5-9047-DA56292377DA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.WebDriverFactoryNunitConfig", "src\Main\AlexanderOnTest.WebDriverFactoryNunitConfig\AlexanderOnTest.WebDriverFactoryNunitConfig.csproj", "{2D1A52AB-853A-472C-B00B-F49F6A32B530}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory", "src\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj", "{06B1F888-7B61-4197-8849-EFED1AE4B9E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7A71CDF5-C9D8-45D5-9047-DA56292377DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A71CDF5-C9D8-45D5-9047-DA56292377DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A71CDF5-C9D8-45D5-9047-DA56292377DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D1A52AB-853A-472C-B00B-F49F6A32B530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1A52AB-853A-472C-B00B-F49F6A32B530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1A52AB-853A-472C-B00B-F49F6A32B530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D1A52AB-853A-472C-B00B-F49F6A32B530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B1F888-7B61-4197-8849-EFED1AE4B9E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B1F888-7B61-4197-8849-EFED1AE4B9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B1F888-7B61-4197-8849-EFED1AE4B9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B1F888-7B61-4197-8849-EFED1AE4B9E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

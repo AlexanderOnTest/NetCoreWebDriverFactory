@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0-alpha2</Version>
+    <Version>3.0.0-alpha3</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -33,6 +33,7 @@ The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriv
     <PackageReleaseNotes>v3.0.0
 Support for Custom Browser sizes.
 Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter.
+Addition of a simple WebDriverConfigurationBuilder
 
 Working code calling the interfaces and implementations from v2.x.x should continue to work unchanged. 
 

@@ -859,13 +859,6 @@
             A WebDriver Configuration implementation.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.DeserializeFromJson(System.String)">
-            <summary>
-            Convenience method to Deserialize from Json.
-            </summary>
-            <param name="jsonString"></param>
-            <returns></returns>
-        </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.Browser">
             <summary>
             Browser type to request.
@@ -900,6 +893,13 @@
             <summary>
             Run headless if available.
             </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.DeserializeFromJson(System.String)">
+            <summary>
+            Convenience method to Deserialize from Json.
+            </summary>
+            <param name="jsonString"></param>
+            <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.SerializeToJson">
             <summary>

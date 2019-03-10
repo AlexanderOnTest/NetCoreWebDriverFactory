@@ -31,7 +31,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         Browser Browser
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -40,7 +39,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         PlatformType PlatformType
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -49,7 +47,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         WindowSize WindowSize
         {
             get;
-            set;
         }
 
 
@@ -59,7 +56,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         Size WindowCustomSize
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -68,7 +64,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         Uri GridUri
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -77,7 +72,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         bool IsLocal
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -86,7 +80,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         bool Headless
         {
             get;
-            set;
         }
     }
 }

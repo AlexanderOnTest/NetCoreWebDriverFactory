@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0-alpha2</Version>
+    <Version>3.0.0-alpha3</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -28,7 +28,10 @@ Working code calling the interfaces and implementations from v2.x.x should conti
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj" />
   </ItemGroup>
 
 </Project>

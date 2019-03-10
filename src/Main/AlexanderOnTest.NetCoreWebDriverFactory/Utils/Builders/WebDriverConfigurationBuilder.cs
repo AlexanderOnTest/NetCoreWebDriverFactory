@@ -60,16 +60,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// <returns></returns>
         public WebDriverConfiguration Build()
         {
-            return new WebDriverConfiguration
-            {
-                Browser = this.browser,
-                GridUri = this.gridUri,
-                Headless = this.headless,
-                IsLocal = this.isLocal,
-                PlatformType = this.platformType,
-                WindowSize = this.windowSize,
-                WindowCustomSize = this.windowCustomSize
-            };
+            return new WebDriverConfiguration(
+                this.browser, 
+                this.gridUri, 
+                this.headless, 
+                this.isLocal, 
+                this.platformType, 
+                this.windowSize, 
+                this.windowCustomSize);
         }
 
         /// <summary>

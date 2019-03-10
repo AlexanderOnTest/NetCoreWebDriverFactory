@@ -709,6 +709,17 @@
             A WebDriver Configuration implementation.
             </summary>
         </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.Browser,System.Uri,System.Boolean,System.Boolean,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize)">
+            <summary>
+            Generate a new mutable WebDriverConfiguration instance.
+            </summary>
+            <param name="browser"></param>
+            <param name="gridUri"></param>
+            <param name="headless"></param>
+            <param name="isLocal"></param>
+            <param name="platformType"></param>
+            <param name="windowSize"></param>
+        </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.Browser">
             <summary>
             Browser type to request.

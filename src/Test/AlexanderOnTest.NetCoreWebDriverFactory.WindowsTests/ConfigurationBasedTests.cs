@@ -124,15 +124,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         private static IWebDriverConfiguration GetConfiguration(Browser browser, WindowSize windowSize = WindowSize.Hd,
             PlatformType platformType = PlatformType.Any, bool headless = false, bool isLocal = true)
         {
-            return new WebDriverConfiguration()
-            {
-                Browser = browser,
-                GridUri = GridUrl,
-                Headless = headless,
-                IsLocal = isLocal,
-                PlatformType = platformType,
-                WindowSize = windowSize
-            };
+            return new WebDriverConfiguration(browser, GridUrl, headless, isLocal, platformType, windowSize);
         }
     }
 }

@@ -27,6 +27,31 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
         /// <summary>
+        /// Generate a new mutable WebDriverConfiguration instance.
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="gridUri"></param>
+        /// <param name="headless"></param>
+        /// <param name="isLocal"></param>
+        /// <param name="platformType"></param>
+        /// <param name="windowSize"></param>
+        public WebDriverConfiguration(
+            Browser browser = Browser.Firefox,
+            Uri gridUri = null,
+            bool headless = false,
+            bool isLocal = true,
+            PlatformType platformType = PlatformType.Any,
+            WindowSize windowSize = WindowSize.Hd)
+        {
+            Browser = browser;
+            GridUri = gridUri;
+            Headless = headless;
+            IsLocal = isLocal;
+            PlatformType = platformType;
+            WindowSize = windowSize;
+        }
+
+        /// <summary>
         /// Browser type to request.
         /// </summary>
         [DefaultValue(Browser.Firefox)]

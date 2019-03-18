@@ -20,7 +20,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using OpenQA.Selenium;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager
 {
 #pragma warning disable S3881 // "IDisposable" should be implemented correctly
     internal class FakeWebDriver : IWebDriver

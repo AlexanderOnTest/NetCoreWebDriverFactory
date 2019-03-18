@@ -16,18 +16,21 @@
 
 using System;
 using System.Drawing;
-using AlexanderOnTest.NetCoreWebDriverFactory;
+using System.Reflection;
+using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Safari;
+using LogProvider = AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProvider;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager
 {
     class FakeWebDriverFactory : IWebDriverFactory
     {
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public Uri GridUri { get; set; }
 
         public IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any,
@@ -84,11 +87,14 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
         public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
         {
+            Logger.Info($"Fake WebDriver requested.");
             return new FakeWebDriver();
         }
 
         public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
         {
+            Logger.Info($"Fake WebDriver requested.");
+
             return new FakeWebDriver();
         }
 

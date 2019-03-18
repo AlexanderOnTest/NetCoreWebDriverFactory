@@ -17,6 +17,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Text;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
@@ -29,6 +30,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
         private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
+        private readonly string description;
 
         [JsonConverter(typeof(SizeJsonConverter))]
         private readonly Size windowCustomSize;
@@ -59,6 +61,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             PlatformType = platformType;
             WindowSize = windowSize;
             this.windowCustomSize = windowCustomSize;
+            description = new StringBuilder()
+                .Append($"{base.ToString()}: (")
+                .Append($" Browser: {Browser.ToString()} ")
+                .Append(Headless ? "headless" : "on screen")
+                .Append($", Size: {WindowCustomSize.Width} x {WindowCustomSize.Height}, ")
+                .Append(IsLocal ? "running locally)" : $"running remotely on {GridUri} on platform: {PlatformType}.)")
+                .ToString();
         }
 
         /// <summary>
@@ -110,6 +119,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; }
+
+        /// <summary>
+        /// Return the configuration in a readable form.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return description;
+        }
 
         /// <summary>
         /// Convenience method to Deserialize from Json.

@@ -16,12 +16,11 @@
 
 using System;
 using System.Reflection;
-using AlexanderOnTest.NetCoreWebDriverFactory;
-using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings;
+using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.Settings;
 using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies
 {
     internal static class DependencyInjector
     {

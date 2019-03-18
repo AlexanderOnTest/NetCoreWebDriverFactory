@@ -16,7 +16,7 @@
 
 using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.Settings
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.Settings
 {
     /// <summary>
     /// This static class provides values to build a test configuration from a xxx.runsettings file.

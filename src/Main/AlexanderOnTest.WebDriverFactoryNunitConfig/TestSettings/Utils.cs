@@ -17,6 +17,7 @@
 using System;
 using System.IO;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.Logging;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -129,7 +130,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 
                 localConfig = JsonConvert.DeserializeObject<T>(json, new SizeJsonConverter());
             }
-
+            
             return localConfig;
         }
     }

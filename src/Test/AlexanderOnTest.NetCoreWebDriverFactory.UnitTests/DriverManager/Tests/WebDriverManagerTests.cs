@@ -15,18 +15,25 @@
 // </copyright>
 
 using System;
-using AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
-using AlexanderOnTest.NetCoreWebDriverFactory;
+using System.IO;
+using System.Reflection;
+using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using FluentAssertions;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
 {
     [Category("CI")]
     public class WebDriverManagerTests
     {
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled;
+
         private IWebDriver DriverOne { get; set; }
 
         private IWebDriver DriverTwo { get; set; }
@@ -36,6 +43,9 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [OneTimeSetUp]
         public void Prepare()
         {
+            ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(logRepository, new FileInfo(Path.Combine(TestContext.CurrentContext.TestDirectory, "log4net.config")));
+
             IServiceProvider provider = DependencyInjector.GetServiceProvider();
 
             WebDriverManager = provider.GetService<IWebDriverManager>();
@@ -47,6 +57,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void GetCreatesNewDriver()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             DriverOne = WebDriverManager.Get();
             DriverOne.Should().NotBeNull();
         }
@@ -57,6 +71,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void GetReturnsTheSameDriver()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             DriverOne = WebDriverManager.Get();
             DriverTwo = WebDriverManager.Get();
             DriverTwo.Should().BeSameAs(DriverOne);
@@ -68,6 +86,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void GetAdditionalWebDriverReturnsAnotherInstance()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             DriverOne = WebDriverManager.Get();
             DriverTwo = WebDriverManager.GetAdditionalWebDriver();
             DriverTwo.Should().NotBeSameAs(DriverOne);
@@ -79,6 +101,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void GetAdditionalWebDriverDoesNotCreateSingleton()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             // Reverse of the above, check that get additional first does not create a singleton instance
             DriverTwo = WebDriverManager.GetAdditionalWebDriver();
             DriverOne = WebDriverManager.Get();
@@ -91,6 +117,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void QuitHasClosedTheWebDriver()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             DriverOne = WebDriverManager.Get();
             WebDriverManager.Quit();
             Action act = () => DriverOne.Manage().Window.FullScreen();
@@ -103,6 +133,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void AfterQuittingANewDriverIsCreated()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             DriverOne = WebDriverManager.Get();
             WebDriverManager.Quit();
             DriverTwo = WebDriverManager.Get();
@@ -115,6 +149,10 @@ namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [Test]
         public void QuitOnlyQuitsTheSingletonWebDriver()
         {
+            if (IsDebugEnabled)
+            {
+                Logger.Debug($"Starting {TestContext.CurrentContext.Test.Name}");
+            }
             DriverOne = WebDriverManager.Get();
             DriverTwo = WebDriverManager.GetAdditionalWebDriver();
             

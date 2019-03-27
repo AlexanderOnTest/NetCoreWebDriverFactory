@@ -26,7 +26,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
     /// <summary>
     /// Static Factory for WebDriverInstances with configuration.

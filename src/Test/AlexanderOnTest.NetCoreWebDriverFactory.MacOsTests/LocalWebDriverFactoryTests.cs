@@ -14,26 +14,21 @@
 // limitations under the License.
 // </copyright>
 
-using System;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
 {
     [TestFixture]
-    public class StaticWebDriverFactoryTests : StaticWebDriverFactoryTestsBase
+    public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
-        public StaticWebDriverFactoryTests() : base(ThisPlatform, DriverPath, GridUrl)
+        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
         {
         }
 
@@ -46,21 +41,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
         {
             base.LocalWebDriverFactoryWorks(browser, headless);
-        }
-
-        [Test]
-        [TestCase(PlatformType.Linux, Browser.Chrome)]
-        [TestCase(PlatformType.Linux, Browser.Firefox)]
-        [TestCase(PlatformType.Mac, Browser.Chrome)]
-        [TestCase(PlatformType.Mac, Browser.Firefox)]
-        [TestCase(PlatformType.Mac, Browser.Safari)]
-        [TestCase(PlatformType.Windows, Browser.Chrome)]
-        [TestCase(PlatformType.Windows, Browser.Edge)]
-        [TestCase(PlatformType.Windows, Browser.Firefox)]
-        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
-        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
-        {
-            base.RemoteWebDriverFactoryWorks(platformType, browser);
         }
 
         [Test]

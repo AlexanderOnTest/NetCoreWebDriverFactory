@@ -31,13 +31,18 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
 
     <PackageReleaseNotes>v3.0.0
+A Complete rework for use in CI/CD pipelines
+
+New features:
+Addition of a simple WebDriverConfigurationBuilder.
 Support for Custom Browser sizes.
-Extending all size setting methods and IWebDriverConfiguration with an optional Size parameter.
-Addition of a simple WebDriverConfigurationBuilder
+Logging implemented to calls to IWebDriverFactory.GetWebDriver(......) overloads
 
-Working code calling the interfaces and implementations from v2.x.x should continue to work unchanged. 
-
-Classes implementing the public interfaces however will require work to meet the new signatures and support custom sizes.</PackageReleaseNotes>
+Changes:
+This is a substantial rewrite with interfaces separated to be more modular. 
+ILocalWebDriverFactory for local WebDrivers
+IRemoteWebDriverFactory for RemoteWebDrivers
+IWebDriverFactory now defines only 2 x IWebDriverFactory.GetWebDriver(......) methods</PackageReleaseNotes>
 
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>

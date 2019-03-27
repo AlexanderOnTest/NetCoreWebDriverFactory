@@ -7,10 +7,8 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.6.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Main\AlexanderOnTest.WebDriverFactoryNunitConfig\AlexanderOnTest.WebDriverFactoryNunitConfig.csproj" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha3" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="3.0.0-alpha3" />
   </ItemGroup>
 
 </Project>

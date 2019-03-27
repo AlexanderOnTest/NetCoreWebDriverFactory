@@ -17,6 +17,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using FluentAssertions;
 using log4net;

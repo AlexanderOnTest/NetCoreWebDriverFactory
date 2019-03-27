@@ -15,55 +15,24 @@
 // </copyright>
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
+namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
 {
     [TestFixture]
-    public class StaticWebDriverFactoryTests : StaticWebDriverFactoryTestsBase
+    public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
-        private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
+        private static readonly OSPlatform ThisPlatform = OSPlatform.Linux;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
-        public StaticWebDriverFactoryTests() : base(ThisPlatform, DriverPath, GridUrl)
-        {
-        }
+        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath) { }
 
         [Test]
-        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Safari, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
-        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
-        {
-            base.LocalWebDriverFactoryWorks(browser, headless);
-        }
-
-        [Test]
-        [TestCase(PlatformType.Linux, Browser.Chrome)]
-        [TestCase(PlatformType.Linux, Browser.Firefox)]
-        [TestCase(PlatformType.Mac, Browser.Chrome)]
-        [TestCase(PlatformType.Mac, Browser.Firefox)]
-        [TestCase(PlatformType.Mac, Browser.Safari)]
-        [TestCase(PlatformType.Windows, Browser.Chrome)]
-        [TestCase(PlatformType.Windows, Browser.Edge)]
-        [TestCase(PlatformType.Windows, Browser.Firefox)]
-        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
-        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
-        {
-            base.RemoteWebDriverFactoryWorks(platformType, browser);
-        }
-
-        [Test]
+        [Category("CI")]
         [TestCase(WindowSize.Hd, 1366, 768)]
         [TestCase(WindowSize.Fhd, 1920, 1080)]
         public new void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
@@ -72,6 +41,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(WindowSize.Custom, 1366, 760)]
         [TestCase(WindowSize.Custom, 1280, 1024)]
         public new void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
@@ -80,20 +50,40 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
+        [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
         {
             base.RequestingUnsupportedWebDriverThrowsInformativeException(browser);
         }
 
         [Test]
+        [Category("CI")]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
         {
             base.RequestingUnsupportedHeadlessBrowserThrowsInformativeException(browser);
+        }
+
+        [Test]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
+        public void LocalWebDriverCallWorks(Browser browser, BrowserVisibility visibility = BrowserVisibility.OnScreen)
+        {
+            LocalWebDriverFactoryWorks(browser, visibility);
+        }
+        
+        [Test]
+        [Category("CI")]
+        [TestCase(BrowserVisibility.Headless)]
+        public void LocalHeadlessFirefoxDriverCallWorks(BrowserVisibility visibility = BrowserVisibility.OnScreen)
+        {
+            LocalWebDriverFactoryWorks(Browser.Firefox, visibility);
         }
     }
 }

@@ -16,7 +16,10 @@
 
 using System;
 using System.Reflection;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.Settings;
+using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,9 +40,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
                 ? typeof(DefaultWebDriverFactory)
                 : typeof(FakeWebDriverFactory);
 
-            services.AddTransient(typeof(IWebDriverFactory), webDriverType);
+            services.AddSingleton(typeof(IDriverOptionsFactory), typeof(DefaultDriverOptionsFactory));
+            services.AddSingleton(typeof(ILocalWebDriverFactory), typeof(DefaultLocalWebDriverFactory));
+            services.AddSingleton(typeof(IRemoteWebDriverFactory), typeof(DefaultRemoteWebDriverFactory));
+            services.AddSingleton(typeof(IWebDriverFactory), webDriverType);
 
-            services.AddTransient(typeof(IWebDriverManager), typeof(WebDriverManager));
+            services.AddSingleton(typeof(IWebDriverManager), typeof(WebDriverManager));
             
             return services.BuildServiceProvider();
         }

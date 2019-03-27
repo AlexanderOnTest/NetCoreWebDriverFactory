@@ -1,5 +1,5 @@
 // <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
 // </copyright>
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -27,15 +25,13 @@ using OpenQA.Selenium;
 namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
 {
     [TestFixture]
-    public class StaticWebDriverFactoryTests : StaticWebDriverFactoryTestsBase
+    public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
-        public StaticWebDriverFactoryTests() : base(ThisPlatform, DriverPath, GridUrl)
-        {
-        }
+        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath, GridUrl) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
@@ -43,9 +39,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(Browser.Safari, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
-            base.LocalWebDriverFactoryWorks(browser, headless);
+            base.LocalWebDriverFactoryWorks(browser, browserVisibility);
         }
 
         [Test]
@@ -72,8 +68,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         }
 
         [Test]
-        [TestCase(WindowSize.Custom, 1366, 760)]
         [TestCase(WindowSize.Custom, 1280, 1024)]
+        [TestCase(WindowSize.Custom, 1360, 768)]
         public new void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
             base.CustomSizeBrowserIsOfRequestedSize(windowSize, expectedWidth, expectedHeight);

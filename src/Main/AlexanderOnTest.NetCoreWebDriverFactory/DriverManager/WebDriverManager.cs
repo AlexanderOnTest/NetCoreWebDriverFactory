@@ -20,7 +20,7 @@ using OpenQA.Selenium;
 // The WebDriverManager was first released in v2.1.0 with this incorrect namespace.
 // I prefer this file structure, but do not wish to change the API.
 // DO NOT CORRECT THIS WITHOUT A MAJOR VERSION BUMP.
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
 {
     /// <summary>
     /// A simple implementation of a WebDriverManager
@@ -33,6 +33,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         private WebDriverManager() { }
 
         /// <summary>
+        /// Configuration based constructor for a WebDriverManager
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="configuration"></param>
+        public WebDriverManager(WebDriverFactory.IWebDriverFactory factory, IWebDriverConfiguration configuration)
+        {
+            this.webDriverConstructor = () => factory.GetWebDriver(configuration);
+        }
+        /// <summary>
         /// Parameter based constructor for a WebDriverManager
         /// </summary>
         /// <param name="factory"></param>
@@ -41,20 +50,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="isLocal"></param>
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
-        public WebDriverManager(IWebDriverFactory factory, Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
+        public WebDriverManager(WebDriverFactory.IWebDriverFactory factory, Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false)
         {
             this.webDriverConstructor = () => factory.GetWebDriver(browser, windowSize, isLocal, platformType, headless);
-        }
-
-        /// <summary>
-        /// Configuration based constructor for a WebDriverManager
-        /// </summary>
-        /// <param name="factory"></param>
-        /// <param name="configuration"></param>
-        public WebDriverManager(IWebDriverFactory factory, IWebDriverConfiguration configuration)
-        {
-            this.webDriverConstructor = () => factory.GetWebDriver(configuration);
         }
 
         /// <summary>

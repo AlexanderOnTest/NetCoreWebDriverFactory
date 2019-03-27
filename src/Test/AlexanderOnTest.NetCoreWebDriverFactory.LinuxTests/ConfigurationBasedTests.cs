@@ -26,7 +26,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
     [TestFixture]
     public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
-        private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
+        private static readonly OSPlatform ThisPlatform = OSPlatform.Linux;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 

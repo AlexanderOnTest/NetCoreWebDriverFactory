@@ -44,7 +44,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
             services.AddSingleton(typeof(ILocalWebDriverFactory), typeof(DefaultLocalWebDriverFactory));
             services.AddSingleton(typeof(IRemoteWebDriverFactory), typeof(DefaultRemoteWebDriverFactory));
             services.AddSingleton(typeof(IWebDriverFactory), webDriverType);
-
             services.AddSingleton(typeof(IWebDriverManager), typeof(WebDriverManager));
             
             return services.BuildServiceProvider();

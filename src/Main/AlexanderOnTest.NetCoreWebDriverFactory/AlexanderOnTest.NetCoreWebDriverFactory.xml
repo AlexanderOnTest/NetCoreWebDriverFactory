@@ -457,6 +457,34 @@
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer">
+            <summary>
+            Interface for a WebDriver resizing service
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer.SetWindowSize(OpenQA.Selenium.IWebDriver,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
+            <summary>
+            Set the WebDriver to the requested Browser size.
+            </summary>
+            <param name="driver"></param>
+            <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverReSizer">
+            <summary>
+            Default implementation of the IWebDriverReSizer interface
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverReSizer.SetWindowSize(OpenQA.Selenium.IWebDriver,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
+            <summary>
+            Set the WebDriver to the requested Browser size.
+            </summary>
+            <param name="driver"></param>
+            <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration">
             <summary>
             A WebDriver Configuration implementation.
@@ -639,21 +667,23 @@
             Default RemoteWebDriverFactory implementation.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,System.Uri)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,System.Uri,AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverReSizer)">
             <summary>
             Return a DriverFactory instance for use in .NET Core projects.
             Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
             </summary>
             <param name="gridUri"></param>
             <param name="driverOptionsFactory"></param>
+            <param name="webDriverReSizer"></param>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration,AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverReSizer)">
             <summary>
             Return a DriverFactory instance for use in .NET Core projects.
             Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
             </summary>
             <param name="configuration"></param>
             <param name="driverOptionsFactory"></param>
+            <param name="webDriverReSizer"></param>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.DriverOptionsFactory">
             <summary>
@@ -663,20 +693,20 @@
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GridUri">
             <inheritdoc />
         </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GetWebDriver(OpenQA.Selenium.DriverOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
+            <summary>
+            Return a RemoteWebDriver of the given browser type with default settings.
+            </summary>
+            <param name="options"></param>
+            <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
             <summary>
             Return a RemoteWebDriver instance of the given configuration.
             </summary>
             <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GetWebDriver(OpenQA.Selenium.DriverOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
-            <summary>
-            Return a RemoteWebDriver of the given windows size.
-            </summary>
-            <param name="options"></param>
-            <param name="windowSize"></param>
-            <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
@@ -899,7 +929,7 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.StaticWebDriverFactory.GetLocalWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,System.String,System.Boolean)">
             <summary>
-            Return a local webdriver of the given browser type with default settings.
+            Return a local WebDriver of the given browser type with default settings.
             Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Chrome, Firefox, Internet Explorer and Edge on Windows 10 version 1803 and earlier 
             Try using driverPath = null (default) for Safari and Edge on Windows 10 version 1809 and later
             </summary>

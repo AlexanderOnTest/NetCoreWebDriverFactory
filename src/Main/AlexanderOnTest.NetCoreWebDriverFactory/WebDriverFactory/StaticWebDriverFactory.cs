@@ -34,7 +34,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     public static class StaticWebDriverFactory
     {
         /// <summary>
-        /// Return a local webdriver of the given browser type with default settings.
+        /// Return a local WebDriver of the given browser type with default settings.
         /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Chrome, Firefox, Internet Explorer and Edge on Windows 10 version 1803 and earlier 
         /// Try using driverPath = null (default) for Safari and Edge on Windows 10 version 1809 and later
         /// </summary>

@@ -215,5 +215,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        private static void RethrowWithSuggestedPath(DriverServiceNotFoundException driverServiceNotFoundException)
+        {
+            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)' or add the driverPath to the Path", driverServiceNotFoundException);
+        }
+
+        private static void RethrowWithSuggestionOfNoPath(DriverServiceNotFoundException driverServiceNotFoundException)
+        {
+            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'null' and ensure that the driverPath is added to the environment Path", driverServiceNotFoundException);
+        }
     }
 }

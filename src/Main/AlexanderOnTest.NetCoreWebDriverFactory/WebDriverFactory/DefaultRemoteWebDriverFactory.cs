@@ -18,11 +18,13 @@ using System;
 using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
@@ -34,16 +36,20 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     {
         private static readonly ILog Logger = LogProvider.For<DefaultRemoteWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
-        
+
+        private readonly WebDriverReSizer webDriverReSizer;
+
         /// <summary>
         /// Return a DriverFactory instance for use in .NET Core projects.
         /// Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
         /// </summary>
         /// <param name="gridUri"></param>
         /// <param name="driverOptionsFactory"></param>
-        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, Uri gridUri)
+        /// <param name="webDriverReSizer"></param>
+        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, Uri gridUri, WebDriverReSizer webDriverReSizer)
         {
             DriverOptionsFactory = driverOptionsFactory;
+            this.webDriverReSizer = webDriverReSizer;
             GridUri = gridUri ?? new Uri("http://localhost:4444/wd/hub");
         }
 
@@ -53,11 +59,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="driverOptionsFactory"></param>
-        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, IWebDriverConfiguration configuration)
-            : this(driverOptionsFactory, configuration.GridUri)
+        /// <param name="webDriverReSizer"></param>
+        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, IWebDriverConfiguration configuration, WebDriverReSizer webDriverReSizer)
+            : this(driverOptionsFactory, configuration.GridUri, webDriverReSizer)
         {
         }
-
 
         /// <summary>
         /// The DriverOptionsFactory instance to use.
@@ -66,6 +72,22 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 
         /// <inheritdoc />
         public Uri GridUri { get; set; }
+        
+        /// <summary>
+        /// Return a RemoteWebDriver of the given browser type with default settings.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
+        /// <returns></returns>
+        public IWebDriver GetWebDriver(
+            DriverOptions options,
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
+        {
+            IWebDriver driver = new RemoteWebDriver(GridUri, options);
+            return webDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
+        }
 
         /// <summary>
         /// Return a RemoteWebDriver instance of the given configuration.
@@ -88,18 +110,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 configuration.Headless,
                 configuration.WindowCustomSize
             );
-        }
-
-        /// <summary>
-        /// Return a RemoteWebDriver of the given windows size.
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="windowSize"></param>
-        /// <param name="windowCustomSize"></param>
-        /// <returns></returns>
-        public virtual IWebDriver GetWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            return StaticWebDriverFactory.GetRemoteWebDriver(options, GridUri, windowSize, windowCustomSize);
         }
 
         /// <summary>

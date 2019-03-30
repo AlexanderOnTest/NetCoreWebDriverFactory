@@ -17,6 +17,7 @@
 using System;
 using System.Drawing;
 using System.Text;
+using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
@@ -26,6 +27,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
     /// </summary>
     public class WebDriverConfigurationBuilder
     {
+        private static readonly ILog Logger = LogProvider.For<WebDriverConfigurationBuilder>();
+
         private Browser browser;
         private PlatformType platformType;
         private WindowSize windowSize;
@@ -60,16 +63,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// <returns></returns>
         public WebDriverConfiguration Build()
         {
-            return new WebDriverConfiguration
-            {
-                Browser = this.browser,
-                GridUri = this.gridUri,
-                Headless = this.headless,
-                IsLocal = this.isLocal,
-                PlatformType = this.platformType,
-                WindowSize = this.windowSize,
-                WindowCustomSize = this.windowCustomSize
-            };
+            WebDriverConfiguration webDriverConfiguration = new WebDriverConfiguration(
+                this.browser, 
+                this.gridUri, 
+                this.headless, 
+                this.isLocal, 
+                this.platformType, 
+                this.windowSize, 
+                this.windowCustomSize);
+            Logger.Debug($"Configuration built: {webDriverConfiguration}");
+            return webDriverConfiguration;
         }
 
         /// <summary>

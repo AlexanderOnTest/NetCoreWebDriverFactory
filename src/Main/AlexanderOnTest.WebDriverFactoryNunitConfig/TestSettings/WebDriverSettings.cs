@@ -17,6 +17,7 @@
 using System;
 using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
@@ -71,17 +72,17 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 2. The value in an applied .runsettings file
         /// 3. Default values.
         /// </summary>
-        public static IWebDriverConfiguration WebDriverConfiguration { get; }
-            = Utils.GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") ??
-              new WebDriverConfiguration
-            {
-                Browser = Browser,
-                IsLocal = IsLocal,
-                WindowSize = WindowSize,
-                WindowCustomSize = WindowCustomSize,
-                GridUri = GridUri,
-                PlatformType = PlatformType,
-                Headless = Headless
-            };
+        public static IWebDriverConfiguration WebDriverConfiguration 
+            => GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") 
+               ?? WebDriverConfigurationBuilder.Start()
+                .WithBrowser(Browser)
+                .WithGridUri(GridUri)
+                .WithHeadless(Headless)
+                .WithIsLocal(IsLocal)
+                .WithPlatformType(PlatformType)
+                .WithWindowSize(WindowSize)
+                .WithWindowCustomSize(WindowCustomSize)
+                .Build();
     }
+
 }

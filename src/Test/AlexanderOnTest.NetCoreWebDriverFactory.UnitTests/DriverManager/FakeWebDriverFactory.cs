@@ -16,79 +16,27 @@
 
 using System;
 using System.Drawing;
-using AlexanderOnTest.NetCoreWebDriverFactory;
+using System.Reflection;
+using log4net;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Safari;
 
-namespace AlexanderonTest.NetCoreWebDriverFactory.UnitTests.DriverManager
+namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager
 {
-    class FakeWebDriverFactory : IWebDriverFactory
+    class FakeWebDriverFactory : WebDriverFactory.IWebDriverFactory
     {
-        public Uri GridUri { get; set; }
-
-        public IWebDriver GetRemoteWebDriver(Browser browser, PlatformType platformType = PlatformType.Any,
-            WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetRemoteWebDriver(IWebDriverConfiguration configuration)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetRemoteWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(IWebDriverConfiguration configuration)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
-
-        public IWebDriver GetLocalWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
-        {
-            throw new NotImplementedException();
-        }
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
         {
+            Logger.Info($"Fake WebDriver requested.");
             return new FakeWebDriver();
         }
 
         public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
         {
+            Logger.Info($"Fake WebDriver requested.");
+
             return new FakeWebDriver();
         }
 

@@ -1,5 +1,5 @@
 ﻿// <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,37 +14,34 @@
 // limitations under the License.
 // </copyright>
 
-using System;
 using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
     /// <summary>
-    /// Implementation of the IWebDriverFactory interface for .NET Core test projects to allow Edge to work on Windows 10 version 1803 and Earlier.
+    /// Implementation of the ILocalWebDriverFactory interface for .NET Core test projects to allow Edge to work on Windows 10 version 1803 and Earlier.
     /// </summary>
-    public class Windows1803WebDriverFactory : DefaultWebDriverFactory
+    public class Windows1803LocalWebDriverFactory : DefaultLocalWebDriverFactory
     {
         /// <summary>
         /// Return a WebDriverFactory for Windows 10 version 1803 and earlier
         /// </summary>
-        /// <param name="installedDriverPath"></param>
-        /// <param name="gridUri"></param>
         /// <param name="driverOptionsFactory"></param>
-        public Windows1803WebDriverFactory(string installedDriverPath, Uri gridUri = null, IDriverOptionsFactory driverOptionsFactory = null) : base(installedDriverPath, gridUri, driverOptionsFactory)
+        /// <param name="installedDriverPath"></param>
+        public Windows1803LocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, string installedDriverPath) : base(driverOptionsFactory, installedDriverPath)
         {
         }
 
         /// <summary>
         /// Return a WebDriverFactory for Windows 10 version 1803 and earlier
         /// </summary>
-        /// <param name="driverPath"></param>
-        /// <param name="configuration"></param>
         /// <param name="driverOptionsFactory"></param>
-        public Windows1803WebDriverFactory(DriverPath driverPath, IWebDriverConfiguration configuration, IDriverOptionsFactory driverOptionsFactory = null)
-            : this(driverPath.PathString, configuration.GridUri, driverOptionsFactory)
+        /// <param name="driverPath"></param>
+        public Windows1803LocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, DriverPath driverPath)
+            : this(driverOptionsFactory, driverPath.PathString)
         {
         }
 
@@ -56,12 +53,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public override IWebDriver GetLocalWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
+        public override IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
             // The only case needing to be overidden is Edge not headless
             return (browser == Browser.Edge && !headless) ?
-                GetLocalWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize, windowCustomSize) :
-                base.GetLocalWebDriver(browser, windowSize, headless, windowCustomSize);
+                GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize, windowCustomSize) :
+                base.GetWebDriver(browser, windowSize, headless, windowCustomSize);
         }
 
         /// <summary>
@@ -71,7 +68,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="windowSize"></param>
         /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public override IWebDriver GetLocalWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
+        public override IWebDriver GetWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
             return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }

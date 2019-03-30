@@ -1,5 +1,5 @@
 // <copyright>
-// Copyright 2018 Alexander Dunn
+// Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,36 +15,23 @@
 // </copyright>
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
-using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
 {
     [TestFixture]
-    public class ConfigurationBasedTests
+    public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
-        private IWebDriver Driver { get; set; }
-        private IWebDriverFactory WebDriverFactory { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
-
-        [OneTimeSetUp]
-        public void SetUp()
-        {
-            Assume.That(() => RuntimeInformation.IsOSPlatform(ThisPlatform));
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            WebDriverFactory = new DefaultWebDriverFactory(DriverPath, GridUrl, DriverOptionsFactory);
-        }
+        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath, GridUrl) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
@@ -53,14 +40,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
+        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
-            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
-                .WithBrowser(browser)
-                .WithHeadless(browserVisibility == BrowserVisibility.Headless)
-                .Build();
-            Driver = WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            base.LocalWebDriverFactoryWorks(browser, browserVisibility);
         }
 
         [Test]
@@ -73,77 +55,41 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         [TestCase(PlatformType.Windows, Browser.Edge)]
         [TestCase(PlatformType.Windows, Browser.Firefox)]
         [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
-        public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
+        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
         {
-            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
-                .WithBrowser(browser)
-                .RunRemotelyOn(GridUrl)
-                .WithPlatformType(platformType)
-                .Build();
-            Driver = WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            base.RemoteWebDriverFactoryWorks(platformType, browser);
         }
 
         [Test]
         [TestCase(WindowSize.Hd, 1366, 768)]
         [TestCase(WindowSize.Fhd, 1920, 1080)]
-        public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
+        public new void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
-            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
-                .WithBrowser(Browser.Firefox)
-                .RunHeadless()
-                .WithWindowSize(windowSize)
-                .Build();
-            Driver = WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
+            base.BrowserIsOfRequestedSize(windowSize, expectedWidth, expectedHeight);
         }
 
         [Test]
         [TestCase(WindowSize.Custom, 1280, 1024)]
         [TestCase(WindowSize.Custom, 1360, 768)]
-        public void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
+        public new void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
-            WebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
-                .WithBrowser(Browser.Firefox)
-                .RunHeadless()
-                .WithCustomSize(new Size(expectedWidth, expectedHeight))
-                .Build();
-            Driver = WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
+            base.CustomSizeBrowserIsOfRequestedSize(windowSize, expectedWidth, expectedHeight);
         }
 
         [Test]
         [TestCase(Browser.Safari)]
-        public void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
+        public new void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
         {
-            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
-                .WithBrowser(browser)
-                .Build();
-
-            void Act() => WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, ThisPlatform);
+            base.RequestingUnsupportedWebDriverThrowsInformativeException(browser);
         }
 
         [Test]
         [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
-        public void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
+        public new void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
         {
-            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
-                .WithBrowser(browser)
-                .RunHeadless()
-                .Build();
-
-            void Act() => WebDriverFactory.GetWebDriver(configuration);
-
-            Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            Driver?.Quit();
+            base.RequestingUnsupportedHeadlessBrowserThrowsInformativeException(browser);
         }
     }
 }

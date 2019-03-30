@@ -14,16 +14,12 @@
 // limitations under the License.
 // </copyright>
 
-using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
-
-namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.Settings
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
-    /// <summary>
-    /// This static class provides values to build a test configuration from a xxx.runsettings file.
-    /// Default values are returned if a setting is not set or valid.
-    /// </summary>
-    internal static class TestSettings
+    public enum SystemTestCategory
     {
-        internal static bool UseRealWebDriver { get; } = GetBoolSettingOrDefault("useRealWebDriver", false);
+        CI,
+        Local,
+        Remote,
     }
 }

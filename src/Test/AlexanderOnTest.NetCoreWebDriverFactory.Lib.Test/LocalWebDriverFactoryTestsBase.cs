@@ -16,14 +16,9 @@
 
 using System;
 using System.Drawing;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
-using log4net;
-using log4net.Config;
-using log4net.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -33,13 +28,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     [TestFixture]
     public abstract class LocalWebDriverFactoryTestsBase
     {
-        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled;
         private readonly OSPlatform thisPlatform;
+        private readonly string driverPath;
 
-        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform)
+
+        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, string driverPath)
         {
             this.thisPlatform = thisPlatform;
+            this.driverPath = driverPath;
         }
 
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }

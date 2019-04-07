@@ -20,6 +20,7 @@ using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -30,12 +31,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class ConfigurationBasedTestsBase
     {
         private readonly OSPlatform thisPlatform;
+        private readonly string driverPath;
         private readonly Uri gridUrl;
 
-        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, Uri gridUrl)
+        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, string driverPath)
         {
             this.thisPlatform = thisPlatform;
-            this.gridUrl = gridUrl;
+            this.driverPath = driverPath;
+            this.gridUrl = WebDriverSettings.GridUri;
         }
 
         private IWebDriver Driver { get; set; }

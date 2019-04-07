@@ -14,10 +14,17 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -26,25 +33,25 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     [TestFixture]
     public abstract class LocalWebDriverFactoryTestsBase
     {
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled;
         private readonly OSPlatform thisPlatform;
-        private readonly string driverPath;
 
-        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, string driverPath)
+        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = driverPath;
         }
 
-        private IWebDriver Driver { get; set; }
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
+        private IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            LocalWebDriverFactory = new DefaultLocalWebDriverFactory(DriverOptionsFactory, driverPath);
+
+            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();
         }
         
         public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)

@@ -14,10 +14,16 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
+using FluentAssertions;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using NUnit.Framework;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
@@ -26,12 +32,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled;
 
-        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
+        public LocalWebDriverFactoryTests() : base(ThisPlatform)
         {
+            ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(logRepository, new FileInfo(Path.Combine(TestContext.CurrentContext.TestDirectory, "log4net.config")));
         }
-        
+
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]

@@ -16,6 +16,7 @@
 
 using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 
@@ -31,7 +32,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// </summary>
         /// <param name="driverOptionsFactory"></param>
         /// <param name="installedDriverPath"></param>
-        public Windows1803LocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, string installedDriverPath) : base(driverOptionsFactory, installedDriverPath)
+        /// <param name="webDriverReSizer"></param>
+        public Windows1803LocalWebDriverFactory(
+            IDriverOptionsFactory driverOptionsFactory, 
+            string installedDriverPath, 
+            IWebDriverReSizer webDriverReSizer) : base(driverOptionsFactory, installedDriverPath, webDriverReSizer)
         {
         }
 
@@ -40,8 +45,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// </summary>
         /// <param name="driverOptionsFactory"></param>
         /// <param name="driverPath"></param>
-        public Windows1803LocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, DriverPath driverPath)
-            : this(driverOptionsFactory, driverPath.PathString)
+        /// <param name="webDriverReSizer"></param>
+        public Windows1803LocalWebDriverFactory(
+            IDriverOptionsFactory driverOptionsFactory, 
+            DriverPath driverPath,
+            IWebDriverReSizer webDriverReSizer) : this(driverOptionsFactory, driverPath.PathString, webDriverReSizer)
         {
         }
 
@@ -70,7 +78,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public override IWebDriver GetWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
     }
 }

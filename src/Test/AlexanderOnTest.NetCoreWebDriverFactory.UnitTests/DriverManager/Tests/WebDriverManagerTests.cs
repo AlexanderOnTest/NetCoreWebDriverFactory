@@ -47,7 +47,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             XmlConfigurator.Configure(logRepository, new FileInfo(Path.Combine(TestContext.CurrentContext.TestDirectory, "log4net.config")));
 
-            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            IServiceProvider provider = DependencyInjector.GetScannedServiceProvider();
 
             WebDriverManager = provider.GetService<IWebDriverManager>();
         }

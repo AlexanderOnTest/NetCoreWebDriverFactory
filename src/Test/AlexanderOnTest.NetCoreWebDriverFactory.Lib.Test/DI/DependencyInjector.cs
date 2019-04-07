@@ -18,28 +18,37 @@ using System;
 using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
-using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.Settings;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI
 {
-    internal static class DependencyInjector
+    public static class DependencyInjector
     {
-        public static IServiceProvider GetScannedServiceProvider()
+        public static IServiceProvider GetServiceProvider()
         {
             ServiceCollection services = new ServiceCollection();
             services.AddSingleton(typeof(IWebDriverConfiguration), WebDriverSettings.WebDriverConfiguration);
             services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
 
-            // Allow a setting to override the default FakeWebDriveFactory
-            Type webDriverFactoryType = TestSettings.UseRealWebDriver
-                ? typeof(DefaultWebDriverFactory)
-                : typeof(FakeWebDriverFactory);
-            services.AddSingleton(typeof(IWebDriverFactory), webDriverFactoryType);
+            services.AddSingleton(typeof(IDriverOptionsFactory), typeof(DefaultDriverOptionsFactory));
+            services.AddSingleton(typeof(IWebDriverReSizer), typeof(WebDriverReSizer));
+            services.AddSingleton(typeof(ILocalWebDriverFactory), typeof(DefaultLocalWebDriverFactory));
+            services.AddSingleton(typeof(IRemoteWebDriverFactory), typeof(DefaultRemoteWebDriverFactory));
+            services.AddSingleton(typeof(IWebDriverFactory), typeof(DefaultWebDriverFactory));
+            services.AddSingleton(typeof(IWebDriverManager), typeof(WebDriverManager));
+
+            return services.BuildServiceProvider();
+        }
+
+        public static IServiceProvider GetScannedServiceProvider()
+        {
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton(typeof(IWebDriverConfiguration), WebDriverSettings.WebDriverConfiguration);
+            services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
 
             // Scrutor guide -https://andrewlock.net/using-scrutor-to-automatically-register-your-services-with-the-asp-net-core-di-container/
             // Select default implementations for interfaces where there are multiples
@@ -57,27 +66,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
                 .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                 .AsMatchingInterface()
                 .WithSingletonLifetime());
-
-            return services.BuildServiceProvider();
-        }
-
-        public static IServiceProvider GetDefinedServiceProvider()
-        {
-            ServiceCollection services = new ServiceCollection();
-            services.AddSingleton(typeof(IWebDriverConfiguration), WebDriverSettings.WebDriverConfiguration);
-            services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
-
-            // Allow a setting to override the default FakeWebDriveFactory
-            Type webDriverFactoryType = TestSettings.UseRealWebDriver
-                ? typeof(DefaultWebDriverFactory)
-                : typeof(FakeWebDriverFactory);
-            services.AddSingleton(typeof(IWebDriverFactory), webDriverFactoryType);
-
-            services.AddSingleton(typeof(ILocalWebDriverFactory), typeof(DefaultLocalWebDriverFactory));
-            services.AddSingleton(typeof(IRemoteWebDriverFactory), typeof(DefaultRemoteWebDriverFactory));
-            services.AddSingleton(typeof(IDriverOptionsFactory), typeof(DefaultDriverOptionsFactory));
-            services.AddSingleton(typeof(IWebDriverReSizer), typeof(WebDriverReSizer));
-            services.AddSingleton(typeof(IWebDriverManager), typeof(WebDriverManager));
 
             return services.BuildServiceProvider();
         }

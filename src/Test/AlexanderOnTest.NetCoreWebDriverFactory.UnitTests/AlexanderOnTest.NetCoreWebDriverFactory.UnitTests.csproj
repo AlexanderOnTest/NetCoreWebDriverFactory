@@ -24,13 +24,11 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="72.0.3626.69" />
+    <PackageReference Include="Scrutor" Version="3.0.2" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="73.0.3683.68" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.24.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Main\AlexanderOnTest.WebDriverFactoryNunitConfig\AlexanderOnTest.WebDriverFactoryNunitConfig.csproj" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="3.0.0-alpha4" />
   </ItemGroup>
 
   <ItemGroup>

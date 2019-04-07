@@ -37,7 +37,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         private static readonly ILog Logger = LogProvider.For<DefaultRemoteWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
 
-        private readonly WebDriverReSizer webDriverReSizer;
+        private readonly IWebDriverReSizer webDriverReSizer;
 
         /// <summary>
         /// Return a DriverFactory instance for use in .NET Core projects.
@@ -46,7 +46,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="gridUri"></param>
         /// <param name="driverOptionsFactory"></param>
         /// <param name="webDriverReSizer"></param>
-        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, Uri gridUri, WebDriverReSizer webDriverReSizer)
+        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, Uri gridUri, IWebDriverReSizer webDriverReSizer)
         {
             DriverOptionsFactory = driverOptionsFactory;
             this.webDriverReSizer = webDriverReSizer;
@@ -60,7 +60,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="configuration"></param>
         /// <param name="driverOptionsFactory"></param>
         /// <param name="webDriverReSizer"></param>
-        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, IWebDriverConfiguration configuration, WebDriverReSizer webDriverReSizer)
+        public DefaultRemoteWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, IWebDriverConfiguration configuration, IWebDriverReSizer webDriverReSizer)
             : this(driverOptionsFactory, configuration.GridUri, webDriverReSizer)
         {
         }

@@ -17,9 +17,10 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -29,30 +30,24 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class ConfigurationBasedTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly string driverPath;
         private readonly Uri gridUrl;
 
-        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, string driverPath, Uri gridUrl)
+        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, Uri gridUrl)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = driverPath;
             this.gridUrl = gridUrl;
         }
 
         private IWebDriver Driver { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
-        private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }
-        private IRemoteWebDriverFactory RemoteWebDriverFactory { get; set; }
         private IWebDriverFactory WebDriverFactory { get; set; }
 
         [OneTimeSetUp]
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            LocalWebDriverFactory = new DefaultLocalWebDriverFactory(DriverOptionsFactory, driverPath);
-            RemoteWebDriverFactory = new DefaultRemoteWebDriverFactory(DriverOptionsFactory, gridUrl);
-            WebDriverFactory = new WebDriverFactory.DefaultWebDriverFactory(LocalWebDriverFactory, RemoteWebDriverFactory);
+
+            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
         
         public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
@@ -129,7 +124,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         [OneTimeTearDown]
         public void Cleanup()
         {
-            WebDriverFactory.Dispose();
+            WebDriverFactory?.Dispose();
         }
     }
 }

@@ -29,13 +29,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class LocalWebDriverFactoryTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly string driverPath;
+        private readonly DriverPath driverPath;
 
 
         protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, string driverPath)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = driverPath;
+            this.driverPath = new DriverPath(driverPath);
         }
 
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }

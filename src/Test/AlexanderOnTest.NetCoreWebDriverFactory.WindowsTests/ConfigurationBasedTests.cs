@@ -14,7 +14,6 @@
 // limitations under the License.
 // </copyright>
 
-using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -29,9 +28,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
-
-        public ConfigurationBasedTests() : base(ThisPlatform, GridUrl) { }
+        
+        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]

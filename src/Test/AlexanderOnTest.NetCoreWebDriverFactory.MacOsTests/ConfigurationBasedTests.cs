@@ -29,9 +29,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
-
-        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath, GridUrl) { }
+        
+        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]

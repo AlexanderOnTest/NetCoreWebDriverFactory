@@ -16,8 +16,10 @@
 
 using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -41,10 +43,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// </summary>
         /// <param name="installedDriverPath"></param>
         /// <param name="driverOptionsFactory"></param>
-        public DefaultLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, string installedDriverPath)
+        /// <param name="webDriverReSizer"></param>
+        public DefaultLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, string installedDriverPath, IWebDriverReSizer webDriverReSizer)
         {
             InstalledDriverPath = installedDriverPath;
             DriverOptionsFactory = driverOptionsFactory ?? new DefaultDriverOptionsFactory();
+            WebDriverReSizer = webDriverReSizer;
         }
 
         /// <summary>
@@ -53,8 +57,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// </summary>
         /// <param name="driverPath"></param>
         /// <param name="driverOptionsFactory"></param>
-        public DefaultLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, DriverPath driverPath)
-            : this(driverOptionsFactory, driverPath.PathString)
+        /// <param name="webDriverReSizer"></param>
+        public DefaultLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, DriverPath driverPath, IWebDriverReSizer webDriverReSizer)
+            : this(driverOptionsFactory, driverPath?.PathString, webDriverReSizer)
         {
         }
 
@@ -62,6 +67,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// The path of installed drivers.
         /// </summary>
         protected string InstalledDriverPath { get; }
+
+        /// <summary>
+        /// The IWebDriverReSizer implementation to use.
+        /// </summary>
+        protected IWebDriverReSizer WebDriverReSizer { get; }
 
         /// <summary>
         /// The DriverOptionsFactory to use.
@@ -143,7 +153,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(ChromeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -156,7 +166,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(FirefoxOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -168,7 +178,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, null, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -180,7 +190,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -192,7 +202,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(SafariOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return StaticWebDriverFactory.GetLocalWebDriver(options, null, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, null, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -214,6 +224,181 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Return a Local Chrome WebDriver instance.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="driverPath"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
+        /// <returns></returns>
+        protected IWebDriver GetLocalWebDriver(
+            ChromeOptions options,
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
+        {
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new ChromeDriver(options)
+                    : new ChromeDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestedPath(ex);
+            }
+
+            return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
+        }
+
+        /// <summary>
+        /// Return a local Firefox WebDriver instance.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="driverPath"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
+        /// <returns></returns>
+        protected IWebDriver GetLocalWebDriver(
+            FirefoxOptions options,
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
+        {
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new FirefoxDriver(options)
+                    : new FirefoxDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestedPath(ex);
+            }
+
+            return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
+        }
+
+        /// <summary>
+        /// Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
+        /// Try using driverPath = null (default) for Windows 10 version 1809 and later.
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Windows 10 version 1803 and earlier.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="driverPath"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
+        /// <returns></returns>
+        protected IWebDriver GetLocalWebDriver(
+            EdgeOptions options,
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
+        {
+            if (!RuntimeInformation.OSDescription.StartsWith("Microsoft Windows 10"))
+            {
+                throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows 10.");
+            }
+
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new EdgeDriver(options)
+                    : new EdgeDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestionOfNoPath(ex);
+            }
+
+            return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
+        }
+
+        /// <summary>
+        /// Return a local Internet Explorer WebDriver instance. (Only supported on Microsoft Windows)
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="driverPath"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
+        /// <returns></returns>
+        protected IWebDriver GetLocalWebDriver(
+                InternetExplorerOptions options,
+                string driverPath = null,
+                WindowSize windowSize = WindowSize.Hd,
+                Size windowCustomSize = new Size())
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                throw new PlatformNotSupportedException("Microsoft Internet Explorer is only available on Microsoft Windows.");
+            }
+
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new InternetExplorerDriver(options)
+                    : new InternetExplorerDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestedPath(ex);
+            }
+
+            return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
+        }
+
+        /// <summary>
+        /// Return a local Safari WebDriver instance. (Only supported on Mac Os)
+        /// Try using driverPath = null (default)
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="driverPath"></param>
+        /// <param name="windowSize"></param>
+        /// <param name="windowCustomSize"></param>
+        /// <returns></returns>
+        protected IWebDriver GetLocalWebDriver(
+            SafariOptions options,
+            string driverPath = null,
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size())
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                throw new PlatformNotSupportedException("Safari is only available on Mac Os.");
+            }
+
+            IWebDriver driver = null;
+            try
+            {
+                driver = driverPath == null
+                    ? new SafariDriver(options)
+                    : new SafariDriver(driverPath, options);
+            }
+            catch (DriverServiceNotFoundException ex)
+            {
+                RethrowWithSuggestionOfNoPath(ex);
+            }
+            return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
+        }
+
+        private void RethrowWithSuggestedPath(DriverServiceNotFoundException driverServiceNotFoundException)
+        {
+            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)' or add the driverPath to the Path", driverServiceNotFoundException);
+        }
+
+        private void RethrowWithSuggestionOfNoPath(DriverServiceNotFoundException driverServiceNotFoundException)
+        {
+            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'null' and ensure that the driverPath is added to the environment Path", driverServiceNotFoundException);
         }
     }
 }

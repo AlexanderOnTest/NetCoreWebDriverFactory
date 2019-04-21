@@ -17,7 +17,10 @@
 using System;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -35,16 +38,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             this.gridUrl = gridUrl;
         }
 
-        private IWebDriver Driver { get; set; }
         private IRemoteWebDriverFactory RemoteWebDriverFactory { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
+        private IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            RemoteWebDriverFactory = new DefaultRemoteWebDriverFactory(DriverOptionsFactory, gridUrl);
+
+            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            RemoteWebDriverFactory = provider.GetService<IRemoteWebDriverFactory>();
         }
         
         public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)

@@ -27,11 +27,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-
-        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
-        {
-        }
         
+        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
+        { }
+
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]

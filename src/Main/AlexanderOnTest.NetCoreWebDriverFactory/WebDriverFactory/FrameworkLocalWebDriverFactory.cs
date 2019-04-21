@@ -15,6 +15,7 @@
 // </copyright>
 
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
@@ -27,6 +28,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// Return a WebDriverFactory instance for use with .NET framework projects
         /// </summary>
         /// <param name="driverOptionsFactory"></param>
-        public FrameworkLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory) : base(driverOptionsFactory, (string) null) { }
+        /// <param name="webDriverReSizer"></param>
+        public FrameworkLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory, IWebDriverReSizer webDriverReSizer) 
+            : base(driverOptionsFactory, (string) null, webDriverReSizer) { }
     }
 }

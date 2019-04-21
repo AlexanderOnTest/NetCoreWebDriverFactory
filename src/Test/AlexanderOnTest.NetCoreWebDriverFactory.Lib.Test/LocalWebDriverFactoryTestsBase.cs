@@ -14,10 +14,12 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -27,24 +29,25 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class LocalWebDriverFactoryTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly string driverPath;
+        private readonly DriverPath driverPath;
+
 
         protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, string driverPath)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = driverPath;
+            this.driverPath = new DriverPath(driverPath);
         }
 
-        private IWebDriver Driver { get; set; }
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }
-        private IDriverOptionsFactory DriverOptionsFactory { get; set; }
+        private IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
-            DriverOptionsFactory = new DefaultDriverOptionsFactory();
-            LocalWebDriverFactory = new DefaultLocalWebDriverFactory(DriverOptionsFactory, driverPath);
+
+            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();
         }
         
         public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)

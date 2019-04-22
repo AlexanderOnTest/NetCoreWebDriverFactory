@@ -16,7 +16,9 @@
 
 using System;
 using System.Drawing;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
@@ -49,7 +51,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
 
-            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            IServiceProvider provider = ServiceCollectionFactory
+                .GetDefaultServiceCollection(new DriverPath(Assembly.GetExecutingAssembly()), WebDriverSettings.GridUri)
+                .BuildServiceProvider();
             WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
         

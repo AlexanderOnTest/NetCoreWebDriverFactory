@@ -62,7 +62,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// <summary>
         /// Requested Custom browser size for WindowSize.Custom
         /// </summary>
-        public static Size WindowCustomSize { get; } = new Size(
+        public static Size CustomWindowSize { get; } = new Size(
             TestContext.Parameters.Get<int>("customWidth", 0 ), 
             TestContext.Parameters.Get<int>("customHeight", 0));
 
@@ -81,7 +81,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 .WithIsLocal(IsLocal)
                 .WithPlatformType(PlatformType)
                 .WithWindowSize(WindowSize)
-                .WithWindowCustomSize(WindowCustomSize)
+                .WithWindowDefinedSize(CustomWindowSize)
                 .Build();
     }
 

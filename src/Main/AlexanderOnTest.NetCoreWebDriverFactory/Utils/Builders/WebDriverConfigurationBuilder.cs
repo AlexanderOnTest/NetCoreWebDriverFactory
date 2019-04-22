@@ -32,7 +32,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         private Browser browser;
         private PlatformType platformType;
         private WindowSize windowSize;
-        private Size windowCustomSize;
+        private Size windowDefinedSize;
         private Uri gridUri;
         private bool isLocal;
         private bool headless;
@@ -51,7 +51,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
             browser = Browser.Firefox;
             platformType = PlatformType.Windows;
             windowSize = WindowSize.Hd;
-            windowCustomSize = Size.Empty;
+            windowDefinedSize = Size.Empty;
             gridUri = new Uri("http://localhost:4444/wd/hub");
             isLocal = true;
             headless = false;
@@ -70,7 +70,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
                 this.isLocal, 
                 this.platformType, 
                 this.windowSize, 
-                this.windowCustomSize);
+                this.windowDefinedSize);
             Logger.Debug($"Configuration built: {webDriverConfiguration}");
             return webDriverConfiguration;
         }
@@ -142,24 +142,24 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         }
 
         /// <summary>
-        /// Set the required WindowCustomSize (Caution: only used for WindowSize.Custom)
+        /// Set the required WindowDefinedSize (Caution: only used for WindowSize.Custom/ WindowSize.Defined)
         /// </summary>
-        /// <param name="windowCustomSize"></param>
+        /// <param name="customWindowSize"></param>
         /// <returns></returns>
-        public WebDriverConfigurationBuilder WithWindowCustomSize(Size windowCustomSize)
+        public WebDriverConfigurationBuilder WithWindowDefinedSize(Size customWindowSize)
         {
-            this.windowCustomSize = windowCustomSize;
+            this.windowDefinedSize = customWindowSize;
             return this;
         }
 
         /// <summary>
         /// Shortcut method to request the given Custom Size
         /// </summary>
-        /// <param name="windowCustomSize"></param>
+        /// <param name="customWindowSize"></param>
         /// <returns></returns>
-        public WebDriverConfigurationBuilder WithCustomSize(Size windowCustomSize)
+        public WebDriverConfigurationBuilder WithCustomSize(Size customWindowSize)
         {
-            return this.WithWindowSize(WindowSize.Defined).WithWindowCustomSize(windowCustomSize);
+            return this.WithWindowSize(WindowSize.Defined).WithWindowDefinedSize(customWindowSize);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
                 jsonBuilder.AppendLine($"  \"WindowSize\": \"{WindowSize.Defined.ToString()}\",");
                 if (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined)
                 {
-                    jsonBuilder.AppendLine($"  \"WindowDefinedSize\": {{\"width\":{windowCustomSize.Width}, \"height\":{windowCustomSize.Height}}},");
+                    jsonBuilder.AppendLine($"  \"WindowDefinedSize\": {{\"width\":{windowDefinedSize.Width}, \"height\":{windowDefinedSize.Height}}},");
                 }
                 else
                 {

@@ -108,7 +108,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 configuration.PlatformType,
                 configuration.WindowSize,
                 configuration.Headless,
-                configuration.WindowCustomSize
+                configuration.WindowDefinedSize
             );
         }
 

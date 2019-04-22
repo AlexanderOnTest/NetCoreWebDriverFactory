@@ -159,7 +159,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// <returns></returns>
         public WebDriverConfigurationBuilder WithCustomSize(Size windowCustomSize)
         {
-            return this.WithWindowSize(WindowSize.Custom).WithWindowCustomSize(windowCustomSize);
+            return this.WithWindowSize(WindowSize.Defined).WithWindowCustomSize(windowCustomSize);
         }
 
         /// <summary>
@@ -196,10 +196,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
             jsonBuilder.AppendLine($"  \"IsLocal\": {isLocal.ToString().ToLower()},");
             jsonBuilder.AppendLine($"  \"PlatformType\": \"{platformType.ToString()}\",");
             jsonBuilder.AppendLine($"  \"Headless\": {headless.ToString().ToLower()},");
-            jsonBuilder.AppendLine($"  \"WindowSize\": \"{windowSize.ToString()}\",");
-            if (windowSize == WindowSize.Custom)
+            if (windowSize == WindowSize.Maximise || windowSize == WindowSize.Maximize || windowSize == WindowSize.Unchanged)
             {
-                jsonBuilder.AppendLine($"  \"WindowCustomSize\": {{\"width\":{windowCustomSize.Width}, \"height\":{windowCustomSize.Height}}},");
+                jsonBuilder.AppendLine($"  \"WindowSize\": \"{windowSize.ToString()}\",");
+            }
+            else
+            {
+                jsonBuilder.AppendLine($"  \"WindowSize\": \"{WindowSize.Defined.ToString()}\",");
+                if (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined)
+                {
+                    jsonBuilder.AppendLine($"  \"WindowDefinedSize\": {{\"width\":{windowCustomSize.Width}, \"height\":{windowCustomSize.Height}}},");
+                }
+                else
+                {
+                    jsonBuilder.AppendLine($"  \"WindowDefinedSize\": {{\"width\":{windowSize.Size().Width}, \"height\":{windowSize.Size().Height}}},");
+                }
             }
             jsonBuilder.AppendLine($"  \"GridUri\": \"{gridUri}\"");
             jsonBuilder.AppendLine("}");

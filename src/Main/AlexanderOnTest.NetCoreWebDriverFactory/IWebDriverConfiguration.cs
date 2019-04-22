@@ -51,9 +51,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
 
 
         /// <summary>
-        /// Custom window size to request if using WindowSize.Custom
+        /// Actual window size requested (if not Maximize/Maximise or Unchanged)
         /// </summary>
-        Size WindowCustomSize
+        Size WindowDefinedSize
         {
             get;
         }

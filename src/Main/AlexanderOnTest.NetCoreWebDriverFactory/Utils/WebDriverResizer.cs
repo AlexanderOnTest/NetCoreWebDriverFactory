@@ -34,7 +34,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils
                     driver.Manage().Window.Maximize();
                     return driver;
 
-                case WindowSize.Custom:
+                case WindowSize.Defined:
                     if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
                     {
                         driver.Manage().Window.Position = Point.Empty;

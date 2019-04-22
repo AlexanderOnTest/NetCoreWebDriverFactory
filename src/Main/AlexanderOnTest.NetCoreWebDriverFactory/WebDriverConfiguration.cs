@@ -32,9 +32,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
         private readonly string description;
 
-        [JsonConverter(typeof(SizeJsonConverter))]
-        private readonly Size windowCustomSize;
-
         /// <summary>
         /// Generate a new immutable WebDriverConfiguration instance.
         /// </summary>
@@ -44,7 +41,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <param name="isLocal"></param>
         /// <param name="platformType"></param>
         /// <param name="windowSize"></param>
-        /// <param name="windowCustomSize"></param>
+        /// <param name="windowDefinedSize"></param>
         public WebDriverConfiguration(
             Browser browser = Browser.Firefox, 
             Uri gridUri = null, 
@@ -52,20 +49,27 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             bool isLocal = true, 
             PlatformType platformType = PlatformType.Any,
             WindowSize windowSize = WindowSize.Hd,
-            Size windowCustomSize = new Size())
+            Size windowDefinedSize = new Size())
         {
             Browser = browser;
             GridUri = gridUri;
             Headless = headless;
             IsLocal = isLocal;
             PlatformType = platformType;
-            WindowSize = windowSize;
-            this.windowCustomSize = windowCustomSize;
+            WindowSize = (
+                    windowSize == WindowSize.Maximise || 
+                    windowSize == WindowSize.Maximize || 
+                    windowSize == WindowSize.Unchanged) ?
+                    windowSize : 
+                    WindowSize.Defined;
+            WindowDefinedSize = (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined) ?
+                windowDefinedSize :
+                windowSize.Size();
             description = new StringBuilder()
                 .Append($"{base.ToString()}: (")
                 .Append($" Browser: {Browser.ToString()} ")
                 .Append(Headless ? "headless" : "on screen")
-                .Append($", Size: {WindowCustomSize.Width} x {WindowCustomSize.Height}, ")
+                .Append($", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, ")
                 .Append(IsLocal ? "running locally)" : $"running remotely on {GridUri} on platform: {PlatformType}.)")
                 .ToString();
         }
@@ -92,12 +96,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         public WindowSize WindowSize { get;}
 
         /// <summary>
-        /// Custom window size to request.
+        /// Actual window size requested (if not Maximize/Maximise or Unchanged)
         /// </summary>
-        public Size WindowCustomSize
-        {
-            get =>WindowSize == WindowSize.Custom ? windowCustomSize : WindowSize.Size();
-        } 
+        [JsonConverter(typeof(SizeJsonConverter))]
+        public Size WindowDefinedSize { get; }
 
         /// <summary>
         /// The Uri of the Selenium grid to use for remote calls.

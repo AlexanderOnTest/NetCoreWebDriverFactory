@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -47,6 +48,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <summary>
         /// Customise browser size according to the windowCustomSize configuration.
         /// </summary>
+        [Obsolete("Use WindowsSize.Defined")]
         Custom,
         /// <summary>
         /// Quad HD (aka 1440p) - 2560 x 1440
@@ -55,7 +57,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <summary>
         /// Ultra HD-1 (aka 4k) - 3840 x 2160
         /// </summary>
-        Uhd
+        Uhd,
+        /// <summary>
+        /// Implemented form for all defined size browsers
+        /// </summary>
+        Defined
     }
 
     /// <summary>

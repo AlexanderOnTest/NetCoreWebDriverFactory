@@ -42,7 +42,7 @@
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
             <summary>
             Get a ServiceCollection referencing default implementations using implicit path.
-            Use for .NET Framework projects or projects where the driver executables are on the System Path.
+            Use for .NET Framework projects and projects where the driver executables are on the System Path.
             </summary>
             <param name="driverConfig"></param>
             <returns></returns>
@@ -50,7 +50,7 @@
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Uri)">
             <summary>
             Get a ServiceCollection referencing default implementations using implicit path.
-            Use for .NET Framework projects or projects where the driver executables are on the System Path.
+            Use for .NET Framework projects and projects where the driver executables are on the System Path.
             </summary>
             <param name="gridUri"></param>
             <returns></returns>
@@ -442,18 +442,18 @@
             <param name="windowSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithWindowCustomSize(System.Drawing.Size)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithWindowDefinedSize(System.Drawing.Size)">
             <summary>
-            Set the required WindowCustomSize (Caution: only used for WindowSize.Custom)
+            Set the required WindowDefinedSize (Caution: only used for WindowSize.Custom/ WindowSize.Defined)
             </summary>
-            <param name="windowCustomSize"></param>
+            <param name="customWindowSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithCustomSize(System.Drawing.Size)">
             <summary>
             Shortcut method to request the given Custom Size
             </summary>
-            <param name="windowCustomSize"></param>
+            <param name="customWindowSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.RunRemotelyOn(System.Uri)">

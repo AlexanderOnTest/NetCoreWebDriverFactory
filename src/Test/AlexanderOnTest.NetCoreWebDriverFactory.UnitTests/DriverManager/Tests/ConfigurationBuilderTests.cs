@@ -23,6 +23,7 @@ using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
 {
+    [Category("CI")]
     public class ConfigurationBuilderTests
     {
         [TestCase(Browser.Safari, WindowSize.Maximise, 1280, 1024, false, false, "http://localhost:4444/wd/hub", PlatformType.Mac)]
@@ -45,7 +46,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
                 .WithBrowser(browser)
                 .WithHeadless(headless)
                 .WithWindowSize(windowSize)
-                .WithWindowCustomSize(new Size(width, height))
+                .WithWindowDefinedSize(new Size(width, height))
                 .WithIsLocal(isLocal)
                 .WithGridUri(new Uri(gridUri))
                 .WithPlatformType(platformType);

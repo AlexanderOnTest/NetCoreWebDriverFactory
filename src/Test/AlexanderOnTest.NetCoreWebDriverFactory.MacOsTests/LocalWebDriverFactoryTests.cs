@@ -52,8 +52,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         }
 
         [Test]
-        [TestCase(WindowSize.Custom, 1366, 760)]
-        [TestCase(WindowSize.Custom, 1280, 1024)]
+        [TestCase(WindowSize.Defined, 1366, 760)]
+        [TestCase(WindowSize.Defined, 1280, 1024)]
         public new void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
             base.CustomSizeBrowserIsOfRequestedSize(windowSize, expectedWidth, expectedHeight);

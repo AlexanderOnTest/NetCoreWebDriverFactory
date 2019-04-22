@@ -1,7 +1,7 @@
 language: csharp
 solution: NetCoreWebDriverFactory.sln
 mono: none
-dotnet: 2.1
+dotnet: 2.2
 addons:
   firefox: latest
   sonarcloud:

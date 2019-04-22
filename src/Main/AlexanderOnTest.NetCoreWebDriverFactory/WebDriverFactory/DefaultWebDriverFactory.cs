@@ -70,7 +70,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 .Append($"Browser: {browser.ToString()}")
                 .Append(headless ? "headless" : "on screen")
                 .Append($"WindowSize enum: {windowSize.ToString()}, ")
-                .Append($"{(windowSize == WindowSize.Custom ? $"Size: {windowCustomSize.Width} x {windowCustomSize.Height}, " : string.Empty)}")
+                .Append($"{((windowSize == WindowSize.Custom || windowSize == WindowSize.Defined) ? $"Size: {windowCustomSize.Width} x {windowCustomSize.Height}, " : string.Empty)}")
                 .Append(isLocal ? "running locally)" : $"running remotely on {RemoteWebDriverFactory.GridUri} on platform: {platformType}.)")
                 .ToString();
 

@@ -17,13 +17,17 @@
 using System;
 using System.IO;
 using System.Reflection;
+using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
+using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
+using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using FluentAssertions;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -47,7 +51,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             XmlConfigurator.Configure(logRepository, new FileInfo(Path.Combine(TestContext.CurrentContext.TestDirectory, "log4net.config")));
 
-            IServiceProvider provider = DependencyInjector.GetScannedServiceProvider();
+            // Use the in-built IoC functionality
+            IServiceCollection services = ServiceCollectionFactory.GetDefaultServiceCollection((IWebDriverConfiguration) null);
+            services.Replace(ServiceDescriptor.Singleton<IWebDriverFactory, FakeWebDriverFactory>());
+            IServiceProvider provider = services.BuildServiceProvider();
+
+            // Or use Scrutor
+            //IServiceProvider provider = DependencyInjector.GetScannedServiceProvider();
+
+            // or use the original IoC container code
+            //IServiceProvider provider = DependencyInjector.GetDefinedServiceProvider();
 
             WebDriverManager = provider.GetService<IWebDriverManager>();
         }

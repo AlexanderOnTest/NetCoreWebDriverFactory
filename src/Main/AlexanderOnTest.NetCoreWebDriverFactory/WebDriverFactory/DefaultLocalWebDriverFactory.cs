@@ -139,7 +139,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 configuration.Browser,
                 configuration.WindowSize,
                 configuration.Headless,
-                configuration.WindowCustomSize
+                configuration.WindowDefinedSize
             );
         }
 

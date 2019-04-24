@@ -17,7 +17,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test.DI;
+using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
@@ -31,13 +31,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class ConfigurationBasedTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly string driverPath;
+        private readonly DriverPath driverPath;
         private readonly Uri gridUrl;
 
         protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, string driverPath)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = driverPath;
+            this.driverPath = new DriverPath(driverPath);
             this.gridUrl = WebDriverSettings.GridUri;
         }
 
@@ -49,7 +49,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
 
-            IServiceProvider provider = DependencyInjector.GetServiceProvider();
+            IServiceProvider provider = ServiceCollectionFactory
+                .GetDefaultServiceCollection(driverPath, gridUrl)
+                .BuildServiceProvider();
             WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
         

@@ -16,11 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="Scrutor" Version="3.0.2" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="3.0.0-alpha4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DI\" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="3.0.0-alpha5" />
   </ItemGroup>
 
   <ItemGroup>

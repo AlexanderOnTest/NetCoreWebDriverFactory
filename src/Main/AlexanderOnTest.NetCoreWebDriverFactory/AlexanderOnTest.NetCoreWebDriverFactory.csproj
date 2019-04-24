@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0-alpha4</Version>
+    <Version>3.0.0-alpha5</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>

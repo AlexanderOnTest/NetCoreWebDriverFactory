@@ -15,11 +15,9 @@
 // </copyright>
 
 using System;
+using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using OpenQA.Selenium;
 
-// The WebDriverManager was first released in v2.1.0 with this incorrect namespace.
-// I prefer this file structure, but do not wish to change the API.
-// DO NOT CORRECT THIS WITHOUT A MAJOR VERSION BUMP.
 namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
 {
     /// <summary>
@@ -29,6 +27,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
     {
         private IWebDriver driver;
         private readonly Func<IWebDriver> webDriverConstructor;
+        private readonly IWebDriverFactory factory;
+        private readonly IWebDriverConfiguration driverConfig;
 
         private WebDriverManager() { }
 
@@ -37,10 +37,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         /// </summary>
         /// <param name="factory"></param>
         /// <param name="configuration"></param>
-        public WebDriverManager(WebDriverFactory.IWebDriverFactory factory, IWebDriverConfiguration configuration)
+        public WebDriverManager(IWebDriverFactory factory, IWebDriverConfiguration configuration)
         {
-            this.webDriverConstructor = () => factory.GetWebDriver(configuration);
+            this.factory = factory;
+            this.driverConfig = configuration;
         }
+
         /// <summary>
         /// Parameter based constructor for a WebDriverManager
         /// </summary>
@@ -56,11 +58,26 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
             this.webDriverConstructor = () => factory.GetWebDriver(browser, windowSize, isLocal, platformType, headless);
         }
 
+        private Func<IWebDriver> WebDriverConstructor
+        {
+            get
+            {
+                if (driverConfig == null)
+                {
+                    return this.webDriverConstructor;
+                }
+                else
+                {
+                    return () => this.factory.GetWebDriver(driverConfig);
+                }
+            }
+        }
+
         /// <summary>
         /// The singleton WebDriver instance.
         /// </summary>
         public IWebDriver Driver {
-            get => driver ?? (driver = webDriverConstructor());
+            get => driver ?? (driver = this.WebDriverConstructor());
             private set => driver = value;
         }
         
@@ -90,7 +107,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         /// <returns></returns>
         public virtual IWebDriver GetAdditionalWebDriver()
         {
-            return webDriverConstructor();
+            return this.WebDriverConstructor();
         }
 
         /// <summary>

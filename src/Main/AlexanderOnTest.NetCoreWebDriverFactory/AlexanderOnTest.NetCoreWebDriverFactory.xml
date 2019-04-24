@@ -34,46 +34,50 @@
              Apple Safari
             </summary>
         </member>
-        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.IoCContainerFactory">
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory">
             <summary>
-            Convenient DI Containers
+            Convenient DI Container factory
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.IoCContainerFactory.GetDefaultProviderForLocalTesting(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
             <summary>
-            Get an IServiceProvider containing all Default implementations. 
+            Get a ServiceCollection referencing default implementations using implicit path.
+            Use for .NET Framework projects and projects where the driver executables are on the System Path.
             </summary>
-            <param name="path"></param>
+            <param name="driverConfig"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.IoCContainerFactory.GetDefaultProviderForGridTesting(System.Uri)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Uri)">
             <summary>
-            Get an IServiceProvider containing all Default implementations. 
+            Get a ServiceCollection referencing default implementations using implicit path.
+            Use for .NET Framework projects and projects where the driver executables are on the System Path.
             </summary>
             <param name="gridUri"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.IoCContainerFactory.GetDefaultProviderForGridTesting(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath)">
             <summary>
-            Get an IServiceProvider containing all Default implementations. 
+            Get a ServiceCollection referencing default implementations with a defined driver path.
+            Use for .NET Core projects with driver executables from nuget packages.
             </summary>
-            <param name="webDriverConfiguration"></param>
+            <param name="driverPath"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.IoCContainerFactory.GetDefaultProviderForLocalAndGridTesting(System.Uri,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,System.Uri)">
             <summary>
-            Get an IServiceProvider containing all Default implementations. 
+            Get a ServiceCollection referencing default implementations with a defined driver path.
+            Use for .NET Core projects with driver executables from nuget packages.
             </summary>
+            <param name="driverPath"></param>
             <param name="gridUri"></param>
-            <param name="path"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.IoCContainerFactory.GetDefaultProviderForLocalAndGridTesting(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
             <summary>
-            Get an IServiceProvider containing all Default implementations. 
+            Get a ServiceCollection referencing all Default implementations. 
             </summary>
-            <param name="webDriverConfiguration"></param>
-            <param name="path"></param>
+            <param name="driverPath"></param>
+            <param name="driverConfig"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.IWebDriverManager">
@@ -359,9 +363,9 @@
             Defined WindowSize to request.
             </summary>
         </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowCustomSize">
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowDefinedSize">
             <summary>
-            Custom window size to request if using WindowSize.Custom
+            Actual window size requested (if not Maximize/Maximise or Unchanged)
             </summary>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.GridUri">
@@ -438,18 +442,18 @@
             <param name="windowSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithWindowCustomSize(System.Drawing.Size)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithWindowDefinedSize(System.Drawing.Size)">
             <summary>
-            Set the required WindowCustomSize (Caution: only used for WindowSize.Custom)
+            Set the required WindowDefinedSize (Caution: only used for WindowSize.Custom/ WindowSize.Defined)
             </summary>
-            <param name="windowCustomSize"></param>
+            <param name="customWindowSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithCustomSize(System.Drawing.Size)">
             <summary>
             Shortcut method to request the given Custom Size
             </summary>
-            <param name="windowCustomSize"></param>
+            <param name="customWindowSize"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.RunRemotelyOn(System.Uri)">
@@ -542,7 +546,7 @@
             <param name="isLocal"></param>
             <param name="platformType"></param>
             <param name="windowSize"></param>
-            <param name="windowCustomSize"></param>
+            <param name="windowDefinedSize"></param>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.Browser">
             <summary>
@@ -559,9 +563,9 @@
             WindowSize to request
             </summary>
         </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowCustomSize">
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowDefinedSize">
             <summary>
-            Custom window size to request.
+            Actual window size requested (if not Maximize/Maximise or Unchanged)
             </summary>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.GridUri">
@@ -1111,6 +1115,11 @@
         <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Uhd">
             <summary>
             Ultra HD-1 (aka 4k) - 3840 x 2160
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.WindowSize.Defined">
+            <summary>
+            Implemented form for all defined size browsers
             </summary>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WindowSizeExtension">

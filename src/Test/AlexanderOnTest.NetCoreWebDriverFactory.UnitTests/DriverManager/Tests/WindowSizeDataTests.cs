@@ -28,6 +28,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
         [TestCase(WindowSize.Maximize, 0, 0)]
         [TestCase(WindowSize.Unchanged, 0, 0)]
         [TestCase(WindowSize.Custom, 0, 0)]
+        [TestCase(WindowSize.Defined, 0, 0)]
         [TestCase(WindowSize.Hd, 1366, 768)]
         [TestCase(WindowSize.Fhd, 1920, 1080)]
         [TestCase(WindowSize.Qhd, 2560, 1440)]

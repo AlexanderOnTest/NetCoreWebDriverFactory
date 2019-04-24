@@ -55,7 +55,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <summary>
         /// Ultra HD-1 (aka 4k) - 3840 x 2160
         /// </summary>
-        Uhd
+        Uhd,
+        /// <summary>
+        /// Implemented form for all defined size browsers
+        /// </summary>
+        Defined
     }
 
     /// <summary>

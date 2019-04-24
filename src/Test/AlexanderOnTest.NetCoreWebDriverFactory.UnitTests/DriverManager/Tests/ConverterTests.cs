@@ -55,8 +55,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             using (new AssertionScope())
             {
                 actualJson.Should().Contain("\"PlatformType\":1");
-                actualJson.Should().Contain("\"WindowSize\":5");
-                actualJson.Should().Contain($"\"WindowCustomSize\":{{\"width\":{width},\"height\":{height}}}");
+                actualJson.Should().Contain("\"WindowSize\":8");
+                actualJson.Should().Contain($"\"WindowDefinedSize\":{{\"width\":{width},\"height\":{height}}}");
                 actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444/wd/hub\"");
             }
         }

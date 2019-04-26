@@ -47,7 +47,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
 
             IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(driverPath)
+                .GetDefaultServiceCollection(true)
                 .BuildServiceProvider();
             LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();
         }
@@ -87,6 +87,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 
             void Act() => LocalWebDriverFactory.GetWebDriver(browser, WindowSize.Hd, true);
         }
+
+
 
         [TearDown]
         public void Teardown()

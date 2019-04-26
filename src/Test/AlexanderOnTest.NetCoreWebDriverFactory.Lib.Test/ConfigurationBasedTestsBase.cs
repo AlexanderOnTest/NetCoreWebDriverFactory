@@ -50,11 +50,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
 
             IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(driverPath, gridUrl)
+                .GetDefaultServiceCollection(true, gridUrl)
                 .BuildServiceProvider();
             WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
-        
+
         public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()

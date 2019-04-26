@@ -39,6 +39,13 @@
             Convenient DI Container factory
             </summary>
         </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection">
+            <summary>
+            Get a ServiceCollection referencing default implementations using implicit path.
+            Use for .NET Framework projects and projects where the driver executables are on the System Path.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
             <summary>
             Get a ServiceCollection referencing default implementations using implicit path.
@@ -53,6 +60,32 @@
             Use for .NET Framework projects and projects where the driver executables are on the System Path.
             </summary>
             <param name="gridUri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Boolean)">
+            <summary>
+            Experimental - Get a ServiceCollection referencing default implementations.
+            Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+            </summary>
+            <param name="useDefaultDotNetCoreDriverPath"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Boolean,System.Uri)">
+            <summary>
+            Experimental - Get a ServiceCollection referencing default implementations.
+            Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+            </summary>
+            <param name="useDefaultDotNetCoreDriverPath"></param>
+            <param name="gridUri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Boolean,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+            <summary>
+            Experimental - Get a ServiceCollection referencing default implementations.
+            Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+            </summary>
+            <param name="useDefaultDotNetCoreDriverPath"></param>
+            <param name="driverConfig"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath)">
@@ -341,6 +374,11 @@
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DriverPath.PathString">
             <summary>
             Return the pathString for locating local WebDriver executables.
+            </summary>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.ExperimentalAttribute">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration">

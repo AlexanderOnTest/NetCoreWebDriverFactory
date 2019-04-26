@@ -17,7 +17,10 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 

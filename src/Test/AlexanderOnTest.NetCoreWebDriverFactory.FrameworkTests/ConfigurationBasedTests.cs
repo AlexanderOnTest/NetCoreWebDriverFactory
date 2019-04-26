@@ -17,7 +17,10 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -30,6 +33,23 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         
         public ConfigurationBasedTests() : base(ThisPlatform, DriverPath) { }
+
+
+
+        [Test]
+        public void ReflectionPathIsCorrect()
+        {
+
+            var standardPath = ServiceCollectionFactory
+                .GetDefaultServiceCollection(new DriverPath(DriverPath))
+                .BuildServiceProvider().GetService<DriverPath>();
+
+            var reflectionPath = ServiceCollectionFactory
+                .GetDefaultServiceCollection(true)
+                .BuildServiceProvider().GetService<DriverPath>();
+
+            standardPath.Should().BeEquivalentTo(reflectionPath);
+        }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]

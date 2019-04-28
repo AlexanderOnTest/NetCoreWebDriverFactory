@@ -14,13 +14,9 @@
 // limitations under the License.
 // </copyright>
 
-using System.IO;
-using System.Reflection;
+using System;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
-using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -30,26 +26,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
     public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        
-        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath) { }
+        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
 
-
-
-        [Test]
-        public void ReflectionPathIsCorrect()
-        {
-
-            var standardPath = ServiceCollectionFactory
-                .GetDefaultServiceCollection(new DriverPath(DriverPath))
-                .BuildServiceProvider().GetService<DriverPath>();
-
-            var reflectionPath = ServiceCollectionFactory
-                .GetDefaultServiceCollection(true)
-                .BuildServiceProvider().GetService<DriverPath>();
-
-            standardPath.Should().BeEquivalentTo(reflectionPath);
-        }
+        public ConfigurationBasedTests() : base(ThisPlatform, GridUrl, true) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]

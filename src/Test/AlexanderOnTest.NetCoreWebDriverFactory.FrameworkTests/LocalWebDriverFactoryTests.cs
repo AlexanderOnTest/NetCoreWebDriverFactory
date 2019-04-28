@@ -14,8 +14,6 @@
 // limitations under the License.
 // </copyright>
 
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
@@ -26,9 +24,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
     public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         
-        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
+        public LocalWebDriverFactoryTests() : base(ThisPlatform, true)
         { }
 
         [Test]

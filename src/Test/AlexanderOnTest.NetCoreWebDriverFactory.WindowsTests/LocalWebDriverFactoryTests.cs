@@ -26,9 +26,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
         
-        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
+        public LocalWebDriverFactoryTests() : base(ThisPlatform)
         { }
 
         [Test]

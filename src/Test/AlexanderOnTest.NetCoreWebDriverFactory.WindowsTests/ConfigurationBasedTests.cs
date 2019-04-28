@@ -14,13 +14,10 @@
 // limitations under the License.
 // </copyright>
 
-using System.IO;
-using System.Reflection;
+using System;
 using System.Runtime.InteropServices;
-using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
-using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -30,9 +27,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        
-        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath) { }
+        private static readonly Uri GridUrl = WebDriverSettings.GridUri;
+
+        public ConfigurationBasedTests() : base(ThisPlatform, GridUrl) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]

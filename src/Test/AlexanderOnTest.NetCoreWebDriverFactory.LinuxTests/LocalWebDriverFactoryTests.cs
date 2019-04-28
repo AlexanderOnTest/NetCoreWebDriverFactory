@@ -26,9 +26,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
     public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Linux;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
 
-        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath) { }
+        public LocalWebDriverFactoryTests() : base(ThisPlatform) { }
 
         [Test]
         [Category("CI")]

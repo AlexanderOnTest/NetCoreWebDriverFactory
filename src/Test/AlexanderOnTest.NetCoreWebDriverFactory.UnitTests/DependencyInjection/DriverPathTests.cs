@@ -51,7 +51,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         {
             DriverPath driverPathFromReferencedProject = ServiceCollectionFactory
                 .GetDefaultServiceCollection(true)
-                .BuildServiceProvider().GetService<DriverPath>();
+                .BuildServiceProvider()
+                .GetService<DriverPath>();
 
             driverPathFromReferencedProject.Should().BeEquivalentTo(ExpectedDriverPath);
         }
@@ -61,7 +62,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         {
             DriverPath driverPathReturned = ServiceCollectionFactory
                 .GetDefaultServiceCollection(ExpectedDriverPath)
-                .BuildServiceProvider().GetService<DriverPath>();
+                .BuildServiceProvider()
+                .GetService<DriverPath>();
 
             driverPathReturned.Should().BeEquivalentTo(ExpectedDriverPath);
         }

@@ -19,6 +19,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using NUnit.Framework;
 using OpenQA.Selenium;
 namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
@@ -27,9 +28,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
     public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Linux;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+        private static readonly Uri GridUrl = WebDriverSettings.GridUri;
 
-        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath)
+        public ConfigurationBasedTests() : base(ThisPlatform, GridUrl)
         {
         }
 

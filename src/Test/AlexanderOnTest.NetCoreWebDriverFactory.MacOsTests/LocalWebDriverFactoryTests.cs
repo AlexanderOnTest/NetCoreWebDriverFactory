@@ -28,7 +28,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
         private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
 
-        public LocalWebDriverFactoryTests() : base(ThisPlatform, DriverPath)
+        public LocalWebDriverFactoryTests() : base(ThisPlatform)
         {
         }
 

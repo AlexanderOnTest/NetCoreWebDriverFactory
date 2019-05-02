@@ -51,10 +51,20 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
+            
+            IServiceCollection serviceCollection;
+            if (useDotNetFramework)
+            {
+                serviceCollection = ServiceCollectionFactory
+                    .GetDefaultServiceCollection();
+            }
+            else
+            {
+                serviceCollection = ServiceCollectionFactory
+                    .GetDefaultServiceCollection(true);
+            }
+            IServiceProvider provider = serviceCollection.BuildServiceProvider();
 
-            IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(true, gridUrl)
-                .BuildServiceProvider();
             WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
 

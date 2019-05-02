@@ -56,12 +56,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             if (useDotNetFramework)
             {
                 serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection();
+                    .GetDefaultServiceCollection(gridUrl);
             }
             else
             {
                 serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection(true);
+                    .GetDefaultServiceCollection(true, gridUrl);
             }
             IServiceProvider provider = serviceCollection.BuildServiceProvider();
 

@@ -1,4 +1,4 @@
-﻿// <copyright>
+// <copyright>
 // Copyright 2019 Alexander Dunn
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,12 +21,12 @@ using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
+namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
 {
     [TestFixture]
     public class RemoteWebDriverFactoryTests : RemoteWebDriverFactoryTestsBase
     {
-        private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
+        private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
         private static readonly Uri GridUrl = WebDriverSettings.GridUri;
 
         public RemoteWebDriverFactoryTests() : base(ThisPlatform, GridUrl) { }

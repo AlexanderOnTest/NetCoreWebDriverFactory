@@ -47,6 +47,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             IServiceProvider provider = ServiceCollectionFactory
                 .GetDefaultServiceCollection(gridUrl)
                 .BuildServiceProvider();
+
             RemoteWebDriverFactory = provider.GetService<IRemoteWebDriverFactory>();
         }
         

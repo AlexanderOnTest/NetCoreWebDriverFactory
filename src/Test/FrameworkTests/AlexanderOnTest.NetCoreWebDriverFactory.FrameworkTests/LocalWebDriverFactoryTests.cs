@@ -14,33 +14,30 @@
 // limitations under the License.
 // </copyright>
 
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
+namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
 {
     [TestFixture]
     public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
-        private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-
-        public LocalWebDriverFactoryTests() : base(ThisPlatform)
-        {
-        }
+        private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
+        
+        public LocalWebDriverFactoryTests() : base(ThisPlatform, true)
+        { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Safari, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
-            base.LocalWebDriverFactoryWorks(browser, headless);
+            base.LocalWebDriverFactoryWorks(browser, browserVisibility);
         }
 
         [Test]
@@ -60,8 +57,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         }
 
         [Test]
-        [TestCase(Browser.Edge)]
-        [TestCase(Browser.InternetExplorer)]
+        [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
         {
             base.RequestingUnsupportedWebDriverThrowsInformativeException(browser);

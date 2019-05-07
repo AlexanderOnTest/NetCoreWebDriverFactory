@@ -34,6 +34,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
     {
         private static readonly DriverPath DriverPath = new DriverPath(Assembly.GetExecutingAssembly());
         private static readonly Uri GridUri = new Uri("http://192.168.0.200:4444/wd/hub");
+
         private static readonly IWebDriverConfiguration TestConfiguration = WebDriverConfigurationBuilder
             .Start()
             .WithBrowser(Browser.Firefox)
@@ -42,6 +43,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             .RunRemotelyOn(GridUri)
             .WithPlatformType(PlatformType.Linux)
             .Build();
+
         private static readonly IWebDriverConfiguration DefaultConfigurationWithGridUri = WebDriverConfigurationBuilder
             .Start()
             .WithGridUri(GridUri)
@@ -113,7 +115,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
                 .BuildServiceProvider();
 
             IWebDriverFactory webDriverFactory = provider.GetService<IWebDriverFactory>();
-            DefaultWebDriverFactory factory = (DefaultWebDriverFactory)webDriverFactory;
+            DefaultWebDriverFactory factory = (DefaultWebDriverFactory) webDriverFactory;
 
             using (new AssertionScope())
             {
@@ -130,7 +132,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
                 .BuildServiceProvider();
 
             IWebDriverFactory webDriverFactory = provider.GetService<IWebDriverFactory>();
-            DefaultWebDriverFactory factory = (DefaultWebDriverFactory)webDriverFactory;
+            DefaultWebDriverFactory factory = (DefaultWebDriverFactory) webDriverFactory;
 
             using (new AssertionScope())
             {
@@ -153,10 +155,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
                 FieldInfo storedDriverConfigField = webDriverManager
                     .GetType()
                     .GetField("driverConfig", BindingFlags.NonPublic | BindingFlags.Instance);
-                IWebDriverConfiguration storedDriverConfig = (IWebDriverConfiguration)storedDriverConfigField.GetValue(webDriverManager);
+                IWebDriverConfiguration storedDriverConfig =
+                    (IWebDriverConfiguration) storedDriverConfigField.GetValue(webDriverManager);
                 storedDriverConfig.Should().BeEquivalentTo(TestConfiguration);
             }
         }
+
         [Test]
         public void ServiceCollectionProvidesCorrectlyConfiguredIWebDriverManagerfromUri()
         {
@@ -171,16 +175,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
                 FieldInfo storedDriverConfigField = webDriverManager
                     .GetType()
                     .GetField("driverConfig", BindingFlags.NonPublic | BindingFlags.Instance);
-                IWebDriverConfiguration storedDriverConfig = (IWebDriverConfiguration)storedDriverConfigField.GetValue(webDriverManager);
+                IWebDriverConfiguration storedDriverConfig =
+                    (IWebDriverConfiguration) storedDriverConfigField.GetValue(webDriverManager);
                 storedDriverConfig.Should().BeEquivalentTo(DefaultConfigurationWithGridUri);
             }
         }
     }
 
+
     public enum PathDefinition
     {
         Defined,
-        Implicit
+        Implicit,
+        NetCoreNugetPath
     }
 
     public enum GridUriDefinition

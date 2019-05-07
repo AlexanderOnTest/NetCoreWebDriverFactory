@@ -15,10 +15,9 @@
 // </copyright>
 
 using System;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -28,9 +27,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
     public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-        
-        public ConfigurationBasedTests() : base(ThisPlatform, DriverPath) { }
+        private static readonly Uri GridUrl = WebDriverSettings.GridUri;
+
+        public ConfigurationBasedTests() : base(ThisPlatform, GridUrl) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]

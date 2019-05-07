@@ -15,6 +15,8 @@
 // </copyright>
 
 using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
@@ -29,6 +31,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
     /// </summary>
     public static class ServiceCollectionFactory
     {
+        /// <summary>
+        /// Get a ServiceCollection referencing default implementations using implicit path.
+        /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
+        /// </summary>
+        /// <returns></returns>
+        public static IServiceCollection GetDefaultServiceCollection()
+        {
+            return GetDefaultServiceCollection(null, (IWebDriverConfiguration) null);
+        }
+
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
         /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
@@ -51,6 +63,58 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
             Uri gridUri)
         {
             return GetDefaultServiceCollection(null, GetDefaultWebDriverConfigurationFromUri(gridUri));
+        }
+
+        /// <summary>
+        /// Experimental - Get a ServiceCollection referencing default implementations.
+        /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+        /// </summary>
+        /// <param name="useDefaultDotNetCoreDriverPath"> </param>
+        /// <returns></returns>
+        [Experimental]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static IServiceCollection GetDefaultServiceCollection(
+            bool useDefaultDotNetCoreDriverPath)
+        {
+            return useDefaultDotNetCoreDriverPath? 
+                GetDefaultServiceCollection(new DriverPath(Assembly.GetCallingAssembly()), (IWebDriverConfiguration) null) :
+                GetDefaultServiceCollection(null, (IWebDriverConfiguration) null);
+        }
+
+        /// <summary>
+        /// Experimental - Get a ServiceCollection referencing default implementations.
+        /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+        /// </summary>
+        /// <param name="useDefaultDotNetCoreDriverPath"></param>
+        /// <param name="gridUri"></param>
+        /// <returns></returns>
+        [Experimental]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static IServiceCollection GetDefaultServiceCollection(
+            bool useDefaultDotNetCoreDriverPath,
+            Uri gridUri)
+        {
+            return useDefaultDotNetCoreDriverPath ? 
+                GetDefaultServiceCollection(new DriverPath(Assembly.GetCallingAssembly()), GetDefaultWebDriverConfigurationFromUri(gridUri)) :
+                GetDefaultServiceCollection(null, GetDefaultWebDriverConfigurationFromUri(gridUri));
+        }
+
+        /// <summary>
+        /// Experimental - Get a ServiceCollection referencing default implementations.
+        /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+        /// </summary>
+        /// <param name="useDefaultDotNetCoreDriverPath"></param>
+        /// <param name="driverConfig"></param>
+        /// <returns></returns>
+        [Experimental]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static IServiceCollection GetDefaultServiceCollection(
+            bool useDefaultDotNetCoreDriverPath,
+            IWebDriverConfiguration driverConfig)
+        {
+            return useDefaultDotNetCoreDriverPath ? 
+                GetDefaultServiceCollection(new DriverPath(Assembly.GetCallingAssembly()), driverConfig) :
+                GetDefaultServiceCollection(null, driverConfig);
         }
 
         /// <summary>

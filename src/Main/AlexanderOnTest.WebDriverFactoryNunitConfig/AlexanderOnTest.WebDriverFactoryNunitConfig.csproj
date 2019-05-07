@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0-alpha5</Version>
+    <Version>3.0.0-alpha6</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -32,7 +32,7 @@ This has been a substantial reworking and most calls from v2.x will require modi
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha5" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha6" />
   </ItemGroup>
 
 </Project>

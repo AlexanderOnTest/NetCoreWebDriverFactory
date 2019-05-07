@@ -52,7 +52,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         /// <param name="isLocal"></param>
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
-        public WebDriverManager(WebDriverFactory.IWebDriverFactory factory, Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
+        public WebDriverManager(IWebDriverFactory factory, Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false)
         {
             this.webDriverConstructor = () => factory.GetWebDriver(browser, windowSize, isLocal, platformType, headless);

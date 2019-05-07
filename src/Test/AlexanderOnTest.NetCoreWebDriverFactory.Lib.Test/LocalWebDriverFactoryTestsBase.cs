@@ -29,13 +29,17 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class LocalWebDriverFactoryTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly DriverPath driverPath;
+        private readonly bool useDotNetFramework;
 
 
-        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, string driverPath)
+        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, bool useDotNetFramework = false)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = new DriverPath(driverPath);
+            if (thisPlatform != OSPlatform.Windows && useDotNetFramework)
+            {
+                throw new PlatformNotSupportedException(".NET Framework is only available on Microsoft Windows platforms.");
+            }
+            this.useDotNetFramework = useDotNetFramework;
         }
 
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }
@@ -46,9 +50,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
 
-            IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(driverPath)
-                .BuildServiceProvider();
+            IServiceCollection serviceCollection;
+            if (useDotNetFramework)
+            {
+                serviceCollection = ServiceCollectionFactory
+                    .GetDefaultServiceCollection();
+            }
+            else
+            {
+                serviceCollection = ServiceCollectionFactory
+                    .GetDefaultServiceCollection(true);
+            }
+            IServiceProvider provider = serviceCollection.BuildServiceProvider();
             LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();
         }
         
@@ -87,6 +100,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 
             void Act() => LocalWebDriverFactory.GetWebDriver(browser, WindowSize.Hd, true);
         }
+
+
 
         [TearDown]
         public void Teardown()

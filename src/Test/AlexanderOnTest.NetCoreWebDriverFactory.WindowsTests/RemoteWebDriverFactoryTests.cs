@@ -17,6 +17,7 @@
 using System;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -26,7 +27,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
     public class RemoteWebDriverFactoryTests : RemoteWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
-        private static readonly Uri GridUrl = new Uri("http://192.168.0.200:4444/wd/hub");
+        private static readonly Uri GridUrl = WebDriverSettings.GridUri;
 
         public RemoteWebDriverFactoryTests() : base(ThisPlatform, GridUrl) { }
 

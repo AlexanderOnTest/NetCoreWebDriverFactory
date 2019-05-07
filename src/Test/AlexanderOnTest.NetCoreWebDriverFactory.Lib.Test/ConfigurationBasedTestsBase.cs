@@ -20,7 +20,6 @@ using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
-using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -31,14 +30,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class ConfigurationBasedTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly DriverPath driverPath;
         private readonly Uri gridUrl;
+        private readonly bool useDotNetFramework;
 
-        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, string driverPath)
+        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, Uri gridUri, bool useDotNetFramework = false)
         {
             this.thisPlatform = thisPlatform;
-            this.driverPath = new DriverPath(driverPath);
-            this.gridUrl = WebDriverSettings.GridUri;
+            if (thisPlatform != OSPlatform.Windows && useDotNetFramework)
+            {
+                throw new PlatformNotSupportedException(".NET Framework is only available on Microsoft Windows platforms.");
+            }
+            this.useDotNetFramework = useDotNetFramework;
+            this.gridUrl = gridUri;
         }
 
         private IWebDriver Driver { get; set; }
@@ -48,13 +51,23 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
+            
+            IServiceCollection serviceCollection;
+            if (useDotNetFramework)
+            {
+                serviceCollection = ServiceCollectionFactory
+                    .GetDefaultServiceCollection(gridUrl);
+            }
+            else
+            {
+                serviceCollection = ServiceCollectionFactory
+                    .GetDefaultServiceCollection(true, gridUrl);
+            }
+            IServiceProvider provider = serviceCollection.BuildServiceProvider();
 
-            IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(driverPath, gridUrl)
-                .BuildServiceProvider();
             WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
-        
+
         public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()

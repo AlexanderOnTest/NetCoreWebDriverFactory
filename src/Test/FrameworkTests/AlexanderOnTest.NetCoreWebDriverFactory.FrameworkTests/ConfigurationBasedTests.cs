@@ -14,33 +14,48 @@
 // limitations under the License.
 // </copyright>
 
-using System.IO;
-using System.Reflection;
+using System;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
+namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
 {
     [TestFixture]
-    public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
+    public class ConfigurationBasedTests : ConfigurationBasedTestsBase
     {
-        private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+        private static readonly OSPlatform ThisPlatform = OSPlatform.Windows;
+        private static readonly Uri GridUrl = WebDriverSettings.GridUri;
 
-        public LocalWebDriverFactoryTests() : base(ThisPlatform)
-        {
-        }
+        public ConfigurationBasedTests() : base(ThisPlatform, GridUrl, true) { }
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Safari, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
-            base.LocalWebDriverFactoryWorks(browser, headless);
+            base.LocalWebDriverFactoryWorks(browser, browserVisibility);
+        }
+
+        [Test]
+        [TestCase(PlatformType.Linux, Browser.Chrome)]
+        [TestCase(PlatformType.Linux, Browser.Firefox)]
+        [TestCase(PlatformType.Mac, Browser.Chrome)]
+        [TestCase(PlatformType.Mac, Browser.Firefox)]
+        [TestCase(PlatformType.Mac, Browser.Safari)]
+        [TestCase(PlatformType.Windows, Browser.Chrome)]
+        [TestCase(PlatformType.Windows, Browser.Edge)]
+        [TestCase(PlatformType.Windows, Browser.Firefox)]
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
+        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
+        {
+            base.RemoteWebDriverFactoryWorks(platformType, browser);
         }
 
         [Test]
@@ -52,16 +67,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         }
 
         [Test]
-        [TestCase(WindowSize.Defined, 1366, 760)]
         [TestCase(WindowSize.Defined, 1280, 1024)]
+        [TestCase(WindowSize.Defined, 1360, 768)]
         public new void CustomSizeBrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
         {
             base.CustomSizeBrowserIsOfRequestedSize(windowSize, expectedWidth, expectedHeight);
         }
 
         [Test]
-        [TestCase(Browser.Edge)]
-        [TestCase(Browser.InternetExplorer)]
+        [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
         {
             base.RequestingUnsupportedWebDriverThrowsInformativeException(browser);

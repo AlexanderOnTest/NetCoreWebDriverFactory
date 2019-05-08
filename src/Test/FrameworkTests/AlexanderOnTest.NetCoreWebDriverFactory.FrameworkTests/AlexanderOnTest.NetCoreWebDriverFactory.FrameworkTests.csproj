@@ -115,10 +115,10 @@
       <Version>3.141.59</Version>
     </PackageReference>
     <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory">
-      <Version>3.0.0-alpha6</Version>
+      <Version>3.0.0-beta1</Version>
     </PackageReference>
     <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig">
-      <Version>3.0.0-alpha6</Version>
+      <Version>3.0.0-beta1</Version>
     </PackageReference>
     <PackageReference Include="System.AppContext">
       <Version>4.3.0</Version>

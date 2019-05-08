@@ -18,7 +18,7 @@ using System;
 using System.Drawing;
 using OpenQA.Selenium;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
 {
     /// <summary>
     /// Interface for a WebDriver Configuration object.

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0-alpha6</Version>
+    <Version>3.0.0-beta1</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -43,7 +43,9 @@ This is a substantial rewrite with interfaces separated to be more modular.
 ILocalWebDriverFactory for local WebDrivers
 IRemoteWebDriverFactory for RemoteWebDrivers
 IWebDriverFactory now defines only 2 x IWebDriverFactory.GetWebDriver(......) methods
-StaticWebDriverFactory removed</PackageReleaseNotes>
+StaticWebDriverFactory removed
+
+Experimental support for DriverPath auto discovery.</PackageReleaseNotes>
 
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>

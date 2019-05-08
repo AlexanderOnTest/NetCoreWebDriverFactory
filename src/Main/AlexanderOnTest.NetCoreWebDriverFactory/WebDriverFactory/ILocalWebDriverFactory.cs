@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;

@@ -32,7 +32,7 @@ This has been a substantial reworking and most calls from v2.x will require modi
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-alpha6" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="3.0.0-beta1" />
   </ItemGroup>
 
 </Project>

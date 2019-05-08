@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory

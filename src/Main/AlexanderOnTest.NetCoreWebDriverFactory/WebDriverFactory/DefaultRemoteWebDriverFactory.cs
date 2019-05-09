@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;

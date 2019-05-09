@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using OpenQA.Selenium;
 

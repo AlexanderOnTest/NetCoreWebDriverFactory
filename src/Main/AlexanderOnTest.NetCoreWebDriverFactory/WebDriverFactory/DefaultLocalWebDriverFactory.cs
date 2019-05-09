@@ -17,6 +17,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
@@ -242,16 +243,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             Size windowCustomSize = new Size())
         {
             IWebDriver driver = null;
-            try
-            {
-                driver = driverPath == null
+
+            driver = driverPath == null
                     ? new ChromeDriver(options)
                     : new ChromeDriver(driverPath, options);
-            }
-            catch (DriverServiceNotFoundException ex)
-            {
-                RethrowWithSuggestedPath(ex);
-            }
 
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }
@@ -272,16 +267,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             Size windowCustomSize = new Size())
         {
             IWebDriver driver = null;
-            try
-            {
-                driver = driverPath == null
-                    ? new FirefoxDriver(options)
-                    : new FirefoxDriver(driverPath, options);
-            }
-            catch (DriverServiceNotFoundException ex)
-            {
-                RethrowWithSuggestedPath(ex);
-            }
+
+            driver = driverPath == null
+                ? new FirefoxDriver(options)
+                : new FirefoxDriver(driverPath, options);
 
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }
@@ -308,16 +297,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             }
 
             IWebDriver driver = null;
-            try
-            {
-                driver = driverPath == null
-                    ? new EdgeDriver(options)
-                    : new EdgeDriver(driverPath, options);
-            }
-            catch (DriverServiceNotFoundException ex)
-            {
-                RethrowWithSuggestionOfNoPath(ex);
-            }
+
+            driver = driverPath == null
+                ? new EdgeDriver(options)
+                : new EdgeDriver(driverPath, options);
 
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }
@@ -343,16 +326,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             }
 
             IWebDriver driver = null;
-            try
-            {
-                driver = driverPath == null
-                    ? new InternetExplorerDriver(options)
-                    : new InternetExplorerDriver(driverPath, options);
-            }
-            catch (DriverServiceNotFoundException ex)
-            {
-                RethrowWithSuggestedPath(ex);
-            }
+
+            driver = driverPath == null
+                ? new InternetExplorerDriver(options)
+                : new InternetExplorerDriver(driverPath, options);
 
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }
@@ -378,27 +355,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             }
 
             IWebDriver driver = null;
-            try
-            {
-                driver = driverPath == null
-                    ? new SafariDriver(options)
-                    : new SafariDriver(driverPath, options);
-            }
-            catch (DriverServiceNotFoundException ex)
-            {
-                RethrowWithSuggestionOfNoPath(ex);
-            }
+
+            driver = driverPath == null
+                ? new SafariDriver(options)
+                : new SafariDriver(driverPath, options);
+
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
-        }
-
-        private void RethrowWithSuggestedPath(DriverServiceNotFoundException driverServiceNotFoundException)
-        {
-            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)' or add the driverPath to the Path", driverServiceNotFoundException);
-        }
-
-        private void RethrowWithSuggestionOfNoPath(DriverServiceNotFoundException driverServiceNotFoundException)
-        {
-            throw new DriverServiceNotFoundException("Try calling with the DriverPath set to 'null' and ensure that the driverPath is added to the environment Path", driverServiceNotFoundException);
         }
     }
 }

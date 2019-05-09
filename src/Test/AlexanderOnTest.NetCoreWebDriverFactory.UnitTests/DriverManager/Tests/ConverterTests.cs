@@ -15,6 +15,7 @@
 // </copyright>
 
 using System.Drawing;
+using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using FluentAssertions;
 using FluentAssertions.Execution;

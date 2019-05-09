@@ -34,6 +34,117 @@
              Apple Safari
             </summary>
         </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration">
+            <summary>
+            Interface for a WebDriver Configuration object.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.Browser">
+            <summary>
+            Browser type to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.PlatformType">
+            <summary>
+            Platform to request for a RemoteWebDriver.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.WindowSize">
+            <summary>
+            Defined WindowSize to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.WindowDefinedSize">
+            <summary>
+            Actual window size requested (if not Maximize/Maximise or Unchanged)
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.GridUri">
+            <summary>
+            The Uri of the Selenium grid to use for remote calls.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.IsLocal">
+            <summary>
+            Use a local WebDriver.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.Headless">
+            <summary>
+            Run headless if available.
+            </summary>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration">
+            <summary>
+            A WebDriver Configuration implementation.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.Browser,System.Uri,System.Boolean,System.Boolean,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
+            <summary>
+            Generate a new immutable WebDriverConfiguration instance.
+            </summary>
+            <param name="browser"></param>
+            <param name="gridUri"></param>
+            <param name="headless"></param>
+            <param name="isLocal"></param>
+            <param name="platformType"></param>
+            <param name="windowSize"></param>
+            <param name="windowDefinedSize"></param>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.Browser">
+            <summary>
+            Browser type to request.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.PlatformType">
+            <summary>
+            Platform to request for a RemoteWebDriver
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.WindowSize">
+            <summary>
+            WindowSize to request
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.WindowDefinedSize">
+            <summary>
+            Actual window size requested (if not Maximize/Maximise or Unchanged)
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.GridUri">
+            <summary>
+            The Uri of the Selenium grid to use for remote calls.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.IsLocal">
+            <summary>
+            Use a local WebDriver.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.Headless">
+            <summary>
+            Run headless if available.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.ToString">
+            <summary>
+            Return the configuration in a readable form.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.DeserializeFromJson(System.String)">
+            <summary>
+            Convenience method to Deserialize from Json.
+            </summary>
+            <param name="jsonString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.SerializeToJson">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory">
             <summary>
             Convenient DI Container factory
@@ -46,7 +157,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Get a ServiceCollection referencing default implementations using implicit path.
             Use for .NET Framework projects and projects where the driver executables are on the System Path.
@@ -79,7 +190,7 @@
             <param name="gridUri"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Boolean,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(System.Boolean,AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Experimental - Get a ServiceCollection referencing default implementations.
             Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
@@ -105,7 +216,7 @@
             <param name="gridUri"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection.ServiceCollectionFactory.GetDefaultServiceCollection(AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Get a ServiceCollection referencing all Default implementations. 
             </summary>
@@ -140,7 +251,7 @@
             A simple implementation of a WebDriverManager
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IWebDriverFactory,AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Configuration based constructor for a WebDriverManager
             </summary>
@@ -381,46 +492,6 @@
             
             </summary>
         </member>
-        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration">
-            <summary>
-            Interface for a WebDriver Configuration object.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.Browser">
-            <summary>
-            Browser type to request.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.PlatformType">
-            <summary>
-            Platform to request for a RemoteWebDriver.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowSize">
-            <summary>
-            Defined WindowSize to request.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.WindowDefinedSize">
-            <summary>
-            Actual window size requested (if not Maximize/Maximise or Unchanged)
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.GridUri">
-            <summary>
-            The Uri of the Selenium grid to use for remote calls.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.IsLocal">
-            <summary>
-            Use a local WebDriver.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration.Headless">
-            <summary>
-            Run headless if available.
-            </summary>
-        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder">
             <summary>
             Builder class for easy configuration
@@ -569,77 +640,6 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration">
-            <summary>
-            A WebDriver Configuration implementation.
-            </summary>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.Browser,System.Uri,System.Boolean,System.Boolean,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
-            <summary>
-            Generate a new immutable WebDriverConfiguration instance.
-            </summary>
-            <param name="browser"></param>
-            <param name="gridUri"></param>
-            <param name="headless"></param>
-            <param name="isLocal"></param>
-            <param name="platformType"></param>
-            <param name="windowSize"></param>
-            <param name="windowDefinedSize"></param>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.Browser">
-            <summary>
-            Browser type to request.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.PlatformType">
-            <summary>
-            Platform to request for a RemoteWebDriver
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowSize">
-            <summary>
-            WindowSize to request
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.WindowDefinedSize">
-            <summary>
-            Actual window size requested (if not Maximize/Maximise or Unchanged)
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.GridUri">
-            <summary>
-            The Uri of the Selenium grid to use for remote calls.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.IsLocal">
-            <summary>
-            Use a local WebDriver.
-            </summary>
-        </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.Headless">
-            <summary>
-            Run headless if available.
-            </summary>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.ToString">
-            <summary>
-            Return the configuration in a readable form.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.DeserializeFromJson(System.String)">
-            <summary>
-            Convenience method to Deserialize from Json.
-            </summary>
-            <param name="jsonString"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverConfiguration.SerializeToJson">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultLocalWebDriverFactory">
             <summary>
             Default LocalWebDriverFactory implementation for .NET Core projects.
@@ -688,7 +688,7 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultLocalWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultLocalWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Return a local WebDriver instance of the given configuration.
             </summary>
@@ -823,7 +823,7 @@
             <param name="driverOptionsFactory"></param>
             <param name="webDriverReSizer"></param>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
             <summary>
             Return a DriverFactory instance for use in .NET Core projects.
             Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
@@ -849,7 +849,7 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultRemoteWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Return a RemoteWebDriver instance of the given configuration.
             </summary>
@@ -912,7 +912,7 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Return a WebDriver instance of the given configuration.
             </summary>
@@ -957,7 +957,7 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.ILocalWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.ILocalWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Return a Local IWebDriver instance of the given configuration.
             </summary>
@@ -1030,7 +1030,7 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IRemoteWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IRemoteWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Return a RemoteWebDriver instance of the given configuration.
             </summary>
@@ -1063,7 +1063,7 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.IWebDriverConfiguration)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration)">
             <summary>
             Return a WebDriver instance of the given configuration.
             </summary>

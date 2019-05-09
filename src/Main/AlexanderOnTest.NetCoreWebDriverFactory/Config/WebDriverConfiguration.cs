@@ -18,11 +18,11 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
-using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
 {
     /// <summary>
     /// A WebDriver Configuration implementation.

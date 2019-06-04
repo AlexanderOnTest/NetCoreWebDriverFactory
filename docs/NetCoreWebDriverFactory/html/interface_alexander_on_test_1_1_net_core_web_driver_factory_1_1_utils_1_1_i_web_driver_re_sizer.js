@@ -1,0 +1,4 @@
+var interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_utils_1_1_i_web_driver_re_sizer =
+[
+    [ "SetWindowSize", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_utils_1_1_i_web_driver_re_sizer.html#a1627f119d897e8419b25e3ead5159817", null ]
+];

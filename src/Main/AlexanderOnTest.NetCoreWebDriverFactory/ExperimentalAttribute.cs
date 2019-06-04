@@ -19,12 +19,17 @@ using System;
 namespace AlexanderOnTest.NetCoreWebDriverFactory
 {
     /// <summary>
-    /// 
+    /// Limited testing suggests that this method works as desired under limited conditions.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.All,
         AllowMultiple = false)]
     public class ExperimentalAttribute : Attribute
     {
+        /// <summary>
+        /// Testing suggests that this method works as desired with certain conditions.
+        /// </summary>
+        /// <param name="testedConditions"> Conditions under which this SHOULD be expected to work. YMMV in other usage. </param>
+        public ExperimentalAttribute(string testedConditions) { }
     }
 }

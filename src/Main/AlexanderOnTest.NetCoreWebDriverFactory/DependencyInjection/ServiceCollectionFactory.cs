@@ -30,6 +30,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
     /// <summary>
     /// Convenient DI Container factory
     /// </summary>
+    [QuickStart]
     public static class ServiceCollectionFactory
     {
         /// <summary>
@@ -37,6 +38,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
         /// </summary>
         /// <returns></returns>
+        [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection()
         {
             return GetDefaultServiceCollection(null, (IWebDriverConfiguration) null);
@@ -48,6 +50,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// </summary>
         /// <param name="driverConfig"></param>
         /// <returns></returns>
+        [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection(
             IWebDriverConfiguration driverConfig)
         {
@@ -60,6 +63,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// </summary>
         /// <param name="gridUri"></param>
         /// <returns></returns>
+        [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection(
             Uri gridUri)
         {
@@ -72,7 +76,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// </summary>
         /// <param name="useDefaultDotNetCoreDriverPath"> </param>
         /// <returns></returns>
-        [Experimental]
+        [QuickStart]
+        [Experimental("The calling assembly must have the required driver nuget packages installed.")]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static IServiceCollection GetDefaultServiceCollection(
             bool useDefaultDotNetCoreDriverPath)
@@ -89,7 +94,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <param name="useDefaultDotNetCoreDriverPath"></param>
         /// <param name="gridUri"></param>
         /// <returns></returns>
-        [Experimental]
+        [QuickStart]
+        [Experimental("The calling assembly must have the required driver nuget packages installed.")]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static IServiceCollection GetDefaultServiceCollection(
             bool useDefaultDotNetCoreDriverPath,
@@ -107,7 +113,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <param name="useDefaultDotNetCoreDriverPath"></param>
         /// <param name="driverConfig"></param>
         /// <returns></returns>
-        [Experimental]
+        [QuickStart]
+        [Experimental("The calling assembly must have the required driver nuget packages installed.")]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static IServiceCollection GetDefaultServiceCollection(
             bool useDefaultDotNetCoreDriverPath,
@@ -124,6 +131,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// </summary>
         /// <param name="driverPath"></param>
         /// <returns></returns>
+        [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection(
             DriverPath driverPath)
         {
@@ -137,6 +145,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <param name="driverPath"></param>
         /// <param name="gridUri"></param>
         /// <returns></returns>
+        [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection(
             DriverPath driverPath,
             Uri gridUri)
@@ -150,6 +159,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <param name="driverPath"></param>
         /// <param name="driverConfig"></param>
         /// <returns></returns>
+        [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection(
             DriverPath driverPath,
             IWebDriverConfiguration driverConfig)

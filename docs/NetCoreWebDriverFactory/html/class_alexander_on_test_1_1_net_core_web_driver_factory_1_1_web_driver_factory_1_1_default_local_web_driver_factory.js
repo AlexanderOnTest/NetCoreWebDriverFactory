@@ -1,5 +1,0 @@
-var class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_default_local_web_driver_factory =
-[
-    [ "DefaultLocalWebDriverFactory", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_default_local_web_driver_factory.html#aeede7802a7d74f58d62b8107bc929848", null ],
-    [ "DefaultLocalWebDriverFactory?", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_default_local_web_driver_factory.html#a29a3c3c5e7b7c5d7fddf9ce80cd1ac81", null ]
-];

@@ -1,7 +1,0 @@
-var namespace_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging =
-[
-    [ "LogProviders", "namespace_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_log_providers.html", "namespace_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_log_providers" ],
-    [ "ILog", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_i_log.html", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_i_log" ],
-    [ "ILogProvider", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_i_log_provider.html", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_i_log_provider" ],
-    [ "LoggerExecutionWrapper", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_logger_execution_wrapper.html", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_logger_execution_wrapper" ]
-];

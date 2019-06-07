@@ -1,5 +1,0 @@
-var class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_log_providers_1_1_disposable_action =
-[
-    [ "DisposableAction", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_log_providers_1_1_disposable_action.html#ab09c6c81f611765d8d98d93f9ae2f0b5", null ],
-    [ "Dispose", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_logging_1_1_log_providers_1_1_disposable_action.html#aae74b8cc1549e44266dbe4695a598471", null ]
-];

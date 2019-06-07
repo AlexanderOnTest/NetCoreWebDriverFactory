@@ -1,5 +1,0 @@
-var interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_i_web_driver_factory =
-[
-    [ "GetWebDriver", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_i_web_driver_factory.html#a8da3eccaf94b647f84f7a5e8af78cf75", null ],
-    [ "GetWebDriver", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_i_web_driver_factory.html#a04873bfc1d37df3eb5e492ab7f68a470", null ]
-];

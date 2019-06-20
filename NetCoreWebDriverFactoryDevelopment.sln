@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebDriverFactory", "src\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj", "{3F97382B-6E44-422D-8EC0-A54968A60531}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{11555F43-5282-451E-99CC-3D16D391C790}"
+	ProjectSection(SolutionItems) = preProject
+		src\Main\Doxyfile = src\Main\Doxyfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8A7C80EE-4A21-466B-8519-EBCED9CF00D7}"
 EndProject

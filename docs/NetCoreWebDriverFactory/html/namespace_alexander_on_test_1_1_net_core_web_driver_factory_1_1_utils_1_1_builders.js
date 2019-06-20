@@ -1,4 +1,0 @@
-var namespace_alexander_on_test_1_1_net_core_web_driver_factory_1_1_utils_1_1_builders =
-[
-    [ "WebDriverConfigurationBuilder", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_utils_1_1_builders_1_1_web_driver_configuration_builder.html", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_utils_1_1_builders_1_1_web_driver_configuration_builder" ]
-];

@@ -28,7 +28,9 @@ using Microsoft.Extensions.DependencyInjection;
 namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
 {
     /// <summary>
-    /// Convenient DI Container factory
+    /// Example DI Container factory for quick prototyping.
+    /// <para>WARNING: This should not be considered stable for use in production projects.
+    /// You are STRONGLY advised to use the source code for inspiration rather than using these method directly.</para>
     /// </summary>
     [QuickStart]
     public static class ServiceCollectionFactory
@@ -36,6 +38,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
         /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <returns></returns>
         [QuickStart]
@@ -47,6 +51,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
         /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="driverConfig"></param>
         /// <returns></returns>
@@ -60,6 +66,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
         /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="gridUri"></param>
         /// <returns></returns>
@@ -73,6 +81,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Experimental - Get a ServiceCollection referencing default implementations.
         /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="useDefaultDotNetCoreDriverPath"> </param>
         /// <returns></returns>
@@ -90,6 +100,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Experimental - Get a ServiceCollection referencing default implementations.
         /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+        /// WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.
         /// </summary>
         /// <param name="useDefaultDotNetCoreDriverPath"></param>
         /// <param name="gridUri"></param>
@@ -109,6 +121,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Experimental - Get a ServiceCollection referencing default implementations.
         /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="useDefaultDotNetCoreDriverPath"></param>
         /// <param name="driverConfig"></param>
@@ -128,6 +142,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Get a ServiceCollection referencing default implementations with a defined driver path.
         /// Use for .NET Core projects with driver executables from nuget packages.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="driverPath"></param>
         /// <returns></returns>
@@ -141,6 +157,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <summary>
         /// Get a ServiceCollection referencing default implementations with a defined driver path.
         /// Use for .NET Core projects with driver executables from nuget packages.
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="driverPath"></param>
         /// <param name="gridUri"></param>
@@ -155,6 +173,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
 
         /// <summary>
         /// Get a ServiceCollection referencing all Default implementations. 
+        /// <para>WARNING: This should not be considered stable for use in production projects.
+        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
         /// <param name="driverPath"></param>
         /// <param name="driverConfig"></param>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0-RC</Version>
+    <Version>3.0.0</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -25,7 +25,7 @@ MacOS     (PlatformType.Mac)
 Tested and working on Windows 10, Linux (Ubuntu 18.04) and MacOS Mojave
 
 The repository at
-https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory
+https://github.com/AlexanderOnTest/NetCoreWebDriverFactory
 contains test projects for Windows, Linux and MacOS. These can be used to test your setup and demonstrate the options available.
 
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
@@ -36,7 +36,6 @@ A Complete rework for use in CI/CD pipelines
 New features:
 Addition of a simple WebDriverConfigurationBuilder.
 Support for Custom Browser sizes.
-Logging implemented to calls to IWebDriverFactory.GetWebDriver(......) overloads
 
 Changes:
 This is a substantial rewrite with interfaces separated to be more modular. 
@@ -48,7 +47,7 @@ StaticWebDriverFactory removed
 Experimental support for DriverPath auto discovery.</PackageReleaseNotes>
 
     <Copyright>Copyright 2019 Alexander Dunn</Copyright>
-    <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory</PackageProjectUrl>
+    <PackageProjectUrl>https://alexanderontest.github.io/</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
@@ -60,6 +59,9 @@ Experimental support for DriverPath auto discovery.</PackageReleaseNotes>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/AlexanderOnTest/AlexanderOnTest.github.io/master/assets/icons/dotnet/64.png</PackageIconUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

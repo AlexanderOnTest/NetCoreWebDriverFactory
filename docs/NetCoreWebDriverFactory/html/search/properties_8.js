@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['webdriverresizer',['WebDriverReSizer',['../class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_web_driver_factory_1_1_local_web_driver_factory_base.html#a605f2a814ef60d95f730aff90fd9aa7a',1,'AlexanderOnTest::NetCoreWebDriverFactory::WebDriverFactory::LocalWebDriverFactoryBase']]],
-  ['windowdefinedsize',['WindowDefinedSize',['../interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_config_1_1_i_web_driver_configuration.html#ae19392489699a9c9e8710d4a5db7b49e',1,'AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.WindowDefinedSize()'],['../class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_config_1_1_web_driver_configuration.html#a68a915d47cdac3db72bc42d2ba93f0b4',1,'AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.WindowDefinedSize()']]],
-  ['windowsize',['WindowSize',['../interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_config_1_1_i_web_driver_configuration.html#a0141e13480cf8614115ad262bd36db67',1,'AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration.WindowSize()'],['../class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_config_1_1_web_driver_configuration.html#a7a1b2a53069b07779759c14b9ef5d4cd',1,'AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.WindowSize()']]]
-];

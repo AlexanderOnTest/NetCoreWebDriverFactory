@@ -1,5 +1,0 @@
-var namespace_alexander_on_test_1_1_net_core_web_driver_factory_1_1_driver_manager =
-[
-    [ "IWebDriverManager", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_driver_manager_1_1_i_web_driver_manager.html", "interface_alexander_on_test_1_1_net_core_web_driver_factory_1_1_driver_manager_1_1_i_web_driver_manager" ],
-    [ "WebDriverManager", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_driver_manager_1_1_web_driver_manager.html", "class_alexander_on_test_1_1_net_core_web_driver_factory_1_1_driver_manager_1_1_web_driver_manager" ]
-];

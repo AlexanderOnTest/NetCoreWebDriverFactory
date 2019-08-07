@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0</Version>
+    <Version>3.0.1</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
@@ -15,7 +15,10 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-    <PackageReleaseNotes>v3.0.0
+    <PackageReleaseNotes>v3.0.1
+Fix for WebDriverSettings.GridUri not returning a value from Config_WebDriver.json
+
+v3.0.0
 Update to NetCoreWebDriverFactory v3.0.0 and handling of configuration for custom browser size requests.
 
 This has been a substantial reworking and most calls from v2.x will require modification</PackageReleaseNotes>
@@ -23,10 +26,11 @@ This has been a substantial reworking and most calls from v2.x will require modi
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageId>
     <LangVersion>7.3</LangVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/AlexanderOnTest/AlexanderOnTest.github.io/master/assets/icons/dotnet/64.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
+    <FileVersion>3.0.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

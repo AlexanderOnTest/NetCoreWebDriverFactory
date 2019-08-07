@@ -35,9 +35,24 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 2. The value in an applied .runsettings file
         /// 3. Default (Localhost) grid.
         /// </summary>
-        public static Uri GridUri { get; }
-            = Utils.GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json") ??
-              new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
+        public static Uri GridUri {
+            get
+            {
+                var gridUriFileValue = Utils.GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
+                if (gridUriFileValue != null)
+                {
+                    return gridUriFileValue;
+                }
+
+                var webDriverFileConfig = Utils.GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
+                if (webDriverFileConfig != null && webDriverFileConfig.GridUri != null)
+                {
+                    return webDriverFileConfig.GridUri;
+                }
+
+                return new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
+            }
+        }
 
         /// <summary>
         /// Run the webdriver locally (rather than remote)

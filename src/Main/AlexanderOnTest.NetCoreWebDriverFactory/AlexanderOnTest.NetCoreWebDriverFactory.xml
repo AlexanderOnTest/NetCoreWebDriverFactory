@@ -322,6 +322,28 @@
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>
         </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverManager.WebDriverManager.GetService(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.CulturedDriverOptionsFactory">
+            <summary>
+            An IDriverOptionsFactory implementation that provides Chrome and Firefox instances with a defined default language
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.CulturedDriverOptionsFactory.#ctor(System.Globalization.CultureInfo)">
+            <summary>
+            Construct a new instance of the CulturedDriverOptionsFactory for Chrome and Firefox
+            </summary>
+            <param name="requestedCulture"></param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.CulturedDriverOptionsFactory.AlexanderOnTest#NetCoreWebDriverFactory#DriverOptionsFactory#IDriverOptionsFactory#GetLocalDriverOptions``1(System.Boolean)">
+            <summary>
+            Return a DriverOptions instance of the correct type configured for a Local WebDriver. Only supported for Chrome and Firefox
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory">
             <summary>
             An overridable implementation of the IDriverOptionsFactory Interface.

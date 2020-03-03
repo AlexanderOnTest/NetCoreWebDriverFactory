@@ -24,6 +24,7 @@ using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using Microsoft.Extensions.DependencyInjection;
+using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
 {
@@ -205,6 +206,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
 
             services.AddSingleton<IWebDriverFactory, DefaultWebDriverFactory>();
             services.AddSingleton<IWebDriverManager, WebDriverManager>();
+
+            services.AddTransient<IWebDriver>((webDriverManager) => webDriverManager.GetService<IWebDriver>());
             
             return services;
         }

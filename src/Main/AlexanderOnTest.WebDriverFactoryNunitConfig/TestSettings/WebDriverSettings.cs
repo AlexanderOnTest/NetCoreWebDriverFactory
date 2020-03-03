@@ -32,8 +32,9 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// <summary>
         /// Uri of the grid. Configuration Priority:
         /// 1. A value provided in "My Documents/Config_GridUri.json" (Windows) or "/Config_GridUri.json" (Mac / Linux)
-        /// 2. The value in an applied .runsettings file
-        /// 3. Default (Localhost) grid.
+        /// 2. A value provided for GridUri in "My Documents/Config_WebDriver.json" (Windows) or "/Config_WebDriver.json" (Mac / Linux)
+        /// 3. The value in an applied .runsettings file
+        /// 4. Default (Localhost) grid.
         /// </summary>
         public static Uri GridUri {
             get
@@ -55,7 +56,10 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         }
 
         /// <summary>
-        /// Run the webdriver locally (rather than remote)
+        /// Run the webdriver locally (rather than remote)Configuration Priority:
+        /// 2. A value provided for IsLocal in "My Documents/Config_WebDriver.json" (Windows) or "/Config_WebDriver.json" (Mac / Linux)
+        /// 3. The value in an applied .runsettings file
+        /// 4. Default (Localhost) grid.
         /// </summary>
         public static bool IsLocal { get; }
             = GetBoolSettingOrDefault("isLocal", true);

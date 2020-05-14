@@ -278,9 +278,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         {
             IWebDriver driver = null;
 
-            driver = driverPath == null
-                ? new FirefoxDriver(options)
-                : new FirefoxDriver(driverPath, options);
+            // To prevent slowdowns in .NET Core we need to use a service to set the host to use IPV4
+
+            FirefoxDriverService geckoService = driverPath == null ?
+                FirefoxDriverService.CreateDefaultService(driverPath) :
+                FirefoxDriverService.CreateDefaultService();
+            geckoService.Host = "::1";
+            driver = new FirefoxDriver(geckoService, options);
 
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }

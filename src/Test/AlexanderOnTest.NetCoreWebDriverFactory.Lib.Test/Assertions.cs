@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -32,6 +33,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         {
             driver.Url = pageToBeLoaded;
             driver.Title.Should().Be(expectedPageTitle);
+        }
+
+        public static void AssertThatBrowserReturnsTheExpectedCulture(
+            IWebDriver driver,
+            CultureInfo cultureInfo)
+        {
+            driver.Url = "https://manytools.org/http-html-text/browser-language/";
+            driver.Title.Should().Be("Browser language - display the list of languages your browser says you prefer");
         }
 
         public static void AssertThatBrowserWindowSizeIsCorrect(

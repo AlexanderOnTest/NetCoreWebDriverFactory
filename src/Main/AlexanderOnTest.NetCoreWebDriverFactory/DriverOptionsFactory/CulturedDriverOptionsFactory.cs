@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
@@ -14,7 +15,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
     public class CulturedDriverOptionsFactory : DefaultDriverOptionsFactory, IDriverOptionsFactory
     {
         /// <summary>
-        /// Construct a new instance of the CulturedDriverOptionsFactory for Chrome and Firefox
+        /// Construct a new instance of the CulturedDriverOptionsFactory for Chrome, (Chromium based) Edge and Firefox
         /// </summary>
         /// <param name="requestedCulture"></param>
         public CulturedDriverOptionsFactory(CultureInfo requestedCulture) : base(new Dictionary<Type, DriverOptions>())
@@ -26,6 +27,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
             FirefoxOptions firefoxCultureOptions = StaticDriverOptionsFactory.GetFirefoxOptions();
             firefoxCultureOptions.SetPreference("intl.accept_languages", requestedCulture.ToString());
             DriverOptionsDictionary.Add(typeof(FirefoxOptions), firefoxCultureOptions);
+
+            Microsoft.Edge.SeleniumTools.EdgeOptions edgeCultureOptions = StaticDriverOptionsFactory.GetEdgiumOptions();
+            edgeCultureOptions.AddUserProfilePreference("intl.accept_languages", requestedCulture.ToString());
+            DriverOptionsDictionary.Add(typeof(Microsoft.Edge.SeleniumTools.EdgeOptions), edgeCultureOptions);
         }
         
         /// <summary>
@@ -48,7 +53,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
                 }
                 else
                 {
-                    Trace.WriteLine("Chrome does not support language profiles in headless operation, running on screen.");
+                    Trace.WriteLine("Chromium does not support language profiles in headless operation, running on screen.");
                 }
             }
             return options;

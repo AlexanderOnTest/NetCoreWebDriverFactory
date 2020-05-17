@@ -39,6 +39,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
             {
                 {typeof(ChromeOptions), StaticDriverOptionsFactory.GetChromeOptions()},
                 {typeof(EdgeOptions), StaticDriverOptionsFactory.GetEdgeOptions()},
+                {typeof(Microsoft.Edge.SeleniumTools.EdgeOptions), StaticDriverOptionsFactory.GetEdgiumOptions()},
                 {typeof(FirefoxOptions), StaticDriverOptionsFactory.GetFirefoxOptions()},
                 {typeof(InternetExplorerOptions), StaticDriverOptionsFactory.GetInternetExplorerOptions()},
                 {typeof(SafariOptions), StaticDriverOptionsFactory.GetSafariOptions()}

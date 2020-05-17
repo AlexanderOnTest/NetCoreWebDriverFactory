@@ -332,7 +332,7 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.CulturedDriverOptionsFactory.#ctor(System.Globalization.CultureInfo)">
             <summary>
-            Construct a new instance of the CulturedDriverOptionsFactory for Chrome and Firefox
+            Construct a new instance of the CulturedDriverOptionsFactory for Chrome, (Chromium based) Edge and Firefox
             </summary>
             <param name="requestedCulture"></param>
         </member>
@@ -467,7 +467,14 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType)">
             <summary>
-            Return a configured EdgeOptions instance.
+            Return a configured OpenQA.Selenium.Edge.EdgeOptions instance for EdgeHtml based Edge
+            </summary>
+            <param name="platformType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgiumOptions(OpenQA.Selenium.PlatformType)">
+            <summary>
+            Return a Microsoft.Edge.SeleniumTools.EdgeOptions instance configured for Chromium Based Edge.
             </summary>
             <param name="platformType"></param>
             <returns></returns>
@@ -838,6 +845,61 @@
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>
         </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.EdgiumLocalWebDriverFactory">
+            <summary>
+            Default LocalWebDriverFactory implementation for .NET Core projects using Chromium based Microsoft Edge.
+            Note: As The Chrome based EdgeDriver is not currently available in a nuget package, it MUST be on the System Path.
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.EdgiumLocalWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,System.String,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
+            <summary>
+            Return a DriverFactory instance for use in .NET Core projects.
+            Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
+            </summary>
+            <param name="driverOptionsFactory"></param>
+            <param name="installedDriverPath"></param>
+            <param name="webDriverReSizer"></param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.EdgiumLocalWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
+            <summary>
+            Return a DriverFactory instance for use in .NET Core projects.
+            Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
+            </summary>
+            <param name="driverOptionsFactory"></param>
+            <param name="driverPath"></param>
+            <param name="webDriverReSizer"></param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.EdgiumLocalWebDriverFactory.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
+            <summary>
+            Return a local WebDriver of the given browser type with default settings.
+            </summary>
+            <param name="browser"></param>
+            <param name="windowSize"></param>
+            <param name="headless"></param>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.EdgiumLocalWebDriverFactory.GetWebDriver(Microsoft.Edge.SeleniumTools.EdgeOptions,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
+            <summary>
+            Return a local Chromium based Edge WebDriver instance.
+            </summary>
+            <param name="options"></param>
+            <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.EdgiumLocalWebDriverFactory.GetLocalWebDriver(Microsoft.Edge.SeleniumTools.EdgeOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
+            <summary>
+            Return a local Chromium based Edge WebDriver instance.
+            Try using driverPath = null (default) for Windows 10 version 1809 and later.
+            Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Windows 10 version 1803 and earlier.
+            </summary>
+            <param name="options"></param>
+            <param name="driverPath"></param>
+            <param name="windowSize"></param>
+            <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.FrameworkLocalWebDriverFactory">
             <summary>
             Overridable implementation of the ILocalWebDriverFactory interface for use with .Net Framework test projects.
@@ -981,6 +1043,7 @@
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase">
             <summary>
             Default LocalWebDriverFactory implementation for .NET Core projects.
+            This implementation does not support Chromium based Edge.
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,System.String,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer,System.Boolean)">

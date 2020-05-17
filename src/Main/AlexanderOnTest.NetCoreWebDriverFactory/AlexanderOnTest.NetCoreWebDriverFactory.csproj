@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0-alpha1</Version>
+    <Version>4.0.0-alpha4</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -34,7 +34,7 @@ The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriv
 Local Firefox now listens on IPV4 to workaround a slowdown bug in .NET Core
 
 Support for launching WebDrivers with a defined culture for i18n testing
-</PackageReleaseNotes>
+Experimental support for Chromium based Edge</PackageReleaseNotes>
 
     <Copyright>Copyright 2020 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://alexanderontest.github.io/</PackageProjectUrl>

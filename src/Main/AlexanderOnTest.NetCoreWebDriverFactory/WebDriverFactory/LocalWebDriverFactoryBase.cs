@@ -32,6 +32,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
     /// <summary>
     /// Default LocalWebDriverFactory implementation for .NET Core projects.
+    /// This implementation does not support Chromium based Edge.
     /// </summary>
     public abstract class LocalWebDriverFactoryBase : ILocalWebDriverFactory
     {
@@ -252,9 +253,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             WindowSize windowSize = WindowSize.Hd,
             Size windowCustomSize = new Size())
         {
-            IWebDriver driver = null;
-
-            driver = driverPath == null
+            IWebDriver driver = driverPath == null
                     ? new ChromeDriver(options)
                     : new ChromeDriver(driverPath, options);
 
@@ -276,15 +275,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             WindowSize windowSize = WindowSize.Hd,
             Size windowCustomSize = new Size())
         {
-            IWebDriver driver = null;
-
             // To prevent slowdowns in .NET Core we need to use a service to set the host to use IPV4
-
             FirefoxDriverService geckoService = driverPath == null ?
                 FirefoxDriverService.CreateDefaultService(driverPath) :
                 FirefoxDriverService.CreateDefaultService();
             geckoService.Host = "::1";
-            driver = new FirefoxDriver(geckoService, options);
+
+            IWebDriver driver = new FirefoxDriver(geckoService, options);
 
             return WebDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }
@@ -310,9 +307,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows 10.");
             }
 
-            IWebDriver driver = null;
-
-            driver = driverPath == null
+            IWebDriver driver = driverPath == null
                 ? new EdgeDriver(options)
                 : new EdgeDriver(driverPath, options);
 
@@ -339,9 +334,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 throw new PlatformNotSupportedException("Microsoft Internet Explorer is only available on Microsoft Windows.");
             }
 
-            IWebDriver driver = null;
-
-            driver = driverPath == null
+            IWebDriver driver = driverPath == null
                 ? new InternetExplorerDriver(options)
                 : new InternetExplorerDriver(driverPath, options);
 
@@ -368,9 +361,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 throw new PlatformNotSupportedException("Safari is only available on Mac Os.");
             }
 
-            IWebDriver driver = null;
-
-            driver = driverPath == null
+            IWebDriver driver = driverPath == null
                 ? new SafariDriver(options)
                 : new SafariDriver(driverPath, options);
 

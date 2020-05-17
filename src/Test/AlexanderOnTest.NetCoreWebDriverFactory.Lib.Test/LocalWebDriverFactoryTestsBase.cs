@@ -16,10 +16,14 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
+using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -43,6 +47,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         }
 
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }
+        private ILocalWebDriverFactory LocalCulturedWebDriverFactory { get; set; }
         private IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
@@ -61,14 +66,28 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 serviceCollection = ServiceCollectionFactory
                     .GetDefaultServiceCollection(true);
             }
+
+            serviceCollection.AddSingleton(new CultureInfo("nl"));
             IServiceProvider provider = serviceCollection.BuildServiceProvider();
             LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();
+            LocalCulturedWebDriverFactory = //provider.GetRequiredService<EdgiumLocalWebDriverFactory>();
+            new EdgiumLocalWebDriverFactory(
+            new CulturedDriverOptionsFactory(new CultureInfo("nl")),
+            provider.GetRequiredService<DriverPath>(),
+            provider.GetRequiredService<IWebDriverReSizer>());
         }
-        
+
         public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
             Driver = LocalWebDriverFactory.GetWebDriver(browser, WindowSize.Hd, browserVisibility == BrowserVisibility.Headless);
             Assertions.AssertThatPageCanBeLoaded(Driver);
+        }
+        
+        public void LocalCulturedWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
+        {
+            Driver = LocalCulturedWebDriverFactory.GetWebDriver(browser, WindowSize.Hd, browserVisibility == BrowserVisibility.Headless);
+            Assertions.AssertThatPageCanBeLoaded(Driver);
+            Assertions.AssertThatBrowserReturnsTheExpectedCulture(Driver, new CultureInfo("nl"));
         }
         
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)

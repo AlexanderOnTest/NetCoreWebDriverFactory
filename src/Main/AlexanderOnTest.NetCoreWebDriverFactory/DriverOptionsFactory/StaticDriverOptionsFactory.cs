@@ -84,13 +84,28 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         }
 
         /// <summary>
-        /// Return a configured EdgeOptions instance.
+        /// Return a configured OpenQA.Selenium.Edge.EdgeOptions instance for EdgeHtml based Edge
         /// </summary>
         /// <param name="platformType"></param>
         /// <returns></returns>
         public static EdgeOptions GetEdgeOptions(PlatformType platformType = PlatformType.Any)
         {
             EdgeOptions options =  new EdgeOptions();
+            SetPlatform(options, platformType);
+            return options;
+        }
+        
+        /// <summary>
+        /// Return a Microsoft.Edge.SeleniumTools.EdgeOptions instance configured for Chromium Based Edge.
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
+        public static Microsoft.Edge.SeleniumTools.EdgeOptions GetEdgiumOptions(PlatformType platformType = PlatformType.Any)
+        {
+            Microsoft.Edge.SeleniumTools.EdgeOptions options = new Microsoft.Edge.SeleniumTools.EdgeOptions
+            {
+                UseChromium = true
+            };
             SetPlatform(options, platformType);
             return options;
         }

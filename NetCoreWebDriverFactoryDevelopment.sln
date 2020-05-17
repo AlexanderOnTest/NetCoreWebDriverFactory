@@ -16,6 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.NetCoreWebD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderOnTest.WebDriverFactoryNunitConfig", "src\Main\AlexanderOnTest.WebDriverFactoryNunitConfig\AlexanderOnTest.WebDriverFactoryNunitConfig.csproj", "{844BA98B-6BD2-4A93-8C09-29D876228809}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C19A3A58-CD21-482E-AC00-4D0CED9E0976}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -43,6 +43,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         }
 
         [Test]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
+        public new void LocalCulturedWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
+        {
+            base.LocalCulturedWebDriverFactoryWorks(browser, browserVisibility);
+        }
+
+        [Test]
         [TestCase(WindowSize.Hd, 1366, 768)]
         [TestCase(WindowSize.Fhd, 1920, 1080)]
         public new void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)

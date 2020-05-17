@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.7.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="Scrutor" Version="3.0.2" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
+    <PackageReference Include="Scrutor" Version="3.2.1" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0-alpha4" />
   </ItemGroup>
 
   <ItemGroup>

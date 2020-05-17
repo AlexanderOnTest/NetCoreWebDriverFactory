@@ -24,7 +24,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
     /// <summary>
     /// A simple implementation of a WebDriverManager
     /// </summary>
-    public class WebDriverManager : IWebDriverManager
+    public class WebDriverManager : IWebDriverManager, IServiceProvider
     {
         private IWebDriver driver;
         private readonly Func<IWebDriver> webDriverConstructor;
@@ -130,6 +130,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc />
+        public object GetService(Type serviceType)
+        {
+            return serviceType == typeof(IWebDriver) ? this.Get() : null;
         }
     }
 }

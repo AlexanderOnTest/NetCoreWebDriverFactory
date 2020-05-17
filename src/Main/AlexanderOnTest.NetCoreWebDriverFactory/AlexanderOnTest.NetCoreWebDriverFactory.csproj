@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0</Version>
+    <Version>4.0.0-alpha4</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -30,30 +30,20 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
 
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
 
-    <PackageReleaseNotes>v3.0.0
-A Complete rework for use in CI/CD pipelines
+    <PackageReleaseNotes>v4.0.0
+Local Firefox now listens on IPV4 to workaround a slowdown bug in .NET Core
 
-New features:
-Addition of a simple WebDriverConfigurationBuilder.
-Support for Custom Browser sizes.
+Support for launching WebDrivers with a defined culture for i18n testing
+Experimental support for Chromium based Edge</PackageReleaseNotes>
 
-Changes:
-This is a substantial rewrite with interfaces separated to be more modular. 
-ILocalWebDriverFactory for local WebDrivers
-IRemoteWebDriverFactory for RemoteWebDrivers
-IWebDriverFactory now defines only 2 x IWebDriverFactory.GetWebDriver(......) methods
-StaticWebDriverFactory removed
-
-Experimental support for DriverPath auto discovery.</PackageReleaseNotes>
-
-    <Copyright>Copyright 2019 Alexander Dunn</Copyright>
+    <Copyright>Copyright 2020 Alexander Dunn</Copyright>
     <PackageProjectUrl>https://alexanderontest.github.io/</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core.</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
     <LangVersion>7.3</LangVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -74,6 +64,7 @@ Experimental support for DriverPath auto discovery.</PackageReleaseNotes>
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
   </ItemGroup>

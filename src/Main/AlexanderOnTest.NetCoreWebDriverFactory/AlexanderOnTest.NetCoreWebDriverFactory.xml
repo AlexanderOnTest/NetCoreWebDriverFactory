@@ -1258,7 +1258,7 @@
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider">
             <summary>
-            Represents a way to get a <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILog"/>
+            Represents a way to get a <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.Logger"/>
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider.GetLogger(System.String)">
@@ -1664,7 +1664,7 @@
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProvider">
             <summary>
-            Provides a mechanism to create instances of <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILog" /> objects.
+            Provides a mechanism to set the <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider" />.
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProvider.SetCurrentLogProvider(AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider)">
@@ -1831,6 +1831,22 @@
             <param name="value">A value.</param>
             <param name="destructure">Determines whether to call the destructor or not.</param>
             <returns>A disposable that when disposed removes the map from the context.</returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProviders.LogProviderBase.FindType(System.String,System.String)">
+            <summary>
+                Finds a type using a type name and assembly name.
+            </summary>
+            <param name="typeName">The name of the type.</param>
+            <param name="assemblyName">The name of the assembly.</param>
+            <returns>The requested type or null if it was not found.</returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProviders.LogProviderBase.FindType(System.String,System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>
+                Finds a type using a type name and a list of assembly names to search.
+            </summary>
+            <param name="typeName">The name of the type.</param>
+            <param name="assemblyNames">A list of assembly names to search.</param>
+            <returns>The request type or null if it was not found.</returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProviders.LoupeLogProvider.WriteDelegate">
             <summary>

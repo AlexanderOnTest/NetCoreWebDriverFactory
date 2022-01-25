@@ -11,7 +11,7 @@ The standard WebDriver nuget packages install the binaries on the path when inst
 IWebDriver driver = new FirefoxDriver();
 ```
 
-When attempting the same from a .NET Core project however, the call fails to locate the WebDriver binary for most browsers. (All except the most recent versions of Safari and Microsoft Edge)
+When attempting the same from a .NET Core project however, the call fails to locate the WebDriver binary for most browsers. (All except recent versions of Safari on MacOS)
 The required call becomes
 ```
 IWebDriver driver = new FirefoxDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

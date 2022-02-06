@@ -52,6 +52,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         public void SetUp()
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
+
+            if (thisPlatform == OSPlatform.Windows)
+            {
+                TestContext.Progress.WriteLine("Information: These tests are configured to run local Internet Explorer tests against Microsoft Edge.");
+            }
             
             IServiceCollection serviceCollection;
             if (useDotNetFramework)

@@ -37,7 +37,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     {
         private static readonly ILog Logger = LogProvider.For<DefaultWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
-        private readonly bool useInternalEdgeDriver;
+        private bool _useEdgeForInternetExplorer;
+        private string _edgeExecutablePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 
         /// <summary>
         /// Return a DriverFactory instance for use in .NET Core projects.
@@ -46,16 +47,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="driverOptionsFactory"></param>
         /// <param name="installedDriverPath"></param>
         /// <param name="webDriverReSizer"></param>
-        /// <param name="useInternalEdgeDriver"></param>
+        /// <param name="useEdgeForInternetExplorer"></param>
         protected LocalWebDriverFactoryBase(IDriverOptionsFactory driverOptionsFactory,
                                             string installedDriverPath,
-                                            IWebDriverReSizer webDriverReSizer,
-                                            bool useInternalEdgeDriver = false)
+                                            IWebDriverReSizer webDriverReSizer, 
+                                            bool useEdgeForInternetExplorer = true)
         {
             InstalledDriverPath = installedDriverPath;
             DriverOptionsFactory = driverOptionsFactory ?? new DefaultDriverOptionsFactory();
             WebDriverReSizer = webDriverReSizer;
-            this.useInternalEdgeDriver = useInternalEdgeDriver;
+            _useEdgeForInternetExplorer = useEdgeForInternetExplorer;
         }
 
         /// <summary>
@@ -65,12 +66,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="driverOptionsFactory"></param>
         /// <param name="driverPath"></param>
         /// <param name="webDriverReSizer"></param>
-        /// <param name="useInternalEdgeDriver"></param>
         protected LocalWebDriverFactoryBase(IDriverOptionsFactory driverOptionsFactory,
                                             DriverPath driverPath,
-                                            IWebDriverReSizer webDriverReSizer,
-                                            bool useInternalEdgeDriver = false)
-            : this(driverOptionsFactory, driverPath?.PathString, webDriverReSizer, useInternalEdgeDriver)
+                                            IWebDriverReSizer webDriverReSizer)
+            : this(driverOptionsFactory, driverPath?.PathString, webDriverReSizer)
         {
         }
 
@@ -90,6 +89,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         public IDriverOptionsFactory DriverOptionsFactory { get; set; }
 
         /// <summary>
+        /// Path to the Microsoft Edge Executable (defaults to Windows default location)
+        /// </summary>
+        public string EdgeExecutablePath { get => _edgeExecutablePath; set => _edgeExecutablePath = value; }
+
+        /// <summary>
         /// Return a local WebDriver of the given browser type with default settings.
         /// </summary>
         /// <param name="browser"></param>
@@ -99,7 +103,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
-            if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
+            if (headless && (browser == Browser.Safari || browser == Browser.InternetExplorer))
             {
                 Exception ex = new ArgumentException($"Headless mode is not currently supported for {browser}.");
                 Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
@@ -189,7 +193,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(EdgeOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
-            return GetLocalWebDriver(options, this.useInternalEdgeDriver ? null : InstalledDriverPath, windowSize, windowCustomSize);
+            return GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
         /// <summary>
@@ -201,6 +205,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(InternetExplorerOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size())
         {
+            if (_useEdgeForInternetExplorer)
+            {
+                options.AttachToEdgeChrome = true;
+                options.EdgeExecutablePath = EdgeExecutablePath;
+            }
             return GetLocalWebDriver(options, InstalledDriverPath, windowSize, windowCustomSize);
         }
 
@@ -286,9 +295,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         }
 
         /// <summary>
-        /// Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
-        /// Try using driverPath = null (default) for Windows 10 version 1809 and later.
-        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Windows 10 version 1803 and earlier.
+        /// Return a local Edge WebDriver instance. 
+        /// Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
         /// </summary>
         /// <param name="options"></param>
         /// <param name="driverPath"></param>
@@ -301,11 +309,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             WindowSize windowSize = WindowSize.Hd,
             Size windowCustomSize = new Size())
         {
-            if (!RuntimeInformation.OSDescription.StartsWith("Microsoft Windows 10"))
-            {
-                throw new PlatformNotSupportedException("Microsoft Edge is only available on Microsoft Windows 10.");
-            }
-
             IWebDriver driver = null;
 
             driver = driverPath == null

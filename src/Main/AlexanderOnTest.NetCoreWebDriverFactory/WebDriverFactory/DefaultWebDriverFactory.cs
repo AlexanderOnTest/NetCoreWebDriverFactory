@@ -101,8 +101,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 LocalWebDriverFactory.GetWebDriver(configuration) :
                 RemoteWebDriverFactory.GetWebDriver(configuration);
 
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            Logger.Debug($"{driver} successfully launched. Agent String: {js.ExecuteScript("return navigator.userAgent;")}");
+            if (IsDebugEnabled)
+            {
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                Logger.Debug($"{driver} successfully launched. Agent String: {js.ExecuteScript("return navigator.userAgent;")}");
+            }
+            
             return driver;
         }
 

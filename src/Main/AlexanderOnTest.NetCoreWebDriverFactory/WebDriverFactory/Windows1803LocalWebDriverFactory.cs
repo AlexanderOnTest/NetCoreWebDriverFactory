@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using System.Drawing;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
@@ -25,6 +26,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     /// <summary>
     /// Implementation of the ILocalWebDriverFactory interface for .NET Core test projects to allow Edge to work on Windows 10 version 1803 and Earlier.
     /// </summary>
+    [Obsolete]
     public class Windows1803LocalWebDriverFactory : DefaultLocalWebDriverFactory
     {
         /// <summary>

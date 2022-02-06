@@ -20,35 +20,35 @@ using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
     /// <summary>
-    /// Default LocalWebDriverFactory implementation for .NET Core projects in Windows using Edge for IE testing (required for Windows 11).
+    /// Default LocalWebDriverFactory implementation for .NET Core projects  using Internet Explorer for IE testing (e.g. Windows 10). 
     /// </summary>
-    public class DefaultLocalWebDriverFactory : LocalWebDriverFactoryBase
+    public class InternetExplorerLocalWebDriverFactory : LocalWebDriverFactoryBase
     {
         /// <summary>
-        /// Return a DriverFactory instance for use in .NET Core projects in Windows using Edge for IE testing (required for Windows 11).
+        /// Return a DriverFactory instance for use in .NET Core projects using Internet Explorer for IE testing.
         /// Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
         /// </summary>
         /// <param name="installedDriverPath"></param>
         /// <param name="driverOptionsFactory"></param>
         /// <param name="webDriverReSizer"></param>
-        public DefaultLocalWebDriverFactory(
+        public InternetExplorerLocalWebDriverFactory(
             IDriverOptionsFactory driverOptionsFactory,
             string installedDriverPath,
-            IWebDriverReSizer webDriverReSizer) : base(driverOptionsFactory, installedDriverPath, webDriverReSizer, true)
+            IWebDriverReSizer webDriverReSizer) : base(driverOptionsFactory, installedDriverPath, webDriverReSizer, false)
         {
         }
 
         /// <summary>
-        /// Return a DriverFactory instance for use in .NET Core projects in Windows using Edge for IE testing (required for Windows 11).
+        /// Return a DriverFactory instance for use in .NET Core projects using Internet Explorer for IE testing.
         /// Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
         /// </summary>
         /// <param name="driverPath"></param>
         /// <param name="driverOptionsFactory"></param>
         /// <param name="webDriverReSizer"></param>
-        public DefaultLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory,
+        public InternetExplorerLocalWebDriverFactory(IDriverOptionsFactory driverOptionsFactory,
                                             DriverPath driverPath,
                                             IWebDriverReSizer webDriverReSizer)
-            : base(driverOptionsFactory, driverPath?.PathString, webDriverReSizer, true)
+            : base(driverOptionsFactory, driverPath?.PathString, webDriverReSizer, false)
         {
         }
     }

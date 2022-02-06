@@ -104,7 +104,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// <summary>
         /// The Uri of the Selenium grid to use for remote calls.
         /// </summary>
-        [DefaultValue("https://localhost:4400/wd/grid")]
+        [DefaultValue("http://localhost:4444")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public Uri GridUri { get;}
 

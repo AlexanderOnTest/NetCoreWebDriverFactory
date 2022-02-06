@@ -35,7 +35,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils
                     return driver;
 
                 case WindowSize.Defined:
-                    if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
+                    if (!((WebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
                     {
                         driver.Manage().Window.Position = Point.Empty;
                     }
@@ -43,7 +43,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils
                     return driver;
 
                 default:
-                    if (!((RemoteWebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
+                    if (!((WebDriver)driver).Capabilities.GetCapability("browserName").Equals("Safari"))
                     {
                         driver.Manage().Window.Position = Point.Empty;
                     }

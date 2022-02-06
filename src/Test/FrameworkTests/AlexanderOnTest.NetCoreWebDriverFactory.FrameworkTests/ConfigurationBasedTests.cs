@@ -37,6 +37,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
         [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
         public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
@@ -45,8 +46,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
 
         [Test]
         [TestCase(PlatformType.Linux, Browser.Chrome)]
+        [TestCase(PlatformType.Linux, Browser.Edge)]
         [TestCase(PlatformType.Linux, Browser.Firefox)]
         [TestCase(PlatformType.Mac, Browser.Chrome)]
+        [TestCase(PlatformType.Mac, Browser.Edge)]
         [TestCase(PlatformType.Mac, Browser.Firefox)]
         [TestCase(PlatformType.Mac, Browser.Safari)]
         [TestCase(PlatformType.Windows, Browser.Chrome)]
@@ -82,7 +85,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         }
 
         [Test]
-        [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)

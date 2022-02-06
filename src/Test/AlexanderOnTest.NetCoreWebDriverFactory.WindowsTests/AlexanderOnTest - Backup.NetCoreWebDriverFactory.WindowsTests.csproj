@@ -19,7 +19,6 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.30.0.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
-    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="97.0.1072.55" />
   </ItemGroup>
 
   <ItemGroup>

@@ -169,6 +169,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
                 case ChromeOptions chromeOptions:
                     chromeOptions.AddArgument("headless");
                     return driverOptions;
+                case EdgeOptions edgeOptions:
+                    edgeOptions.AddArgument("headless");
+                    return driverOptions;
                 case FirefoxOptions firefoxOptions:
                     firefoxOptions.AddArgument("--headless");
                     return driverOptions;

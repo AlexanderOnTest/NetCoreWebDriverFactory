@@ -38,7 +38,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// </summary>
         public static Uri GridUri { get; }
             = Utils.GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json") ??
-              new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444/wd/hub"));
+              new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444"));
 
         /// <summary>
         /// Run the webdriver locally (rather than remote)Configuration Priority:

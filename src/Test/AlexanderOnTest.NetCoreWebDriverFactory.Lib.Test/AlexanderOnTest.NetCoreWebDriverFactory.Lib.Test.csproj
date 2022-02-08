@@ -15,7 +15,7 @@
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Scrutor" Version="3.3.0" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0-beta2" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0-beta4" />
   </ItemGroup>
 
   <ItemGroup>

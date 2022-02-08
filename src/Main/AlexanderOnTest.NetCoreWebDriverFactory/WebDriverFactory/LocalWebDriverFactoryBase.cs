@@ -103,7 +103,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
-            if (headless && (browser == Browser.Safari || browser == Browser.InternetExplorer))
+            if (headless && 
+                !(browser == Browser.Chrome || 
+                  browser == Browser.Edge || 
+                  browser == Browser.Firefox))
             {
                 Exception ex = new ArgumentException($"Headless mode is not currently supported for {browser}.");
                 Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
@@ -122,7 +125,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                     return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(), windowSize, windowCustomSize);
 
                 case Browser.Edge:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(headless), windowSize, windowCustomSize);
 
                 case Browser.Safari:
                     return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(), windowSize, windowCustomSize);

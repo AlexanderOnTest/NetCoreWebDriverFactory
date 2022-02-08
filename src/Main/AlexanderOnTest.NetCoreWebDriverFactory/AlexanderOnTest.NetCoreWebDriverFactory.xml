@@ -443,11 +443,19 @@
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a configured EdgeOptions instance.
+            Return a configured EdgeOptions instance for a RemoteWebDriver.
             </summary>
             <param name="platformType"></param>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(System.Boolean)">
+            <summary>
+            Return a configured EdgeOptions instance for a local WebDriver.
+            </summary>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetInternetExplorerOptions(OpenQA.Selenium.PlatformType)">

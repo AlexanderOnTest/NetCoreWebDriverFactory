@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>default</LangVersion>
+
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,25 +21,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.6.0" />
-    <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="Scrutor" Version="3.0.2" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="73.0.3683.68" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.24.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.5" />
+    <PackageReference Include="FluentAssertions" Version="6.4.0" />
+    <PackageReference Include="log4net" Version="2.0.14" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="Scrutor" Version="4.0.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="98.0.4758.8000" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0.1" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Main\AlexanderOnTest.NetCoreWebDriverFactory\AlexanderOnTest.NetCoreWebDriverFactory.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="System">
-      <HintPath>System</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>

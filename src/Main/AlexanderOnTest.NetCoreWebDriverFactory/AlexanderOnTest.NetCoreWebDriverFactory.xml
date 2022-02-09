@@ -443,11 +443,19 @@
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a configured EdgeOptions instance.
+            Return a configured EdgeOptions instance for a RemoteWebDriver.
             </summary>
             <param name="platformType"></param>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetEdgeOptions(System.Boolean)">
+            <summary>
+            Return a configured EdgeOptions instance for a local WebDriver.
+            </summary>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.GetInternetExplorerOptions(OpenQA.Selenium.PlatformType)">
@@ -674,12 +682,12 @@
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultLocalWebDriverFactory">
             <summary>
-            Default LocalWebDriverFactory implementation for .NET Core projects in Windows 10 versions 1809 and 1903.
+            Default LocalWebDriverFactory implementation for .NET Core projects in Windows using Edge for IE testing (required for Windows 11).
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultLocalWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,System.String,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
             <summary>
-            Return a DriverFactory instance for use in .NET Core projects.
+            Return a DriverFactory instance for use in .NET Core projects in Windows using Edge for IE testing (required for Windows 11).
             Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
             </summary>
             <param name="installedDriverPath"></param>
@@ -688,7 +696,7 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.DefaultLocalWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
             <summary>
-            Return a DriverFactory instance for use in .NET Core projects.
+            Return a DriverFactory instance for use in .NET Core projects in Windows using Edge for IE testing (required for Windows 11).
             Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
             </summary>
             <param name="driverPath"></param>
@@ -895,6 +903,29 @@
             <param name="windowCustomSize"></param>
             <returns></returns>
         </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.InternetExplorerLocalWebDriverFactory">
+            <summary>
+            Default LocalWebDriverFactory implementation for .NET Core projects  using Internet Explorer for IE testing (e.g. Windows 10). 
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.InternetExplorerLocalWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,System.String,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
+            <summary>
+            Return a DriverFactory instance for use in .NET Core projects using Internet Explorer for IE testing.
+            Try using installedDriverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" when running from .NET core projects.
+            </summary>
+            <param name="installedDriverPath"></param>
+            <param name="driverOptionsFactory"></param>
+            <param name="webDriverReSizer"></param>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.InternetExplorerLocalWebDriverFactory.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
+            <summary>
+            Return a DriverFactory instance for use in .NET Core projects using Internet Explorer for IE testing.
+            Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
+            </summary>
+            <param name="driverPath"></param>
+            <param name="driverOptionsFactory"></param>
+            <param name="webDriverReSizer"></param>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.IRemoteWebDriverFactory">
             <summary>
             Interface for a Factory for WebDrivers running on a Selenium grid.
@@ -969,9 +1000,9 @@
             <param name="driverOptionsFactory"></param>
             <param name="installedDriverPath"></param>
             <param name="webDriverReSizer"></param>
-            <param name="useInternalEdgeDriver"></param>
+            <param name="useEdgeForInternetExplorer"></param>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory,AlexanderOnTest.NetCoreWebDriverFactory.DriverPath,AlexanderOnTest.NetCoreWebDriverFactory.Utils.IWebDriverReSizer)">
             <summary>
             Return a DriverFactory instance for use in .NET Core projects.
             Try using driverPath = new DriverPath(Assembly.GetCallingAssembly()) when testing locally from .NET core projects.
@@ -979,7 +1010,6 @@
             <param name="driverOptionsFactory"></param>
             <param name="driverPath"></param>
             <param name="webDriverReSizer"></param>
-            <param name="useInternalEdgeDriver"></param>
         </member>
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.InstalledDriverPath">
             <summary>
@@ -994,6 +1024,11 @@
         <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.DriverOptionsFactory">
             <summary>
             The DriverOptionsFactory to use.
+            </summary>
+        </member>
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.EdgeExecutablePath">
+            <summary>
+            Path to the Microsoft Edge Executable (defaults to Windows default location)
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.GetWebDriver(AlexanderOnTest.NetCoreWebDriverFactory.Browser,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Boolean,System.Drawing.Size)">
@@ -1095,9 +1130,8 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory.LocalWebDriverFactoryBase.GetLocalWebDriver(OpenQA.Selenium.Edge.EdgeOptions,System.String,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size)">
             <summary>
-            Return a local Edge WebDriver instance. (Only supported on Microsoft Windows 10)
-            Try using driverPath = null (default) for Windows 10 version 1809 and later.
-            Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)" for Windows 10 version 1803 and earlier.
+            Return a local Edge WebDriver instance. 
+            Try using driverPath = "Path.GetDirectoryName(Assembly.GetCallingAssembly().Location)"
             </summary>
             <param name="options"></param>
             <param name="driverPath"></param>
@@ -1258,7 +1292,7 @@
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider">
             <summary>
-            Represents a way to get a <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILog"/>
+            Represents a way to get a <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.Logger"/>
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider.GetLogger(System.String)">
@@ -1664,7 +1698,7 @@
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProvider">
             <summary>
-            Provides a mechanism to create instances of <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILog" /> objects.
+            Provides a mechanism to set the <see cref="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider" />.
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProvider.SetCurrentLogProvider(AlexanderOnTest.NetCoreWebDriverFactory.Logging.ILogProvider)">
@@ -1831,6 +1865,22 @@
             <param name="value">A value.</param>
             <param name="destructure">Determines whether to call the destructor or not.</param>
             <returns>A disposable that when disposed removes the map from the context.</returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProviders.LogProviderBase.FindType(System.String,System.String)">
+            <summary>
+                Finds a type using a type name and assembly name.
+            </summary>
+            <param name="typeName">The name of the type.</param>
+            <param name="assemblyName">The name of the assembly.</param>
+            <returns>The requested type or null if it was not found.</returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProviders.LogProviderBase.FindType(System.String,System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>
+                Finds a type using a type name and a list of assembly names to search.
+            </summary>
+            <param name="typeName">The name of the type.</param>
+            <param name="assemblyNames">A list of assembly names to search.</param>
+            <returns>The request type or null if it was not found.</returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Logging.LogProviders.LoupeLogProvider.WriteDelegate">
             <summary>

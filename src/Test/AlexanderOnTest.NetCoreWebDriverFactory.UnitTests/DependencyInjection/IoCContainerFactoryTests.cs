@@ -92,7 +92,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
                 provider.Should().NotBe(null);
                 IRemoteWebDriverFactory remoteWebDriverFactory = provider.GetService<IRemoteWebDriverFactory>();
                 remoteWebDriverFactory.Should().BeOfType(typeof(DefaultRemoteWebDriverFactory));
-                remoteWebDriverFactory.GridUri.Should().BeEquivalentTo(GridUri);
+                remoteWebDriverFactory?.GridUri.Should().BeEquivalentTo(GridUri);
             }
         }
 
@@ -163,7 +163,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         }
 
         [Test]
-        public void ServiceCollectionProvidesCorrectlyConfiguredIWebDriverManagerfromUri()
+        public void ServiceCollectionProvidesCorrectlyConfiguredIWebDriverManagerFromUri()
         {
 
             IServiceProvider provider = ServiceCollectionFactory

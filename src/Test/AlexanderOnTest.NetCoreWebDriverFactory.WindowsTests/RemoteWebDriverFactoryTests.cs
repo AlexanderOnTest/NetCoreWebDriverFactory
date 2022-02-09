@@ -33,8 +33,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
 
         [Test]
         [TestCase(PlatformType.Linux, Browser.Chrome)]
+        [TestCase(PlatformType.Linux, Browser.Edge)]
         [TestCase(PlatformType.Linux, Browser.Firefox)]
         [TestCase(PlatformType.Mac, Browser.Chrome)]
+        [TestCase(PlatformType.Mac, Browser.Edge)]
         [TestCase(PlatformType.Mac, Browser.Firefox)]
         [TestCase(PlatformType.Mac, Browser.Safari)]
         [TestCase(PlatformType.Windows, Browser.Chrome)]

@@ -84,15 +84,29 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         }
 
         /// <summary>
-        /// Return a configured EdgeOptions instance.
+        /// Return a configured EdgeOptions instance for a RemoteWebDriver.
         /// </summary>
         /// <param name="platformType"></param>
+        /// <param name="headless"></param>
         /// <returns></returns>
-        public static EdgeOptions GetEdgeOptions(PlatformType platformType = PlatformType.Any)
+        public static EdgeOptions GetEdgeOptions(PlatformType platformType, bool headless = false)
         {
-            EdgeOptions options =  new EdgeOptions();
+            EdgeOptions options =  GetEdgeOptions(headless);
             SetPlatform(options, platformType);
-            return options;
+
+            return headless ? AddHeadlessOption(options) : options;
+        }
+
+        /// <summary>
+        /// Return a configured EdgeOptions instance for a local WebDriver.
+        /// </summary>
+        /// <param name="headless"></param>
+        /// <returns></returns>
+        public static EdgeOptions GetEdgeOptions(bool headless = false)
+        {
+            EdgeOptions options = new EdgeOptions();
+
+            return headless ? AddHeadlessOption(options) : options;
         }
 
         /// <summary>
@@ -169,12 +183,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
                 case ChromeOptions chromeOptions:
                     chromeOptions.AddArgument("headless");
                     return driverOptions;
+                case EdgeOptions edgeOptions:
+                    edgeOptions.AddArgument("headless");
+                    return driverOptions;
                 case FirefoxOptions firefoxOptions:
                     firefoxOptions.AddArgument("--headless");
                     return driverOptions;
             }
 
-            throw new ArgumentException("Only Chrome and Firefox support headless operation");
+            throw new ArgumentException("Only Chrome, Edge and Firefox support headless operation");
         }
     }
 }

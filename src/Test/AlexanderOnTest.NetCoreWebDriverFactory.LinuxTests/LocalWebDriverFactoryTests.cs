@@ -49,7 +49,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
 
         [Test]
         [Category("CI")]
-        [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
@@ -59,7 +58,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
 
         [Test]
         [Category("CI")]
-        [TestCase(Browser.Edge)]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
         public new void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
@@ -69,8 +67,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
 
         [Test]
         [TestCase(Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
         public void LocalWebDriverCallWorks(Browser browser, BrowserVisibility visibility = BrowserVisibility.OnScreen)
         {
             LocalWebDriverFactoryWorks(browser, visibility);

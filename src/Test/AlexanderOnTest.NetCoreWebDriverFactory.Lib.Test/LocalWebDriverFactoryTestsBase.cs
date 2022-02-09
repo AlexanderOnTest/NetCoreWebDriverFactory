@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
+using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -50,6 +51,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         {
             Assume.That(() => RuntimeInformation.IsOSPlatform(thisPlatform));
 
+            if (thisPlatform == OSPlatform.Windows)
+            {
+                TestContext.Progress.WriteLine("Information: These tests are configured to run local Internet Explorer tests against Microsoft Edge.");
+            }
+            
             IServiceCollection serviceCollection;
             if (useDotNetFramework)
             {

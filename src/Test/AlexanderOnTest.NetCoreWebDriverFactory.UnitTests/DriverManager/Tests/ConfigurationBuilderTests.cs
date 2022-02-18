@@ -27,16 +27,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
     [Category("CI")]
     public class ConfigurationBuilderTests
     {
-        [TestCase(Browser.Safari, WindowSize.Maximise, 1280, 1024, false, false, "http://localhost:4444/wd/hub", PlatformType.Mac)]
-        [TestCase(Browser.Edge, WindowSize.Unchanged, 1280, 1024, false, false, "http://localhost:4444/wd/hub", PlatformType.Windows)]
-        [TestCase(Browser.InternetExplorer, WindowSize.Hd, 1280, 1024, false, false, "http://localhost:4444/wd/hub", PlatformType.Windows)]
-        [TestCase(Browser.Firefox, WindowSize.Maximise, 1280, 1024, false, false, "http://localhost:4444/wd/hub", PlatformType.Linux)]
-        [TestCase(Browser.Chrome, WindowSize.Uhd, 1280, 1024, true, true, "http://localhost:4444/wd/hub", PlatformType.Any)]
+        [TestCase(Browser.Safari, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Mac)]
+        [TestCase(Browser.Edge, WindowSize.Unchanged, false, false, "http://localhost:4444", PlatformType.Windows)]
+        [TestCase(Browser.InternetExplorer, WindowSize.Hd, false, false, "http://localhost:4444", PlatformType.Windows)]
+        [TestCase(Browser.Firefox, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Linux)]
+        [TestCase(Browser.Chrome, WindowSize.Uhd, true, true, "http://localhost:4444", PlatformType.Any)]
         public void BuilderJsonConfigStringProducesCorrectSerialisation(
             Browser browser, 
             WindowSize windowSize, 
-            int width, 
-            int height, 
             bool headless,
             bool isLocal,
             string gridUri,
@@ -47,7 +45,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
                 .WithBrowser(browser)
                 .WithHeadless(headless)
                 .WithWindowSize(windowSize)
-                .WithWindowDefinedSize(new Size(width, height))
                 .WithIsLocal(isLocal)
                 .WithGridUri(new Uri(gridUri))
                 .WithPlatformType(platformType);
@@ -65,5 +62,69 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             configFromJsonConfigString.Should().BeEquivalentTo(returnedConfig);
         }
 
+        [TestCase(Browser.Safari, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Mac)]
+        [TestCase(Browser.Edge, WindowSize.Unchanged, false, false, "http://localhost:4444", PlatformType.Windows)]
+        [TestCase(Browser.InternetExplorer, WindowSize.Hd, false, false, "http://localhost:4444", PlatformType.Windows)]
+        [TestCase(Browser.Firefox, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Linux)]
+        [TestCase(Browser.Chrome, WindowSize.Uhd, true, true, "http://localhost:4444", PlatformType.Any)]
+        public void JsonNetSerialisationIsEquivalentToBuilderGetJsonConfigString(
+            Browser browser,
+            WindowSize windowSize,
+            bool headless,
+            bool isLocal,
+            string gridUri,
+            PlatformType platformType)
+        {
+            CompareJsonEquivalence(WebDriverConfigurationBuilder.Start()
+                .WithBrowser(browser)
+                .WithHeadless(headless)
+                .WithWindowSize(windowSize)
+                .WithIsLocal(isLocal)
+                .WithGridUri(new Uri(gridUri))
+                .WithPlatformType(platformType));
+        }
+        
+        
+        [TestCase(1280, 1024)]
+        [TestCase(1920, 1200)]
+        [TestCase(320, 240)]
+        [TestCase(240, 320)]
+        public void JsonNetSerialisationIsEquivalentToBuilderGetJsonConfigStringCustomSizeConfiguration(int width, int height)
+        {
+            CompareJsonEquivalence(WebDriverConfigurationBuilder.Start().WithCustomSize(new Size(width, height)));
+        }
+        
+        [TestCase(WindowSize.Unchanged)]
+        [TestCase(WindowSize.Maximise)]
+        [TestCase(WindowSize.Maximize)]
+        public void JsonNetSerialisationIsEquivalentToBuilderGetJsonConfigStringUndefinedSizeConfiguration(WindowSize windowSize)
+        {
+            CompareJsonEquivalence(WebDriverConfigurationBuilder.Start().WithWindowSize(windowSize));
+        }
+
+        [TestCase(WindowSize.Hd)]
+        [TestCase(WindowSize.Fhd)]
+        [TestCase(WindowSize.Qhd)]
+        [TestCase(WindowSize.Uhd)]
+        public void JsonNetSerialisationIsEquivalentToBuilderGetJsonConfigStringStandardSizeConfiguration(WindowSize windowSize)
+        {
+            CompareJsonEquivalence(WebDriverConfigurationBuilder.Start().WithWindowSize(windowSize));
+        }
+
+        private void CompareJsonEquivalence(WebDriverConfigurationBuilder webDriverConfigurationBuilder)
+        {
+            // Arrange
+            string formattedString = webDriverConfigurationBuilder.GetJsonConfigString();
+            WebDriverConfiguration expectedConfig = webDriverConfigurationBuilder.Build();
+            string requestedJson = expectedConfig.SerializeToJson();
+
+            // Act
+            WebDriverConfiguration returnedConfig = WebDriverConfiguration.DeserializeFromJson(requestedJson);
+            WebDriverConfiguration configFromFormattedString =
+                WebDriverConfiguration.DeserializeFromJson(formattedString);
+            
+            // Assert
+            returnedConfig.Should().BeEquivalentTo(configFromFormattedString);
+        }
     }
 }

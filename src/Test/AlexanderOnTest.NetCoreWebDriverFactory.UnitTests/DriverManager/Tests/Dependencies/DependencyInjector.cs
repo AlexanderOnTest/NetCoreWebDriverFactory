@@ -31,7 +31,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
         public static IServiceProvider GetScannedServiceProvider()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton(new Uri("http://localhost:4444/wd/hub"));
+            services.AddSingleton(new Uri("http://localhost:4444"));
             services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
             services.AddSingleton(typeof(IWebDriverConfiguration), new WebDriverConfiguration());
 
@@ -61,7 +61,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.
         public static IServiceProvider GetDefinedServiceProvider()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton(new Uri("http://localhost:4444/wd/hub"));
+            services.AddSingleton(new Uri("http://localhost:4444"));
             services.AddSingleton(new DriverPath(Assembly.GetExecutingAssembly()));
             services.AddSingleton(typeof(IWebDriverConfiguration), new WebDriverConfiguration());
             

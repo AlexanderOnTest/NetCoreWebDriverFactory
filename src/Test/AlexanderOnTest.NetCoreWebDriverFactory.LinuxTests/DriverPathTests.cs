@@ -14,7 +14,7 @@
 // limitations under the License.
 // </copyright>
 
-using System.Reflection;
+using System;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,18 +25,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
     [TestFixture(Category="CI")]
     public class DriverPathTests
     {
-        private static readonly DriverPath ExpectedDriverPath = new DriverPath(Assembly.GetExecutingAssembly());
-
-        [Test]
-        public void DriverPathLocatedByInstalledPackageIsTheSameAsLocatedByThisAssembly()
-        {
-            DriverPath implicitDriverPathLocatedByInstalledPackage = ServiceCollectionFactory
-                .GetDefaultServiceCollection(true)
-                .BuildServiceProvider()
-                .GetService<DriverPath>();
-
-            implicitDriverPathLocatedByInstalledPackage.Should().BeEquivalentTo(ExpectedDriverPath);
-        }
+        private static readonly DriverPath ExpectedDriverPath = new (Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
         [Test]
         public void DriverPathReturnedShouldBeNullIfNoPathIsSpecified()
@@ -46,16 +35,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
                 .BuildServiceProvider().GetService<DriverPath>();
 
             driverPathReturnedWhenNoPathIsSpecified.Should().BeNull();
-        }
-
-        [Test]
-        public void DriverPathIsNullWithFalsePassedIn()
-        {
-            DriverPath driverPathWithFalsePassedIn = ServiceCollectionFactory
-                .GetDefaultServiceCollection(false)
-                .BuildServiceProvider().GetService<DriverPath>();
-
-            driverPathWithFalsePassedIn.Should().BeNull();
         }
 
         [Test]

@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 
+using System;
 using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using FluentAssertions;
@@ -24,7 +25,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
 {
     public class DriverPathTests
     {
-        private static readonly DriverPath ExpectedDriverPath = new DriverPath(Assembly.GetExecutingAssembly());
+        private static readonly DriverPath ExpectedDriverPath = 
+            new (Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
         [Test]
         public void DriverPathReturnedShouldBeNullIfNoPathIsSpecified()
@@ -34,27 +36,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
                 .BuildServiceProvider().GetService<DriverPath>();
 
             driverPathReturnedWhenNoPathIsSpecified.Should().BeNull();
-        }
-
-        [Test]
-        public void DriverPathIsNullWithFalsePassedIn()
-        {
-            DriverPath driverPathWithFalsePassedIn = ServiceCollectionFactory
-                .GetDefaultServiceCollection(false)
-                .BuildServiceProvider().GetService<DriverPath>();
-
-            driverPathWithFalsePassedIn.Should().BeNull();
-        }
-
-        [Test]
-        public void DriverPathLocatedByReferencedProjectIsAsExpected()
-        {
-            DriverPath driverPathFromReferencedProject = ServiceCollectionFactory
-                .GetDefaultServiceCollection(true)
-                .BuildServiceProvider()
-                .GetService<DriverPath>();
-
-            driverPathFromReferencedProject.Should().BeEquivalentTo(ExpectedDriverPath);
         }
 
         [Test]

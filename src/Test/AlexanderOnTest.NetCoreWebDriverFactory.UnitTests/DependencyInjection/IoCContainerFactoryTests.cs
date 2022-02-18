@@ -33,8 +33,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
     [Category("CI")]
     public class IoCContainerFactoryTests
     {
-        private static readonly DriverPath DriverPath = new DriverPath(Assembly.GetExecutingAssembly());
-        private static readonly Uri GridUri = new Uri("http://192.168.0.200:4444/wd/hub");
+        private static readonly DriverPath DriverPath = 
+            new (Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+        private static readonly Uri GridUri = new ("http://localhost:4444");
 
         private static readonly IWebDriverConfiguration TestConfiguration = WebDriverConfigurationBuilder
             .Start()
@@ -51,24 +52,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             .Build();
 
         [Test]
-        [TestCase(PathDefinition.Defined, typeof(DefaultLocalWebDriverFactory))]
-        [TestCase(PathDefinition.Implicit, typeof(FrameworkLocalWebDriverFactory))]
-        public void CanGetCorrectLocalFactoryFromServiceCollection(PathDefinition driverPathType, Type expectedType)
+        [TestCase]
+        public void CanGetCorrectLocalFactoryFromServiceCollection()
         {
-            IServiceCollection serviceCollection;
-
-            switch (driverPathType)
-            {
-                case PathDefinition.Defined:
-                    serviceCollection = ServiceCollectionFactory
-                        .GetDefaultServiceCollection(DriverPath, GridUri);
-                    break;
-
-                default:
-                    serviceCollection = ServiceCollectionFactory
+            IServiceCollection serviceCollection = ServiceCollectionFactory
                         .GetDefaultServiceCollection(GridUri);
-                    break;
-            }
 
             IServiceProvider provider = serviceCollection.BuildServiceProvider();
 
@@ -76,7 +64,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             {
                 provider.Should().NotBe(null);
                 provider.GetService<ILocalWebDriverFactory>()
-                    .Should().BeOfType(expectedType);
+                    .Should().BeOfType(typeof(DefaultLocalWebDriverFactory));
             }
         }
 
@@ -100,7 +88,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         public void CanGetFullIoCContainer()
         {
             IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(DriverPath, GridUri)
+                .GetDefaultServiceCollection(GridUri, DriverPath)
                 .BuildServiceProvider();
 
             IWebDriverFactory webDriverFactory = provider.GetService<IWebDriverFactory>();
@@ -112,17 +100,20 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         public void PathDefinedServiceCollectionProvidesCorrectImplementations()
         {
             IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(DriverPath, GridUri)
+                .GetDefaultServiceCollection(GridUri, DriverPath)
                 .BuildServiceProvider();
 
             IWebDriverFactory webDriverFactory = provider.GetService<IWebDriverFactory>();
-            DefaultWebDriverFactory factory = (DefaultWebDriverFactory) webDriverFactory;
+            var defaultWebDriverFactory = webDriverFactory as DefaultWebDriverFactory;
 
             using (new AssertionScope())
             {
-                factory.LocalWebDriverFactory.Should().BeOfType<DefaultLocalWebDriverFactory>();
-                factory.RemoteWebDriverFactory.Should().BeOfType<DefaultRemoteWebDriverFactory>();
+                defaultWebDriverFactory.LocalWebDriverFactory.Should().BeOfType<DefaultLocalWebDriverFactory>();
+                defaultWebDriverFactory.RemoteWebDriverFactory.Should().BeOfType<DefaultRemoteWebDriverFactory>();
             }
+
+            var localWebDriverFactory = defaultWebDriverFactory.LocalWebDriverFactory as DefaultLocalWebDriverFactory;
+            localWebDriverFactory.InstalledDriverPath.Should().Be(DriverPath.PathString);
         }
 
         [Test]
@@ -137,7 +128,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
 
             using (new AssertionScope())
             {
-                factory.LocalWebDriverFactory.Should().BeOfType<FrameworkLocalWebDriverFactory>();
+                factory.LocalWebDriverFactory.Should().BeOfType<DefaultLocalWebDriverFactory>();
                 factory.RemoteWebDriverFactory.Should().BeOfType<DefaultRemoteWebDriverFactory>();
             }
         }
@@ -147,7 +138,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         {
 
             IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(DriverPath, TestConfiguration)
+                .GetDefaultServiceCollection(TestConfiguration, DriverPath)
                 .BuildServiceProvider();
 
             using (new AssertionScope())
@@ -167,7 +158,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
         {
 
             IServiceProvider provider = ServiceCollectionFactory
-                .GetDefaultServiceCollection(DriverPath, GridUri)
+                .GetDefaultServiceCollection(GridUri, DriverPath)
                 .BuildServiceProvider();
 
             using (new AssertionScope())

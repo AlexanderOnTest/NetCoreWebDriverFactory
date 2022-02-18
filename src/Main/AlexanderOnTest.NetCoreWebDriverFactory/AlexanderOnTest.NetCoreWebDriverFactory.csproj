@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0-beta4</Version>
+    <Version>4.0.0-beta7</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Oliveira Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -45,14 +45,10 @@ Internet Explorer testing in Edge on Local Windows</PackageReleaseNotes>
     <LangVersion>default</LangVersion>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
-    <PackageVersion>4.0.0-beta4</PackageVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <PackageVersion>4.0.0-beta7</PackageVersion>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/AlexanderOnTest/AlexanderOnTest.github.io/master/assets/icons/dotnet/64.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
@@ -71,7 +67,17 @@ Internet Explorer testing in Edge on Local Windows</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="AoTdN.png" Pack="true" Visible="false" PackagePath="" />
+    <None Include="AoTdN.png" Pack="true" PackagePath="">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="WebDriverFactory\InstalledDriverLocalWebDriverFactory.cs" />
+    <Compile Remove="WebDriverFactory\PackagedDriverLocalWebDriverFactory.cs" />
+    <Compile Remove="WebDriverFactory\Windows1803LocalWebDriverFactory.cs" />
+    <Compile Remove="WebDriverFactory\FrameworkLocalWebDriverFactory.cs" />
+    <Compile Remove="WebDriverFactory\InternetExplorerLocalWebDriverFactory.cs" />
   </ItemGroup>
 
 </Project>

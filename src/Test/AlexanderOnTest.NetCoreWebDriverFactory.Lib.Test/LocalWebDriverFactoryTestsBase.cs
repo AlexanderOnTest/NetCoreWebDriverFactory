@@ -65,7 +65,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             else
             {
                 serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection(true);
+                    .GetDefaultServiceCollection();
             }
             IServiceProvider provider = serviceCollection.BuildServiceProvider();
             LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();

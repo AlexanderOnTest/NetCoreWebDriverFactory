@@ -40,6 +40,49 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             deserialisedConfig.Should().BeEquivalentTo(testConfig);
         }
 
+        [TestCase(WindowSize.Hd,1366,768)]
+        [TestCase(WindowSize.Fhd,1920,1080)]
+        [TestCase(WindowSize.Qhd,2560,1440)]
+        [TestCase(WindowSize.Uhd,3840,2160)]
+        public void StandardSizeConfigurationSerialisesWithCorrectWidthAndHeight(WindowSize windowSize, int expectedWidth, int expectedHeight)
+        {
+            // Arrange
+            WebDriverConfiguration testedConfig = WebDriverConfigurationBuilder.Start().WithWindowSize(windowSize).Build();
+
+            // Act
+            string actualJson = testedConfig.SerializeToJson();
+
+            //Assert
+            using (new AssertionScope())
+            {
+                actualJson.Should().Contain("\"PlatformType\":\"Windows\"");
+                actualJson.Should().Contain($"\"WindowSize\":\"Defined\"");
+                actualJson.Should().Contain($"\"WindowDefinedSize\":{{\"width\":{expectedWidth},\"height\":{expectedHeight}}}");
+                actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444\"");
+            }
+        }
+        
+        [TestCase(WindowSize.Unchanged)]
+        [TestCase(WindowSize.Maximise)]
+        [TestCase(WindowSize.Maximize)]
+        public void UndefinedSizeConfigurationSerialisesWithCorrectWidthAndHeight(WindowSize windowSize)
+        {
+            // Arrange
+            WebDriverConfiguration testedConfig = WebDriverConfigurationBuilder.Start().WithWindowSize(windowSize).Build();
+
+            // Act
+            string actualJson = testedConfig.SerializeToJson();
+
+            //Assert
+            using (new AssertionScope())
+            {
+                actualJson.Should().Contain("\"PlatformType\":\"Windows\"");
+                actualJson.Should().Contain($"\"WindowSize\":\"{windowSize}\"");
+                actualJson.Should().Contain("\"WindowDefinedSize\":{\"width\":0,\"height\":0}");
+                actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444\"");
+            }
+        }
+
         [TestCase(1280, 1024)]
         [TestCase(1920, 1200)]
         [TestCase(320, 240)]
@@ -55,10 +98,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             //Assert
             using (new AssertionScope())
             {
-                actualJson.Should().Contain("\"PlatformType\":1");
-                actualJson.Should().Contain("\"WindowSize\":8");
+                actualJson.Should().Contain("\"PlatformType\":\"Windows\"");
+                actualJson.Should().Contain("\"WindowSize\":\"Defined\"");
                 actualJson.Should().Contain($"\"WindowDefinedSize\":{{\"width\":{width},\"height\":{height}}}");
-                actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444/wd/hub\"");
+                actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444\"");
             }
         }
 

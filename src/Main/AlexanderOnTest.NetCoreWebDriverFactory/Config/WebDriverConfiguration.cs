@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Text;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
@@ -79,6 +80,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// </summary>
         [DefaultValue(Browser.Firefox)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonConverter(typeof(StringEnumConverter))]
         public Browser Browser { get;}
 
         /// <summary>
@@ -86,6 +88,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// </summary>
         [DefaultValue(PlatformType.Any)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonConverter(typeof(StringEnumConverter))]
         public PlatformType PlatformType { get;}
 
         /// <summary>
@@ -93,6 +96,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// </summary>
         [DefaultValue(WindowSize.Hd)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonConverter(typeof(StringEnumConverter))]
         public WindowSize WindowSize { get;}
 
         /// <summary>

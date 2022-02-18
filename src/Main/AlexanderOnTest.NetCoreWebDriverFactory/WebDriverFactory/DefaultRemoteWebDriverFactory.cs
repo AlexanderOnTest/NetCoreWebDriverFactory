@@ -33,7 +33,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     /// <summary>
     /// Default RemoteWebDriverFactory implementation.
     /// </summary>
-    public class DefaultRemoteWebDriverFactory : IRemoteWebDriverFactory
+    public sealed class DefaultRemoteWebDriverFactory : IRemoteWebDriverFactory
     {
         private static readonly ILog Logger = LogProvider.For<DefaultRemoteWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
@@ -122,7 +122,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
+        public IWebDriver GetWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
             if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
             {
@@ -159,7 +159,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing)
             {

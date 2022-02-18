@@ -30,14 +30,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
     /// <summary>
     /// Example DI Container factory for quick prototyping.
     /// <para>WARNING: This should not be considered stable for use in production projects.
-    /// You are STRONGLY advised to use the source code for inspiration rather than using these method directly.</para>
+    /// You are STRONGLY advised to use the source code for inspiration rather than using these methods directly.</para>
     /// </summary>
     [QuickStart]
     public static class ServiceCollectionFactory
     {
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
-        /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
         /// <para>WARNING: This should not be considered stable for use in production projects.
         /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
@@ -45,12 +44,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection()
         {
-            return GetDefaultServiceCollection(null, (IWebDriverConfiguration) null);
+            return GetDefaultServiceCollection((IWebDriverConfiguration) null, null);
         }
 
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
-        /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
         /// <para>WARNING: This should not be considered stable for use in production projects.
         /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
@@ -60,12 +58,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         public static IServiceCollection GetDefaultServiceCollection(
             IWebDriverConfiguration driverConfig)
         {
-            return GetDefaultServiceCollection(null, driverConfig);
+            return GetDefaultServiceCollection(driverConfig, null);
         }
 
         /// <summary>
         /// Get a ServiceCollection referencing default implementations using implicit path.
-        /// Use for .NET Framework projects and projects where the driver executables are on the System Path.
         /// <para>WARNING: This should not be considered stable for use in production projects.
         /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
@@ -75,73 +72,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         public static IServiceCollection GetDefaultServiceCollection(
             Uri gridUri)
         {
-            return GetDefaultServiceCollection(null, GetDefaultWebDriverConfigurationFromUri(gridUri));
-        }
-
-        /// <summary>
-        /// Experimental - Get a ServiceCollection referencing default implementations.
-        /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
-        /// <para>WARNING: This should not be considered stable for use in production projects.
-        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
-        /// </summary>
-        /// <param name="useDefaultDotNetCoreDriverPath"> </param>
-        /// <returns></returns>
-        [QuickStart]
-        [Experimental("The calling assembly must have the required driver nuget packages installed.")]
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public static IServiceCollection GetDefaultServiceCollection(
-            bool useDefaultDotNetCoreDriverPath)
-        {
-            return useDefaultDotNetCoreDriverPath? 
-                GetDefaultServiceCollection(new DriverPath(Assembly.GetCallingAssembly()), (IWebDriverConfiguration) null) :
-                GetDefaultServiceCollection(null, (IWebDriverConfiguration) null);
-        }
-
-        /// <summary>
-        /// Experimental - Get a ServiceCollection referencing default implementations.
-        /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
-        /// WARNING: This should not be considered stable for use in production projects.
-        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.
-        /// </summary>
-        /// <param name="useDefaultDotNetCoreDriverPath"></param>
-        /// <param name="gridUri"></param>
-        /// <returns></returns>
-        [QuickStart]
-        [Experimental("The calling assembly must have the required driver nuget packages installed.")]
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public static IServiceCollection GetDefaultServiceCollection(
-            bool useDefaultDotNetCoreDriverPath,
-            Uri gridUri)
-        {
-            return useDefaultDotNetCoreDriverPath ? 
-                GetDefaultServiceCollection(new DriverPath(Assembly.GetCallingAssembly()), GetDefaultWebDriverConfigurationFromUri(gridUri)) :
-                GetDefaultServiceCollection(null, GetDefaultWebDriverConfigurationFromUri(gridUri));
-        }
-
-        /// <summary>
-        /// Experimental - Get a ServiceCollection referencing default implementations.
-        /// Use true for .NET Core projects with driver executables from nuget packages / false for .NET Framework using nuget or driver executables on the System Path.
-        /// <para>WARNING: This should not be considered stable for use in production projects.
-        /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
-        /// </summary>
-        /// <param name="useDefaultDotNetCoreDriverPath"></param>
-        /// <param name="driverConfig"></param>
-        /// <returns></returns>
-        [QuickStart]
-        [Experimental("The calling assembly must have the required driver nuget packages installed.")]
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public static IServiceCollection GetDefaultServiceCollection(
-            bool useDefaultDotNetCoreDriverPath,
-            IWebDriverConfiguration driverConfig)
-        {
-            return useDefaultDotNetCoreDriverPath ? 
-                GetDefaultServiceCollection(new DriverPath(Assembly.GetCallingAssembly()), driverConfig) :
-                GetDefaultServiceCollection(null, driverConfig);
+            return GetDefaultServiceCollection(GetDefaultWebDriverConfigurationFromUri(gridUri), null);
         }
 
         /// <summary>
         /// Get a ServiceCollection referencing default implementations with a defined driver path.
-        /// Use for .NET Core projects with driver executables from nuget packages.
         /// <para>WARNING: This should not be considered stable for use in production projects.
         /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
@@ -151,24 +86,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         public static IServiceCollection GetDefaultServiceCollection(
             DriverPath driverPath)
         {
-            return GetDefaultServiceCollection(driverPath, (IWebDriverConfiguration) null);
+            return GetDefaultServiceCollection((IWebDriverConfiguration) null, driverPath);
         }
 
         /// <summary>
         /// Get a ServiceCollection referencing default implementations with a defined driver path.
-        /// Use for .NET Core projects with driver executables from nuget packages.
         /// <para>WARNING: This should not be considered stable for use in production projects.
         /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
-        /// <param name="driverPath"></param>
         /// <param name="gridUri"></param>
+        /// <param name="driverPath"></param>
         /// <returns></returns>
         [QuickStart]
-        public static IServiceCollection GetDefaultServiceCollection(
-            DriverPath driverPath,
-            Uri gridUri)
+        public static IServiceCollection GetDefaultServiceCollection(Uri gridUri, DriverPath driverPath)
         {
-            return GetDefaultServiceCollection(driverPath, GetDefaultWebDriverConfigurationFromUri(gridUri));
+            return GetDefaultServiceCollection(GetDefaultWebDriverConfigurationFromUri(gridUri), driverPath);
         }
 
         /// <summary>
@@ -176,13 +108,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
         /// <para>WARNING: This should not be considered stable for use in production projects.
         /// You are STRONGLY advised to use the source code for inspiration rather than using this method directly.</para>
         /// </summary>
-        /// <param name="driverPath"></param>
         /// <param name="driverConfig"></param>
+        /// <param name="driverPath"></param>
         /// <returns></returns>
         [QuickStart]
         public static IServiceCollection GetDefaultServiceCollection(
-            DriverPath driverPath,
-            IWebDriverConfiguration driverConfig)
+            IWebDriverConfiguration driverConfig,
+            DriverPath driverPath)
         {
             IServiceCollection services = new ServiceCollection();
             
@@ -192,15 +124,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
             if (driverPath != null)
             {
                 services.AddSingleton<DriverPath>(driverPath);
-                services.AddSingleton<ILocalWebDriverFactory, DefaultLocalWebDriverFactory>();
-            }
-            else
-            {
-                services.AddSingleton<ILocalWebDriverFactory, FrameworkLocalWebDriverFactory>();
             }
 
             services.AddSingleton(driverConfig ?? WebDriverConfigurationBuilder.Start().Build());
-
+            services.AddSingleton<ILocalWebDriverFactory, DefaultLocalWebDriverFactory>();
             services.AddSingleton<IRemoteWebDriverFactory, DefaultRemoteWebDriverFactory>();
 
             services.AddSingleton<IWebDriverFactory, DefaultWebDriverFactory>();

@@ -24,9 +24,9 @@ using OpenQA.Selenium;
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
     /// <summary>
-    /// Overridable implementation of the IWebDriverFactory interface for .NET Core test projects.
+    /// Implementation of the IWebDriverFactory interface for .NET Core test projects.
     /// </summary>
-    public class DefaultWebDriverFactory : IWebDriverFactory
+    public sealed class DefaultWebDriverFactory : IWebDriverFactory
     {
         private static readonly ILog Logger = LogProvider.For<DefaultWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
@@ -64,7 +64,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
+        public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
         {
             string configurationDescription = new StringBuilder()
@@ -114,7 +114,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing)
             {

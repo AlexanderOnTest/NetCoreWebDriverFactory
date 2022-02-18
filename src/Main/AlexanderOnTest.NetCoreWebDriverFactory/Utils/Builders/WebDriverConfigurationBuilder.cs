@@ -53,7 +53,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
             platformType = PlatformType.Windows;
             windowSize = WindowSize.Hd;
             windowDefinedSize = Size.Empty;
-            gridUri = new Uri("http://localhost:4444/wd/hub");
+            gridUri = new Uri("http://localhost:4444");
             isLocal = true;
             headless = false;
         }

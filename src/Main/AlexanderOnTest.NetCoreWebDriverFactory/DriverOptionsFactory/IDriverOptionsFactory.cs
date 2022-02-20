@@ -25,19 +25,23 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
     public interface IDriverOptionsFactory : IDisposable
     {
         /// <summary>
-        /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+        /// <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
+        /// <para>Defaults to headless mode where available.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="headless"></param>
         /// <returns></returns>
-        T GetLocalDriverOptions<T>(bool headless = false) where T : DriverOptions;
+        T GetLocalDriverOptions<T>(bool headless = true) where T : DriverOptions;
 
         /// <summary>
-        /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+        /// <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
+        /// <para>Defaults to headless mode where available.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="platformType"></param>
+        /// <param name="headless"></param>
         /// <returns></returns>
-        T GetRemoteDriverOptions<T>(PlatformType platformType) where T : DriverOptions;
+        T GetRemoteDriverOptions<T>(PlatformType platformType, bool headless = true) where T : DriverOptions;
     }
 }
+

@@ -308,18 +308,21 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
+            <para>Defaults to headless mode where available.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a RemoteWebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
+            <para>Defaults to headless mode where available.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.SetPlatform``1(``0,OpenQA.Selenium.PlatformType)">
@@ -357,18 +360,21 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
+            <para>Defaults to headless mode where available.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
+            <para>Defaults to headless mode where available.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory">

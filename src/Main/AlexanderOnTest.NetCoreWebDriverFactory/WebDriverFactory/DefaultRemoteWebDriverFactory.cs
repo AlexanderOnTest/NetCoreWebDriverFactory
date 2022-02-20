@@ -122,9 +122,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public IWebDriver GetWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
+        public IWebDriver GetWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = true, Size windowCustomSize = new Size())
         {
-            if (headless && !(browser == Browser.Chrome || browser == Browser.Firefox))
+            if (headless && !(browser == Browser.Chrome || browser == Browser.Edge || browser == Browser.Firefox))
             {
                 Exception ex = new ArgumentException($"Headless mode is not currently supported for {browser}.");
                 Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
@@ -134,19 +134,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType, headless), windowSize, windowCustomSize);
 
                 case Browser.Chrome:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType, headless), windowSize, windowCustomSize);
 
                 case Browser.InternetExplorer:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType, headless), windowSize, windowCustomSize);
 
                 case Browser.Edge:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType, headless), windowSize, windowCustomSize);
 
                 case Browser.Safari:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType, headless), windowSize, windowCustomSize);
 
                 default:
                     Exception ex = new PlatformNotSupportedException($"{browser} is not currently supported.");

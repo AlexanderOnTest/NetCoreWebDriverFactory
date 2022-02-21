@@ -122,7 +122,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <returns></returns>
-        public IWebDriver GetWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = true, Size windowCustomSize = new Size())
+        public IWebDriver GetWebDriver(Browser browser, PlatformType platformType = PlatformType.Any, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
         {
             if (headless && !(browser == Browser.Chrome || browser == Browser.Edge || browser == Browser.Firefox))
             {

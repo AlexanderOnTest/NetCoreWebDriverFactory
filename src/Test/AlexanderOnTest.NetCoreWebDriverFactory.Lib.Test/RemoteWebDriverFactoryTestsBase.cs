@@ -17,7 +17,9 @@
 using System;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -51,10 +53,17 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             RemoteWebDriverFactory = provider.GetService<IRemoteWebDriverFactory>();
         }
         
-        public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
+        public void RemoteWebDriverFactoryWorks(
+            PlatformType platformType, 
+            Browser browser, 
+            BrowserVisibility browserVisibility = BrowserVisibility.OnScreen)
         {
-            Driver = RemoteWebDriverFactory.GetWebDriver(browser, platformType);
+            Driver = RemoteWebDriverFactory
+                .GetWebDriver(browser, platformType, WindowSize.Fhd, browserVisibility == BrowserVisibility.Headless);
             Assertions.AssertThatPageCanBeLoaded(Driver);
+            Driver.IsRunningHeadless().Should()
+                .Be(browserVisibility == BrowserVisibility.Headless, 
+                    $"{browserVisibility.ToString()} was requested");
         }
 
         [TearDown]

@@ -295,31 +295,34 @@
             Construct a default DriverOptionsFactory.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.#ctor(System.Collections.Generic.Dictionary{System.Type,OpenQA.Selenium.DriverOptions})">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.#ctor(System.Collections.Generic.Dictionary{System.Type,System.Func{OpenQA.Selenium.DriverOptions}})">
             <summary>
             Constructor to override the default DriverOptions.
             </summary>
             <param name="driverOptionsDictionary"></param>
         </member>
-        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.DriverOptionsDictionary">
+        <member name="P:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.DriverOptionsFunctionsDictionary">
             <summary>
             Dictionary of basically configured DriverOptions instances.
             </summary>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
+            <para>Defaults to on screen running.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a RemoteWebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
+            <para>Defaults to on screen running.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.SetPlatform``1(``0,OpenQA.Selenium.PlatformType)">
@@ -357,18 +360,19 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="headless"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean)">
             <summary>
-            Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+            <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="platformType"></param>
+            <param name="headless"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory">
@@ -627,6 +631,20 @@
             <param name="driver"></param>
             <param name="windowSize"></param>
             <param name="windowCustomSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverExtensions">
+            <summary>
+            WebDriver Extensions
+            </summary>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverExtensions.IsRunningHeadless(OpenQA.Selenium.IWebDriver)">
+            <summary>
+            <para> Is this WebDriver instance running Headless </para>
+            <para> Caution this relies upon implmentation details and is liable to breaking. </para>
+            <para> See <cref>https://stackoverflow.com/questions/47559054/generic-way-to-check-browser-options-of-running-webdriver-instance</cref></para>
+            </summary>
+            <param name="driver"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Utils.WebDriverReSizer">

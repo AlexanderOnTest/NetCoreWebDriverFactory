@@ -31,21 +31,29 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.LinuxTests
 
         public RemoteWebDriverFactoryTests() : base(ThisPlatform, GridUrl) { }
 
-        [Test]
-        [TestCase(PlatformType.Linux, Browser.Chrome)]
-        [TestCase(PlatformType.Linux, Browser.Edge)]
-        [TestCase(PlatformType.Linux, Browser.Firefox)]
-        [TestCase(PlatformType.Mac, Browser.Chrome)]
-        [TestCase(PlatformType.Mac, Browser.Edge)]
-        [TestCase(PlatformType.Mac, Browser.Firefox)]
-        [TestCase(PlatformType.Mac, Browser.Safari)]
-        [TestCase(PlatformType.Windows, Browser.Chrome)]
-        [TestCase(PlatformType.Windows, Browser.Edge)]
-        [TestCase(PlatformType.Windows, Browser.Firefox)]
-        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
-        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
+        [TestCase(PlatformType.Linux, Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Linux, Browser.Edge, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Linux, Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Mac, Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Mac, Browser.Edge, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Mac, Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Mac, Browser.Safari, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Windows, Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Linux, Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Linux, Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Linux, Browser.Firefox, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Mac, Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Mac, Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Mac, Browser.Firefox, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Windows, Browser.Firefox, BrowserVisibility.Headless)]
+        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser, BrowserVisibility browserVisibility = BrowserVisibility.OnScreen)
         {
-            base.RemoteWebDriverFactoryWorks(platformType, browser);
+            base.RemoteWebDriverFactoryWorks(platformType, browser, browserVisibility);
         }
     }
 }

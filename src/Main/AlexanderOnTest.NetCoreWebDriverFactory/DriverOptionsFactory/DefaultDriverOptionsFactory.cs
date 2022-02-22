@@ -35,13 +35,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         /// </summary>
         public DefaultDriverOptionsFactory()
         {
-            this.DriverOptionsDictionary = new Dictionary<Type, DriverOptions>
+            this.DriverOptionsFunctionsDictionary = new Dictionary<Type, Func<DriverOptions>>
             {
-                {typeof(ChromeOptions), StaticDriverOptionsFactory.GetChromeOptions()},
-                {typeof(EdgeOptions), StaticDriverOptionsFactory.GetEdgeOptions()},
-                {typeof(FirefoxOptions), StaticDriverOptionsFactory.GetFirefoxOptions()},
-                {typeof(InternetExplorerOptions), StaticDriverOptionsFactory.GetInternetExplorerOptions()},
-                {typeof(SafariOptions), StaticDriverOptionsFactory.GetSafariOptions()}
+                {typeof(ChromeOptions), () => StaticDriverOptionsFactory.GetChromeOptions()},
+                {typeof(EdgeOptions), () => StaticDriverOptionsFactory.GetEdgeOptions()},
+                {typeof(FirefoxOptions), () => StaticDriverOptionsFactory.GetFirefoxOptions()},
+                {typeof(InternetExplorerOptions), () => StaticDriverOptionsFactory.GetInternetExplorerOptions()},
+                {typeof(SafariOptions), () => StaticDriverOptionsFactory.GetSafariOptions()}
             };
         }
 
@@ -49,18 +49,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         /// Constructor to override the default DriverOptions.
         /// </summary>
         /// <param name="driverOptionsDictionary"></param>
-        public DefaultDriverOptionsFactory(Dictionary<Type, DriverOptions> driverOptionsDictionary)
+        public DefaultDriverOptionsFactory(Dictionary<Type, Func<DriverOptions>> driverOptionsDictionary)
         {
-            DriverOptionsDictionary = driverOptionsDictionary;
+            DriverOptionsFunctionsDictionary = driverOptionsDictionary;
         }
 
         /// <summary>
         /// Dictionary of basically configured DriverOptions instances.
         /// </summary>
-        protected Dictionary<Type, DriverOptions> DriverOptionsDictionary { get; }
+        protected Dictionary<Type, Func<DriverOptions>> DriverOptionsFunctionsDictionary { get; }
 
         /// <summary>
-        /// Return a DriverOptions instance of the correct type configured for a Local WebDriver.
+        /// <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
+        /// <para>Defaults to on screen running.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="headless"></param>
@@ -68,23 +69,26 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         public T GetLocalDriverOptions<T>(bool headless = false) where T : DriverOptions
         {
             Type type = typeof(T);
-            DriverOptionsDictionary.TryGetValue(type, out DriverOptions driverOptions);
-            T options = driverOptions as T;
+            DriverOptionsFunctionsDictionary.TryGetValue(type, out Func<DriverOptions> driverOptionsFunction);
+            T options = driverOptionsFunction() as T;
             return headless ? AddHeadlessOption(options) : options;
         }
 
         /// <summary>
-        /// Return a DriverOptions instance of the correct type configured for a RemoteWebDriver.
+        /// <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
+        /// <para>Defaults to on screen running.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="platformType"></param>
+        /// <param name="headless"></param>
         /// <returns></returns>
-        public T GetRemoteDriverOptions<T>(PlatformType platformType) where T : DriverOptions
+        public T GetRemoteDriverOptions<T>(PlatformType platformType, bool headless = false) where T : DriverOptions
         {
             Type type = typeof(T);
-            DriverOptionsDictionary.TryGetValue(type, out DriverOptions driverOptions);
-            SetPlatform(driverOptions, platformType);
-            return (T)driverOptions;
+            DriverOptionsFunctionsDictionary.TryGetValue(type, out Func<DriverOptions> driverOptionsFunction);
+            T options = driverOptionsFunction() as T;
+            SetPlatform(options, platformType);
+            return headless ? AddHeadlessOption(options) : options;
         }
 
         /// <summary>

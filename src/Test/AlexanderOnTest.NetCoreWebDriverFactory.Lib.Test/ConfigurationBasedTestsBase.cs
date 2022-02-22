@@ -19,9 +19,13 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
+using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -33,6 +37,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         private readonly OSPlatform thisPlatform;
         private readonly Uri gridUrl;
         private readonly bool useDotNetFramework;
+        private SizeJsonConverter sizeJsonConverter = new SizeJsonConverter();
 
         protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, Uri gridUri, bool useDotNetFramework = false)
         {
@@ -80,19 +85,28 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithBrowser(browser)
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
                 .Build();
+            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatPageCanBeLoaded(Driver);
         }
         
-        public void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser)
+        public void RemoteWebDriverFactoryWorks(
+            PlatformType platformType, 
+            Browser browser, 
+            BrowserVisibility browserVisibility = BrowserVisibility.OnScreen)
         {
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
+                .WithHeadless(browserVisibility == BrowserVisibility.Headless)
                 .RunRemotelyOn(gridUrl)
                 .WithPlatformType(platformType)
                 .Build();
+            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatPageCanBeLoaded(Driver);
+            Driver.IsRunningHeadless().Should()
+                .Be(browserVisibility == BrowserVisibility.Headless, 
+                    $"{browserVisibility.ToString()} was requested");
         }
         
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
@@ -102,6 +116,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .RunHeadless()
                 .WithWindowSize(windowSize)
                 .Build();
+            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
@@ -113,6 +128,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .RunHeadless()
                 .WithCustomSize(new Size(expectedWidth, expectedHeight))
                 .Build();
+            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
@@ -122,7 +138,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
                 .Build();
-
+            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             void Act() => WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, thisPlatform);
         }

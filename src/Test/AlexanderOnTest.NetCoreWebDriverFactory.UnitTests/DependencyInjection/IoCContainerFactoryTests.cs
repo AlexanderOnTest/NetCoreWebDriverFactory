@@ -52,7 +52,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             .Build();
 
         [Test]
-        [TestCase]
         public void CanGetCorrectLocalFactoryFromServiceCollection()
         {
             IServiceCollection serviceCollection = ServiceCollectionFactory

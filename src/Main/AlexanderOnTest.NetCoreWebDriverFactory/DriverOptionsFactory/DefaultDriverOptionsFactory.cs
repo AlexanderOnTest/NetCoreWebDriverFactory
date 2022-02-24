@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -65,12 +66,17 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="headless"></param>
+        /// <param name="requestedCulture"></param>
         /// <returns></returns>
-        public T GetLocalDriverOptions<T>(bool headless = false) where T : DriverOptions
+        public T GetLocalDriverOptions<T>(bool headless = false, CultureInfo requestedCulture = null) where T : DriverOptions
         {
             Type type = typeof(T);
             DriverOptionsFunctionsDictionary.TryGetValue(type, out Func<DriverOptions> driverOptionsFunction);
             T options = driverOptionsFunction() as T;
+            if (requestedCulture != null)
+            {
+                SetCulture(options, requestedCulture, headless);
+            }
             return headless ? AddHeadlessOption(options) : options;
         }
 
@@ -81,13 +87,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         /// <typeparam name="T"></typeparam>
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
+        /// <param name="requestedCulture"></param>
         /// <returns></returns>
-        public T GetRemoteDriverOptions<T>(PlatformType platformType, bool headless = false) where T : DriverOptions
+        public T GetRemoteDriverOptions<T>(PlatformType platformType, bool headless = false, CultureInfo requestedCulture = null) where T : DriverOptions
         {
             Type type = typeof(T);
             DriverOptionsFunctionsDictionary.TryGetValue(type, out Func<DriverOptions> driverOptionsFunction);
             T options = driverOptionsFunction() as T;
             SetPlatform(options, platformType);
+            if (requestedCulture != null)
+            {
+                SetCulture(options, requestedCulture, headless);
+            }
             return headless ? AddHeadlessOption(options) : options;
         }
 
@@ -112,6 +123,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         protected virtual T AddHeadlessOption<T>(T driverOptions) where T : DriverOptions
         {
             return StaticDriverOptionsFactory.AddHeadlessOption(driverOptions);
+        }
+
+        /// <summary>
+        /// Set the requested Language culture if available
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="options"></param>
+        /// <param name="requestedCulture"></param>
+        /// <param name="headless"></param>
+        /// <returns></returns>
+        protected T SetCulture<T>(T options, CultureInfo requestedCulture, bool headless) where T : DriverOptions
+        {
+            return StaticDriverOptionsFactory.SetCulture(options, requestedCulture, headless);
         }
 
         /// <summary>

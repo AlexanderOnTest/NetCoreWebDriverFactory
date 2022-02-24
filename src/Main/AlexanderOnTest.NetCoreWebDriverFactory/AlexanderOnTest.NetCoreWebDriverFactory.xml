@@ -306,16 +306,17 @@
             Dictionary of basically configured DriverOptions instances.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean,System.Globalization.CultureInfo)">
             <summary>
             <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
             <para>Defaults to on screen running.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="headless"></param>
+            <param name="requestedCulture"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean,System.Globalization.CultureInfo)">
             <summary>
             <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
             <para>Defaults to on screen running.</para>
@@ -323,6 +324,7 @@
             <typeparam name="T"></typeparam>
             <param name="platformType"></param>
             <param name="headless"></param>
+            <param name="requestedCulture"></param>
             <returns></returns>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.SetPlatform``1(``0,OpenQA.Selenium.PlatformType)">
@@ -342,6 +344,16 @@
             <param name="driverOptions"></param>
             <returns></returns>
         </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.SetCulture``1(``0,System.Globalization.CultureInfo,System.Boolean)">
+            <summary>
+            Set the requested Language culture if available
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="options"></param>
+            <param name="requestedCulture"></param>
+            <param name="headless"></param>
+            <returns></returns>
+        </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.DefaultDriverOptionsFactory.Dispose(System.Boolean)">
             <summary>
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -358,21 +370,23 @@
             Interface for DriverOptionsFactory instances.
             </summary>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetLocalDriverOptions``1(System.Boolean,System.Globalization.CultureInfo)">
             <summary>
             <para>Return a DriverOptions instance of the correct type configured for a Local WebDriver.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="headless"></param>
+            <param name="requestedCulture"></param>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.IDriverOptionsFactory.GetRemoteDriverOptions``1(OpenQA.Selenium.PlatformType,System.Boolean,System.Globalization.CultureInfo)">
             <summary>
             <para>Return a DriverOptions instance of the correct type configured for a Remote WebDriver.</para>
             </summary>
             <typeparam name="T"></typeparam>
             <param name="platformType"></param>
             <param name="headless"></param>
+            <param name="requestedCulture"></param>
             <returns></returns>
         </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory">
@@ -447,6 +461,18 @@
             <param name="options"></param>
             <param name="platformType"></param>
             <returns></returns>
+        </member>
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.SetCulture``1(``0,System.Globalization.CultureInfo,System.Boolean)">
+            <summary>
+            Add the required settings for requesting a browser of a given language profile - if supported.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="options"></param>
+            <param name="requestedCulture"></param>
+            <param name="headless"></param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory.StaticDriverOptionsFactory.AddHeadlessOption``1(``0)">
             <summary>

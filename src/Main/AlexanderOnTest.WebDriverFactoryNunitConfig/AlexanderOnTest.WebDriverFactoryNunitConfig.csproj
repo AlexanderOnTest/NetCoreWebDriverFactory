@@ -39,7 +39,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-beta11" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-beta12" />
         <None Include="AoTdN.png" Pack="true" PackagePath="">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

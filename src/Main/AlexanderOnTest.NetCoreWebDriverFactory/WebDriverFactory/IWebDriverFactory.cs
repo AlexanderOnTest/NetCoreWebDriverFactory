@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using OpenQA.Selenium;
 
@@ -35,9 +36,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="requestedCultrue"></param>
         /// <returns></returns>
-        IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size());
+        IWebDriver GetWebDriver(
+            Browser browser, 
+            WindowSize windowSize = WindowSize.Hd, 
+            bool isLocal = true,
+            PlatformType platformType = PlatformType.Any, 
+            bool headless = false, 
+            Size windowCustomSize = new Size(),
+            CultureInfo requestedCultrue = null);
 
         /// <summary>
         /// Return a WebDriver instance of the given configuration.

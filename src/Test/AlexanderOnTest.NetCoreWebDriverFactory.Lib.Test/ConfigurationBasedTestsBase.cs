@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
@@ -31,22 +32,17 @@ using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
-    [TestFixture]
     public abstract class ConfigurationBasedTestsBase
     {
         private readonly OSPlatform thisPlatform;
         private readonly Uri gridUrl;
-        private readonly bool useDotNetFramework;
+        // private readonly bool useDotNetFramework;
+        private readonly CultureInfo testCultureInfo = new CultureInfo("es-Es");
         private SizeJsonConverter sizeJsonConverter = new SizeJsonConverter();
 
-        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, Uri gridUri, bool useDotNetFramework = false)
+        protected ConfigurationBasedTestsBase(OSPlatform thisPlatform, Uri gridUri)
         {
             this.thisPlatform = thisPlatform;
-            if (thisPlatform != OSPlatform.Windows && useDotNetFramework)
-            {
-                throw new PlatformNotSupportedException(".NET Framework is only available on Microsoft Windows platforms.");
-            }
-            this.useDotNetFramework = useDotNetFramework;
             this.gridUrl = gridUri;
         }
 
@@ -63,47 +59,44 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 TestContext.Progress.WriteLine("Information: These tests are configured to run local Internet Explorer tests against Microsoft Edge.");
             }
             
-            IServiceCollection serviceCollection;
-            if (useDotNetFramework)
-            {
-                serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection(gridUrl);
-            }
-            else
-            {
-                serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection(gridUrl);
-            }
+            IServiceCollection serviceCollection = ServiceCollectionFactory.GetDefaultServiceCollection(gridUrl);
             IServiceProvider provider = serviceCollection.BuildServiceProvider();
-
             WebDriverFactory = provider.GetRequiredService<IWebDriverFactory>();
         }
 
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
+        public void LocalWebDriverFactoryWorks(
+            Browser browser, 
+            BrowserVisibility browserVisibility, 
+            bool useCulturedBrowser = false)
         {
+            CultureInfo requestedCulture = useCulturedBrowser ? testCultureInfo : null;
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
+                .WithlanguageCulture(requestedCulture)
                 .Build();
             TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            Assertions.AssertThatPageCanBeLoadedInExpectedLanguage(Driver, requestedCulture);
         }
         
         public void RemoteWebDriverFactoryWorks(
             PlatformType platformType, 
             Browser browser, 
-            BrowserVisibility browserVisibility = BrowserVisibility.OnScreen)
+            BrowserVisibility browserVisibility = BrowserVisibility.OnScreen, 
+            bool useCulturedBrowser = false)
         {
+            CultureInfo requestedCulture = useCulturedBrowser ? testCultureInfo : null;
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
                 .RunRemotelyOn(gridUrl)
                 .WithPlatformType(platformType)
+                .WithlanguageCulture(requestedCulture)
                 .Build();
             TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            Assertions.AssertThatPageCanBeLoadedInExpectedLanguage(Driver, requestedCulture);
             Driver.IsRunningHeadless().Should()
                 .Be(browserVisibility == BrowserVisibility.Headless, 
                     $"{browserVisibility.ToString()} was requested");
@@ -133,19 +126,74 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
         
-        public void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
+        public void RequestingUnsupportedLocalWebDriverThrowsInformativeException(Browser browser)
         {
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
+                .WithIsLocal(true)
                 .Build();
             TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             void Act() => WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, thisPlatform);
         }
         
-        public void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
+        public void RequestingUnsupportedLocalHeadlessBrowserThrowsInformativeException(Browser browser)
         {
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
+                .WithBrowser(browser)
+                .WithIsLocal(true)
+                .RunHeadless()
+                .Build();
+
+            void Act() => WebDriverFactory.GetWebDriver(configuration);
+
+            Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
+        }
+        
+        public void RequestingUnsupportedLocalCulturedBrowserThrowsAppropriateException(
+            Browser browser, 
+            BrowserVisibility browserVisibility)
+        {
+            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
+                .WithIsLocal(true)
+                .WithBrowser(browser)
+                .WithHeadless(browserVisibility == BrowserVisibility.Headless)
+                .WithlanguageCulture(testCultureInfo)
+                .Build();
+
+            void Act() => WebDriverFactory.GetWebDriver(configuration);
+
+            if (browser == Browser.Chrome || browser == Browser.Edge)
+            {
+                Assertions.AssertThatRequestingAHeadlessCulturedChromiumBrowserThrowsCorrectException(Act, browser);
+            }
+            else
+            {
+                Assertions.AssertThatRequestingAnUnsupportedCulturedBrowserThrowsCorrectException(Act, browser);
+            }
+        }
+        
+        public void RequestingUnsupportedRemoteWebDriverThrowsInformativeException(
+            PlatformType platformType,
+            Browser browser)
+        {
+            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
+                .RunRemotelyOn(gridUrl)
+                .WithPlatformType(platformType)
+                .WithBrowser(browser)
+                .Build();
+            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            void Act() => WebDriverFactory.GetWebDriver(configuration);
+            Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, platformType);
+        }
+        
+        public void RequestingUnsupportedRemoteHeadlessBrowserThrowsInformativeException(
+            PlatformType platformType,
+            Browser browser)
+        {
+            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
+                .RunRemotelyOn(gridUrl)
+                .WithPlatformType(platformType)
                 .WithBrowser(browser)
                 .RunHeadless()
                 .Build();
@@ -153,6 +201,31 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             void Act() => WebDriverFactory.GetWebDriver(configuration);
 
             Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
+        }
+        
+        public void RequestingUnsupportedRemoteCulturedBrowserThrowsAppropriateException(
+            PlatformType platformType,
+            Browser browser, 
+            BrowserVisibility browserVisibility)
+        {
+            IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
+                .RunRemotelyOn(gridUrl)
+                .WithPlatformType(platformType)
+                .WithBrowser(browser)
+                .WithHeadless(browserVisibility == BrowserVisibility.Headless)
+                .WithlanguageCulture(testCultureInfo)
+                .Build();
+
+            void Act() => WebDriverFactory.GetWebDriver(configuration);
+
+            if (browser == Browser.Chrome || browser == Browser.Edge)
+            {
+                Assertions.AssertThatRequestingAHeadlessCulturedChromiumBrowserThrowsCorrectException(Act, browser);
+            }
+            else
+            {
+                Assertions.AssertThatRequestingAnUnsupportedCulturedBrowserThrowsCorrectException(Act, browser);
+            }
         }
 
         [TearDown]

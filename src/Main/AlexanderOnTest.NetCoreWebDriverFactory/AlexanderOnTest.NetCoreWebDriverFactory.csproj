@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0-beta12</Version>
+    <Version>4.0.0-betac02</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Oliveira Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -34,7 +34,9 @@ The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriv
 Added support for:
 Selenium Webdriver v4.x and Grid 4.x
 Chromium Edge on Windows, Linux and MacOs
-Internet Explorer testing in Edge on Local Windows</PackageReleaseNotes>
+Internet Explorer testing in Edge on Local Windows
+Requesting a browser with a given language culture where supported    
+    </PackageReleaseNotes>
 
     <Copyright>Copyright 2022 Alexander Oliveira Dunn</Copyright>
     <PackageProjectUrl>https://alexanderontest.github.io/</PackageProjectUrl>
@@ -45,7 +47,7 @@ Internet Explorer testing in Edge on Local Windows</PackageReleaseNotes>
     <LangVersion>default</LangVersion>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
-    <PackageVersion>4.0.0-beta12</PackageVersion>
+    <PackageVersion>4.0.0-betac02</PackageVersion>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>

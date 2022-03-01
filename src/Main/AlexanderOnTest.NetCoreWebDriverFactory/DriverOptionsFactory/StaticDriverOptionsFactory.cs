@@ -189,7 +189,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
             }
             if (typeof(T) != typeof(ChromeOptions) && typeof(T) != typeof(EdgeOptions) && typeof(T) != typeof(FirefoxOptions))
             {
-                throw new NotSupportedException("The requested browser does not support requesting a given language culture");
+                throw new NotSupportedException("The requested browser does not support requesting a given language culture.");
             }
             if (typeof(T) == typeof(FirefoxOptions))
             {
@@ -200,7 +200,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
             }
             if (headless)
             {
-                throw new NotSupportedException("Chromium based browsers do not support headless running when requesting a given language culture");
+                throw new NotSupportedException("Chromium based browsers do not support headless running when requesting a given language culture.");
             }
 
             if (typeof(T) == typeof(ChromeOptions))

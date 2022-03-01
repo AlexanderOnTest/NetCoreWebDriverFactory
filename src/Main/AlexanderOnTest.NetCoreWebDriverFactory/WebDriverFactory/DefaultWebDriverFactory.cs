@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
@@ -63,9 +64,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="requestedCulture"></param>
         /// <returns></returns>
-        public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
+        public IWebDriver GetWebDriver(
+            Browser browser, 
+            WindowSize windowSize = WindowSize.Hd, 
+            bool isLocal = true,
+            PlatformType platformType = PlatformType.Any, 
+            bool headless = false, 
+            Size windowCustomSize = new Size(),
+            CultureInfo requestedCulture = null)
         {
             string configurationDescription = new StringBuilder()
                 .Append($"Browser: {browser.ToString()}")
@@ -73,6 +81,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 .Append($"WindowSize enum: {windowSize.ToString()}, ")
                 .Append($"{((windowSize == WindowSize.Custom || windowSize == WindowSize.Defined) ? $"Size: {windowCustomSize.Width} x {windowCustomSize.Height}, " : string.Empty)}")
                 .Append(isLocal ? "running locally)" : $"running remotely on {RemoteWebDriverFactory.GridUri} on platform: {platformType}.)")
+                .Append(requestedCulture != null ? $"\", Requested language culture\": \"{requestedCulture}\")" : ")")
                 .ToString();
 
             Logger.Info($"WebDriver requested using parameters: {configurationDescription}");

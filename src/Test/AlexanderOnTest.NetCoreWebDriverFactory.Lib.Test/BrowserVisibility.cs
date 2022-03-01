@@ -18,7 +18,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
     public enum BrowserVisibility
     {
-        Headless,
-        OnScreen
+        Headless = 0,
+        OnScreen = 1
     }
 }

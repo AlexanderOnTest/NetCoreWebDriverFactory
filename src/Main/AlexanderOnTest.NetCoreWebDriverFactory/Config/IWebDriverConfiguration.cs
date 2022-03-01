@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
@@ -78,6 +79,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// Run headless if available.
         /// </summary>
         bool Headless
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Request a specific language culture
+        /// </summary>
+        CultureInfo LanguageCulture
         {
             get;
         }

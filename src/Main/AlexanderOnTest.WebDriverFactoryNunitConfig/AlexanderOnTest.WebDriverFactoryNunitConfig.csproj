@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.0.0-beta12</Version>
+    <Version>4.0.0-betac02</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageIcon>AoTdN.png</PackageIcon>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -20,6 +20,7 @@
        Support for Selenium v4.x and Selenium Grid v4.x
        WebDriver Factory now supports Microsoft Edge on Windows, Linux and MacOs
        Webdriver factory now supports Internet Explorer mode on Microsoft Edge in local mode (required for Windows 11) 
+       Support for requesting a browser with a given language culture where supported. 
     </PackageReleaseNotes>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -29,7 +30,7 @@
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
     <PackageIcon>AoTdN.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
-    <PackageVersion>4.0.0-beta12</PackageVersion>
+    <PackageVersion>4.0.0-betac02</PackageVersion>
     <FileVersion>4.0.0</FileVersion>
   </PropertyGroup>
 
@@ -39,7 +40,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-beta12" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-betac02" />
         <None Include="AoTdN.png" Pack="true" PackagePath="">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

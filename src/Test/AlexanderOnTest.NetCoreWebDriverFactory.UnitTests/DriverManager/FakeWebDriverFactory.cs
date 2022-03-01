@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using log4net;
@@ -27,8 +28,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager
     {
         private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
+        public IWebDriver GetWebDriver(
+            Browser browser, 
+            WindowSize windowSize = WindowSize.Hd, 
+            bool isLocal = true,
+            PlatformType platformType = PlatformType.Any, 
+            bool headless = false, 
+            Size windowCustomSize = new Size(),
+            CultureInfo requestedCulture = null)
         {
             Logger.Info($"Fake WebDriver requested.");
             return new FakeWebDriver();

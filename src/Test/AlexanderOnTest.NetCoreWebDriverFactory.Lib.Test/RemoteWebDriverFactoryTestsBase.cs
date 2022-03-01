@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
@@ -31,6 +32,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     {
         private readonly OSPlatform thisPlatform;
         private readonly Uri gridUrl;
+        private readonly CultureInfo testCultureInfo = new CultureInfo("es-Es");
 
         protected RemoteWebDriverFactoryTestsBase(OSPlatform thisPlatform, Uri gridUrl)
         {
@@ -56,15 +58,79 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         public void RemoteWebDriverFactoryWorks(
             PlatformType platformType, 
             Browser browser, 
-            BrowserVisibility browserVisibility = BrowserVisibility.OnScreen)
+            BrowserVisibility browserVisibility = BrowserVisibility.OnScreen, 
+            bool useCulturedBrowser = false)
         {
+            CultureInfo requestedCulture = useCulturedBrowser ? testCultureInfo : null;
             Driver = RemoteWebDriverFactory
-                .GetWebDriver(browser, platformType, WindowSize.Fhd, browserVisibility == BrowserVisibility.Headless);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+                .GetWebDriver(
+                    browser, 
+                    platformType, 
+                    WindowSize.Fhd, 
+                    browserVisibility == BrowserVisibility.Headless, 
+                    default, 
+                    requestedCulture);
+            Assertions.AssertThatPageCanBeLoadedInExpectedLanguage(Driver, requestedCulture);
             Driver.IsRunningHeadless().Should()
                 .Be(browserVisibility == BrowserVisibility.Headless, 
                     $"{browserVisibility.ToString()} was requested");
         }
+
+        public void RequestingUnsupportedWebDriverThrowsInformativeException(
+            PlatformType platformType, 
+            Browser browser)
+        {
+            Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, platformType);
+
+            void Act() => RemoteWebDriverFactory.GetWebDriver(browser, platformType);
+        }
+        
+        public void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(
+            PlatformType platformType, 
+            Browser browser)
+        {
+            Assertions.AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(Act, browser);
+
+            void Act() => RemoteWebDriverFactory.GetWebDriver(browser, platformType, WindowSize.Hd, true);
+        }
+        
+        public void RequestingUnsupportedCulturedBrowserThrowsInformativeException(
+            PlatformType platformType, 
+            Browser browser,
+            BrowserVisibility browserVisibility)
+        {
+            void Act() => RemoteWebDriverFactory.GetWebDriver(
+                browser, 
+                platformType, 
+                WindowSize.Hd,
+                browserVisibility == BrowserVisibility.Headless,
+                default,
+                testCultureInfo);
+
+            if (browser == Browser.Chrome || browser == Browser.Edge)
+            {
+                Assertions.AssertThatRequestingAHeadlessCulturedChromiumBrowserThrowsCorrectException(Act, browser);
+            }
+            else
+            {
+                Assertions.AssertThatRequestingAnUnsupportedCulturedBrowserThrowsCorrectException(Act, browser);
+            }
+        }
+        
+        // public void RequestingUnsupportedHeadlessCulturedBrowserThrowsInformativeException(
+        //     PlatformType platformType, 
+        //     Browser browser)
+        // {
+        //     Assertions.AssertThatRequestingAnUnsupportedCulturedBrowserThrowsCorrectException(Act, browser);
+        //
+        //     void Act() => RemoteWebDriverFactory.GetWebDriver(
+        //         browser, 
+        //         platformType, 
+        //         WindowSize.Hd,
+        //         true,
+        //         default,
+        //         testCultureInfo);
+        // }
 
         [TearDown]
         public void Teardown()

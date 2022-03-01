@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
@@ -44,6 +45,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             .WithCustomSize(new Size(1920, 1080))
             .RunRemotelyOn(GridUri)
             .WithPlatformType(PlatformType.Linux)
+            .WithlanguageCulture(new CultureInfo("en-GB"))
             .Build();
 
         private static readonly IWebDriverConfiguration DefaultConfigurationWithGridUri = WebDriverConfigurationBuilder
@@ -93,6 +95,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             IWebDriverFactory webDriverFactory = provider.GetService<IWebDriverFactory>();
 
             webDriverFactory.Should().BeOfType<DefaultWebDriverFactory>();
+            provider.GetService<DriverPath>().Should().NotBeNull();
         }
 
         [Test]

@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
@@ -80,7 +81,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// Use Microsoft Edge for testing Internet Explorer compatibility.
         /// </summary>
         public bool UseEdgeForInternetExplorer { get; set; } = true;
-        
+
         /// <summary>
         /// Return a local WebDriver of the given browser type with default settings.
         /// </summary>
@@ -88,15 +89,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="requestedCulture"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
+        public virtual IWebDriver GetWebDriver(
+            Browser browser, 
+            WindowSize windowSize = WindowSize.Hd, 
+            bool headless = false, 
+            Size windowCustomSize = new Size(),
+            CultureInfo requestedCulture = null)
         {
             if (headless && 
                 !(browser == Browser.Chrome || 
                   browser == Browser.Edge || 
                   browser == Browser.Firefox))
             {
-                Exception ex = new ArgumentException($"Headless mode is not currently supported for {browser}.");
+                Exception ex = new NotSupportedException($"Headless mode is not currently supported for {browser}.");
                 Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
                 throw ex;
             }
@@ -104,22 +111,22 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.Chrome:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.InternetExplorer:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.Edge:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(headless), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.Safari:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 default:
-                    Exception ex = new PlatformNotSupportedException($"{browser} is not currently supported.");
+                    Exception ex = new NotSupportedException($"{browser} is not currently supported.");
                     Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
                     throw ex;
             }
@@ -145,7 +152,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 configuration.Browser,
                 configuration.WindowSize,
                 configuration.Headless,
-                configuration.WindowDefinedSize
+                configuration.WindowDefinedSize,
+                configuration.LanguageCulture
             );
         }
 

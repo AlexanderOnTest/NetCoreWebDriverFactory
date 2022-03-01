@@ -17,6 +17,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
 using Newtonsoft.Json;
@@ -43,14 +44,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// <param name="platformType"></param>
         /// <param name="windowSize"></param>
         /// <param name="windowDefinedSize"></param>
-        public WebDriverConfiguration(
-            Browser browser = Browser.Firefox, 
-            Uri gridUri = null, 
-            bool headless = false, 
-            bool isLocal = true, 
+        /// <param name="languageCulture"></param>
+        public WebDriverConfiguration(Browser browser = Browser.Firefox,
+            Uri gridUri = null,
+            bool headless = false,
+            bool isLocal = true,
             PlatformType platformType = PlatformType.Any,
             WindowSize windowSize = WindowSize.Hd,
-            Size windowDefinedSize = new Size())
+            Size windowDefinedSize = new Size(),
+            CultureInfo languageCulture = null)
         {
             Browser = browser;
             GridUri = gridUri;
@@ -58,21 +60,23 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
             IsLocal = isLocal;
             PlatformType = platformType;
             WindowSize = (
-                    windowSize == WindowSize.Maximise || 
-                    windowSize == WindowSize.Maximize || 
-                    windowSize == WindowSize.Unchanged) ?
-                    windowSize : 
-                    WindowSize.Defined;
-            WindowDefinedSize = (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined) ?
-                windowDefinedSize :
-                windowSize.Size();
+                windowSize == WindowSize.Maximise ||
+                windowSize == WindowSize.Maximize ||
+                windowSize == WindowSize.Unchanged)
+                ? windowSize
+                : WindowSize.Defined;
+            WindowDefinedSize = (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined)
+                ? windowDefinedSize
+                : windowSize.Size();
+            LanguageCulture = languageCulture;
             description = new StringBuilder()
                 .Append($"{base.ToString()}: (")
                 .Append($" Browser: {Browser.ToString()} ")
                 .Append(Headless ? "headless" : "on screen")
                 .Append($", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, ")
                 .Append(IsLocal ? "running locally)" : $"running remotely on {GridUri} on platform: {PlatformType}.)")
-                .ToString();
+                .Append(languageCulture != null ? $"\", Requested language culture\": \"{languageCulture}\")" : ")")
+        .ToString();
         }
 
         /// <summary>
@@ -125,7 +129,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; }
-
+        
+        /// <summary>
+        /// Request a specific language culture
+        /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public CultureInfo LanguageCulture { get; }
+        
         /// <summary>
         /// Return the configuration in a readable form.
         /// </summary>

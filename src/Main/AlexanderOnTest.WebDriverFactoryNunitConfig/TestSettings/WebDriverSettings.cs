@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
@@ -40,14 +41,14 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         {
             get
             {
-                var gridUriFileValue = Utils.GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
+                var gridUriFileValue = GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
                 if (gridUriFileValue != null)
                 {
                     return gridUriFileValue;
                 }
 
                 var webDriverFileConfig =
-                    Utils.GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
+                    GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
                 if (webDriverFileConfig != null && webDriverFileConfig.GridUri != null)
                 {
                     return webDriverFileConfig.GridUri;
@@ -78,7 +79,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         public static WindowSize WindowSize { get; } = GetEnumSettingOrDefault("windowSize", WindowSize.Hd);
 
         /// <summary>
-        /// Run the WebDriver instance Headless (Supported only on Firefox and Chrome)
+        /// Run the WebDriver instance Headless (Supported only on Chrome, Edge and Firefox)
         /// </summary>
         public static bool Headless { get; } = GetBoolSettingOrDefault("headless", false);
 
@@ -86,8 +87,20 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// Requested Custom browser size for WindowSize.Custom
         /// </summary>
         public static Size CustomWindowSize { get; } = new Size(
-            TestContext.Parameters.Get<int>("customWidth", 0 ), 
-            TestContext.Parameters.Get<int>("customHeight", 0));
+            TestContext.Parameters.Get("customWidth", 0 ), 
+            TestContext.Parameters.Get("customHeight", 0));
+
+        /// <summary>
+        /// Requested language culture for the browser
+        /// </summary>
+        public static CultureInfo LanguageCulture
+        {
+            get
+            {
+                string languageCultureSetting = GetSettingOrDefault("languageCulture", null);
+                return languageCultureSetting == null ? null : new CultureInfo(languageCultureSetting);
+            }
+        }
 
         /// <summary>
         /// Return the Configuration to use - Priority:
@@ -105,6 +118,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 .WithPlatformType(PlatformType)
                 .WithWindowSize(WindowSize)
                 .WithWindowDefinedSize(CustomWindowSize)
+                .WithlanguageCulture(LanguageCulture)
                 .Build();
     }
 

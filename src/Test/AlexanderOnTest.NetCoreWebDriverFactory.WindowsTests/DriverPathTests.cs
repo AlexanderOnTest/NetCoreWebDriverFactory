@@ -17,12 +17,14 @@
 using System;
 using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
+using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
 {
+    [Category(TestCategories.Local)]
     public class DriverPathTests
     {
         private static readonly DriverPath ExpectedDriverPath = 

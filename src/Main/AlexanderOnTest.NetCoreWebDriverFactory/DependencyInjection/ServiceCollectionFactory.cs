@@ -15,8 +15,6 @@
 // </copyright>
 
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
@@ -123,7 +121,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection
 
             if (driverPath != null)
             {
-                services.AddSingleton<DriverPath>(driverPath);
+                services.AddSingleton(driverPath);
             }
 
             services.AddSingleton(driverConfig ?? WebDriverConfigurationBuilder.Start().Build());

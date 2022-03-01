@@ -50,7 +50,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
                 .WithIsLocal(isLocal)
                 .WithGridUri(new Uri(gridUri))
                 .WithPlatformType(platformType)
-                .WithlanguageCulture(language != null ? new CultureInfo(language) : null);
+                .WithLanguageCulture(language != null ? new CultureInfo(language) : null);
             WebDriverConfiguration expectedConfig = webDriverConfigurationBuilder.Build();
             string requestedJson = expectedConfig.SerializeToJson();
 
@@ -86,7 +86,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
                 .WithIsLocal(isLocal)
                 .WithGridUri(new Uri(gridUri))
                 .WithPlatformType(platformType)
-                .WithlanguageCulture(language != null ? new CultureInfo(language) : null));
+                .WithLanguageCulture(language != null ? new CultureInfo(language) : null));
         }
         
         

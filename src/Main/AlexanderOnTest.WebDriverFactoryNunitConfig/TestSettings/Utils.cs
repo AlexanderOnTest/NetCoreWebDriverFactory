@@ -82,7 +82,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
             {
                 try
                 {
-                    returnValue = TestContext.Parameters.Get<int>(settingName, defaultValue);
+                    returnValue = TestContext.Parameters.Get(settingName, defaultValue);
                 }
                 catch (Exception ex) when (ex is ArgumentException || ex is OverflowException)
                 {

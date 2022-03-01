@@ -41,7 +41,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         public WebDriverManager(IWebDriverFactory factory, IWebDriverConfiguration configuration)
         {
             this.factory = factory;
-            this.driverConfig = configuration;
+            driverConfig = configuration;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         public WebDriverManager(IWebDriverFactory factory, Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
             PlatformType platformType = PlatformType.Any, bool headless = false)
         {
-            this.webDriverConstructor = () => factory.GetWebDriver(browser, windowSize, isLocal, platformType, headless);
+            webDriverConstructor = () => factory.GetWebDriver(browser, windowSize, isLocal, platformType, headless);
         }
 
         private Func<IWebDriver> WebDriverConstructor
@@ -65,11 +65,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
             {
                 if (driverConfig == null)
                 {
-                    return this.webDriverConstructor;
+                    return webDriverConstructor;
                 }
                 else
                 {
-                    return () => this.factory.GetWebDriver(driverConfig);
+                    return () => factory.GetWebDriver(driverConfig);
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         /// The singleton WebDriver instance.
         /// </summary>
         public IWebDriver Driver {
-            get => driver ?? (driver = this.WebDriverConstructor());
+            get => driver ?? (driver = WebDriverConstructor());
             private set => driver = value;
         }
         
@@ -108,7 +108,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverManager
         /// <returns></returns>
         public virtual IWebDriver GetAdditionalWebDriver()
         {
-            return this.WebDriverConstructor();
+            return WebDriverConstructor();
         }
 
         /// <summary>

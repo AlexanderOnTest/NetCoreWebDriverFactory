@@ -622,7 +622,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithlanguageCulture(System.Globalization.CultureInfo)">
+        <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders.WebDriverConfigurationBuilder.WithLanguageCulture(System.Globalization.CultureInfo)">
             <summary>
             Set the requested browser language culture
             </summary>

@@ -20,8 +20,6 @@ using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverManager;
-using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection;
-using AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests.Dependencies;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using FluentAssertions;
 using log4net;

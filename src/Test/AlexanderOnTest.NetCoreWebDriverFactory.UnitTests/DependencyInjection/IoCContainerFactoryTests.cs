@@ -45,7 +45,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
             .WithCustomSize(new Size(1920, 1080))
             .RunRemotelyOn(GridUri)
             .WithPlatformType(PlatformType.Linux)
-            .WithlanguageCulture(new CultureInfo("en-GB"))
+            .WithLanguageCulture(new CultureInfo("en-GB"))
             .Build();
 
         private static readonly IWebDriverConfiguration DefaultConfigurationWithGridUri = WebDriverConfigurationBuilder

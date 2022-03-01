@@ -36,7 +36,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         /// </summary>
         public DefaultDriverOptionsFactory()
         {
-            this.DriverOptionsFunctionsDictionary = new Dictionary<Type, Func<DriverOptions>>
+            DriverOptionsFunctionsDictionary = new Dictionary<Type, Func<DriverOptions>>
             {
                 {typeof(ChromeOptions), () => StaticDriverOptionsFactory.GetChromeOptions()},
                 {typeof(EdgeOptions), () => StaticDriverOptionsFactory.GetEdgeOptions()},
@@ -72,6 +72,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
         {
             Type type = typeof(T);
             DriverOptionsFunctionsDictionary.TryGetValue(type, out Func<DriverOptions> driverOptionsFunction);
+            if (driverOptionsFunction == null)
+            {
+                throw new NotSupportedException("Unrecognised DriverOptions Type requested.");
+            }
             T options = driverOptionsFunction() as T;
             if (requestedCulture != null)
             {

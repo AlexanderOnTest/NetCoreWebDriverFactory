@@ -31,10 +31,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory
     public class StaticDriverOptionsFactoryCultureTests
     {
         internal const string UnsupportedBrowserMessage =
-            "The requested browser does not support requesting a given language culture";
+            "The requested browser does not support requesting a given language culture.";
 
         internal const string HeadlessBrowserNotSupportedMessage =
-            "Chromium based browsers do not support headless running when requesting a given language culture";
+            "Chromium based browsers do not support headless running when requesting a given language culture.";
         private static CultureInfo CultureInfo => new("en-GB");
         
         [Test]
@@ -49,7 +49,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory
         {
             Invoking(() =>StaticDriverOptionsFactory.SetCulture(new ChromeOptions(), CultureInfo, true))
                 .Should().Throw<NotSupportedException>()
-                .WithMessage("Chromium based browsers do not support headless running when requesting a given language culture");
+                .WithMessage(HeadlessBrowserNotSupportedMessage);
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory
         {
             Invoking(() => StaticDriverOptionsFactory.SetCulture(new EdgeOptions(), CultureInfo, true))
                 .Should().Throw<NotSupportedException>()
-                .WithMessage("Chromium based browsers do not support headless running when requesting a given language culture");
+                .WithMessage(HeadlessBrowserNotSupportedMessage);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory
         {
             Invoking(() => StaticDriverOptionsFactory.SetCulture(new InternetExplorerOptions(), CultureInfo, true))
                 .Should().Throw<NotSupportedException>()
-                .WithMessage("The requested browser does not support requesting a given language culture");
+                .WithMessage(UnsupportedBrowserMessage);
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory
         {
             Invoking(() => StaticDriverOptionsFactory.SetCulture(new SafariOptions(), CultureInfo, true))
                 .Should().Throw<NotSupportedException>()
-                .WithMessage("The requested browser does not support requesting a given language culture");
+                .WithMessage(UnsupportedBrowserMessage);
         }
     }
 }

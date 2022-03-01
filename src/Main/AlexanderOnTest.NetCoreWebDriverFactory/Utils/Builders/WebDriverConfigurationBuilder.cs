@@ -193,7 +193,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// </summary>
         /// <param name="languageCulture"></param>
         /// <returns></returns>
-        public WebDriverConfigurationBuilder WithlanguageCulture(CultureInfo languageCulture)
+        public WebDriverConfigurationBuilder WithLanguageCulture(CultureInfo languageCulture)
         {
             this.languageCulture = languageCulture;
             return this;
@@ -234,7 +234,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
                 jsonBuilder.Append(",");
                 jsonBuilder.AppendLine($"  \"LanguageCulture\": \"{languageCulture}\"");
             }
-            //string cultureDescriptor = languageCulture != null ?  : "Default";
             jsonBuilder.AppendLine("}");
             return jsonBuilder.ToString();
         }

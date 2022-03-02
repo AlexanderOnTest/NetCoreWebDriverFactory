@@ -73,7 +73,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             IWebDriverConfiguration configuration = WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
-                .WithlanguageCulture(requestedCulture)
+                .WithLanguageCulture(requestedCulture)
                 .Build();
             TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
@@ -92,7 +92,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
                 .RunRemotelyOn(gridUrl)
                 .WithPlatformType(platformType)
-                .WithlanguageCulture(requestedCulture)
+                .WithLanguageCulture(requestedCulture)
                 .Build();
             TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
@@ -158,7 +158,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithIsLocal(true)
                 .WithBrowser(browser)
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
-                .WithlanguageCulture(testCultureInfo)
+                .WithLanguageCulture(testCultureInfo)
                 .Build();
 
             void Act() => WebDriverFactory.GetWebDriver(configuration);
@@ -213,7 +213,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithPlatformType(platformType)
                 .WithBrowser(browser)
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
-                .WithlanguageCulture(testCultureInfo)
+                .WithLanguageCulture(testCultureInfo)
                 .Build();
 
             void Act() => WebDriverFactory.GetWebDriver(configuration);

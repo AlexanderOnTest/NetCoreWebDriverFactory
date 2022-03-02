@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.0.0-betac02</Version>
+    <Version>4.0.0-betac03</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageIcon>AoTdN.png</PackageIcon>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -30,7 +30,7 @@
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
     <PackageIcon>AoTdN.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
-    <PackageVersion>4.0.0-betac02</PackageVersion>
+    <PackageVersion>4.0.0-betac03</PackageVersion>
     <FileVersion>4.0.0</FileVersion>
   </PropertyGroup>
 
@@ -40,7 +40,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-betac02" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-betac03" />
         <None Include="AoTdN.png" Pack="true" PackagePath="">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

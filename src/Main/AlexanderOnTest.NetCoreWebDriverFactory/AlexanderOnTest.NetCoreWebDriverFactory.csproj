@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0-betac02</Version>
+    <Version>4.0.0-betac03</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Oliveira Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -47,7 +47,7 @@ Requesting a browser with a given language culture where supported
     <LangVersion>default</LangVersion>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
-    <PackageVersion>4.0.0-betac02</PackageVersion>
+    <PackageVersion>4.0.0-betac03</PackageVersion>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>

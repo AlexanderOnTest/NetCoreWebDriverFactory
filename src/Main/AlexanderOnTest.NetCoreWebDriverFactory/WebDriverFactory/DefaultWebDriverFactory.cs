@@ -27,7 +27,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     /// <summary>
     /// Implementation of the IWebDriverFactory interface for .NET Core test projects.
     /// </summary>
-    public sealed class DefaultWebDriverFactory : IWebDriverFactory
+    public class DefaultWebDriverFactory : IWebDriverFactory
     {
         private static readonly ILog Logger = LogProvider.For<DefaultWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();

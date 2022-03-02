@@ -34,7 +34,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     /// <summary>
     /// Default RemoteWebDriverFactory implementation.
     /// </summary>
-    public sealed class DefaultRemoteWebDriverFactory : IRemoteWebDriverFactory
+    public class DefaultRemoteWebDriverFactory : IRemoteWebDriverFactory
     {
         private static readonly ILog Logger = LogProvider.For<DefaultRemoteWebDriverFactory>();
         private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();

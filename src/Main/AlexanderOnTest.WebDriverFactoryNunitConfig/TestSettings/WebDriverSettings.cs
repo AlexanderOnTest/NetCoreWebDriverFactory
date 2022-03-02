@@ -118,7 +118,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 .WithPlatformType(PlatformType)
                 .WithWindowSize(WindowSize)
                 .WithWindowDefinedSize(CustomWindowSize)
-                .WithlanguageCulture(LanguageCulture)
+                .WithLanguageCulture(LanguageCulture)
                 .Build();
     }
 

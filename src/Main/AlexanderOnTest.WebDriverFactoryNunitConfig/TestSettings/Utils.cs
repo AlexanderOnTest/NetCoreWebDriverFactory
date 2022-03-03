@@ -17,13 +17,18 @@
 using System;
 using System.IO;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.Logging;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 {
     public static class Utils
     {
+        private static ILogger _logger = NunitConfigLogging.LoggerFactory.CreateLogger("Information");
+        
         /// <summary>
         /// Return the string value of the setting in the applied .runsettings file or the passed in default.
         /// </summary>
@@ -129,7 +134,12 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 
                 localConfig = JsonConvert.DeserializeObject<T>(json, new SizeJsonConverter());
             }
-            
+
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.Log(LogLevel.Information ,$"{typeof(T)} successfully loaded from {configFilePath}");
+                _logger.Log(LogLevel.Information, localConfig.ToString());
+            }
             return localConfig;
         }
     }

@@ -20,14 +20,19 @@ using System.Globalization;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.Logging;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 {
     public static class WebDriverSettings
     {
+        private static ILogger _logger = NunitConfigLogging.LoggerFactory.CreateLogger("Information");
+        
         public static Browser Browser { get; } = GetEnumSettingOrDefault("browserType", Browser.Firefox);
 
         /// <summary>
@@ -44,6 +49,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 var gridUriFileValue = GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
                 if (gridUriFileValue != null)
                 {
+                    _logger.Log(LogLevel.Information,"GridUri successfully loaded from Config_GridUri.json");
                     return gridUriFileValue;
                 }
 
@@ -51,11 +57,12 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                     GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
                 if (webDriverFileConfig != null && webDriverFileConfig.GridUri != null)
                 {
+                    _logger.Log(LogLevel.Information,"GridUri successfully loaded from the value in Config_WebDriver.json");
                     return webDriverFileConfig.GridUri;
                 }
 
+                _logger.Log(LogLevel.Information,"Returning GridUri from the gridUri value in the applied runsettings or default");
                 return new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444"));
-
             }
         }
 

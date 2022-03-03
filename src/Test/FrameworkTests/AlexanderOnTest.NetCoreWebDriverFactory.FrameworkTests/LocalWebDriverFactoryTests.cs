@@ -40,7 +40,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
-        public new void LocalWebDriverFactoryWorks(
+        public void LocalWebDriverFactoryWorks(
             Browser browser, 
             BrowserVisibility browserVisibility, 
             BrowserCulture browserCulture = BrowserCulture.Undefined)

@@ -42,7 +42,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.RemoteLinux)]
-        public new void RemoteWebDriverFactoryWorksForLinux(
+        public void RemoteWebDriverFactoryWorksForLinux(
             Browser browser,
             BrowserVisibility browserVisibility,
             BrowserCulture browserCulture)
@@ -66,7 +66,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.RemoteMacOs)]
-        public new void RemoteWebDriverFactoryWorksForMacOs(
+        public void RemoteWebDriverFactoryWorksForMacOs(
             Browser browser, 
             BrowserVisibility browserVisibility,
             BrowserCulture browserCulture)
@@ -90,7 +90,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.RemoteWindows)]
-        public new void RemoteWebDriverFactoryWorksForWindows(
+        public void RemoteWebDriverFactoryWorksForWindows(
             Browser browser, 
             BrowserVisibility browserVisibility,
             BrowserCulture browserCulture)

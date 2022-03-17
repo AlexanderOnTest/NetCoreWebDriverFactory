@@ -32,16 +32,16 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
 
         private bool IsInformationEnabled { get;}
         
-        public void Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (IsInformationEnabled && logLevel == Microsoft.Extensions.Logging.LogLevel.Information)
+            if (IsInformationEnabled && logLevel == LogLevel.Information)
             {
                 TestContext.WriteLine($"Information: {formatter(state, exception)}");
             }
         }
 
         public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel) =>
-            logLevel == Microsoft.Extensions.Logging.LogLevel.Information && IsInformationEnabled;
+            logLevel == LogLevel.Information && IsInformationEnabled;
 
         public IDisposable BeginScope<TState>(TState state)
         {

@@ -31,7 +31,9 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 {
     public static class WebDriverSettings
     {
-        private static ILogger _logger = NunitConfigLogging.LoggerFactory.CreateLogger("Information");
+        private static readonly ILogger _logger = NunitConfigLogging.LoggerFactory.CreateLogger("Information");
+        private static readonly bool _isDebugEnabled = _logger != null && _logger.IsEnabled(LogLevel.Debug);
+        private static readonly bool _isInfoEnabled = _logger != null && _logger.IsEnabled(LogLevel.Information);
         
         public static Browser Browser { get; } = GetEnumSettingOrDefault("browserType", Browser.Firefox);
 
@@ -46,23 +48,57 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         {
             get
             {
+                if (_isDebugEnabled)
+                {
+                    _logger.Log(LogLevel.Debug,"Attempting to load GridUri from Config_GridUri.json");
+                }
+                
                 var gridUriFileValue = GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
+                
                 if (gridUriFileValue != null)
                 {
-                    _logger.Log(LogLevel.Information,"GridUri successfully loaded from Config_GridUri.json");
+                    if (_isInfoEnabled)
+                    {
+                        _logger.Log(LogLevel.Information, "GridUri successfully loaded from Config_GridUri.json");
+                    }
+
                     return gridUriFileValue;
                 }
 
+                if (_isDebugEnabled)
+                {
+                    _logger.Log(LogLevel.Debug,"Attempting to load GridUri from Config_WebDriver.json");
+                }
+                
                 var webDriverFileConfig =
                     GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
                 if (webDriverFileConfig != null && webDriverFileConfig.GridUri != null)
                 {
-                    _logger.Log(LogLevel.Information,"GridUri successfully loaded from the value in Config_WebDriver.json");
+                    if (_isInfoEnabled)
+                    {
+                        _logger.Log(LogLevel.Information,
+                            "GridUri successfully loaded from the value in Config_WebDriver.json");
+                    }
+
                     return webDriverFileConfig.GridUri;
                 }
 
-                _logger.Log(LogLevel.Information,"Returning GridUri from the gridUri value in the applied runsettings or default");
-                return new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444"));
+                if (_isInfoEnabled)
+                {
+                    _logger.Log(LogLevel.Information,
+                        "Returning GridUri from the gridUri value in the applied runsettings or default");
+                }
+
+                var gridUri = new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444"));
+
+                if (_isInfoEnabled)
+                {
+                    const string messagePattern = "GridUri value: '{0}'.";
+                    var messageParameters = new object[] { gridUri };
+                    _logger.Log(LogLevel.Information, messagePattern, messageParameters);
+                }
+                
+                return gridUri;
             }
         }
 
@@ -115,18 +151,39 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         /// 2. The value in an applied .runsettings file
         /// 3. Default values.
         /// </summary>
-        public static IWebDriverConfiguration WebDriverConfiguration 
-            => GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json") 
-               ?? WebDriverConfigurationBuilder.Start()
-                .WithBrowser(Browser)
-                .WithGridUri(GridUri)
-                .WithHeadless(Headless)
-                .WithIsLocal(IsLocal)
-                .WithPlatformType(PlatformType)
-                .WithWindowSize(WindowSize)
-                .WithWindowDefinedSize(CustomWindowSize)
-                .WithLanguageCulture(LanguageCulture)
-                .Build();
+        public static IWebDriverConfiguration WebDriverConfiguration
+        {
+            get
+            {
+                IWebDriverConfiguration configFromFileSystem =
+                    GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
+                if (configFromFileSystem != null)
+                {
+                    return configFromFileSystem;
+                }
+                
+                IWebDriverConfiguration defaultWebDriverConfiguration = 
+                    WebDriverConfigurationBuilder.Start()
+                           .WithBrowser(Browser)
+                           .WithGridUri(GridUri)
+                           .WithHeadless(Headless)
+                           .WithIsLocal(IsLocal)
+                           .WithPlatformType(PlatformType)
+                           .WithWindowSize(WindowSize)
+                           .WithWindowDefinedSize(CustomWindowSize)
+                           .WithLanguageCulture(LanguageCulture)
+                           .Build();
+                
+                if (_isInfoEnabled)
+                {
+                    const string messagePattern = "WebDriverConfiguration: '{0}'.";
+                    var messageParameters = new object[] { defaultWebDriverConfiguration.ToString() };
+                    _logger.Log(LogLevel.Information, messagePattern, messageParameters);
+                }
+
+                return defaultWebDriverConfiguration;
+            }
+        }
     }
 
 }

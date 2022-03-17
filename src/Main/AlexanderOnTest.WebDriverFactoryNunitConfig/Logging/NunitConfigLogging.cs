@@ -15,7 +15,6 @@
 // </copyright>
 
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
@@ -23,7 +22,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
 {
     public static class NunitConfigLogging
     {
-        private static ILoggerFactory _Factory = null;
+        private static ILoggerFactory _factory = null;
 
         public static void ConfigureLogger(ILoggerFactory factory)
         {
@@ -34,14 +33,14 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
         {
             get
             {
-                if (_Factory == null)
+                if (_factory == null)
                 {
-                    _Factory = new LoggerFactory();
-                    ConfigureLogger(_Factory);
+                    _factory = new LoggerFactory();
+                    ConfigureLogger(_factory);
                 }
-                return _Factory;
+                return _factory;
             }
-            set { _Factory = value; }
+            set { _factory = value; }
         }
         
         public static ILogger CreateLogger() => LoggerFactory.CreateLogger("Information");

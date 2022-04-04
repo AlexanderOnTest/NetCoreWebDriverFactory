@@ -75,7 +75,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithHeadless(browserVisibility == BrowserVisibility.Headless)
                 .WithLanguageCulture(requestedCulture)
                 .Build();
-            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            TestContext.WriteLine($"Configuration = {configuration}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatPageCanBeLoadedInExpectedLanguage(Driver, requestedCulture);
         }
@@ -94,7 +94,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithPlatformType(platformType)
                 .WithLanguageCulture(requestedCulture)
                 .Build();
-            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            TestContext.WriteLine($"Configuration = {configuration}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatPageCanBeLoadedInExpectedLanguage(Driver, requestedCulture);
             Driver.IsRunningHeadless().Should()
@@ -109,7 +109,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .RunHeadless()
                 .WithWindowSize(windowSize)
                 .Build();
-            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            TestContext.WriteLine($"Configuration = {configuration}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
@@ -121,7 +121,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .RunHeadless()
                 .WithCustomSize(new Size(expectedWidth, expectedHeight))
                 .Build();
-            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            TestContext.WriteLine($"Configuration = {configuration}");
             Driver = WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatBrowserWindowSizeIsCorrect(Driver, expectedWidth, expectedHeight);
         }
@@ -132,7 +132,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithBrowser(browser)
                 .WithIsLocal(true)
                 .Build();
-            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            TestContext.WriteLine($"Configuration = {configuration}");
             void Act() => WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, thisPlatform);
         }
@@ -182,7 +182,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithPlatformType(platformType)
                 .WithBrowser(browser)
                 .Build();
-            TestContext.WriteLine($"Configuration = {JsonConvert.SerializeObject(configuration, sizeJsonConverter)}");
+            TestContext.WriteLine($"Configuration = {configuration}");
             void Act() => WebDriverFactory.GetWebDriver(configuration);
             Assertions.AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(Act, browser, platformType);
         }

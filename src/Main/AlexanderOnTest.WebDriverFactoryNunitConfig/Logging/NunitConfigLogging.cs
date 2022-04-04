@@ -20,15 +20,25 @@ using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
 {
+    /// <summary>
+    /// Logging configuration for the WebDriverFactoryNunitConfig
+    /// </summary>
     public static class NunitConfigLogging
     {
         private static ILoggerFactory _factory = null;
 
+        /// <summary>
+        /// Configure a default logger that logs information to the NUnit3 TestContext
+        /// </summary>
+        /// <param name="factory"></param>
         public static void ConfigureLogger(ILoggerFactory factory)
         {
             factory.AddProvider(new TestContextLoggerProvider(true));
         }
 
+        /// <summary>
+        /// ILoggerFactory instance used by the library
+        /// </summary>
         public static ILoggerFactory LoggerFactory
         {
             get
@@ -42,7 +52,5 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
             }
             set { _factory = value; }
         }
-        
-        public static ILogger CreateLogger() => LoggerFactory.CreateLogger("Information");
     }
 }

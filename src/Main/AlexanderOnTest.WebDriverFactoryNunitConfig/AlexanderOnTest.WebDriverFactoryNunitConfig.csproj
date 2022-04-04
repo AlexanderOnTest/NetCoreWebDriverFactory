@@ -28,9 +28,9 @@
     <LangVersion>7.3</LangVersion>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
-    <PackageIcon>AoTdN.png</PackageIcon>
+    <PackageIcon>AoT.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
-    <PackageVersion>4.0.0-alphal07</PackageVersion>
+    <PackageVersion>4.0.0-alphal09</PackageVersion>
     <FileVersion>4.0.0</FileVersion>
   </PropertyGroup>
 
@@ -38,10 +38,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-betac04" />
-        <None Include="AoTdN.png" Pack="true" PackagePath="">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-alphal09" />
+    <None Include="AoT.png" Pack="true" PackagePath="">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

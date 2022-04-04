@@ -16,6 +16,8 @@
 
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
@@ -91,6 +93,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
             BrowserVisibility browserVisibility)
         {
             base.RequestingUnsupportedCulturedBrowserThrowsInformativeException(browser, browserVisibility);
+        }
+
+        [Test]
+        public void WebDriverSettingsWork()
+        {
+            WebDriverSettings.GridUri.Should().NotBeNull();
         }
     }
 }

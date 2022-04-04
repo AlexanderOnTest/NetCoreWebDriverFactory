@@ -36,7 +36,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
         {
             if (IsInformationEnabled && logLevel == LogLevel.Information)
             {
-                TestContext.WriteLine($"Information: {formatter(state, exception)}");
+                TestContext.WriteLine(formatter(state, exception));
             }
         }
 

@@ -31,9 +31,9 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 {
     public static class WebDriverSettings
     {
-        private static readonly ILogger _logger = NunitConfigLogging.LoggerFactory.CreateLogger("Information");
-        private static readonly bool _isDebugEnabled = _logger != null && _logger.IsEnabled(LogLevel.Debug);
-        private static readonly bool _isInfoEnabled = _logger != null && _logger.IsEnabled(LogLevel.Information);
+        private static readonly ILogger Logger = NunitConfigLogging.LoggerFactory?.CreateLogger("NUnitWebDriverConfigurator");
+        private static readonly bool IsDebugEnabled = Logger != null && Logger.IsEnabled(LogLevel.Debug);
+        private static readonly bool IsInfoEnabled = Logger != null && Logger.IsEnabled(LogLevel.Information);
         
         public static Browser Browser { get; } = GetEnumSettingOrDefault("browserType", Browser.Firefox);
 
@@ -48,54 +48,54 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
         {
             get
             {
-                if (_isDebugEnabled)
+                if (IsDebugEnabled)
                 {
-                    _logger.Log(LogLevel.Debug,"Attempting to load GridUri from Config_GridUri.json");
+                    Logger.Log(LogLevel.Debug,"Attempting to load GridUri from Config_GridUri.json");
                 }
                 
                 var gridUriFileValue = GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
                 
                 if (gridUriFileValue != null)
                 {
-                    if (_isInfoEnabled)
+                    if (IsInfoEnabled)
                     {
-                        _logger.Log(LogLevel.Information, "GridUri successfully loaded from Config_GridUri.json");
+                        Logger.Log(LogLevel.Information, "GridUri successfully loaded from Config_GridUri.json");
                     }
 
                     return gridUriFileValue;
                 }
 
-                if (_isDebugEnabled)
+                if (IsDebugEnabled)
                 {
-                    _logger.Log(LogLevel.Debug,"Attempting to load GridUri from Config_WebDriver.json");
+                    Logger.Log(LogLevel.Debug,"Attempting to load GridUri from Config_WebDriver.json");
                 }
                 
                 var webDriverFileConfig =
                     GetConfigFromFileSystemIfPresent<WebDriverConfiguration>("Config_WebDriver.json");
                 if (webDriverFileConfig != null && webDriverFileConfig.GridUri != null)
                 {
-                    if (_isInfoEnabled)
+                    if (IsInfoEnabled)
                     {
-                        _logger.Log(LogLevel.Information,
+                        Logger.Log(LogLevel.Information,
                             "GridUri successfully loaded from the value in Config_WebDriver.json");
                     }
 
                     return webDriverFileConfig.GridUri;
                 }
 
-                if (_isInfoEnabled)
+                if (IsInfoEnabled)
                 {
-                    _logger.Log(LogLevel.Information,
+                    Logger.Log(LogLevel.Information,
                         "Returning GridUri from the gridUri value in the applied runsettings or default");
                 }
 
                 var gridUri = new Uri(GetSettingOrDefault("gridUri", "http://localhost:4444"));
 
-                if (_isInfoEnabled)
+                if (IsInfoEnabled)
                 {
                     const string messagePattern = "GridUri value: '{0}'.";
                     var messageParameters = new object[] { gridUri };
-                    _logger.Log(LogLevel.Information, messagePattern, messageParameters);
+                    Logger.Log(LogLevel.Information, messagePattern, messageParameters);
                 }
                 
                 return gridUri;
@@ -174,11 +174,11 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                            .WithLanguageCulture(LanguageCulture)
                            .Build();
                 
-                if (_isInfoEnabled)
+                if (IsInfoEnabled)
                 {
                     const string messagePattern = "WebDriverConfiguration: '{0}'.";
                     var messageParameters = new object[] { defaultWebDriverConfiguration.ToString() };
-                    _logger.Log(LogLevel.Information, messagePattern, messageParameters);
+                    Logger.Log(LogLevel.Information, messagePattern, messageParameters);
                 }
 
                 return defaultWebDriverConfiguration;

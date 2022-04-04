@@ -40,14 +40,14 @@ Requesting a browser with a given language culture where supported
 
     <Copyright>Copyright 2022 Alexander Oliveira Dunn</Copyright>
     <PackageProjectUrl>https://alexanderontest.github.io/</PackageProjectUrl>
-    <PackageIcon>AoTdN.png</PackageIcon>
+    <PackageIcon>AoT.png</PackageIcon>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core, .net Framework, .net 6</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
     <LangVersion>default</LangVersion>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
-    <PackageVersion>4.0.0-betac04</PackageVersion>
+    <PackageVersion>4.0.0-alphal09</PackageVersion>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
@@ -67,20 +67,9 @@ Requesting a browser with a given language culture where supported
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="AoTdN.png" Pack="true" PackagePath="">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="WebDriverFactory\InstalledDriverLocalWebDriverFactory.cs" />
-    <Compile Remove="WebDriverFactory\PackagedDriverLocalWebDriverFactory.cs" />
-    <Compile Remove="WebDriverFactory\Windows1803LocalWebDriverFactory.cs" />
-    <Compile Remove="WebDriverFactory\FrameworkLocalWebDriverFactory.cs" />
-    <Compile Remove="WebDriverFactory\InternetExplorerLocalWebDriverFactory.cs" />
+      <None Include="AoT.png" Pack="true" PackagePath="">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>      
   </ItemGroup>
 
 </Project>

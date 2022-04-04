@@ -19,10 +19,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Text;
+using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using OpenQA.Selenium;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
 {
@@ -31,6 +34,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
     /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
+        private static readonly ILogger Logger = WebDriverFactoryLogging.LoggerFactory?.CreateLogger("WebDriverFactory");
+        private static readonly bool IsDebugEnabled = Logger != null && Logger.IsEnabled(LogLevel.Debug);
+        private static readonly bool IsInfoEnabled = Logger != null && Logger.IsEnabled(LogLevel.Information);
+        
         private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
         private readonly string description;
 
@@ -78,6 +85,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
                 .Append(languageCulture != null ? $", Requested language culture: {languageCulture}" : "")
                 .Append(")")
         .ToString();
+            
+            if (IsDebugEnabled)
+            {
+                const string messagePattern = "New WebDriverConfiguration created: {0}";
+                var messageParameters = new object[] { description };
+                Logger.Log(LogLevel.Debug, messagePattern, messageParameters);
+            }
         }
 
         /// <summary>
@@ -153,6 +167,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// <returns></returns>
         public static WebDriverConfiguration DeserializeFromJson(string jsonString)
         {
+            if (IsDebugEnabled)
+            {
+                const string messagePattern = "Attempting to Deserialize WebDriverConfiguration from {0}";
+                var messageParameters = new object[] { jsonString };
+                Logger.Log(LogLevel.Debug, messagePattern, messageParameters);
+            }
             return JsonConvert.DeserializeObject<WebDriverConfiguration>(jsonString, SizeJsonConverter);
         }
 

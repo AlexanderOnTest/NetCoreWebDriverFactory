@@ -52,7 +52,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         {
             DriverOptionsFactory = driverOptionsFactory;
             this.webDriverReSizer = webDriverReSizer;
-            GridUri = gridUri ?? new Uri("http://localhost:4444/wd/hub");
+            GridUri = gridUri ?? new Uri("http://localhost:4444");
         }
 
         /// <summary>

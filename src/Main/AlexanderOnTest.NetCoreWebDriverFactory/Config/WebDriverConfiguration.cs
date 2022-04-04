@@ -71,11 +71,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
             LanguageCulture = languageCulture;
             description = new StringBuilder()
                 .Append($"{base.ToString()}: (")
-                .Append($" Browser: {Browser.ToString()} ")
+                .Append($"Browser: {Browser.ToString()} ")
                 .Append(Headless ? "headless" : "on screen")
-                .Append($", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, ")
-                .Append(IsLocal ? "running locally)" : $"running remotely on {GridUri} on platform: {PlatformType}.)")
-                .Append(languageCulture != null ? $"\", Requested language culture\": \"{languageCulture}\")" : ")")
+                .Append(windowSize == WindowSize.Defined ? 
+                $", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, " :
+                $", {windowSize}, ")
+                .Append(IsLocal ? "running locally" : $"running remotely on {GridUri} on platform: {PlatformType}")
+                .Append(languageCulture != null ? $", Requested language culture: {languageCulture}" : "")
+                .Append(")")
         .ToString();
         }
 

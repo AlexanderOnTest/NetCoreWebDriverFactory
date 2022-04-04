@@ -14,11 +14,21 @@
 // limitations under the License.
 // </copyright>
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
+using Microsoft.Extensions.Logging;
+
+namespace AlexanderOnTest.NetCoreWebDriverFactory.Logging;
+
+/// <summary>
+/// Logging configuration for the NetCoreWebDriverFactory
+/// </summary>
+public static class WebDriverFactoryLogging
 {
-    public enum BrowserVisibility
+    /// <summary>
+    /// ILoggerFactory instance used by the library
+    /// </summary>
+    public static ILoggerFactory LoggerFactory
     {
-        Headless = 0,
-        OnScreen = 1
+        get;
+        set;
     }
 }

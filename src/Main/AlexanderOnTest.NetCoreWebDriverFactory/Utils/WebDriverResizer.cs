@@ -14,12 +14,8 @@
 // limitations under the License.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils
 {

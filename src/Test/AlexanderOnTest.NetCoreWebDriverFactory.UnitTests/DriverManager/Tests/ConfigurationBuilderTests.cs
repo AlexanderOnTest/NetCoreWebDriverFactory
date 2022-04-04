@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
 using FluentAssertions;
@@ -27,18 +28,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
     [Category("CI")]
     public class ConfigurationBuilderTests
     {
-        [TestCase(Browser.Safari, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Mac)]
-        [TestCase(Browser.Edge, WindowSize.Unchanged, false, false, "http://localhost:4444", PlatformType.Windows)]
-        [TestCase(Browser.InternetExplorer, WindowSize.Hd, false, false, "http://localhost:4444", PlatformType.Windows)]
-        [TestCase(Browser.Firefox, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Linux)]
-        [TestCase(Browser.Chrome, WindowSize.Uhd, true, true, "http://localhost:4444", PlatformType.Any)]
+        [TestCase(Browser.Safari, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Mac, "nl")]
+        [TestCase(Browser.Edge, WindowSize.Unchanged, false, false, "http://localhost:4444", PlatformType.Windows, "en-GB")]
+        [TestCase(Browser.InternetExplorer, WindowSize.Hd, false, false, "http://localhost:4444", PlatformType.Windows, "es-US")]
+        [TestCase(Browser.Firefox, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Linux, "fr")]
+        [TestCase(Browser.Chrome, WindowSize.Uhd, true, true, "http://localhost:4444", PlatformType.Any, "en-US")]
         public void BuilderJsonConfigStringProducesCorrectSerialisation(
             Browser browser, 
             WindowSize windowSize, 
             bool headless,
             bool isLocal,
             string gridUri,
-            PlatformType platformType)
+            PlatformType platformType,
+            string language)
         {
             // Arrange
             var webDriverConfigurationBuilder = WebDriverConfigurationBuilder.Start()
@@ -47,7 +49,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
                 .WithWindowSize(windowSize)
                 .WithIsLocal(isLocal)
                 .WithGridUri(new Uri(gridUri))
-                .WithPlatformType(platformType);
+                .WithPlatformType(platformType)
+                .WithLanguageCulture(language != null ? new CultureInfo(language) : null);
             WebDriverConfiguration expectedConfig = webDriverConfigurationBuilder.Build();
             string requestedJson = expectedConfig.SerializeToJson();
 
@@ -62,18 +65,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             configFromJsonConfigString.Should().BeEquivalentTo(returnedConfig);
         }
 
-        [TestCase(Browser.Safari, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Mac)]
-        [TestCase(Browser.Edge, WindowSize.Unchanged, false, false, "http://localhost:4444", PlatformType.Windows)]
-        [TestCase(Browser.InternetExplorer, WindowSize.Hd, false, false, "http://localhost:4444", PlatformType.Windows)]
-        [TestCase(Browser.Firefox, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Linux)]
-        [TestCase(Browser.Chrome, WindowSize.Uhd, true, true, "http://localhost:4444", PlatformType.Any)]
+        [TestCase(Browser.Safari, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Mac, "nl")]
+        [TestCase(Browser.Edge, WindowSize.Unchanged, false, false, "http://localhost:4444", PlatformType.Windows, "en-GB")]
+        [TestCase(Browser.InternetExplorer, WindowSize.Hd, false, false, "http://localhost:4444", PlatformType.Windows, "es-US")]
+        [TestCase(Browser.Firefox, WindowSize.Maximise, false, false, "http://localhost:4444", PlatformType.Linux, "fr")]
+        [TestCase(Browser.Chrome, WindowSize.Uhd, true, true, "http://localhost:4444", PlatformType.Any, "en-US")]
         public void JsonNetSerialisationIsEquivalentToBuilderGetJsonConfigString(
             Browser browser,
             WindowSize windowSize,
             bool headless,
             bool isLocal,
             string gridUri,
-            PlatformType platformType)
+            PlatformType platformType,
+            string language)
         {
             CompareJsonEquivalence(WebDriverConfigurationBuilder.Start()
                 .WithBrowser(browser)
@@ -81,7 +85,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
                 .WithWindowSize(windowSize)
                 .WithIsLocal(isLocal)
                 .WithGridUri(new Uri(gridUri))
-                .WithPlatformType(platformType));
+                .WithPlatformType(platformType)
+                .WithLanguageCulture(language != null ? new CultureInfo(language) : null));
         }
         
         

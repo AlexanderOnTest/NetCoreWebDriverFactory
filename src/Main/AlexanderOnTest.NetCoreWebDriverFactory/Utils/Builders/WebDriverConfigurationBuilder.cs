@@ -16,9 +16,9 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
-using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using OpenQA.Selenium;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
@@ -28,8 +28,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
     /// </summary>
     public class WebDriverConfigurationBuilder
     {
-        private static readonly ILog Logger = LogProvider.For<WebDriverConfigurationBuilder>();
-
         private Browser browser;
         private PlatformType platformType;
         private WindowSize windowSize;
@@ -37,6 +35,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         private Uri gridUri;
         private bool isLocal;
         private bool headless;
+        private CultureInfo languageCulture;
 
         /// <summary>
         /// return a new instance of this class
@@ -56,6 +55,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
             gridUri = new Uri("http://localhost:4444");
             isLocal = true;
             headless = false;
+            languageCulture = null;
         }
 
         /// <summary>
@@ -65,14 +65,14 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         public WebDriverConfiguration Build()
         {
             WebDriverConfiguration webDriverConfiguration = new WebDriverConfiguration(
-                this.browser, 
-                this.gridUri, 
-                this.headless, 
-                this.isLocal, 
-                this.platformType, 
-                this.windowSize, 
-                this.windowDefinedSize);
-            Logger.Debug($"Configuration built: {webDriverConfiguration}");
+                browser, 
+                gridUri, 
+                headless, 
+                isLocal, 
+                platformType, 
+                windowSize, 
+                windowDefinedSize,
+                languageCulture);
             return webDriverConfiguration;
         }
 
@@ -149,7 +149,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// <returns></returns>
         public WebDriverConfigurationBuilder WithWindowDefinedSize(Size customWindowSize)
         {
-            this.windowDefinedSize = customWindowSize;
+            windowDefinedSize = customWindowSize;
             return this;
         }
 
@@ -160,7 +160,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// <returns></returns>
         public WebDriverConfigurationBuilder WithCustomSize(Size customWindowSize)
         {
-            return this.WithWindowSize(WindowSize.Defined).WithWindowDefinedSize(customWindowSize);
+            return WithWindowSize(WindowSize.Defined).WithWindowDefinedSize(customWindowSize);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         public WebDriverConfigurationBuilder RunRemotelyOn(Uri gridUri)
         {
             this.gridUri = gridUri;
-            this.isLocal = false;
+            isLocal = false;
             return this;
         }
 
@@ -181,7 +181,18 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         /// <returns></returns>
         public WebDriverConfigurationBuilder RunHeadless()
         {
-            return this.WithHeadless(true);
+            return WithHeadless(true);
+        }
+
+        /// <summary>
+        /// Set the requested browser language culture
+        /// </summary>
+        /// <param name="languageCulture"></param>
+        /// <returns></returns>
+        public WebDriverConfigurationBuilder WithLanguageCulture(CultureInfo languageCulture)
+        {
+            this.languageCulture = languageCulture;
+            return this;
         }
 
         /// <summary>
@@ -214,6 +225,11 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
                 }
             }
             jsonBuilder.AppendLine($"  \"GridUri\": \"{gridUri}\"");
+            if (languageCulture != null)
+            {
+                jsonBuilder.Append(",");
+                jsonBuilder.AppendLine($"  \"LanguageCulture\": \"{languageCulture}\"");
+            }
             jsonBuilder.AppendLine("}");
             return jsonBuilder.ToString();
         }

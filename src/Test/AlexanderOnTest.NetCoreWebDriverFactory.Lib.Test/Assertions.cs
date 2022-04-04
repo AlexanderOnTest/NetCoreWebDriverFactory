@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -32,6 +33,33 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
         {
             driver.Url = pageToBeLoaded;
             driver.Title.Should().Be(expectedPageTitle);
+        }
+        
+        /// <summary>
+        /// Asserts that the page loads with the correct title and expected Culture if requested
+        /// To be a valid test, the requested culture if set must be different to that of the test OS
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="requestedCulture"></param>
+        /// <param name="pageToBeLoaded"></param>
+        /// <param name="expectedPageTitle"></param>
+        public static void AssertThatPageCanBeLoadedInExpectedLanguage(
+            IWebDriver driver,
+            CultureInfo requestedCulture,
+            string pageToBeLoaded = "https://manytools.org/http-html-text/browser-language/",
+            string expectedPageTitle = "Browser language - display the list of languages your browser says you prefer")
+        {
+            driver.Url = pageToBeLoaded;
+            var executor = (IJavaScriptExecutor) driver;
+            string language = executor.ExecuteScript("return window.navigator.userlanguage || window.navigator.language").ToString();
+            using (new AssertionScope())
+            {
+                driver.Title.Should().Be(expectedPageTitle);
+                if (requestedCulture != null)
+                {
+                    language.Should().Be(requestedCulture.ToString());
+                }
+            }
         }
 
         public static void AssertThatBrowserWindowSizeIsCorrect(
@@ -58,13 +86,41 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 .WithMessage("*is only available on*");
         }
 
+        public static void AssertThatRequestingAnUnsupportedBrowserThrowsCorrectException(
+            Action act, 
+            Browser browser,
+            PlatformType platformType)
+        {
+            act.Should()
+                .Throw<PlatformNotSupportedException>($"because {browser} is not supported on {platformType}.")
+                .WithMessage("*is not currently supported on*");
+        }
+
         public static void AssertThatRequestingAnUnsupportedHeadlessBrowserThrowsCorrectException(
             Action act,
             Browser browser)
         {
             act.Should()
-                .ThrowExactly<ArgumentException>($"because headless mode is not supported on {browser}.")
+                .ThrowExactly<NotSupportedException>($"because headless mode is not supported on {browser}.")
                 .WithMessage($"Headless mode is not currently supported for {browser}.");
+        }
+
+        public static void AssertThatRequestingAnUnsupportedCulturedBrowserThrowsCorrectException(
+            Action act,
+            Browser browser)
+        {
+            act.Should()
+                .ThrowExactly<NotSupportedException>($"{browser} does not support requesting browsers with a specified culture.")
+                .WithMessage("The requested browser does not support requesting a given language culture*");
+        }
+
+        public static void AssertThatRequestingAHeadlessCulturedChromiumBrowserThrowsCorrectException(
+            Action act,
+            Browser browser)
+        {
+            act.Should()
+                .ThrowExactly<NotSupportedException>("Chromium based browsers do not support headless running when requesting a given language culture.")
+                .WithMessage("Chromium based browsers do not support headless running when requesting a given language culture*");
         }
     }
 }

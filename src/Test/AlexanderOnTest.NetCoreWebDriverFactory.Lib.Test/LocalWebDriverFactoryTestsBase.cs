@@ -16,9 +16,9 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
-using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -30,17 +30,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
     public abstract class LocalWebDriverFactoryTestsBase
     {
         private readonly OSPlatform thisPlatform;
-        private readonly bool useDotNetFramework;
+        //private readonly bool useDotNetFramework;
+        private readonly CultureInfo testCultureInfo = new CultureInfo("es-Es");
 
-
-        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform, bool useDotNetFramework = false)
+        protected LocalWebDriverFactoryTestsBase(OSPlatform thisPlatform)
         {
             this.thisPlatform = thisPlatform;
-            if (thisPlatform != OSPlatform.Windows && useDotNetFramework)
-            {
-                throw new PlatformNotSupportedException(".NET Framework is only available on Microsoft Windows platforms.");
-            }
-            this.useDotNetFramework = useDotNetFramework;
         }
 
         private ILocalWebDriverFactory LocalWebDriverFactory { get; set; }
@@ -56,25 +51,23 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
                 TestContext.Progress.WriteLine("Information: These tests are configured to run local Internet Explorer tests against Microsoft Edge.");
             }
             
-            IServiceCollection serviceCollection;
-            if (useDotNetFramework)
-            {
-                serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection();
-            }
-            else
-            {
-                serviceCollection = ServiceCollectionFactory
-                    .GetDefaultServiceCollection();
-            }
+            IServiceCollection serviceCollection = ServiceCollectionFactory.GetDefaultServiceCollection();
             IServiceProvider provider = serviceCollection.BuildServiceProvider();
             LocalWebDriverFactory = provider.GetRequiredService<ILocalWebDriverFactory>();
         }
         
-        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
+        public void LocalWebDriverFactoryWorks(
+            Browser browser, 
+            BrowserVisibility browserVisibility, 
+            bool useCulturedBrowser = false)
         {
-            Driver = LocalWebDriverFactory.GetWebDriver(browser, WindowSize.Hd, browserVisibility == BrowserVisibility.Headless);
-            Assertions.AssertThatPageCanBeLoaded(Driver);
+            CultureInfo requestedCulture = useCulturedBrowser ? new CultureInfo("es-ES") : null;
+            Driver = LocalWebDriverFactory.GetWebDriver(
+                browser, WindowSize.Hd, 
+                browserVisibility == BrowserVisibility.Headless,
+                default, 
+                requestedCulture);
+            Assertions.AssertThatPageCanBeLoadedInExpectedLanguage(Driver,requestedCulture);
         }
         
         public void BrowserIsOfRequestedSize(WindowSize windowSize, int expectedWidth, int expectedHeight)
@@ -107,7 +100,25 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
             void Act() => LocalWebDriverFactory.GetWebDriver(browser, WindowSize.Hd, true);
         }
 
+        public void RequestingUnsupportedCulturedBrowserThrowsInformativeException(Browser browser, BrowserVisibility browserVisibility)
+        {
+            
+            void Act() => LocalWebDriverFactory.GetWebDriver(
+                browser, 
+                WindowSize.Hd,
+                browserVisibility == BrowserVisibility.Headless,
+                default,
+                testCultureInfo);
 
+            if (browser == Browser.Chrome || browser == Browser.Edge)
+            {
+                Assertions.AssertThatRequestingAHeadlessCulturedChromiumBrowserThrowsCorrectException(Act, browser);
+            }
+            else
+            {
+                Assertions.AssertThatRequestingAnUnsupportedCulturedBrowserThrowsCorrectException(Act, browser);
+            }
+        }
 
         [TearDown]
         public void Teardown()

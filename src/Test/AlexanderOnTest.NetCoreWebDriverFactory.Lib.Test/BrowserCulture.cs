@@ -16,9 +16,9 @@
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
-    public enum BrowserVisibility
+    public enum BrowserCulture
     {
-        Headless = 0,
-        OnScreen = 1
+        Undefined = 0,
+        Spanish = 1
     }
 }

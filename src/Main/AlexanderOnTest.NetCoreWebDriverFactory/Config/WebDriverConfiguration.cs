@@ -17,11 +17,15 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
+using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using OpenQA.Selenium;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
 {
@@ -30,6 +34,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
     /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
+        private static readonly ILogger Logger = WebDriverFactoryLogging.LoggerFactory?.CreateLogger("WebDriverFactory");
+        private static readonly bool IsDebugEnabled = Logger != null && Logger.IsEnabled(LogLevel.Debug);
+        private static readonly bool IsInfoEnabled = Logger != null && Logger.IsEnabled(LogLevel.Information);
+        
         private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
         private readonly string description;
 
@@ -43,14 +51,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// <param name="platformType"></param>
         /// <param name="windowSize"></param>
         /// <param name="windowDefinedSize"></param>
-        public WebDriverConfiguration(
-            Browser browser = Browser.Firefox, 
-            Uri gridUri = null, 
-            bool headless = false, 
-            bool isLocal = true, 
+        /// <param name="languageCulture"></param>
+        public WebDriverConfiguration(Browser browser = Browser.Firefox,
+            Uri gridUri = null,
+            bool headless = false,
+            bool isLocal = true,
             PlatformType platformType = PlatformType.Any,
             WindowSize windowSize = WindowSize.Hd,
-            Size windowDefinedSize = new Size())
+            Size windowDefinedSize = new Size(),
+            CultureInfo languageCulture = null)
         {
             Browser = browser;
             GridUri = gridUri;
@@ -58,21 +67,31 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
             IsLocal = isLocal;
             PlatformType = platformType;
             WindowSize = (
-                    windowSize == WindowSize.Maximise || 
-                    windowSize == WindowSize.Maximize || 
-                    windowSize == WindowSize.Unchanged) ?
-                    windowSize : 
-                    WindowSize.Defined;
-            WindowDefinedSize = (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined) ?
-                windowDefinedSize :
-                windowSize.Size();
+                windowSize == WindowSize.Maximise ||
+                windowSize == WindowSize.Maximize ||
+                windowSize == WindowSize.Unchanged)
+                ? windowSize
+                : WindowSize.Defined;
+            WindowDefinedSize = (windowSize == WindowSize.Custom || windowSize == WindowSize.Defined)
+                ? windowDefinedSize
+                : windowSize.Size();
+            LanguageCulture = languageCulture;
             description = new StringBuilder()
                 .Append($"{base.ToString()}: (")
-                .Append($" Browser: {Browser.ToString()} ")
+                .Append($"Browser: {Browser.ToString()} ")
                 .Append(Headless ? "headless" : "on screen")
                 .Append($", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, ")
-                .Append(IsLocal ? "running locally)" : $"running remotely on {GridUri} on platform: {PlatformType}.)")
-                .ToString();
+                .Append(IsLocal ? "running locally" : $"running remotely on {GridUri} on platform: {PlatformType}")
+                .Append(languageCulture != null ? $", Requested language culture: {languageCulture}" : "")
+                .Append(")")
+        .ToString();
+            
+            if (IsDebugEnabled)
+            {
+                const string messagePattern = "New WebDriverConfiguration created: {0}";
+                var messageParameters = new object[] { description };
+                Logger.Log(LogLevel.Debug, messagePattern, messageParameters);
+            }
         }
 
         /// <summary>
@@ -125,7 +144,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Headless { get; }
-
+        
+        /// <summary>
+        /// Request a specific language culture
+        /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public CultureInfo LanguageCulture { get; }
+        
         /// <summary>
         /// Return the configuration in a readable form.
         /// </summary>
@@ -142,6 +167,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// <returns></returns>
         public static WebDriverConfiguration DeserializeFromJson(string jsonString)
         {
+            if (IsDebugEnabled)
+            {
+                const string messagePattern = "Attempting to Deserialize WebDriverConfiguration from {0}";
+                var messageParameters = new object[] { jsonString };
+                Logger.Log(LogLevel.Debug, messagePattern, messageParameters);
+            }
             return JsonConvert.DeserializeObject<WebDriverConfiguration>(jsonString, SizeJsonConverter);
         }
 

@@ -51,7 +51,7 @@ public class RemoteDriverOptionsFactoryTests
         options?.PlatformName?.ToLower().Should().Be(platformType.ToString().ToLower());
     }
 
-    [TestCase]
+    [Test]
     public void RequestingHeadlessModeThrowsCorrectlyForSafari()
     {
         optionsFactory
@@ -60,7 +60,7 @@ public class RemoteDriverOptionsFactoryTests
             .WithMessage("Only Chrome, Edge and Firefox support headless operation");
     }
 
-    [TestCase]
+    [Test]
     public void RequestingHeadlessModeThrowsCorrectlyForInternetExplorer()
     {
         optionsFactory
@@ -69,7 +69,7 @@ public class RemoteDriverOptionsFactoryTests
             .WithMessage("Only Chrome, Edge and Firefox support headless operation");
     }
 
-    [TestCase]
+    [Test]
     public void RequestingOnScreenModeDoesNotThrowForSafari()
     {
         optionsFactory
@@ -77,7 +77,7 @@ public class RemoteDriverOptionsFactoryTests
             .Should().NotThrow();
     }
 
-    [TestCase]
+    [Test]
     public void RequestingOnScreenModeDoesNotThrowForInternetExplorer()
     {
         optionsFactory

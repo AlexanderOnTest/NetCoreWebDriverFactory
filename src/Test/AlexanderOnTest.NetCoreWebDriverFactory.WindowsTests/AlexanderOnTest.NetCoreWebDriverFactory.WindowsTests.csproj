@@ -4,6 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+
+    <FileVersion>1.0.0</FileVersion>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +20,10 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="Selenium.Support" Version="4.1.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="98.0.4758.10200" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="100.0.4896.6000" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.30.0.1" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0" />
-    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="98.0.1108.56" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0.1" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="99.0.1150.25" />
   </ItemGroup>
 
   <ItemGroup>

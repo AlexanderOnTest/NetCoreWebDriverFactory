@@ -14,11 +14,23 @@
 // limitations under the License.
 // </copyright>
 
-namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
+using Microsoft.Extensions.Logging;
+
+namespace AlexanderOnTest.WebDriverFactoryNunitConfig.Logging
 {
-    public enum BrowserVisibility
+    public class TestContextLoggerProvider : ILoggerProvider
     {
-        Headless = 0,
-        OnScreen = 1
+        private readonly ILogger logger;
+
+        public TestContextLoggerProvider(bool isInformationEnabled)
+        {
+            logger = new TestContextLogger(isInformationEnabled);
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public ILogger CreateLogger(string categoryName) => logger;
     }
 }

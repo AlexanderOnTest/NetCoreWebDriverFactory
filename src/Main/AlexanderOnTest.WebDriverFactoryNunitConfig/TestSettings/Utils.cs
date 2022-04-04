@@ -17,13 +17,20 @@
 using System;
 using System.IO;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Converters;
+using AlexanderOnTest.WebDriverFactoryNunitConfig.Logging;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
 {
     public static class Utils
     {
+        private static ILogger _logger = NunitConfigLogging.LoggerFactory.CreateLogger("Information");
+        private static bool _isDebugEnabled = _logger != null && _logger.IsEnabled(LogLevel.Debug);
+        private static bool _isInfoEnabled = _logger != null && _logger.IsEnabled(LogLevel.Information);
+        
         /// <summary>
         /// Return the string value of the setting in the applied .runsettings file or the passed in default.
         /// </summary>
@@ -82,7 +89,7 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
             {
                 try
                 {
-                    returnValue = TestContext.Parameters.Get<int>(settingName, defaultValue);
+                    returnValue = TestContext.Parameters.Get(settingName, defaultValue);
                 }
                 catch (Exception ex) when (ex is ArgumentException || ex is OverflowException)
                 {
@@ -120,16 +127,44 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
             string fileLocationPath = Environment.GetFolderPath(fileLocation);
             string configFilePath = Path.Combine(fileLocationPath, filename);
 
-            if (string.IsNullOrEmpty(configFilePath) || !File.Exists(configFilePath)) return default;
+            if (string.IsNullOrEmpty(configFilePath) || !File.Exists(configFilePath))
+            {
+                if (_isDebugEnabled)
+                {
+                    const string messagePattern = "Configuration file not found: '{0}'";
+                    var messageParameters = new object[] { configFilePath };
+                    _logger.Log(LogLevel.Debug, messagePattern, messageParameters);
+                }
+                return default;
+            }
 
+            if (_isDebugEnabled)
+            {
+                const string messagePattern = "Configuration file found at '{0}', attempting to read.";
+                var messageParameters = new object[] { configFilePath };
+                _logger.Log(LogLevel.Debug, messagePattern, configFilePath);
+            }
             T localConfig;
             using (StreamReader file = File.OpenText(configFilePath))
             {
                 string json = file.ReadToEnd();
 
+                if (_isDebugEnabled)
+                {
+                    const string messagePattern = "Configuration file found read: '{0}', attempting to deserialize.";
+                    var messageParameters = new object[] { json };
+                    _logger.Log(LogLevel.Debug, messagePattern, messageParameters);
+                }
+                
                 localConfig = JsonConvert.DeserializeObject<T>(json, new SizeJsonConverter());
             }
-            
+
+            if (_isInfoEnabled)
+            {
+                const string messagePattern = "{0} successfully loaded from '{1}'.\r\nValue: '{2}'";
+                var messageParameters = new object[] { typeof(T), configFilePath, localConfig?.ToString() };
+                _logger.Log(LogLevel.Information, messagePattern, messageParameters);
+            }
             return localConfig;
         }
     }

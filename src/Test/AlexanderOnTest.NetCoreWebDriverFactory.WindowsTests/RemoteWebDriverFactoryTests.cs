@@ -30,30 +30,111 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WindowsTests
         private static readonly Uri GridUrl = WebDriverSettings.GridUri;
 
         public RemoteWebDriverFactoryTests() : base(ThisPlatform, GridUrl) { }
+
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
+        [Category(TestCategories.RemoteLinux)]
+        public new void RemoteWebDriverFactoryWorksForLinux(
+            Browser browser,
+            BrowserVisibility browserVisibility,
+            BrowserCulture browserCulture)
+        {
+            base.RemoteWebDriverFactoryWorks(
+                PlatformType.Linux, 
+                browser, 
+                browserVisibility, 
+                browserCulture == BrowserCulture.Spanish);
+        }
         
-        [TestCase(PlatformType.Linux, Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Linux, Browser.Edge, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Linux, Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Mac, Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Mac, Browser.Edge, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Mac, Browser.Firefox, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Safari, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
+        [Category(TestCategories.RemoteMacOs)]
+        public new void RemoteWebDriverFactoryWorksForMacOs(
+            Browser browser, 
+            BrowserVisibility browserVisibility,
+            BrowserCulture browserCulture)
+        {
+            base.RemoteWebDriverFactoryWorks(
+                PlatformType.Mac, 
+                browser, 
+                browserVisibility, 
+                browserCulture == BrowserCulture.Spanish);
+        }
+
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen, BrowserCulture.Undefined)]
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Undefined)]
+        [TestCase(Browser.Chrome, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Edge, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
+        [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
+        [Category(TestCategories.RemoteWindows)]
+        public new void RemoteWebDriverFactoryWorksForWindows(
+            Browser browser, 
+            BrowserVisibility browserVisibility,
+            BrowserCulture browserCulture)
+        {
+            base.RemoteWebDriverFactoryWorks(
+                PlatformType.Windows, 
+                browser, 
+                browserVisibility, 
+                browserCulture == BrowserCulture.Spanish);
+        }
+
+        [Category(TestCategories.NotSupported)]
+        [TestCase(PlatformType.Linux, Browser.Safari)]
+        [TestCase(PlatformType.Windows, Browser.Safari)]
+        [TestCase(PlatformType.Linux, Browser.InternetExplorer)]
+        [TestCase(PlatformType.Mac, Browser.InternetExplorer)]
+        public new void RequestingUnsupportedWebDriverThrowsInformativeException(PlatformType platformType, Browser browser)
+        {
+            base.RequestingUnsupportedWebDriverThrowsInformativeException(platformType, browser);
+        }
+
+        [Category(TestCategories.NotSupported)]
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
+        [TestCase(PlatformType.Mac, Browser.Safari)]
+        public new void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(PlatformType platformType, Browser browser)
+        {
+            base.RequestingUnsupportedHeadlessBrowserThrowsInformativeException(platformType, browser);
+        }
+
+        [Category(TestCategories.NotSupported)]
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer,BrowserVisibility.OnScreen)]
         [TestCase(PlatformType.Mac, Browser.Safari, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Windows, Browser.Firefox, BrowserVisibility.OnScreen)]
-        [TestCase(PlatformType.Windows, Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(PlatformType.Linux, Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Linux, Browser.Edge, BrowserVisibility.Headless)]
-        [TestCase(PlatformType.Linux, Browser.Firefox, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Mac, Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Mac, Browser.Edge, BrowserVisibility.Headless)]
-        [TestCase(PlatformType.Mac, Browser.Firefox, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
-        [TestCase(PlatformType.Windows, Browser.Firefox, BrowserVisibility.Headless)]
-        public new void RemoteWebDriverFactoryWorks(PlatformType platformType, Browser browser, BrowserVisibility browserVisibility = BrowserVisibility.OnScreen)
+        public new void RequestingUnsupportedCulturedBrowserThrowsInformativeException(
+            PlatformType platformType, 
+            Browser browser,
+            BrowserVisibility browserVisibility)
         {
-            base.RemoteWebDriverFactoryWorks(platformType, browser, browserVisibility);
+            base.RequestingUnsupportedCulturedBrowserThrowsInformativeException(platformType, browser, browserVisibility);
         }
     }
 }

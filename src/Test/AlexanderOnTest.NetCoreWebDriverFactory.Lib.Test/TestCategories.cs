@@ -16,9 +16,18 @@
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test
 {
-    public enum BrowserVisibility
+    public class TestCategories
     {
-        Headless = 0,
-        OnScreen = 1
+        public const string RemoteMacOs = "RemoteMacOs";
+        
+        public const string RemoteLinux = "RemoteLinux";
+
+        public const string RemoteWindows = "RemoteWindows";
+        
+        public const string Local = "Local";
+        
+        public const string ConfigBased = "ConfigBased";
+
+        public const string NotSupported = "NotSupported";
     }
 }

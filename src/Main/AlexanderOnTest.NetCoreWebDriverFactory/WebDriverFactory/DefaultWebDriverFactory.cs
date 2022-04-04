@@ -16,20 +16,24 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
+using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 {
     /// <summary>
     /// Implementation of the IWebDriverFactory interface for .NET Core test projects.
     /// </summary>
-    public sealed class DefaultWebDriverFactory : IWebDriverFactory
+    public class DefaultWebDriverFactory : IWebDriverFactory
     {
-        private static readonly ILog Logger = LogProvider.For<DefaultWebDriverFactory>();
-        private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
+        private static readonly ILogger Logger = WebDriverFactoryLogging.LoggerFactory?.CreateLogger("DefaultWebDriverFactory");
+        private static readonly bool IsDebugEnabled = Logger != null && Logger.IsEnabled(LogLevel.Debug);
+        private static readonly bool IsInfoEnabled = Logger != null && Logger.IsEnabled(LogLevel.Information);
 
         /// <summary>
         /// Return a DriverFactory instance.
@@ -63,9 +67,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="platformType"></param>
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="requestedCulture"></param>
         /// <returns></returns>
-        public IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, bool headless = false, Size windowCustomSize = new Size())
+        public IWebDriver GetWebDriver(
+            Browser browser, 
+            WindowSize windowSize = WindowSize.Hd, 
+            bool isLocal = true,
+            PlatformType platformType = PlatformType.Any, 
+            bool headless = false, 
+            Size windowCustomSize = new Size(),
+            CultureInfo requestedCulture = null)
         {
             string configurationDescription = new StringBuilder()
                 .Append($"Browser: {browser.ToString()}")
@@ -73,9 +84,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 .Append($"WindowSize enum: {windowSize.ToString()}, ")
                 .Append($"{((windowSize == WindowSize.Custom || windowSize == WindowSize.Defined) ? $"Size: {windowCustomSize.Width} x {windowCustomSize.Height}, " : string.Empty)}")
                 .Append(isLocal ? "running locally)" : $"running remotely on {RemoteWebDriverFactory.GridUri} on platform: {platformType}.)")
+                .Append(requestedCulture != null ? $"\", Requested language culture\": \"{requestedCulture}\")" : ")")
                 .ToString();
 
-            Logger.Info($"WebDriver requested using parameters: {configurationDescription}");
+            if (IsInfoEnabled)
+            {
+                const string messagePattern = "WebDriver requested using parameters: {0}";
+                var messageParameters = new object[] { configurationDescription };
+                Logger.LogInformation(messagePattern, messageParameters);
+            }
+            
             IWebDriver driver = isLocal ?
                 LocalWebDriverFactory.GetWebDriver(browser, windowSize, headless, windowCustomSize) :
                 RemoteWebDriverFactory.GetWebDriver(browser, platformType, windowSize, headless, windowCustomSize);
@@ -83,7 +101,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             if (IsDebugEnabled)
             {
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                Logger.Debug($"{driver} successfully launched. Agent String: {js.ExecuteScript("return navigator.userAgent;")}");
+                if (IsDebugEnabled)
+                {
+                    const string messagePattern = "{0} successfully launched. Agent String: {1}";
+                    object[] messageParameters = { driver, js.ExecuteScript("return navigator.userAgent;") };
+                    Logger.LogDebug(messagePattern, messageParameters);
+                }
             }
 
             return driver;
@@ -96,7 +119,13 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
         {
-            Logger.Info($"WebDriver requested using {configuration}");
+            if (IsInfoEnabled)
+            {
+                const string messagePattern = "WebDriver requested using {0}";
+                var messageParameters = new object[] { configuration.ToString() };
+                Logger.LogInformation(messagePattern, messageParameters);
+            }
+            
             IWebDriver driver = configuration.IsLocal ?
                 LocalWebDriverFactory.GetWebDriver(configuration) :
                 RemoteWebDriverFactory.GetWebDriver(configuration);
@@ -104,7 +133,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             if (IsDebugEnabled)
             {
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                Logger.Debug($"{driver} successfully launched. Agent String: {js.ExecuteScript("return navigator.userAgent;")}");
+                if (IsDebugEnabled)
+                {
+                    const string messagePattern = "{0} successfully launched. Agent String: {1}";
+                    object[] messageParameters = { driver, js.ExecuteScript("return navigator.userAgent;") };
+                    Logger.LogDebug(messagePattern, messageParameters);
+                }
             }
             
             return driver;

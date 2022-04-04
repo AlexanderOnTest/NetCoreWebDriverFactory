@@ -16,18 +16,21 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Logging;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils;
+using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Safari;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 [assembly: InternalsVisibleTo("AlexanderOnTest.NetCoreWebDriverFactory.UnitTests")]
 
@@ -38,8 +41,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
     /// </summary>
     public class DefaultLocalWebDriverFactory :ILocalWebDriverFactory
     {
-        private static readonly ILog Logger = LogProvider.For<DefaultWebDriverFactory>();
-        private static readonly bool IsDebugEnabled = Logger.IsDebugEnabled();
+        private static readonly ILogger Logger = WebDriverFactoryLogging.LoggerFactory?.CreateLogger("DefaultLocalWebDriverFactory");
+        private static readonly bool IsDebugEnabled = Logger != null && Logger.IsEnabled(LogLevel.Debug);
+        private static readonly bool IsInfoEnabled = Logger != null && Logger.IsEnabled(LogLevel.Information);
         
         /// <summary>
         /// Return a DriverFactory instance. Default to using Edge for IE testing on Windows (required for Windows 11).
@@ -80,7 +84,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// Use Microsoft Edge for testing Internet Explorer compatibility.
         /// </summary>
         public bool UseEdgeForInternetExplorer { get; set; } = true;
-        
+
         /// <summary>
         /// Return a local WebDriver of the given browser type with default settings.
         /// </summary>
@@ -88,40 +92,49 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="windowSize"></param>
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="requestedCulture"></param>
         /// <returns></returns>
-        public virtual IWebDriver GetWebDriver(Browser browser, WindowSize windowSize = WindowSize.Hd, bool headless = false, Size windowCustomSize = new Size())
+        public virtual IWebDriver GetWebDriver(
+            Browser browser, 
+            WindowSize windowSize = WindowSize.Hd, 
+            bool headless = false, 
+            Size windowCustomSize = new Size(),
+            CultureInfo requestedCulture = null)
         {
+            if (IsDebugEnabled)
+            {
+                const string messagePattern = "Local WebDriver requested using parameters: Browser : {0}, WindowSize : {1}, Is Headless : {2}, (Custom Size: Height {3}, Width {4}), (Requested Language Culture : {5})";
+                var messageParameters = new object[] { browser, windowSize, headless, windowCustomSize.Height, windowCustomSize.Width, requestedCulture };
+                Logger.LogDebug(messagePattern, messageParameters);
+            }
+            
             if (headless && 
                 !(browser == Browser.Chrome || 
                   browser == Browser.Edge || 
                   browser == Browser.Firefox))
             {
-                Exception ex = new ArgumentException($"Headless mode is not currently supported for {browser}.");
-                Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
-                throw ex;
+                throw new NotSupportedException($"Headless mode is not currently supported for {browser}.");
             }
 
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<FirefoxOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.Chrome:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<ChromeOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.InternetExplorer:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<InternetExplorerOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.Edge:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(headless), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<EdgeOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 case Browser.Safari:
-                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(), windowSize, windowCustomSize);
+                    return GetWebDriver(DriverOptionsFactory.GetLocalDriverOptions<SafariOptions>(headless, requestedCulture), windowSize, windowCustomSize);
 
                 default:
-                    Exception ex = new PlatformNotSupportedException($"{browser} is not currently supported.");
-                    Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
-                    throw ex;
+                    throw new NotSupportedException($"{browser} is not currently supported.");
             }
         }
 
@@ -132,20 +145,24 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <returns></returns>
         public IWebDriver GetWebDriver(IWebDriverConfiguration configuration)
         {
-            Logger.Info($"Local WebDriver requested using configuration: {configuration}");
-
+            if (IsDebugEnabled)
+            {
+                const string messagePattern = "Local WebDriver requested using {0}";
+                var messageParameters = new object[] { configuration.ToString() };
+                Logger.LogDebug(messagePattern, messageParameters);
+            }
+            
             if (!configuration.IsLocal)
             {
-                Exception ex = new ArgumentException("A RemoteWebDriver Instance cannot be generated by this method.");
-                Logger.Fatal("Invalid WebDriver Configuration requested.", ex);
-                throw ex;
+                throw new ArgumentException("A RemoteWebDriver Instance cannot be generated by this method.");
             }
 
             return GetWebDriver(
                 configuration.Browser,
                 configuration.WindowSize,
                 configuration.Headless,
-                configuration.WindowDefinedSize
+                configuration.WindowDefinedSize,
+                configuration.LanguageCulture
             );
         }
 

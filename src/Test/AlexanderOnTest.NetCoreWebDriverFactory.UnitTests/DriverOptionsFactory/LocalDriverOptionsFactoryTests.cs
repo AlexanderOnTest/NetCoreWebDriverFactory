@@ -42,7 +42,7 @@ public class LocalDriverOptionsFactoryTests
             .GetRequiredService<IDriverOptionsFactory>();
     }
 
-    [TestCase]
+    [Test]
     public void RequestingHeadlessModeThrowsCorrectlyForSafari()
     {
         optionsFactory
@@ -51,7 +51,7 @@ public class LocalDriverOptionsFactoryTests
             .WithMessage("Only Chrome, Edge and Firefox support headless operation");
     }
 
-    [TestCase]
+    [Test]
     public void RequestingOnScreenModeDoesNotThrowForSafari()
     {
         optionsFactory
@@ -59,7 +59,7 @@ public class LocalDriverOptionsFactoryTests
             .Should().NotThrow();
     }
 
-    [TestCase]
+    [Test]
     public void RequestingHeadlessModeThrowsCorrectlyForInternetExplorer()
     {
         optionsFactory
@@ -68,7 +68,7 @@ public class LocalDriverOptionsFactoryTests
             .WithMessage("Only Chrome, Edge and Firefox support headless operation");
     }
 
-    [TestCase]
+    [Test]
     public void RequestingOnScreenModeThrowsCorrectlyForInternetExplorer()
     {
         optionsFactory
@@ -76,42 +76,42 @@ public class LocalDriverOptionsFactoryTests
             .Should().NotThrow();
     }
 
-    [TestCase]
+    [Test]
     public void HeadlessModeIsSetCorrectlyForChrome()
     {
         ChromeOptions options = optionsFactory.GetLocalDriverOptions<ChromeOptions>(true);
         options?.Arguments.Should().Contain("headless");
     }
 
-    [TestCase]
+    [Test]
     public void HeadlessModeIsNotSetIncorrectlyForChrome()
     {
         ChromeOptions options = optionsFactory.GetLocalDriverOptions<ChromeOptions>(false);
         options?.Arguments.Should().NotContain("headless");
     }
 
-    [TestCase]
+    [Test]
     public void HeadlessModeIsSetCorrectlyForEdge()
     {
         EdgeOptions options = optionsFactory.GetLocalDriverOptions<EdgeOptions>(true);
         options?.Arguments.Should().Contain("headless");
     }
 
-    [TestCase]
+    [Test]
     public void HeadlessModeIsNotSetIncorrectlyForEdge()
     {
         EdgeOptions options = optionsFactory.GetLocalDriverOptions<EdgeOptions>(false);
         options?.Arguments.Should().NotContain("headless");
     }
     
-    [TestCase]
+    [Test]
     public void HeadlessModeIsSetCorrectlyForFirefox()
     {
         FirefoxOptions options = optionsFactory.GetLocalDriverOptions<FirefoxOptions>(true);
         GetFirefoxArguments(options).Should().Contain("--headless");
     }
 
-    [TestCase]
+    [Test]
     public void HeadlessModeIsNotSetIncorrectlyForFirefox()
     {
         FirefoxOptions options = optionsFactory.GetLocalDriverOptions<FirefoxOptions>(false);

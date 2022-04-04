@@ -15,6 +15,7 @@
 // </copyright>
 
 using System;
+using System.Globalization;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -168,6 +169,59 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.DriverOptionsFactory
                 default:
                     return options;
             }
+        }
+
+        /// <summary>
+        /// Add the required settings for requesting a browser of a given language profile - if supported.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="options"></param>
+        /// <param name="requestedCulture"></param>
+        /// <param name="headless"></param>
+        /// <returns></returns>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static T SetCulture<T>(T options, CultureInfo requestedCulture, bool headless) where T : DriverOptions
+        {
+            if (requestedCulture == null)
+            {
+                throw new ArgumentNullException("requestedCulture");
+            }
+            if (typeof(T) != typeof(ChromeOptions) && typeof(T) != typeof(EdgeOptions) && typeof(T) != typeof(FirefoxOptions))
+            {
+                throw new NotSupportedException("The requested browser does not support requesting a given language culture.");
+            }
+            if (typeof(T) == typeof(FirefoxOptions))
+            {
+                // Firefox doesn't care about headless operation so just add the preference
+                var firefoxOptions = options as FirefoxOptions;
+                firefoxOptions.SetPreference("intl.accept_languages", requestedCulture.ToString());
+                return options;
+            }
+            if (headless)
+            {
+                throw new NotSupportedException("Chromium based browsers do not support headless running when requesting a given language culture.");
+            }
+
+            if (typeof(T) == typeof(ChromeOptions))
+            {
+                // Chrome uses a profile which does not support headless operation
+                var chromeOptions = options as ChromeOptions;
+                chromeOptions.AddUserProfilePreference("intl.accept_languages", requestedCulture.ToString());
+                return options;
+            }
+
+
+            if (typeof(T) == typeof(EdgeOptions))
+            {
+                // Edge uses a profile which does not support headless operation
+                var edgeOptions = options as EdgeOptions;
+                edgeOptions.AddUserProfilePreference("intl.accept_languages", requestedCulture.ToString());
+                return options;
+            }
+
+            // this should never be reached
+            throw new NotSupportedException("Unsupported feature combination requested.");
         }
 
         /// <summary>

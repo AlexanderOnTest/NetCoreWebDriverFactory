@@ -15,7 +15,6 @@
 // </copyright>
 
 using System;
-using System.Reflection;
 using AlexanderOnTest.NetCoreWebDriverFactory.DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;

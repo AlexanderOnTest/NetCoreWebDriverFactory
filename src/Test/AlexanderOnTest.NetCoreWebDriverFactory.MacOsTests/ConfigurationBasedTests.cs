@@ -88,19 +88,73 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
             base.CustomSizeBrowserIsOfRequestedSize(windowSize, expectedWidth, expectedHeight);
         }
 
-        [Test]
         [TestCase(Browser.InternetExplorer)]
-        public new void RequestingUnsupportedWebDriverThrowsInformativeException(Browser browser)
+        [Category(TestCategories.NotSupported)]
+        public new void RequestingUnsupportedLocalWebDriverThrowsInformativeException(Browser browser)
         {
-            base.RequestingUnsupportedWebDriverThrowsInformativeException(browser);
+            base.RequestingUnsupportedLocalWebDriverThrowsInformativeException(browser);
         }
 
-        [Test]
         [TestCase(Browser.InternetExplorer)]
         [TestCase(Browser.Safari)]
-        public new void RequestingUnsupportedHeadlessBrowserThrowsInformativeException(Browser browser)
+        [Category(TestCategories.NotSupported)]
+        public new void RequestingUnsupportedLocalHeadlessBrowserThrowsInformativeException(Browser browser)
         {
-            base.RequestingUnsupportedHeadlessBrowserThrowsInformativeException(browser);
+            base.RequestingUnsupportedLocalHeadlessBrowserThrowsInformativeException(browser);
+        }
+
+        [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
+        [TestCase(Browser.Safari, BrowserVisibility.OnScreen)]
+        [Category(TestCategories.NotSupported)]
+        public new void RequestingUnsupportedLocalCulturedBrowserThrowsInformativeException(
+            Browser browser,
+            BrowserVisibility browserVisibility)
+        {
+            base.RequestingUnsupportedLocalCulturedBrowserThrowsAppropriateException(browser, browserVisibility);
+        }
+
+        [TestCase(PlatformType.Linux, Browser.InternetExplorer)]
+        [TestCase(PlatformType.Linux, Browser.Safari)]
+        [TestCase(PlatformType.Mac, Browser.InternetExplorer)]
+        [TestCase(PlatformType.Windows, Browser.Safari)]
+        [Category(TestCategories.NotSupported)]
+        public new void RequestingUnsupportedRemoteWebDriverThrowsInformativeException(
+            PlatformType platformType,
+            Browser browser)
+        {
+            base.RequestingUnsupportedRemoteWebDriverThrowsInformativeException(platformType, browser);
+        }
+
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer)]
+        [TestCase(PlatformType.Mac, Browser.Safari)]
+        [Category(TestCategories.NotSupported)]
+        public new void RequestingUnsupportedRemoteHeadlessBrowserThrowsInformativeException(
+            PlatformType platformType,
+            Browser browser)
+        {
+            base.RequestingUnsupportedRemoteHeadlessBrowserThrowsInformativeException(platformType, browser);
+        }
+
+        [TestCase(PlatformType.Linux, Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Linux, Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Mac, Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Mac, Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Mac, Browser.Safari, BrowserVisibility.OnScreen)]
+        [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
+        [TestCase(PlatformType.Windows, Browser.InternetExplorer, BrowserVisibility.OnScreen)]
+        [Category(TestCategories.NotSupported)]
+        public new void RequestingUnsupportedRemoteCulturedBrowserThrowsInformativeException(
+            PlatformType platformType,
+            Browser browser,
+            BrowserVisibility browserVisibility)
+        {
+            base.RequestingUnsupportedRemoteCulturedBrowserThrowsAppropriateException(
+                platformType,
+                browser,
+                browserVisibility);
         }
     }
 }

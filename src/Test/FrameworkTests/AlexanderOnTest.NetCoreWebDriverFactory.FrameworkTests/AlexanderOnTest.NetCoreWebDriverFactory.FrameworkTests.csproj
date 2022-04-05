@@ -118,7 +118,7 @@
       <Version>100.0.1183-pre</Version>
     </PackageReference>
     <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig">
-      <Version>4.0.0-beta30</Version>
+      <Version>4.0.0-RC1</Version>
     </PackageReference>
     <PackageReference Include="System.AppContext">
       <Version>4.3.0</Version>

@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="Scrutor" Version="4.1.0" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0-beta30" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0-RC1" />
   </ItemGroup>
 
   <ItemGroup>

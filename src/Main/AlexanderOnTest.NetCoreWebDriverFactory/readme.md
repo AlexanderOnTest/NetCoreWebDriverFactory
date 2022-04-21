@@ -82,5 +82,5 @@ As supported features do change, these are not guaranteed to remain correct.
 
 ## Extensible
 All services are defined as interfaces so you can provide alternative or additional implementations if needed.
-- The [Browser.cs](https://github.com/AlexanderOnTest/NetCoreWebDriverFactory/blob/v4_0_0/src/Main/AlexanderOnTest.NetCoreWebDriverFactory/Utils/Builders/Browser.cs) Enum in particular has been populated with many potential additional options that you can provide your own implementations to support.
+- The [Browser.cs](https://github.com/AlexanderOnTest/NetCoreWebDriverFactory/blob/v4_0_0/src/Main/AlexanderOnTest.NetCoreWebDriverFactory/Browser.cs) Enum in particular has been populated with many potential additional options that you can provide your own implementations to support.
 - The configurations also support custom window sizes if the pre-defined options are not enough.

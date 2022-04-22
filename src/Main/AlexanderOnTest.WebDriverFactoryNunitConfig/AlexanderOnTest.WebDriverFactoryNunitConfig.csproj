@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.0.0-RC2</Version>
+    <Version>4.0.0-RC3</Version>
     <PackageProjectUrl>https://github.com/AlexanderOnTesting/NetCoreWebDriverFactory/wiki/Selenium.WebDriver.WebDriverFactoryNunitConfig</PackageProjectUrl>
     <PackageIcon>AoT.png</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Oliveira Dunn</Authors>
@@ -29,7 +30,7 @@
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageVersion>4.0.0-RC2</PackageVersion>
+    <PackageVersion>4.0.0-RC3</PackageVersion>
     <FileVersion>4.0.0</FileVersion>
   </PropertyGroup>
 
@@ -39,10 +40,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-RC2" />
+    <PackageReference Include="Selenium.WebDriver.NetCoreWebDriverFactory" Version="4.0.0-RC3" />
     <None Include="AoT.png" Pack="true" PackagePath="">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

@@ -17,7 +17,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="Scrutor" Version="4.1.0" />
-    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0-RC3" />
+    <PackageReference Include="Selenium.WebDriver.WebDriverFactoryNunitConfig" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

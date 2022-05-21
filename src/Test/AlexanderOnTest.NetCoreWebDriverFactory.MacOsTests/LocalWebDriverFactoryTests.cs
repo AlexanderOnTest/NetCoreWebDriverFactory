@@ -14,8 +14,6 @@
 // limitations under the License.
 // </copyright>
 
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using AlexanderOnTest.NetCoreWebDriverFactory.Lib.Test;
 using NUnit.Framework;
@@ -26,7 +24,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
     public class LocalWebDriverFactoryTests : LocalWebDriverFactoryTestsBase
     {
         private static readonly OSPlatform ThisPlatform = OSPlatform.OSX;
-        private static readonly string DriverPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
 
         public LocalWebDriverFactoryTests() : base(ThisPlatform)
         {
@@ -40,7 +37,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
+        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility headless = BrowserVisibility.OnScreen)
         {
             base.LocalWebDriverFactoryWorks(browser, headless);
         }

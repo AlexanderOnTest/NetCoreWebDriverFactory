@@ -21,16 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.4.0" />
+    <PackageReference Include="FluentAssertions" Version="6.6.0" />
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-    <PackageReference Include="Scrutor" Version="4.0.0" />
+    <PackageReference Include="Scrutor" Version="4.1.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="98.0.4758.8000" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0.1" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.31.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0.1" />
   </ItemGroup>
 
   <ItemGroup>

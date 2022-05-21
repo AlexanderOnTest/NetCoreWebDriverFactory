@@ -34,6 +34,86 @@
              Apple Safari
             </summary>
         </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.FirefoxBeta">
+            <summary>
+            Mozilla Firefox beta configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.ChromeBeta">
+            <summary>
+            Google Chrome beta configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.EdgeBeta">
+            <summary>
+            Microsoft Edge beta configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.FirefoxAlternate">
+            <summary>
+            Mozilla Firefox alternate configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.ChromeAlternate">
+            <summary>
+            Google Chrome alternate configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.InternetExplorerAlternate">
+            <summary>
+            Microsoft Internet Explorer alternate configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.EdgeAlternate">
+            <summary>
+            Microsoft Edge alternate configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.SafariAlternate">
+            <summary>
+             Apple Safari alternate configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.FirefoxDev">
+            <summary>
+            Mozilla Firefox dev configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.ChromeDev">
+            <summary>
+            Google Chrome dev configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.EdgeDev">
+            <summary>
+            Microsoft Edge dev configuration for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.Custom1">
+            <summary>
+             Custom Browser Value for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.Custom2">
+            <summary>
+             Custom Browser Value for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.Custom3">
+            <summary>
+             Custom Browser Value for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.Custom4">
+            <summary>
+             Custom Browser Value for your own implementation
+            </summary>
+        </member>
+        <member name="F:AlexanderOnTest.NetCoreWebDriverFactory.Browser.Custom5">
+            <summary>
+             Custom Browser Value for your own implementation
+            </summary>
+        </member>
         <member name="T:AlexanderOnTest.NetCoreWebDriverFactory.Config.IWebDriverConfiguration">
             <summary>
             Interface for a WebDriver Configuration object.

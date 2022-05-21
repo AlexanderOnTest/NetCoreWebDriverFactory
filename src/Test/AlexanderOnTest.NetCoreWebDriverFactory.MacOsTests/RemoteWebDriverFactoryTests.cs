@@ -51,7 +51,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.Firefox, BrowserVisibility.Headless)]
-        public new void RemoteWebDriverFactoryWorks(
+        public void RemoteWebDriverFactoryWorks(
             PlatformType platformType, 
             Browser browser, 
             BrowserVisibility browserVisibility)

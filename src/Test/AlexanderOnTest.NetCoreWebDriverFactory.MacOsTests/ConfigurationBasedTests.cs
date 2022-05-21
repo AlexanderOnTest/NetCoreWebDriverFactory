@@ -39,7 +39,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless)]
-        public new void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
+        public void LocalWebDriverFactoryWorks(Browser browser, BrowserVisibility browserVisibility)
         {
             base.LocalWebDriverFactoryWorks(browser, browserVisibility);
         }
@@ -64,7 +64,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(PlatformType.Windows, Browser.Chrome, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.Firefox, BrowserVisibility.Headless)]
-        public new void RemoteWebDriverFactoryWorks(
+        public void RemoteWebDriverFactoryWorks(
             PlatformType platformType, 
             Browser browser, 
             BrowserVisibility browserVisibility)
@@ -108,7 +108,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [TestCase(Browser.Safari, BrowserVisibility.OnScreen)]
         [Category(TestCategories.NotSupported)]
-        public new void RequestingUnsupportedLocalCulturedBrowserThrowsInformativeException(
+        public void RequestingUnsupportedLocalCulturedBrowserThrowsInformativeException(
             Browser browser,
             BrowserVisibility browserVisibility)
         {
@@ -146,7 +146,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.MacOsTests
         [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [Category(TestCategories.NotSupported)]
-        public new void RequestingUnsupportedRemoteCulturedBrowserThrowsInformativeException(
+        public void RequestingUnsupportedRemoteCulturedBrowserThrowsInformativeException(
             PlatformType platformType,
             Browser browser,
             BrowserVisibility browserVisibility)

@@ -166,7 +166,7 @@
         </member>
         <member name="M:AlexanderOnTest.NetCoreWebDriverFactory.Config.WebDriverConfiguration.#ctor(AlexanderOnTest.NetCoreWebDriverFactory.Browser,System.Uri,System.Boolean,System.Boolean,OpenQA.Selenium.PlatformType,AlexanderOnTest.NetCoreWebDriverFactory.WindowSize,System.Drawing.Size,System.Globalization.CultureInfo)">
             <summary>
-            Generate a new immutable WebDriverConfiguration instance.
+            Generate a new partially mutable WebDriverConfiguration instance to support overrides.
             </summary>
             <param name="browser"></param>
             <param name="gridUri"></param>

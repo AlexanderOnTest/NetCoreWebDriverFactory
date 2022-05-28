@@ -28,6 +28,7 @@ using static FluentAssertions.FluentActions;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory
 {
+    [Category("CI")]
     public class StaticDriverOptionsFactoryCultureTests
     {
         internal const string UnsupportedBrowserMessage =

@@ -31,6 +31,7 @@ using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory;
 
+[Category("CI")]
 public class LocalDriverOptionsFactoryTests
 {
     private IDriverOptionsFactory optionsFactory;

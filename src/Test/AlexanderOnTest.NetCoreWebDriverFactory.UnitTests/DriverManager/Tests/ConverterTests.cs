@@ -55,7 +55,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             //Assert
             using (new AssertionScope())
             {
-                actualJson.Should().Contain("\"PlatformType\":\"Windows\"");
                 actualJson.Should().Contain($"\"WindowSize\":\"Defined\"");
                 actualJson.Should().Contain($"\"WindowDefinedSize\":{{\"width\":{expectedWidth},\"height\":{expectedHeight}}}");
                 actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444\"");
@@ -76,7 +75,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             //Assert
             using (new AssertionScope())
             {
-                actualJson.Should().Contain("\"PlatformType\":\"Windows\"");
                 actualJson.Should().Contain($"\"WindowSize\":\"{windowSize}\"");
                 actualJson.Should().Contain("\"WindowDefinedSize\":{\"width\":0,\"height\":0}");
                 actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444\"");
@@ -98,7 +96,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager.Tests
             //Assert
             using (new AssertionScope())
             {
-                actualJson.Should().Contain("\"PlatformType\":\"Windows\"");
                 actualJson.Should().Contain("\"WindowSize\":\"Defined\"");
                 actualJson.Should().Contain($"\"WindowDefinedSize\":{{\"width\":{width},\"height\":{height}}}");
                 actualJson.Should().Contain("\"GridUri\":\"http://localhost:4444\"");

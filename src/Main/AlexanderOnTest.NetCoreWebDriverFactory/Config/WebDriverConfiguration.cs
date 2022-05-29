@@ -31,11 +31,10 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
     /// </summary>
     public class WebDriverConfiguration :IWebDriverConfiguration
     {
-        private static readonly SizeJsonConverter SizeJsonConverter = new SizeJsonConverter();
-        private readonly string description;
+        private static readonly SizeJsonConverter SizeJsonConverter = new ();
 
         /// <summary>
-        /// Generate a new immutable WebDriverConfiguration instance.
+        /// Generate a new partially mutable WebDriverConfiguration instance to support overrides.
         /// </summary>
         /// <param name="browser"></param>
         /// <param name="gridUri"></param>
@@ -69,17 +68,6 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
                 ? windowDefinedSize
                 : windowSize.Size();
             LanguageCulture = languageCulture;
-            description = new StringBuilder()
-                .Append($"{base.ToString()}: (")
-                .Append($"Browser: {Browser.ToString()} ")
-                .Append(Headless ? "headless" : "on screen")
-                .Append(windowSize == WindowSize.Defined ? 
-                $", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, " :
-                $", {windowSize}, ")
-                .Append(IsLocal ? "running locally" : $"running remotely on {GridUri} on platform: {PlatformType}")
-                .Append(languageCulture != null ? $", Requested language culture: {languageCulture}" : "")
-                .Append(")")
-        .ToString();
         }
 
         /// <summary>
@@ -88,7 +76,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         [DefaultValue(Browser.Firefox)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public Browser Browser { get;}
+        public Browser Browser { get; }
 
         /// <summary>
         /// Platform to request for a RemoteWebDriver
@@ -96,7 +84,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         [DefaultValue(PlatformType.Any)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public PlatformType PlatformType { get;}
+        public PlatformType PlatformType { get; set; }
 
         /// <summary>
         /// WindowSize to request
@@ -104,7 +92,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         [DefaultValue(WindowSize.Hd)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WindowSize WindowSize { get;}
+        public WindowSize WindowSize { get; }
 
         /// <summary>
         /// Actual window size requested (if not Maximize/Maximise or Unchanged)
@@ -117,21 +105,21 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// </summary>
         [DefaultValue("http://localhost:4444")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public Uri GridUri { get;}
+        public Uri GridUri { get; set; }
 
         /// <summary>
         /// Use a local WebDriver.
         /// </summary>
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool IsLocal { get;}
+        public bool IsLocal { get; set; }
 
         /// <summary>
         /// Run headless if available.
         /// </summary>
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool Headless { get; }
+        public bool Headless { get; set; }
         
         /// <summary>
         /// Request a specific language culture
@@ -145,7 +133,17 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
         /// <returns></returns>
         public override string ToString()
         {
-            return description;
+            return new StringBuilder()
+                .Append($"{base.ToString()}: (")
+                .Append($"Browser: {Browser.ToString()} ")
+                .Append(Headless ? "headless" : "on screen")
+                .Append(WindowSize == WindowSize.Defined ? 
+                    $", Size: {WindowDefinedSize.Width} x {WindowDefinedSize.Height}, " :
+                    $", {WindowSize}, ")
+                .Append(IsLocal ? "running locally" : $"running remotely on {GridUri} on platform: {PlatformType}")
+                .Append(LanguageCulture != null ? $", Requested language culture: {LanguageCulture}" : "")
+                .Append(")")
+                .ToString();
         }
 
         /// <summary>

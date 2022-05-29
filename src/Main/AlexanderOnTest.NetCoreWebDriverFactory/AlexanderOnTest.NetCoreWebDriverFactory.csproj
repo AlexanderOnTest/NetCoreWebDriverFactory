@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
     <Company>AlexanderOnTest.tech</Company>
     <Authors>Alexander Oliveira Dunn</Authors>
     <Product>NetCoreWebDriverFactory</Product>
@@ -30,12 +30,16 @@ contains test projects for Windows, Linux and MacOS. These can be used to test y
 
 The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriverFactoryNunitConfig provides easy test configuration options if using Nunit 3 for your tests.</Description>
 
-    <PackageReleaseNotes>v4.0.0
-Added support for:
-Selenium Webdriver v4.x and Grid 4.x
-Chromium Edge on Windows, Linux and MacOs
-Internet Explorer Mode testing in Edge on Local Windows
-Requesting a browser with a given language culture where supported    
+    <PackageReleaseNotes>
+        v4.1.0
+        Added Mutability to the WebDriverConfiguration implementation
+        Correctly use the GridUri passed in in an IWebDriverConfiguration over the factory default
+        v4.0.0
+        Added support for:
+        Selenium Webdriver v4.x and Grid 4.x
+        Chromium Edge on Windows, Linux and MacOs
+        Internet Explorer Mode testing in Edge on Local Windows
+        Requesting a browser with a given language culture where supported
     </PackageReleaseNotes>
 
     <Copyright>Copyright 2022 Alexander Oliveira Dunn</Copyright>
@@ -46,9 +50,9 @@ Requesting a browser with a given language culture where supported
     <PackageTags>Selenium, WebDriverFactory, WebDriver, Selenium WebDriver, DotNet Core, .net Core, .net Framework, .net 6</PackageTags>
     <PackageId>Selenium.WebDriver.NetCoreWebDriverFactory</PackageId>
     <LangVersion>default</LangVersion>
-    <AssemblyVersion>4.0.0</AssemblyVersion>
-    <FileVersion>4.0.0</FileVersion>
-    <PackageVersion>4.0.0</PackageVersion>
+    <AssemblyVersion>4.1.0</AssemblyVersion>
+    <FileVersion>4.1.0</FileVersion>
+    <PackageVersion>4.1.0</PackageVersion>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/AlexanderOnTest/NetCoreWebDriverFactory.git</RepositoryUrl>

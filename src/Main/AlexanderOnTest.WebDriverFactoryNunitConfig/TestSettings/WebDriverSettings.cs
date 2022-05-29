@@ -20,6 +20,7 @@ using System.Globalization;
 using AlexanderOnTest.NetCoreWebDriverFactory;
 using AlexanderOnTest.NetCoreWebDriverFactory.Config;
 using AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using static AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings.Utils;
@@ -120,6 +121,44 @@ namespace AlexanderOnTest.WebDriverFactoryNunitConfig.TestSettings
                 .WithWindowDefinedSize(CustomWindowSize)
                 .WithLanguageCulture(LanguageCulture)
                 .Build();
+        
+        /// <summary>
+        /// Return the Configuration to use - Priority:
+        /// 1. A value provided in "My Documents/Config_WebDriver.json" (Windows) or "/Config_WebDriver.json" (Mac / Linux)
+        /// 2. The value in an applied .runsettings file
+        /// 3. Default values.
+        /// </summary>
+        public static IWebDriverConfiguration OverriddenWebDriverConfiguration
+        {
+            get
+            {
+                var config = WebDriverConfiguration as WebDriverConfiguration;
+                Uri gridUriFileValue = null;
+                try
+                {
+                    gridUriFileValue = GetConfigFromFileSystemIfPresent<Uri>("Config_GridUri.json");
+                }
+                catch(JsonSerializationException ex)
+                {
+                    TestContext.WriteLine($"An invalid Uri was declared in `Config_GridUri.json`");
+                    TestContext.WriteLine($"Exception message: '{ex.Message}'");
+                    TestContext.WriteLine($"Overriding Configuration to use on Screen local driver.");
+                    TestContext.WriteLine($"Fix the Uri in `Config_GridUri.json` if this is not intended");
+                    // if "Config_GridUri.json" contains an invalid Uri, Override to run locally on Screen for debugging
+                    config.IsLocal = true;
+                    config.PlatformType = PlatformType.Any;
+                    config.Headless = false;
+                }
+                if (gridUriFileValue != null)
+                {
+                    TestContext
+                        .WriteLine($"A valid Uri ({gridUriFileValue}) was declared in `Config_GridUri.json` - Overriding the `Config_WebDriver.json` value.");
+                    config.GridUri = gridUriFileValue;
+                }
+
+                return config;
+            }
+        }
     }
 
 }

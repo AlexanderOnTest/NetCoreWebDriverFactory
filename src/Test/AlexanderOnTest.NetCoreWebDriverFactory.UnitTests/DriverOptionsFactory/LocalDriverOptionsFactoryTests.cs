@@ -31,6 +31,7 @@ using OpenQA.Selenium.Safari;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory;
 
+[Category("CI")]
 public class LocalDriverOptionsFactoryTests
 {
     private IDriverOptionsFactory optionsFactory;
@@ -130,7 +131,7 @@ public class LocalDriverOptionsFactoryTests
             List<object> arguments = argumentObject as List<object>;
             if (arguments != null)
             {
-                argumentStringsList = arguments?.Select(obj => obj as string).ToList();
+                argumentStringsList = arguments.Select(obj => obj as string).ToList();
             }
         }
         

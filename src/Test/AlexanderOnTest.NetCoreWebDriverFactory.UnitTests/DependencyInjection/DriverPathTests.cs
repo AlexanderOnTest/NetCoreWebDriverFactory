@@ -22,6 +22,7 @@ using NUnit.Framework;
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DependencyInjection
 {
+    [Category("CI")]
     public class DriverPathTests
     {
         private static readonly DriverPath ExpectedDriverPath = 

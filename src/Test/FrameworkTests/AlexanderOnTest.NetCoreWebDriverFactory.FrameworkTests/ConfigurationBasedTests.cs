@@ -43,7 +43,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.Local)]
-        public new void LocalWebDriverFactoryWorks(
+        public void LocalWebDriverFactoryWorks(
             Browser browser, 
             BrowserVisibility browserVisibility, 
             BrowserCulture browserCulture = BrowserCulture.Undefined)
@@ -62,7 +62,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.RemoteLinux)]
-        public new void RemoteWebDriverFactoryWorksForLinux(
+        public void RemoteWebDriverFactoryWorksForLinux(
             Browser browser,
             BrowserVisibility browserVisibility,
             BrowserCulture browserCulture)
@@ -86,7 +86,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.RemoteMacOs)]
-        public new void RemoteWebDriverFactoryWorksForMacOs(
+        public void RemoteWebDriverFactoryWorksForMacOs(
             Browser browser, 
             BrowserVisibility browserVisibility,
             BrowserCulture browserCulture)
@@ -110,7 +110,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Firefox, BrowserVisibility.OnScreen, BrowserCulture.Spanish)]
         [TestCase(Browser.Firefox, BrowserVisibility.Headless, BrowserCulture.Spanish)]
         [Category(TestCategories.RemoteWindows)]
-        public new void RemoteWebDriverFactoryWorksForWindows(
+        public void RemoteWebDriverFactoryWorksForWindows(
             Browser browser, 
             BrowserVisibility browserVisibility,
             BrowserCulture browserCulture)
@@ -157,7 +157,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [Category(TestCategories.NotSupported)]
-        public new void RequestingUnsupportedLocalCulturedBrowserThrowsInformativeException(
+        public void RequestingUnsupportedLocalCulturedBrowserThrowsInformativeException(
             Browser browser, 
             BrowserVisibility browserVisibility)
         {
@@ -195,7 +195,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.FrameworkTests
         [TestCase(PlatformType.Windows, Browser.Edge, BrowserVisibility.Headless)]
         [TestCase(PlatformType.Windows, Browser.InternetExplorer, BrowserVisibility.OnScreen)]
         [Category(TestCategories.NotSupported)]
-        public new void RequestingUnsupportedRemoteCulturedBrowserThrowsInformativeException(
+        public void RequestingUnsupportedRemoteCulturedBrowserThrowsInformativeException(
             PlatformType platformType,
             Browser browser, 
             BrowserVisibility browserVisibility)

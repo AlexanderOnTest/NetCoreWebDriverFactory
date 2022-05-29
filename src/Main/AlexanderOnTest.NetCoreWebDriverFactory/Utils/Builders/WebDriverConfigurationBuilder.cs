@@ -52,7 +52,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Utils.Builders
         private WebDriverConfigurationBuilder()
         {
             browser = Browser.Firefox;
-            platformType = PlatformType.Windows;
+            platformType = PlatformType.Any;
             windowSize = WindowSize.Hd;
             windowDefinedSize = Size.Empty;
             gridUri = new Uri("http://localhost:4444");

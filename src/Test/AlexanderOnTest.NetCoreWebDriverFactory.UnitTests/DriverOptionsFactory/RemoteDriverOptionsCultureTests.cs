@@ -34,6 +34,7 @@ using static AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFact
 
 namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverOptionsFactory;
 
+[Category("CI")]
 public class RemoteDriverOptionsCultureTests
 {
     private IDriverOptionsFactory optionsFactory;

@@ -74,20 +74,22 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
 
         /// <inheritdoc />
         public Uri GridUri { get; set; }
-        
+
         /// <summary>
         /// Return a RemoteWebDriver of the given browser type with default settings.
         /// </summary>
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="gridUri"></param>
         /// <returns></returns>
         public IWebDriver GetWebDriver(
             DriverOptions options,
             WindowSize windowSize = WindowSize.Hd,
-            Size windowCustomSize = new Size())
+            Size windowCustomSize = new(), 
+            Uri gridUri = null)
         {
-            IWebDriver driver = new RemoteWebDriver(GridUri, options);
+            IWebDriver driver = new RemoteWebDriver(gridUri ?? GridUri, options);
             return webDriverReSizer.SetWindowSize(driver, windowSize, windowCustomSize);
         }
 
@@ -111,7 +113,8 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
                 configuration.WindowSize,
                 configuration.Headless,
                 configuration.WindowDefinedSize,
-                configuration.LanguageCulture
+                configuration.LanguageCulture,
+                configuration.GridUri ?? GridUri
             );
         }
 
@@ -124,14 +127,16 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <param name="requestedCulture"></param>
+        /// <param name="gridUri"></param>
         /// <returns></returns>
         public IWebDriver GetWebDriver(
-            Browser browser, 
-            PlatformType platformType = PlatformType.Any, 
-            WindowSize windowSize = WindowSize.Hd, 
-            bool headless = false, 
-            Size windowCustomSize = new Size(),
-            CultureInfo requestedCulture = null)
+            Browser browser,
+            PlatformType platformType = PlatformType.Any,
+            WindowSize windowSize = WindowSize.Hd,
+            bool headless = false,
+            Size windowCustomSize = new(),
+            CultureInfo requestedCulture = null, 
+            Uri gridUri = null)
         {
             if (browser == Browser.Safari && platformType != PlatformType.Mac ||
                 browser == Browser.InternetExplorer && platformType != PlatformType.Windows)
@@ -158,19 +163,39 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
             switch (browser)
             {
                 case Browser.Firefox:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType, headless, requestedCulture), windowSize, windowCustomSize);
+                    return GetWebDriver(
+                        DriverOptionsFactory.GetRemoteDriverOptions<FirefoxOptions>(platformType, headless, requestedCulture), 
+                        windowSize, 
+                        windowCustomSize,
+                        gridUri ?? GridUri);
 
                 case Browser.Chrome:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType, headless, requestedCulture), windowSize, windowCustomSize);
+                    return GetWebDriver(
+                        DriverOptionsFactory.GetRemoteDriverOptions<ChromeOptions>(platformType, headless, requestedCulture), 
+                        windowSize, 
+                        windowCustomSize,
+                        gridUri ?? GridUri);
 
                 case Browser.InternetExplorer:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType, headless), windowSize, windowCustomSize);
+                    return GetWebDriver(
+                        DriverOptionsFactory.GetRemoteDriverOptions<InternetExplorerOptions>(platformType, headless), 
+                        windowSize, 
+                        windowCustomSize,
+                        gridUri ?? GridUri);
 
                 case Browser.Edge:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType, headless, requestedCulture), windowSize, windowCustomSize);
+                    return GetWebDriver(
+                        DriverOptionsFactory.GetRemoteDriverOptions<EdgeOptions>(platformType, headless, requestedCulture), 
+                        windowSize, 
+                        windowCustomSize,
+                        gridUri ?? GridUri);
 
                 case Browser.Safari:
-                    return GetWebDriver(DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType, headless), windowSize, windowCustomSize);
+                    return GetWebDriver(
+                        DriverOptionsFactory.GetRemoteDriverOptions<SafariOptions>(platformType, headless), 
+                        windowSize, 
+                        windowCustomSize,
+                        gridUri ?? GridUri);
 
                 default:
                     Exception ex = new NotSupportedException($"{browser} is not currently supported.");

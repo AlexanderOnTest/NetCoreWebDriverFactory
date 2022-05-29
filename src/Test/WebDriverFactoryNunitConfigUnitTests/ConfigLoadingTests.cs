@@ -152,7 +152,7 @@ public class ConfigLoadingTests
         return null;
     }
     
-    private async Task WriteConfig(string configFileName, string configToWrite)
+    private async Task WriteConfig(string configFileName, string? configToWrite)
     {
         string configFilePath = Path.Combine(GetFolderPath(SpecialFolder.MyDocuments), configFileName);
         if (string.IsNullOrEmpty(configToWrite) && File.Exists(configFilePath))

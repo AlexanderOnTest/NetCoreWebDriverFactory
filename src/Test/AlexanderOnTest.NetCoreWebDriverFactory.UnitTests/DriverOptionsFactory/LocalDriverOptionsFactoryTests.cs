@@ -131,7 +131,7 @@ public class LocalDriverOptionsFactoryTests
             List<object> arguments = argumentObject as List<object>;
             if (arguments != null)
             {
-                argumentStringsList = arguments?.Select(obj => obj as string).ToList();
+                argumentStringsList = arguments.Select(obj => obj as string).ToList();
             }
         }
         

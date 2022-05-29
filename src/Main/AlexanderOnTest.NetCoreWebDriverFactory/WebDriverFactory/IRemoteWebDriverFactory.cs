@@ -45,14 +45,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <param name="requestedCulture"></param>
+        /// <param name="gridUri"></param>
         /// <returns></returns>
-        IWebDriver GetWebDriver(
-            Browser browser, 
-            PlatformType platformType = PlatformType.Any, 
-            WindowSize windowSize = WindowSize.Hd, 
-            bool headless = false, 
+        IWebDriver GetWebDriver(Browser browser,
+            PlatformType platformType = PlatformType.Any,
+            WindowSize windowSize = WindowSize.Hd,
+            bool headless = false,
             Size windowCustomSize = new Size(),
-            CultureInfo requestedCulture = null);
+            CultureInfo requestedCulture = null, 
+            Uri gridUri = null);
 
         /// <summary>
         /// Return a RemoteWebDriver instance of the given configuration.
@@ -67,7 +68,12 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="options"></param>
         /// <param name="windowSize"></param>
         /// <param name="windowCustomSize"></param>
+        /// <param name="gridUri"></param>
         /// <returns></returns>
-        IWebDriver GetWebDriver(DriverOptions options, WindowSize windowSize = WindowSize.Hd, Size windowCustomSize = new Size());
+        IWebDriver GetWebDriver(
+            DriverOptions options,
+            WindowSize windowSize = WindowSize.Hd,
+            Size windowCustomSize = new Size(), 
+            Uri gridUri = null);
     }
 }

@@ -24,7 +24,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.UnitTests.DriverManager
     internal class FakeWebDriver : IWebDriver
 #pragma warning restore S3881 // "IDisposable" should be implemented correctly
     {
-        private bool isQuit = false;
+        private bool isQuit;
 
         public IWebElement FindElement(By @by)
         {

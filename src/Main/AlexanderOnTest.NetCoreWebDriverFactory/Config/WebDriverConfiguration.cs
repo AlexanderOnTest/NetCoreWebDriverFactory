@@ -143,7 +143,7 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.Config
                 .Append(IsLocal ? "running locally" : $"running remotely on {GridUri} on platform: {PlatformType}")
                 .Append(LanguageCulture != null ? $", Requested language culture: {LanguageCulture}" : "")
                 .Append(")")
-                .ToString();;
+                .ToString();
         }
 
         /// <summary>

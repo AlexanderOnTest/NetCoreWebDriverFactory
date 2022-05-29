@@ -65,15 +65,15 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory.WebDriverFactory
         /// <param name="headless"></param>
         /// <param name="windowCustomSize"></param>
         /// <param name="requestedCulture"></param>
+        /// <param name="gridUri"></param>
         /// <returns></returns>
-        public IWebDriver GetWebDriver(
-            Browser browser, 
-            WindowSize windowSize = WindowSize.Hd, 
+        public IWebDriver GetWebDriver(Browser browser,
+            WindowSize windowSize = WindowSize.Hd,
             bool isLocal = true,
-            PlatformType platformType = PlatformType.Any, 
-            bool headless = false, 
+            PlatformType platformType = PlatformType.Any,
+            bool headless = false,
             Size windowCustomSize = new Size(),
-            CultureInfo requestedCulture = null)
+            CultureInfo requestedCulture = null, Uri gridUri = null)
         {
             string configurationDescription = new StringBuilder()
                 .Append($"Browser: {browser.ToString()}")

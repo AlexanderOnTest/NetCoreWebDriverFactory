@@ -70,7 +70,7 @@ The supporting package https://www.nuget.org/packages/Selenium.WebDriver.WebDriv
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.14.1" />
     <None Include="readme.md" Pack="true" PackagePath="\" />
     <None Update="AoT.png">
       <Pack>true</Pack>

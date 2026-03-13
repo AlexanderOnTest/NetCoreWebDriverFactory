@@ -59,7 +59,19 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
         /// <summary>
         /// Implemented form for all defined size browsers
         /// </summary>
-        Defined
+        Defined,
+        HdPlus,
+        /// <summary>
+        /// HD-Plus - 1600 x 900 screen size. 3rd most common 'PC' screen size.
+        /// </summary>
+        TwoK,
+        /// <summary>
+        /// 2K - 2048 x 1080 screen size. 4th most common 'PC' screen size.
+        /// </summary>
+        FiveK,
+        /// <summary>
+        /// 5K - 5120 x 2880 screen size. 5th most common 'PC' screen size.
+        /// </summary>
     }
 
     /// <summary>
@@ -76,6 +88,9 @@ namespace AlexanderOnTest.NetCoreWebDriverFactory
             Sizes.Add(WindowSize.Fhd, new Size(1920, 1080));
             Sizes.Add(WindowSize.Qhd, new Size(2560, 1440));
             Sizes.Add(WindowSize.Uhd, new Size(3840, 2160));
+            Sizes.Add(WindowSize.HdPlus, new Size(1600, 900));
+            Sizes.Add(WindowSize.TwoK, new Size(2048, 1080));
+            Sizes.Add(WindowSize.FiveK, new Size(5120, 2880));
         }
 
         /// <summary>
